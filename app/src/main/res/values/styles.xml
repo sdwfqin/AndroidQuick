@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- 配置qmui提供的theme -->
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+        <item name="QMUITopBarStyle">@style/QDTopBar</item>
+    </style>
+
+    <!--**********************************************
+        *             qmui topbar style              *
+        ***********************************************-->
+    <style name="QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_height">45dp</item>
+        <item name="qmui_topbar_title_color">@color/black1</item>
+        <item name="qmui_topbar_bg_color">@color/colorPrimary</item>
+        <item name="qmui_topbar_left_back_drawable_id">@mipmap/back</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="qmui_topbar_image_btn_width">38dp</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/black1</item>
+    </style>
+
+    <style name="transactionTheme" parent="AppTheme">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="transactionDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item><!--模糊-->
+    </style>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidQuick.iml" filepath="$PROJECT_DIR$/AndroidQuick.iml" />
+      <module fileurl="file://F:\WorkSpace\AndroidStudioProjects\JavaSeed\ZyErp2.iml" filepath="F:\WorkSpace\AndroidStudioProjects\JavaSeed\ZyErp2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\StudioProjects\AndroidQuick\quicklib\qlibrary.iml" filepath="E:\StudioProjects\AndroidQuick\quicklib\qlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quicklib/quicklib.iml" filepath="$PROJECT_DIR$/quicklib/quicklib.iml" />
+    </modules>
+  </component>
+</project>

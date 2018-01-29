@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:divider="@drawable/divider"
+    android:background="@drawable/bg_amount_layout"
+    android:showDividers="middle"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btnDecrease"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/btn_amount"
+        android:text="-"/>
+
+    <EditText
+        android:id="@+id/etAmount"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:minWidth="60dp"
+        android:layout_weight="2"
+        android:background="@null"
+        android:inputType="number"
+        android:gravity="center"
+        android:text="1"/>
+
+    <Button
+        android:id="@+id/btnIncrease"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/btn_amount"
+        android:text="+"/>
+</LinearLayout>
