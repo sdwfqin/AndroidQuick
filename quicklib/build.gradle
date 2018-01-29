@@ -4,6 +4,9 @@ apply plugin: 'com.jfrog.bintray'
 
 version = "1.0.0"
 
+// graedlew install
+// gradlew bintrayUpload
+
 android {
     compileSdkVersion 27
 
@@ -27,6 +30,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -58,8 +65,8 @@ dependencies {
     implementation files('libs/alipaySdk-20170922.jar')
 }
 
-def siteUrl = 'http://www.sdwfqin.com'      // 项目的主页
-def gitUrl = 'https://github.com/sdwfqin/AndroidQuick'   // Git仓库的url
+def siteUrl = 'https://github.com/sdwfqin/AndroidQuick'      // 项目的主页
+def gitUrl = 'https://github.com/sdwfqin/AndroidQuick.git'   // Git仓库的url
 group = "com.sdwfqin.quicklib" // Maven Group ID for the artifact，一般填你唯一的包名
 install {
     repositories.mavenInstaller {
@@ -93,6 +100,26 @@ install {
             }
         }
     }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
 
 Properties properties = new Properties()
