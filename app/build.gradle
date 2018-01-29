@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        SignConfig {
-            keyAlias 'tongyi'
-            keyPassword 'tongyi123'
-            storeFile file('fanli.jks')
-            storePassword 'tongyi123'
-        }
-    }
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
     defaultConfig {
@@ -18,7 +10,6 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.SignConfig
 
         multiDexEnabled true
     }
@@ -26,10 +17,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // signingConfig signingConfigs.SignConfig
-        }
-        debug {
-            // signingConfig signingConfigs.SignConfig
         }
     }
     compileOptions {
