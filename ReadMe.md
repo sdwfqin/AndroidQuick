@@ -1,15 +1,42 @@
-# 包名按照功能划分
+# 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，请不要直接引入，请先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如果雷同，不甚荣幸
 
-# 配置参数放在base/Constants.java中
+    compile 'com.sdwfqin.quicklib:quicklib:1.0.0'
 
-1. 所有的Activity活动请求吗放在这里面，例如：RESULT_CODE_1
+> 最低支持api16，编译版本27，gradle4.1
 
-# 日志打印使用LogUtils类，方便统一管理，例如：LogUtils.i("1234");
+    minSdkVersion 16
+    targetSdkVersion 27
 
-# 请求错误调用BaseActivity/BaseFragment中的httpError方法，可以传入错误码，方便进行统一的错误管理
+# 项目中引入了以下依赖
 
-# Fragment中建议使用lazyLoad()方法加载数据
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:support-v4:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:cardview-v7:27.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    api 'com.qmuiteam:qmui:1.0.7'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    api 'com.youth.banner:banner:1.4.10'
+    api 'com.squareup.okhttp3:okhttp:3.9.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    api 'com.blankj:utilcode:1.12.0'
+    api 'org.greenrobot:eventbus:3.1.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.1.7'
+    api 'com.just.agentweb:agentweb:3.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.google.zxing:core:3.3.1'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
+    implementation files('libs/alipaySdk-20170922.jar')
 
+# 本项目中的支付与二维码模块clone自RxTools
+
+https://github.com/vondear/RxTools
 
 ## 支付工具类
 ### 支付宝支付:

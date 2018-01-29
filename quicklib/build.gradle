@@ -57,3 +57,57 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     implementation files('libs/alipaySdk-20170922.jar')
 }
+
+def siteUrl = 'http://www.sdwfqin.com'      // 项目的主页
+def gitUrl = 'https://github.com/sdwfqin/AndroidQuick'   // Git仓库的url
+group = "com.sdwfqin.quicklib" // Maven Group ID for the artifact，一般填你唯一的包名
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                description 'Android 快速开发库'  //项目描述
+                name 'quicklib'
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer { // 开发者信息
+                        id 'sdwfqin'
+                        name 'qinzhang'
+                        email 'sdwfqin@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+Properties properties = new Properties()
+// 加载本地配置
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "quicklib"  //发布到Bintray的那个仓库里，默认账户有四个库，我们这里上传到maven库
+        name = "quicklib"  //发布到Bintray上的项目名字
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
