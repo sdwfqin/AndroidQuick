@@ -1,6 +1,6 @@
 package com.sdwfqin.quickseed.base;
 
-import android.support.multidex.MultiDexApplication;
+import android.app.Application;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
@@ -20,7 +20,7 @@ import com.sdwfqin.quickseed.ui.MainActivity;
  * @author 张钦
  * @date 2017/8/3
  */
-public class BaseApp extends MultiDexApplication {
+public class BaseApp extends Application {
 
     @Override
     public void onCreate() {

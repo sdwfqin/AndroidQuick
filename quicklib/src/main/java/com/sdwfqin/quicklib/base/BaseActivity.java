@@ -111,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 接受到分发的粘性事件
+     * 接收到分发的粘性事件
      *
      * @param event 粘性事件
      */
