@@ -26,11 +26,10 @@ public class WebViewActivity extends BaseActivity {
     private String mUrl;
     private AgentWeb mAgentWeb;
 
-    public static Intent newInstance(Context context, String url) {
-
-        Intent intent = new Intent(context, WebViewActivity.class);
-        intent.putExtra("url", url);
-        return intent;
+    public static void launch(Context context, String url) {
+        Intent i = new Intent(context, WebViewActivity.class);
+        i.putExtra("url", url);
+        context.startActivity(i);
     }
 
     @Override

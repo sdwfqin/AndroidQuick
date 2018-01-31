@@ -14,4 +14,11 @@
         <!-- 小数的位数 -->
         <attr name="decimalLength" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="TrembleButton">
+        <attr name="durationMax" format="integer" />
+        <attr name="durationMin" format="integer" />
+        <attr name="translationMax" format="integer" />
+        <attr name="translationMin" format="integer" />
+    </declare-styleable>
 </resources>

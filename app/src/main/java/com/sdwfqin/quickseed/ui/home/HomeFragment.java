@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.module.WebViewActivity;
 import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
+import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
 
@@ -53,14 +54,32 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.a, R.id.b})
+    @OnClick({R.id.a, R.id.b, R.id.c})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.a:
-                startActivity(WebViewActivity.newInstance(mContext, "https://www.baidu.com"));
+                WebViewActivity.launch(mContext, "https://www.baidu.com");
                 break;
             case R.id.b:
                 startActivity(new Intent(mContext, QrBarScanActivity.class));
+                break;
+            case R.id.c:
+                HintDialog hintDialog = new HintDialog(mContext);
+                hintDialog.show();
+                hintDialog.setTitle("啊啊啊啊啊啊");
+                hintDialog.hideRight();
+                hintDialog.setLeftText("取消");
+                hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
+                    @Override
+                    public void left() {
+                        showMsg("您点击了取消！");
+                    }
+
+                    @Override
+                    public void right() {
+
+                    }
+                });
                 break;
         }
     }

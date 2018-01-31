@@ -117,6 +117,19 @@ public class HintDialog extends Dialog implements View.OnClickListener {
     }
 
     /**
+     * 设置标题文字颜色
+     *
+     * @param titleColor
+     */
+    public void setTitleColor(@ColorInt int titleColor) {
+        try {
+            mDialogTitle.setTextColor(titleColor);
+        } catch (Exception e) {
+            Log.e(TAG, "setTitleColor: ", e);
+        }
+    }
+
+    /**
      * 设置右侧按钮文字
      *
      * @param rightText
@@ -138,7 +151,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mRight.setBackgroundColor(rightBgColor);
         } catch (Exception e) {
-            Log.e(TAG, "setRightText: ", e);
+            Log.e(TAG, "setRightBgColor: ", e);
         }
     }
 
@@ -164,7 +177,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mLeft.setBackgroundColor(leftBgColor);
         } catch (Exception e) {
-            Log.e(TAG, "setLeftText: ", e);
+            Log.e(TAG, "setLeftBgColor: ", e);
         }
     }
 

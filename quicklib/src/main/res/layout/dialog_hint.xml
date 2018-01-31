@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="center"
-            android:text="亲，产品已激活成功，\n欢迎使用该产品！"/>
-
+            android:text="亲，产品已激活成功，\n欢迎使用该产品！"
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
