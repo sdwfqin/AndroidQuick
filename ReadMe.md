@@ -17,6 +17,8 @@
 
     minSdkVersion 16
     targetSdkVersion 27
+    
+# 当前项目依赖Qmui 1.0.7，后期可能会脱离出来
 
 # 本项目中的支付与二维码模块clone自RxTools
 
