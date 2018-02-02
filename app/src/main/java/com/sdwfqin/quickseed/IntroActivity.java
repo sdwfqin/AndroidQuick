@@ -162,7 +162,6 @@ public class IntroActivity extends Activity implements ViewPager.OnPageChangeLis
      */
     @Override
     public void onClick(View v) {
-        SPUtils.getInstance().put("intro", false);
 //        startActivity(new Intent(IntroActivity.this, LoginActivity.class));
         finish();
     }

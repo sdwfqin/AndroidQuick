@@ -16,6 +16,8 @@ import com.sdwfqin.quickseed.base.Constants;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * 描述：首页
  *
@@ -61,7 +63,7 @@ public class HomeFragment extends BaseFragment {
                 WebViewActivity.launch(mContext, "https://www.baidu.com");
                 break;
             case R.id.b:
-                startActivity(new Intent(mContext, QrBarScanActivity.class));
+                startActivityForResult(new Intent(mContext, QrBarScanActivity.class), Constants.RESULT_CODE_1);
                 break;
             case R.id.c:
                 HintDialog hintDialog = new HintDialog(mContext);
@@ -81,6 +83,21 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case Constants.RESULT_CODE_1:
+                    String code = data.getStringExtra("data");
+                    if (code != null) {
+                        showMsg(code);
+                    }
+                    break;
+            }
         }
     }
 }
