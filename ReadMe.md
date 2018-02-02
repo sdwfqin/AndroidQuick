@@ -8,8 +8,8 @@
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.github.bumptech.glide:glide:4.6.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.0'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
     
     implementation 'com.sdwfqin.quicklib:quicklib:1.0.3'
 
