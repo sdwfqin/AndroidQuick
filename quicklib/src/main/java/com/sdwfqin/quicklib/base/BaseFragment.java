@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.utils.NetworkError;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
@@ -191,7 +192,8 @@ public abstract class BaseFragment extends Fragment {
      * @param msg
      */
     public void showMsg(String msg) {
-        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(msg);
     }
 
     /**

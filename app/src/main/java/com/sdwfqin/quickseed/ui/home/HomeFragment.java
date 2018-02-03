@@ -9,9 +9,13 @@ import android.widget.TextView;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.module.WebViewActivity;
 import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
+import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
 import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,7 +60,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.a, R.id.b, R.id.c})
+    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.a:
@@ -82,6 +86,12 @@ public class HomeFragment extends BaseFragment {
 
                     }
                 });
+                break;
+            case R.id.d:
+                List<String> strings = new ArrayList<>();
+                strings.add("http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg");
+                strings.add("http://img.taopic.com/uploads/allimg/140729/240450-140HZP45790.jpg");
+                SeeImageActivity.launch(mContext, strings);
                 break;
         }
     }

@@ -36,4 +36,10 @@
         app:translationMax="20"
         app:translationMin="15" />
 
+    <Button
+        android:id="@+id/d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="图片预览" />
+
 </LinearLayout>

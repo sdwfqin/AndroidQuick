@@ -44,7 +44,7 @@ public class Constants {
     /**
      * 图片保存位置
      */
-    public static final String SAVE_REAL_PATH = SDCardUtils.getSDCardPaths().get(0) + "/FlShop";
+    public static final String SAVE_REAL_PATH = SDCardUtils.getSDCardPaths().get(0) + "/AndroidQuick";
 
     /**
      * 文件共享

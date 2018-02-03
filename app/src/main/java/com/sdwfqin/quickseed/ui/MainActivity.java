@@ -1,5 +1,8 @@
 package com.sdwfqin.quickseed.ui;
 
+import android.Manifest;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,21 +14,24 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.ui.find.FindFragment;
 import com.sdwfqin.quickseed.ui.home.HomeFragment;
 import com.sdwfqin.quickseed.ui.my.MyFragment;
 import com.sdwfqin.quicklib.view.NoScrollViewPager;
 
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 描述：主Activity
  *
  * @author 张钦
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.pager)
     NoScrollViewPager mPager;
@@ -45,6 +51,12 @@ public class MainActivity extends BaseActivity {
 
         QMUIStatusBarHelper.translucent(mContext);
         QMUIStatusBarHelper.setStatusBarLightMode(mContext);
+
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+        } else {
+            EasyPermissions.requestPermissions(mContext, "App正常运行需要存储权限、媒体权限", Constants.RESULT_CODE_1, perms);
+        }
 
         initTabs();
         initPagers();
@@ -117,6 +129,23 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    //成功
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> list) {
+    }
+
+    //失败
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+
     }
 
     private class MyFragPagerAdapter extends FragmentPagerAdapter {

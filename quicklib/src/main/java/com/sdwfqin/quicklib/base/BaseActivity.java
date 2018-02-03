@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.utils.AppManager;
@@ -125,7 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param msg
      */
     public void showMsg(String msg) {
-        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort(msg);
     }
 
     /**
