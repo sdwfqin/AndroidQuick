@@ -2,6 +2,8 @@ package com.sdwfqin.quickseed.ui.home;
 
 import android.content.Intent;
 import android.os.Build;
+import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.module.WebViewActivity;
 import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
 import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
+import com.sdwfqin.quicklib.view.dialog.BottomDialogPhotoFragment;
 import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
@@ -60,7 +63,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d})
+    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.a:
@@ -92,6 +95,29 @@ public class HomeFragment extends BaseFragment {
                 strings.add("http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg");
                 strings.add("http://img.taopic.com/uploads/allimg/140729/240450-140HZP45790.jpg");
                 SeeImageActivity.launch(mContext, strings);
+                break;
+            case R.id.e:
+                BottomDialogPhotoFragment.Builder builder = new BottomDialogPhotoFragment.Builder();
+                BottomSheetDialogFragment bottomSheetDialogFragment = builder.setOnClickListener(new BottomDialogPhotoFragment.OnDialogClickListener() {
+                    @Override
+                    public void xiangce() {
+
+                    }
+
+                    @Override
+                    public void paizhao() {
+
+                    }
+
+                    @Override
+                    public void exit() {
+
+                    }
+                }).builder();
+                FragmentManager fragmentManager = getFragmentManager();
+                if (fragmentManager != null) {
+                    bottomSheetDialogFragment.show(fragmentManager, "dialog");
+                }
                 break;
         }
     }

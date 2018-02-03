@@ -17,23 +17,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:gravity="center"
-                android:text="选择图片" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
-
-            <TextView
                 android:id="@+id/xiangce"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:drawablePadding="15dp"
                 android:gravity="center"
-                android:paddingLeft="15dp"
                 android:text="相册" />
 
             <View
@@ -45,9 +32,7 @@
                 android:id="@+id/paizhao"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:drawablePadding="15dp"
                 android:gravity="center"
-                android:paddingLeft="15dp"
                 android:text="拍照" />
 
         </LinearLayout>
