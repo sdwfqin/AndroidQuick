@@ -16,13 +16,13 @@ import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.utils.ImageLoader;
 
 import java.io.File;
 
@@ -66,17 +66,13 @@ public class SeeImageFragment extends BaseFragment {
             LogUtils.i("initEventAndData: " + url);
         }
 
-        Glide
-                .with(mContext)
-                .asBitmap()
-                .load(url)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        mShowimageImg.setImageBitmap(resource);
-                        mProgressBar.setVisibility(View.GONE);
-                    }
-                });
+        ImageLoader.loadBitmapImage(mContext, url, new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                mShowimageImg.setImageBitmap(resource);
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
 
         // setOnLongClickListener中return的值决定是否在长按后再加一个短按动作
         // true为不加短按,false为加入短按
@@ -99,7 +95,7 @@ public class SeeImageFragment extends BaseFragment {
      */
     private void initMenuClick() {
         SeeImageActivity activity = (SeeImageActivity) getActivity();
-        if (activity != null){
+        if (activity != null) {
             activity.mSave.setOnClickListener(v -> saveImage());
         }
     }

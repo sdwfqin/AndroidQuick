@@ -58,6 +58,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
             EasyPermissions.requestPermissions(mContext, "App正常运行需要存储权限、媒体权限", Constants.RESULT_CODE_1, perms);
         }
 
+        Constants.STATUS_HEIGHT = QMUIStatusBarHelper.getStatusbarHeight(mContext);
+
         initTabs();
         initPagers();
 

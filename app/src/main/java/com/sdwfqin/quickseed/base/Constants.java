@@ -1,5 +1,6 @@
 package com.sdwfqin.quickseed.base;
 
+import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 
 /**
@@ -29,7 +30,7 @@ public class Constants {
     /**
      * 状态栏高度
      */
-    public static int STATUS_HEIGHT = 25;
+    public static int STATUS_HEIGHT = ConvertUtils.dp2px(25);
 
     /**
      * 上传文件表单

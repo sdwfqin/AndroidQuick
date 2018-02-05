@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.sdwfqin.quicklib.GlideApp;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.Constants;
 
@@ -31,7 +33,7 @@ public class ImageLoader {
      * 简单加载图片
      */
     public static void loadImage(Context context, ImageView imageView, Object model) {
-        Glide
+        GlideApp
                 .with(context)
                 .load(model)
                 .into(imageView);
@@ -41,14 +43,10 @@ public class ImageLoader {
      * 简单加载图片+CenterCrop缩放
      */
     public static void loadCenterCropImage(Context context, ImageView imageView, Object model) {
-
-        RequestOptions options = new RequestOptions()
-                .centerCrop();
-
-        Glide
+        GlideApp
                 .with(context)
                 .load(model)
-                .apply(options)
+                .centerCrop()
                 .into(imageView);
     }
 
@@ -56,14 +54,10 @@ public class ImageLoader {
      * 简单加载图片+CenterCrop缩放
      */
     public static void loadBaseCropImage(Context context, ImageView imageView, Object model) {
-
-        RequestOptions options = new RequestOptions()
-                .centerCrop();
-
-        Glide
+        GlideApp
                 .with(context)
                 .load(Constants.BASE_URL + model)
-                .apply(options)
+                .centerCrop()
                 .into(imageView);
     }
 
@@ -71,14 +65,10 @@ public class ImageLoader {
      * 默认占位图
      */
     public static void loadPlaceImage(Context context, ImageView imageView, Object model) {
-
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.ic_launcher);
-
-        Glide
+        GlideApp
                 .with(context)
                 .load(model)
-                .apply(options)
+                .placeholder(R.mipmap.ic_launcher)
                 .into(imageView);
     }
 
@@ -86,14 +76,10 @@ public class ImageLoader {
      * 占位图可修改
      */
     public static void loadPlaceImage(Context context, ImageView imageView, @DrawableRes int placeholder, Object model) {
-
-        RequestOptions options = new RequestOptions()
-                .placeholder(placeholder);
-
-        Glide
+        GlideApp
                 .with(context)
                 .load(model)
-                .apply(options)
+                .placeholder(placeholder)
                 .into(imageView);
     }
 
@@ -101,15 +87,22 @@ public class ImageLoader {
      * 占位图可修改+缓存处理
      */
     public static void loadPlaceCacheImage(Context context, ImageView imageView, @DrawableRes int placeholder, DiskCacheStrategy strategy, Object model) {
-
-        RequestOptions options = new RequestOptions()
-                .placeholder(placeholder)
-                .diskCacheStrategy(strategy);
-
-        Glide
+        GlideApp
                 .with(context)
                 .load(model)
-                .apply(options)
+                .placeholder(placeholder)
+                .diskCacheStrategy(strategy)
                 .into(imageView);
+    }
+
+    /**
+     * Bitmap
+     */
+    public static void loadBitmapImage(Context context, Object model, SimpleTarget<Bitmap> target) {
+        GlideApp
+                .with(context)
+                .asBitmap()
+                .load(model)
+                .into(target);
     }
 }
