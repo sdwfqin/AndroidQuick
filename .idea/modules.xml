@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidQuick.iml" filepath="$PROJECT_DIR$/AndroidQuick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AndroidQuick.iml" filepath="$PROJECT_DIR$/.idea/AndroidQuick.iml" />
+      <module fileurl="file://E:\WorkSpace\AndroidStudioProjects\AndroidQuick\AndroidQuick.iml" filepath="E:\WorkSpace\AndroidStudioProjects\AndroidQuick\AndroidQuick.iml" />
       <module fileurl="file://F:\WorkSpace\AndroidStudioProjects\JavaSeed\ZyErp2.iml" filepath="F:\WorkSpace\AndroidStudioProjects\JavaSeed\ZyErp2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://E:\StudioProjects\AndroidQuick\quicklib\qlibrary.iml" filepath="E:\StudioProjects\AndroidQuick\quicklib\qlibrary.iml" />

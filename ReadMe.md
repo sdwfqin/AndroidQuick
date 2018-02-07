@@ -20,6 +20,8 @@
     
 # 当前项目依赖Qmui 1.0.7，后期可能会脱离出来
 
+# Apk http://fir.im/x97v
+
 # 本项目中的支付与二维码模块clone自RxTools
 
 https://github.com/vondear/RxTools
