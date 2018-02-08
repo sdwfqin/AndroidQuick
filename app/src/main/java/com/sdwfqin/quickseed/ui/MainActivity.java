@@ -1,8 +1,6 @@
 package com.sdwfqin.quickseed.ui;
 
 import android.Manifest;
-import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,13 +10,16 @@ import android.support.v4.view.ViewPager;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
-import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quicklib.base.BasePresenter;
+import com.sdwfqin.quicklib.base.MvpActivity;
+import com.sdwfqin.quicklib.view.NoScrollViewPager;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
+import com.sdwfqin.quickseed.contract.MainContract;
+import com.sdwfqin.quickseed.presenter.MainPresenter;
 import com.sdwfqin.quickseed.ui.find.FindFragment;
 import com.sdwfqin.quickseed.ui.home.HomeFragment;
 import com.sdwfqin.quickseed.ui.my.MyFragment;
-import com.sdwfqin.quicklib.view.NoScrollViewPager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +32,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  *
  * @author 张钦
  */
-public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+public class MainActivity extends MvpActivity implements MainContract.View, EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.pager)
     NoScrollViewPager mPager;
@@ -63,6 +64,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         initTabs();
         initPagers();
 
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return new MainPresenter();
     }
 
     private void initTabs() {

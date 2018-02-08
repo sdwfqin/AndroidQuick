@@ -8,10 +8,10 @@
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.github.bumptech.glide:glide:4.5.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     
-    implementation 'com.sdwfqin.quicklib:quicklib:1.0.7'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.1.0'
 
 > 最低支持api16，编译版本27，gradle4.1
 
@@ -19,6 +19,11 @@
     targetSdkVersion 27
     
 # 当前项目依赖Qmui 1.0.7，后期可能会脱离出来
+
+# 支持Mvp与Mvc模式
+
+1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
+2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承RxPresenter<T extends BaseView>类并实现Presenter接口，他们的区别是RxPresenter里面实现了BasePresenter的接口处理了View绑定并且添加了对RxJava事件的处理
 
 # Apk http://fir.im/x97v
 

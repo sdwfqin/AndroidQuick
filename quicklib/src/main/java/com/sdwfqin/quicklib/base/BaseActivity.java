@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
@@ -18,19 +17,16 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected Activity mContext;
     private QMUITipDialog mQmuiTipDialog;
-    protected CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         AppManager.addActivity(this);
         QMUIStatusBarHelper.setStatusBarLightMode(mContext);
+        initPresenter();
         initEventAndData();
     }
 
@@ -61,22 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
-        }
+        removePresenter();
         super.onDestroy();
-    }
-
-    /**
-     * Rx事件管理
-     *
-     * @param subscription
-     */
-    protected void addSubscribe(Disposable subscription) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(subscription);
     }
 
     /**
@@ -125,6 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @param msg
      */
+    @Override
     public void showMsg(String msg) {
         ToastUtils.showShort(msg);
     }
@@ -132,6 +116,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 开启加载动画
      */
+    @Override
     public void showProgress() {
         if (mQmuiTipDialog == null) {
             mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
@@ -147,6 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 关闭加载动画
      */
+    @Override
     public void hideProgress() {
         if (mQmuiTipDialog != null) {
             if (mQmuiTipDialog.isShowing()) {
@@ -172,6 +158,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void networkError(int errorCode, String errorMsg) {
         NetworkError.networkError(mContext, errorCode, errorMsg);
         hideProgress();
+    }
+
+    protected void initPresenter() {
+
+    }
+
+    protected void removePresenter() {
+
     }
 
     /**

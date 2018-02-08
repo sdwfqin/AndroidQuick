@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -21,8 +20,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * 描述：Fragment基类
@@ -30,7 +27,7 @@ import io.reactivex.disposables.Disposable;
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected View mView;
     protected Activity mActivity;
@@ -51,7 +48,6 @@ public abstract class BaseFragment extends Fragment {
     protected boolean isLoad = false;
     private Unbinder mUnBinder;
     private QMUITipDialog mQmuiTipDialog;
-    protected CompositeDisposable mCompositeDisposable;
 
     /**
      * Fragment的UI是否是可见
@@ -91,6 +87,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mUnBinder = ButterKnife.bind(this, view);
         mInflater = onGetLayoutInflater(savedInstanceState);
+        initPresenter();
         initEventAndData();
         // 界面加载完成
         isPrepared = true;
@@ -126,23 +123,9 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
-        }
+        removePresenter();
         mUnBinder.unbind();
         super.onDestroyView();
-    }
-
-    /**
-     * Rx事件管理
-     *
-     * @param subscription
-     */
-    protected void addSubscribe(Disposable subscription) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(subscription);
     }
 
     /**
@@ -191,6 +174,7 @@ public abstract class BaseFragment extends Fragment {
      *
      * @param msg
      */
+    @Override
     public void showMsg(String msg) {
 //        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
         ToastUtils.showShort(msg);
@@ -199,6 +183,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 开启加载动画
      */
+    @Override
     public void showProgress() {
         if (mQmuiTipDialog == null) {
             mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
@@ -214,6 +199,7 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 关闭加载动画
      */
+    @Override
     public void hideProgress() {
         if (mQmuiTipDialog != null) {
             if (mQmuiTipDialog.isShowing()) {
@@ -240,6 +226,15 @@ public abstract class BaseFragment extends Fragment {
         NetworkError.networkError(mContext, errorCode, errorMsg);
         hideProgress();
     }
+
+    protected void initPresenter() {
+
+    }
+
+    protected void removePresenter() {
+
+    }
+
 
     /**
      * 加载布局
