@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-import com.sdwfqin.quicklib.utils.NetworkError;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
 
@@ -206,25 +205,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
                 mQmuiTipDialog.dismiss();
             }
         }
-    }
-
-    /**
-     * 网络错误
-     */
-    public void networkError() {
-        NetworkError.networkError(mContext);
-        hideProgress();
-    }
-
-    /**
-     * 网络错误的统一异常处理
-     *
-     * @param errorCode 错误代码
-     * @param errorMsg  错误消息
-     */
-    public void networkError(int errorCode, String errorMsg) {
-        NetworkError.networkError(mContext, errorCode, errorMsg);
-        hideProgress();
     }
 
     protected void initPresenter() {
