@@ -10,9 +10,9 @@ import android.support.v4.view.ViewPager;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
-import com.sdwfqin.quicklib.base.BasePresenter;
 import com.sdwfqin.quicklib.base.MvpActivity;
 import com.sdwfqin.quicklib.view.NoScrollViewPager;
+import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.contract.MainContract;
@@ -20,19 +20,18 @@ import com.sdwfqin.quickseed.presenter.MainPresenter;
 import com.sdwfqin.quickseed.ui.find.FindFragment;
 import com.sdwfqin.quickseed.ui.home.HomeFragment;
 import com.sdwfqin.quickseed.ui.my.MyFragment;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
-import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 描述：主Activity
  *
  * @author 张钦
  */
-public class MainActivity extends MvpActivity implements MainContract.View, EasyPermissions.PermissionCallbacks {
+public class MainActivity extends MvpActivity<MainContract.Presenter> implements MainContract.View {
 
     @BindView(R.id.pager)
     NoScrollViewPager mPager;
@@ -53,13 +52,9 @@ public class MainActivity extends MvpActivity implements MainContract.View, Easy
         QMUIStatusBarHelper.translucent(mContext);
         QMUIStatusBarHelper.setStatusBarLightMode(mContext);
 
-        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-        if (EasyPermissions.hasPermissions(this, perms)) {
-        } else {
-            EasyPermissions.requestPermissions(mContext, "App正常运行需要存储权限、媒体权限", Constants.RESULT_CODE_1, perms);
-        }
-
         Constants.STATUS_HEIGHT = QMUIStatusBarHelper.getStatusbarHeight(mContext);
+
+        getPermissions();
 
         initTabs();
         initPagers();
@@ -67,8 +62,42 @@ public class MainActivity extends MvpActivity implements MainContract.View, Easy
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MainContract.Presenter createPresenter() {
         return new MainPresenter();
+    }
+
+    private void getPermissions(){
+
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+        new RxPermissions(mContext)
+                .request(perms)
+                .subscribe(granted -> {
+                    if (granted) { // Always true pre-M
+                        // I can control the camera now
+                    } else {
+                        showPermissionsDialog();
+                    }
+                });
+    }
+
+    private void showPermissionsDialog() {
+        HintDialog hintDialog = new HintDialog(mContext);
+        hintDialog.show();
+        hintDialog.setTitle("App正常运行需要存储权限、媒体权限");
+        hintDialog.setLeftText("取消");
+        hintDialog.setRightText("确定");
+        hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
+            @Override
+            public void left() {
+                finish();
+            }
+
+            @Override
+            public void right() {
+                getPermissions();
+            }
+        });
     }
 
     private void initTabs() {
@@ -137,23 +166,6 @@ public class MainActivity extends MvpActivity implements MainContract.View, Easy
 
             }
         });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    //成功
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> list) {
-    }
-
-    //失败
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> list) {
-
     }
 
     private class MyFragPagerAdapter extends FragmentPagerAdapter {

@@ -51,14 +51,14 @@ public class BaseApp extends Application {
      */
     static {
         //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreater((context, layout) -> {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
             //全局设置主题颜色
             layout.setPrimaryColorsId(R.color.gray2, R.color.black1);
             //指定为经典Header，默认是 贝塞尔雷达Header
             return new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate);
         });
         //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreater((context, layout) -> {
+        SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
                     layout.setPrimaryColorsId(R.color.gray2, R.color.black1);
                     //指定为经典Footer，默认是 BallPulseFooter
                     return new ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate);

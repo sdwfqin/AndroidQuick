@@ -4,7 +4,7 @@ import com.sdwfqin.quicklib.base.BasePresenter;
 import com.sdwfqin.quicklib.base.BaseView;
 
 /**
- * 描述：为啥是空的呢？因为没有module啊。
+ * 描述：
  *
  * @author zhangqin
  * @date 2018/2/8
