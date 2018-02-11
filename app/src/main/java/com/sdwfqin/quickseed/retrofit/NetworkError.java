@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.retrofit;
 
+import android.content.Context;
+
 import com.blankj.utilcode.util.ToastUtils;
 
 /**
@@ -15,7 +17,7 @@ public class NetworkError {
         ToastUtils.showShort(responeThrowable.message);
     }
 
-    public static void error(String msg, int errorCode) {
+    public static void error(Context context, String msg, int errorCode) {
         ToastUtils.showShort(msg);
     }
 }

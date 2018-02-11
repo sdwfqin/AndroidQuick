@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.retrofit;
 
+import android.content.Context;
+
 /**
  * 描述：
  *
@@ -12,11 +14,11 @@ public class BaseResponse<T> {
     private String msg;
     private T res;
 
-    public boolean isOk() {
+    public boolean isOk(Context context) {
         if (code == 200) {
             return true;
         } else {
-            NetworkError.error(msg, code);
+            NetworkError.error(context, msg, code);
             return false;
         }
     }
