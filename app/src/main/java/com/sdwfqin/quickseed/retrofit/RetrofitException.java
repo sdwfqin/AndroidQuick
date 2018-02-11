@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException;
 import org.json.JSONException;
 
 import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -59,7 +60,8 @@ public class RetrofitException {
             ex = new ResponeThrowable(e, ERROR.PARSE_ERROR);
             ex.message = "解析错误";
             return ex;
-        } else if (e instanceof ConnectException) {
+        } else if (e instanceof ConnectException
+                || e instanceof SocketTimeoutException) {
             ex = new ResponeThrowable(e, ERROR.NETWORD_ERROR);
             ex.message = "连接失败";
             return ex;
