@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -110,8 +111,12 @@ final class DecodeHandler extends Handler {
             //Log.d(TAG, "Sending decode succeeded message...");
             message.sendToTarget();
         } else {
-            Message message = Message.obtain(activity.getHandler(), R.id.decode_failed);
-            message.sendToTarget();
+            try {
+                Message message = Message.obtain(activity.getHandler(), R.id.decode_failed);
+                message.sendToTarget();
+            } catch (Exception e) {
+                LogUtils.e(e);
+            }
         }
     }
 

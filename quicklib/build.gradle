@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.1.4"
+version = "1.1.5"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 14
+        versionCode 15
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -54,7 +54,7 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
-    compile 'com.google.zxing:core:3.3.1'
+    compile 'com.google.zxing:core:3.3.2'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile files('libs/alipaySdk-20170922.jar')
 }
