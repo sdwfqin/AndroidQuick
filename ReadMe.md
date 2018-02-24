@@ -20,9 +20,9 @@
     
 # 注意事项
 
-> 当前项目依赖Qmui 1.0.7，即在主项目中配置了Qmui，quicklib中的样式无需再次配置就与主项目中的样式一致，后期可能会脱离出来
-> 需要注意quicklib中的QuickInit类，建议在Application中初始化
-> 因为项目引入了AndroidUtilCode，所以需要在Application初始化（Utils.init(this);）
+1. 当前项目依赖Qmui 1.0.7，即在主项目中配置了Qmui，quicklib中的样式无需再次配置就与主项目中的样式一致，后期可能会脱离出来
+2. 需要注意quicklib中的QuickInit类，建议在Application中初始化
+3. 因为项目引入了AndroidUtilCode，所以需要在Application初始化（Utils.init(this);）
 
 # 支持Mvp与Mvc模式
 
