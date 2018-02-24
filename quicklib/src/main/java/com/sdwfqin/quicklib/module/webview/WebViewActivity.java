@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module;
+package com.sdwfqin.quicklib.module.webview;
 
 import android.content.Context;
 import android.content.Intent;

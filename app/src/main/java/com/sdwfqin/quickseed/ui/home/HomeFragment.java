@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quicklib.module.WebViewActivity;
+import com.sdwfqin.quicklib.module.webview.WebViewActivity;
 import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
 import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
 import com.sdwfqin.quicklib.view.dialog.BottomDialogPhotoFragment;

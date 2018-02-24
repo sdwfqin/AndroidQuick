@@ -31,7 +31,7 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.sdwfqin.quicklib.module.WebViewActivity" />
+        <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewActivity" />
         <activity android:name="com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity" />
         <activity android:name=".module.seeimage.SeeImageActivity"/>
     </application>
