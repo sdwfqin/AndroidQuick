@@ -1,19 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sdwfqin.quicklib">
+          package="com.sdwfqin.quicklib">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 许可振动 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- 打开闪光灯 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
     <!-- 许可使用照相机 -->
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- 许可调用相机硬件 -->
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera"/>
     <!-- 许可调用相机自动对焦 -->
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
         android:allowBackup="true"
@@ -24,15 +24,16 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewActivity" />
-        <activity android:name="com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewActivity"/>
+        <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewLoadDataActivity"/>
+        <activity android:name="com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity"/>
         <activity android:name=".module.seeimage.SeeImageActivity"/>
     </application>
 </manifest>
