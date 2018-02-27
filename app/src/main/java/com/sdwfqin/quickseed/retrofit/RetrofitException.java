@@ -8,6 +8,7 @@ import org.json.JSONException;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLHandshakeException;
 
@@ -50,9 +51,10 @@ public class RetrofitException {
             }
             return ex;
         } else if (e instanceof ServerException) {
+            // 服务器下发的错误
             ServerException resultException = (ServerException) e;
             ex = new ResponeThrowable(resultException, resultException.code);
-            ex.message = resultException.message;
+            ex.message = resultException.getMessage();
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
@@ -61,7 +63,8 @@ public class RetrofitException {
             ex.message = "解析错误";
             return ex;
         } else if (e instanceof ConnectException
-                || e instanceof SocketTimeoutException) {
+                || e instanceof SocketTimeoutException
+                || e instanceof UnknownHostException) {
             ex = new ResponeThrowable(e, ERROR.NETWORD_ERROR);
             ex.message = "连接失败";
             return ex;
@@ -97,7 +100,6 @@ public class RetrofitException {
          * 协议出错
          */
         public static final int HTTP_ERROR = 1003;
-
         /**
          * 证书出错
          */
@@ -111,12 +113,6 @@ public class RetrofitException {
         public ResponeThrowable(Throwable throwable, int code) {
             super(throwable);
             this.code = code;
-
         }
-    }
-
-    public class ServerException extends RuntimeException {
-        public int code;
-        public String message;
     }
 }

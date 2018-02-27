@@ -18,7 +18,7 @@ public class BaseResponse<T> {
         if (code == 200) {
             return true;
         } else {
-            NetworkError.error(context, msg, code);
+            NetworkError.error(context, new ServerException(code, msg));
             return false;
         }
     }
