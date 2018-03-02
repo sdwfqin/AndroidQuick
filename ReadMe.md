@@ -1,17 +1,17 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，请不要直接引入，请先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:support-v4:27.0.2'
-    implementation 'com.android.support:design:27.0.2'
-    implementation 'com.android.support:cardview-v7:27.0.2'
-    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v4:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.5'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.1.7'
 
 > 最低支持api16，编译版本27，gradle4.1
 
@@ -39,7 +39,7 @@
     |- RxPresenter Presenter层封装
     |- AliPayTools 支付宝支付工具类
     |- WechatPay 微信支付工具类
-    |- WechatShareTools微信分享工具类
+    |- WechatShareTools 微信分享工具类
     |- QrBarScanActivity 解析二维码Activity
     |- QrCreateCode 创建二维码工具类
     |- SeeImageActivity 图片预览Activity（多图/单图）
@@ -58,6 +58,7 @@
     |- DecimalEditText Double类型的EditText，支持限定小数点后的位数
     |- NoScrollViewPager 可以禁止滑动的ViewPager
     |- TrembleButton 可以漂浮颤抖的按钮
+    |- WrapContentHeightViewPager 处理NestedScrollView嵌套Viewpager+RecyclerView
 |- app
     |- IntroActivity 新用户引导页Activity
     |- RetrofitClient Retrofit封装（内部类单例）
