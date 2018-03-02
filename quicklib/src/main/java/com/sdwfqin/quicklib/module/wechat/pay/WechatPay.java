@@ -42,7 +42,7 @@ public class WechatPay {
         return sMWechatPay;
     }
 
-    public IWXAPI getWXApi() {
+    public  IWXAPI getWXApi() {
         return mWXApi;
     }
 

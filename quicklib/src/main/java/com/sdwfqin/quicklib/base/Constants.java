@@ -29,6 +29,9 @@ public class Constants {
     public static boolean LOG_TYPE = true;
 
 
+    public static String APP_ID = "123456789";
+
+
     public static final String HEAD = "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
             "    <head>\n" +

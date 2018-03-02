@@ -11,14 +11,12 @@
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.7'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.1.8'
 
 > 最低支持api16，编译版本27，gradle4.1
 
     minSdkVersion 16
     targetSdkVersion 27
-    
-# 微信支付无法获取结果回调，正在修复
     
 # 注意事项
 
@@ -40,7 +38,7 @@
     |- MvpFragment
     |- RxPresenter Presenter层封装
     |- AliPayTools 支付宝支付工具类
-    |- WechatPay 微信支付工具类
+    |- WechatPayTools 微信支付工具类
     |- WechatShareTools 微信分享工具类
     |- QrBarScanActivity 解析二维码Activity
     |- QrCreateCode 创建二维码工具类
@@ -70,4 +68,26 @@
 ```
 
 # Apk http://fir.im/x97v
+
+# 微信支付
+
+1. 调用WechatPayTools下面的wechatPayApp方法
+2. 如果想要支付回掉结果请参照示例app下面的WXPayEntryActivity
+3. 注意下面的部分
+
+    ```
+    <activity
+                android:name=".wxapi.WXPayEntryActivity"
+                android:exported="true"
+                android:screenOrientation="portrait"/>
+                
+    // 注意WXPayEntryActivity下面的这个方法
+    @Override
+    public void onResp(BaseResp resp) {
+        //回掉结果监听
+        WechatPay.getInstance().onResp(resp.errCode);
+        LogUtils.e("onPayFinish, errCode = " + resp.errCode);
+        finish();
+    }
+    ```
 
