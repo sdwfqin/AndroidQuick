@@ -33,7 +33,6 @@ public class AliPayTools {
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);
 
                     //对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-
                     String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
@@ -59,10 +58,10 @@ public class AliPayTools {
      * @param isRsa2
      * @param alipay_rsa_private
      * @param aliPayModel
-     * @param onRxHttp1
+     * @param onRequestListener
      */
-    public static void aliPay(final Activity activity, String appid, boolean isRsa2, String alipay_rsa_private, AliPayModel aliPayModel, OnRequestListener onRxHttp1) {
-        sOnRequestListener = onRxHttp1;
+    public static void aliPay(final Activity activity, String appid, boolean isRsa2, String alipay_rsa_private, AliPayModel aliPayModel, OnRequestListener onRequestListener) {
+        sOnRequestListener = onRequestListener;
         Map<String, String> params = AliPayOrderInfoUtil.buildOrderParamMap(appid, isRsa2, aliPayModel.getOut_trade_no(), aliPayModel.getName(), aliPayModel.getMoney(), aliPayModel.getDetail());
         String orderParam = AliPayOrderInfoUtil.buildOrderParam(params);
 
@@ -75,6 +74,29 @@ public class AliPayTools {
             PayTask alipay = new PayTask(activity);
             Map<String, String> result = alipay.payV2(orderInfo, true);
             Log.i("msp", result.toString());
+
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        };
+
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    /**
+     * 支付
+     *
+     * @param activity
+     * @param orderInfo
+     * @param onRequestListener
+     */
+    public static void aliPay(final Activity activity, String orderInfo, OnRequestListener onRequestListener) {
+        sOnRequestListener = onRequestListener;
+        Runnable payRunnable = () -> {
+            PayTask alipay = new PayTask(activity);
+            Map<String, String> result = alipay.payV2(orderInfo, true);
 
             Message msg = new Message();
             msg.what = SDK_PAY_FLAG;
