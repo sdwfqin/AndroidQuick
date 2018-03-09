@@ -28,7 +28,7 @@
         android:id="@+id/c"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@mipmap/ic_launcher"
+        android:background="@mipmap/quicklib_launcher"
         android:gravity="center"
         android:text="颤抖的button"
         app:durationMax="6000"
