@@ -25,7 +25,7 @@ import java.net.URLConnection;
  */
 public class WechatShareUtil {
 
-    private static final String TAG = "SDK_Sample.Util";
+    private static final String TAG = "WechatShareUtil";
 
     public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -61,8 +61,11 @@ public class WechatShareUtil {
             e.printStackTrace();
         }
         byte[] data = inputStreamToByte(inStream);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-        return data;
+        byte[] bytes = compressByQuality(bitmap, '耀', true);
+
+        return bytes;
     }
 
     public static byte[] inputStreamToByte(InputStream is) {
@@ -206,5 +209,48 @@ public class WechatShareUtil {
         }
 
         return null;
+    }
+
+    public static byte[] compressByQuality(final Bitmap src,
+                                           final long maxByteSize,
+                                           final boolean recycle) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        src.compress(CompressFormat.JPEG, 100, baos);
+        Log.e(TAG, "compressByQuality: " + baos.toByteArray().length);
+        byte[] bytes;
+        if (baos.size() <= maxByteSize) {
+            bytes = baos.toByteArray();
+        } else {
+            baos.reset();
+            src.compress(CompressFormat.JPEG, 0, baos);
+            if (baos.size() >= maxByteSize) {
+                bytes = baos.toByteArray();
+            } else {
+                // find the best quality using binary search
+                int st = 0;
+                int end = 100;
+                int mid = 0;
+                while (st < end) {
+                    mid = (st + end) / 2;
+                    baos.reset();
+                    src.compress(CompressFormat.JPEG, mid, baos);
+                    int len = baos.size();
+                    if (len == maxByteSize) {
+                        break;
+                    } else if (len > maxByteSize) {
+                        end = mid - 1;
+                    } else {
+                        st = mid + 1;
+                    }
+                }
+                if (end == mid - 1) {
+                    baos.reset();
+                    src.compress(CompressFormat.JPEG, st, baos);
+                }
+                bytes = baos.toByteArray();
+            }
+        }
+        if (recycle && !src.isRecycled()) src.recycle();
+        return bytes;
     }
 }
