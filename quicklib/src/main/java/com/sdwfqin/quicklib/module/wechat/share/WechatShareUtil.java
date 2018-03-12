@@ -61,11 +61,16 @@ public class WechatShareUtil {
             e.printStackTrace();
         }
         byte[] data = inputStreamToByte(inStream);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-        byte[] bytes = compressByQuality(bitmap, '耀', true);
+        if (data.length > '耀') {
 
-        return bytes;
+            // 转换为bitmap
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+            // 获取压缩后的byte数组
+            data = compressByQuality(bitmap, '耀', true);
+        }
+        return data;
     }
 
     public static byte[] inputStreamToByte(InputStream is) {
