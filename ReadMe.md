@@ -31,7 +31,7 @@
 
 # 使用方法
 
-[Wiki](https://github.com/sdwfqin/AndroidQuick/wiki})
+[Wiki](https://github.com/sdwfqin/AndroidQuick/wiki)
 
 # 功能列表
 ```
