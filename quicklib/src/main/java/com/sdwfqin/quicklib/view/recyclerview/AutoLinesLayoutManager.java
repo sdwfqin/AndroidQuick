@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.view;
+package com.sdwfqin.quicklib.view.recyclerview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

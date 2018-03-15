@@ -59,6 +59,7 @@
     |- NoScrollViewPager 可以禁止滑动的ViewPager
     |- TrembleButton 可以漂浮颤抖的按钮
     |- WrapContentHeightViewPager 处理NestedScrollView嵌套Viewpager+RecyclerView
+    |- AutoPollRecyclerView 跑马灯样式的RecyclerView
 |- app
     |- IntroActivity 新用户引导页Activity
     |- RetrofitClient Retrofit封装（内部类单例）
