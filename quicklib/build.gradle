@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.1.11"
+version = "1.1.12_alpha_1"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -42,16 +42,16 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-    compile 'com.qmuiteam:qmui:1.0.7'
+    compile 'com.qmuiteam:qmui:1.0.8'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
     compile 'com.youth.banner:banner:1.4.10'
-    compile 'com.blankj:utilcode:1.13.1'
+    compile 'com.blankj:utilcode:1.13.4'
     compile 'org.greenrobot:eventbus:3.1.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
-    compile 'com.just.agentweb:agentweb:3.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.9.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.10'
+    compile 'com.just.agentweb:agentweb:4.0.2'
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.google.zxing:core:3.3.2'

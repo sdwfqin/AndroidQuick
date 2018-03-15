@@ -69,21 +69,21 @@ public class WebViewLoadDataActivity extends BaseActivity {
                 .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
                 // 使用默认进度条
                 .useDefaultIndicator()
-                .defaultProgressBarColor()
+                // .defaultProgressBarColor()
                 .createAgentWeb()
                 .ready()
                 .go(null);
-        agentWeb.getWebCreator().get().setLayerType(View.LAYER_TYPE_NONE, null);
+        agentWeb.getWebCreator().getWebView().setLayerType(View.LAYER_TYPE_NONE, null);
         if (StringUtils.isEmpty(mBaseUrl)) {
             agentWeb
-                    .getLoader()
+                    .getUrlLoader()
                     .loadData(Constants.HEAD +
                                     mContent +
                                     Constants.END
                             , "text/html", "UTF-8");
         } else {
             agentWeb
-                    .getLoader()
+                    .getUrlLoader()
                     .loadDataWithBaseURL(Constants.BASE_URL,
                             Constants.HEAD +
                                     mContent +

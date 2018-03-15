@@ -2,12 +2,12 @@ package com.sdwfqin.quicklib.module.webview;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.just.agentweb.AgentWeb;
-import com.just.agentweb.ChromeClientCallbackManager;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
@@ -65,16 +65,17 @@ public class WebViewActivity extends BaseActivity {
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()// 使用默认进度条
-                .defaultProgressBarColor() // 使用默认进度条颜色
-                .setReceivedTitleCallback(getReceivedTitleCallback()) //设置 Web 页面的 title 回调
+                .setWebChromeClient(new WebChromeClient(){
+                    @Override
+                    public void onReceivedTitle(WebView view, String title) {
+                        super.onReceivedTitle(view, title);
+                        mTopbar.setTitle(title);
+                    }
+                })
+                //.defaultProgressBarColor() // 使用默认进度条颜色
                 .createAgentWeb()
                 .ready()
                 .go(mUrl);
-    }
-
-    private @Nullable
-    ChromeClientCallbackManager.ReceivedTitleCallback getReceivedTitleCallback() {
-        return (view, title) -> mTopbar.setTitle(title);
     }
 
     @Override
