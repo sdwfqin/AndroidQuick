@@ -53,7 +53,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.10.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
-    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.google.zxing:core:3.3.2'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
     compile files('libs/alipaySdk-20170922.jar')
