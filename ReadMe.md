@@ -29,6 +29,10 @@
 1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
 2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承RxPresenter<T extends BaseView>类并实现Presenter接口，他们的区别是RxPresenter里面实现了BasePresenter的接口处理了View绑定并且添加了对RxJava事件的处理
 
+# 使用方法
+
+[Wiki](https://github.com/sdwfqin/AndroidQuick/wiki})
+
 # 功能列表
 ```
 |- quicklib
@@ -69,26 +73,4 @@
 ```
 
 # Apk http://fir.im/x97v
-
-# 微信支付
-
-1. 调用WechatPayTools下面的wechatPayApp方法
-2. 如果想要支付回掉结果请参照示例app下面的WXPayEntryActivity
-3. 注意下面的部分
-
-    ```
-    <activity
-                android:name=".wxapi.WXPayEntryActivity"
-                android:exported="true"
-                android:screenOrientation="portrait"/>
-                
-    // 注意WXPayEntryActivity下面的这个方法
-    @Override
-    public void onResp(BaseResp resp) {
-        //回掉结果监听
-        WechatPay.getInstance().onResp(resp.errCode);
-        LogUtils.e("onPayFinish, errCode = " + resp.errCode);
-        finish();
-    }
-    ```
 
