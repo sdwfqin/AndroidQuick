@@ -58,12 +58,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            isVisible = true;
-            baseLazyLoad();
-        } else {
-            isVisible = false;
-        }
+        isVisible = isVisibleToUser;
+        baseLazyLoad();
     }
 
     @Override
@@ -237,7 +233,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 页面懒加载
      */
-    protected void lazyLoadHide(boolean isLoad){
+    protected void lazyLoadHide(boolean isLoad) {
 
     }
 }
