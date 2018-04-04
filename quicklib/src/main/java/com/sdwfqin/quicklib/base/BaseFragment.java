@@ -113,10 +113,13 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * 懒加载条件判断
      */
     private void baseLazyLoad() {
-        if (isVisible) {
-            if (isPrepared) {
-                lazyLoad();
+        if (isPrepared) {
+            if (isVisible) {
+                lazyLoadShow(isLoad);
+            } else {
+                lazyLoadHide(isLoad);
             }
+
         }
     }
 
@@ -229,5 +232,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 页面懒加载
      */
-    protected abstract void lazyLoad();
+    protected abstract void lazyLoadShow(boolean isLoad);
+
+    /**
+     * 页面懒加载
+     */
+    protected void lazyLoadHide(boolean isLoad){
+
+    }
 }

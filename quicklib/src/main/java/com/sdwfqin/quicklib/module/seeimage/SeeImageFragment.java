@@ -83,10 +83,7 @@ public class SeeImageFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible) {
-            return;
-        }
+    protected void lazyLoadShow(boolean isLoad) {
         initMenuClick();
     }
 
