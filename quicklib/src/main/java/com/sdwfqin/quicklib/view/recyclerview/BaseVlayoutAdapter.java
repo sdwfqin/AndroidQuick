@@ -1,9 +1,9 @@
 package com.sdwfqin.quicklib.view.recyclerview;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -28,8 +29,13 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
     protected Context mContext;
     private List<T> mData;
     private int mLayoutResId;
+    private int mCount;
     private LayoutHelper mLayoutHelper;
     private VirtualLayoutManager.LayoutParams mLayoutParams;
+
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemChildClickListener mOnItemChildClickListener;
+    private final LinkedHashSet<Integer> childClickViewIds;
 
     public BaseVlayoutAdapter(LayoutHelper layoutHelper, @LayoutRes int layoutResId, List<T> data) {
         this(layoutHelper, layoutResId, data, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -40,6 +46,8 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         this.mData = data == null ? new ArrayList<T>() : data;
         this.mLayoutResId = layoutResId;
         this.mLayoutParams = layoutParams;
+        this.childClickViewIds = new LinkedHashSet<>();
+        this.mCount = mData.size();
     }
 
     @Override
@@ -53,6 +61,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(mLayoutResId, parent, false);
         BaseViewHolder holder = new BaseViewHolder(view);
+        bindViewClickListener(holder);
         return holder;
     }
 
@@ -63,7 +72,13 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
-        convert((BaseViewHolder) holder, mData.get(offsetTotal), position, offsetTotal);
+        T t;
+        try {
+            t = mData.get(offsetTotal);
+        } catch (Exception e) {
+            t = null;
+        }
+        convert((BaseViewHolder) holder, t, position, offsetTotal);
     }
 
     @Override
@@ -71,10 +86,84 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         return mData.size();
     }
 
+    private void bindViewClickListener(final BaseViewHolder baseViewHolder) {
+        if (baseViewHolder == null) {
+            return;
+        }
+        final View view = baseViewHolder.itemView;
+        if (view == null) {
+            return;
+        }
+        if (getOnItemClickListener() != null) {
+            view.setOnClickListener(v ->
+                    setOnItemClick(v, baseViewHolder.getLayoutPosition()));
+        }
+    }
 
-    public void setNewData(@Nullable List<T> data) {
+    public final OnItemClickListener getOnItemClickListener() {
+        return mOnItemClickListener;
+    }
+
+    public void setOnItemClick(View v, int position) {
+        getOnItemClickListener().onItemClick(BaseVlayoutAdapter.this, v, position);
+    }
+
+    public final OnItemChildClickListener getOnItemChildClickListener() {
+        return mOnItemChildClickListener;
+    }
+
+    public void addOnClickListener(BaseViewHolder baseViewHolder, @IdRes final int viewId) {
+        childClickViewIds.add(viewId);
+        final View view = baseViewHolder.getView(viewId);
+        if (view != null) {
+            if (!view.isClickable()) {
+                view.setClickable(true);
+            }
+            view.setOnClickListener(v -> {
+                if (getOnItemChildClickListener() != null) {
+                    getOnItemChildClickListener()
+                            .onItemChildClick(BaseVlayoutAdapter.this, v, baseViewHolder.getLayoutPosition());
+                }
+            });
+        }
+    }
+
+    /**
+     * 设置Item数量
+     *
+     * @param count
+     */
+    public void setItemCount(int count) {
+        mCount = count;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 设置新数据
+     *
+     * @param data
+     */
+    public void setNewData(List<T> data) {
         this.mData = data == null ? new ArrayList<T>() : data;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+
+        void onItemClick(BaseVlayoutAdapter adapter, View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public interface OnItemChildClickListener {
+
+        void onItemChildClick(BaseVlayoutAdapter adapter, View view, int position);
+    }
+
+    public void setOnItemChildClickListener(OnItemChildClickListener listener) {
+        mOnItemChildClickListener = listener;
     }
 
     /**
