@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.1.12_alpha_2"
+version = "1.1.12_alpha_4"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 19
+        versionCode 20
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
@@ -46,9 +46,9 @@ dependencies {
         transitive = true
     }
     compile 'com.qmuiteam:qmui:1.0.8'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
     compile 'com.youth.banner:banner:1.4.10'
-    compile 'com.blankj:utilcode:1.13.4'
+    compile 'com.blankj:utilcode:1.13.5'
     compile 'org.greenrobot:eventbus:3.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
     compile 'io.reactivex.rxjava2:rxjava:2.1.10'
