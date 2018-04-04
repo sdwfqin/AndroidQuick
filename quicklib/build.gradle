@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.1.12_alpha_4"
+version = "1.1.12"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -13,11 +13,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 20
+        versionCode 21
         versionName version
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -45,7 +42,7 @@ dependencies {
     implementation('com.alibaba.android:vlayout:1.2.12@aar') {
         transitive = true
     }
-    compile 'com.qmuiteam:qmui:1.0.8'
+    compile 'com.qmuiteam:qmui:1.1.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.blankj:utilcode:1.13.5'
