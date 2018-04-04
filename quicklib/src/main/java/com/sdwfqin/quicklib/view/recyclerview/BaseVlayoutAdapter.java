@@ -83,7 +83,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mCount;
     }
 
     private void bindViewClickListener(final BaseViewHolder baseViewHolder) {
