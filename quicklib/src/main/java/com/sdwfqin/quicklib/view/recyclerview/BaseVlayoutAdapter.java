@@ -70,11 +70,16 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         holder.itemView.setLayoutParams(new VirtualLayoutManager.LayoutParams(mLayoutParams));
     }
 
+    /**
+     * @param holder
+     * @param position    当前Adapter的位置
+     * @param offsetTotal 全局RecyclerView的位置
+     */
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
         T t;
         try {
-            t = mData.get(offsetTotal);
+            t = mData.get(position);
         } catch (Exception e) {
             t = null;
         }

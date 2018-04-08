@@ -15,7 +15,7 @@
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     
     // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.12_alpha_2'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.1.17'
 
 > 最低支持api16，编译版本27，gradle4.1
 

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.1.16"
+version = "1.1.17"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -13,7 +13,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 25
+        versionCode 26
         versionName version
     }
 
@@ -39,11 +39,11 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-    implementation('com.alibaba.android:vlayout:1.2.12@aar') {
+    implementation('com.alibaba.android:vlayout:1.2.13@aar') {
         transitive = true
     }
     compile 'com.qmuiteam:qmui:1.1.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.36'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.37'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.blankj:utilcode:1.13.5'
     compile 'org.greenrobot:eventbus:3.1.1'
