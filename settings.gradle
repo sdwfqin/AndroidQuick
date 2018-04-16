@@ -1,1 +1,1 @@
-include ':app', ':quicklib'
+include ':app', ':quicklib', ':baidumaplib'

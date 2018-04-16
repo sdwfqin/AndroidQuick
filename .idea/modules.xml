@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidQuick.iml" filepath="$PROJECT_DIR$/AndroidQuick.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumaplib/baidumaplib.iml" filepath="$PROJECT_DIR$/baidumaplib/baidumaplib.iml" />
       <module fileurl="file://$PROJECT_DIR$/quicklib/quicklib.iml" filepath="$PROJECT_DIR$/quicklib/quicklib.iml" />
     </modules>
   </component>
