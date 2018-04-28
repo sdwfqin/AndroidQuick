@@ -1,30 +1,30 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，请不要直接引入，请先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
     // support支持库
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.android.support:cardview-v7:27.1.0'
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
     // butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     
     // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.17'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.1.19'
 
-> 最低支持api16，编译版本27，gradle4.1
+> 最低支持api16，编译版本27，gradle4.4
 
     minSdkVersion 16
     targetSdkVersion 27
     
 # 注意事项
 
-1. 当前项目依赖Qmui 1.0.7，即在主项目中配置了Qmui，quicklib中的样式无需再次配置就与主项目中的样式一致，后期可能会脱离出来
+1. 当前项目依赖Qmui 1.1.2，即在主项目中配置了Qmui，quicklib中的样式无需再次配置就与主项目中的样式一致，后期可能会脱离出来
 2. 需要注意quicklib中的QuickInit类，建议在Application中初始化
 3. 因为项目引入了AndroidUtilCode，所以需要在Application初始化（Utils.init(this);）
 

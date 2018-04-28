@@ -19,6 +19,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 描述：Fragment基类
@@ -47,6 +49,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected boolean isLoad = false;
     private Unbinder mUnBinder;
     private QMUITipDialog mQmuiTipDialog;
+    protected CompositeDisposable mCompositeDisposable;
 
     /**
      * Fragment的UI是否是可见
@@ -122,6 +125,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void onDestroyView() {
         removePresenter();
+        unSubscribe();
         mUnBinder.unbind();
         super.onDestroyView();
     }
@@ -203,6 +207,19 @@ public abstract class BaseFragment extends Fragment implements BaseView {
             if (mQmuiTipDialog.isShowing()) {
                 mQmuiTipDialog.dismiss();
             }
+        }
+    }
+
+    protected void addSubscribe(Disposable subscription) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(subscription);
+    }
+
+    protected void unSubscribe() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
         }
     }
 

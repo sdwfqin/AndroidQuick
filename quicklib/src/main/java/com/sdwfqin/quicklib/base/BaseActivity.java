@@ -16,6 +16,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 描述：Activity基类
@@ -26,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected Activity mContext;
     private QMUITipDialog mQmuiTipDialog;
+    protected CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onDestroy() {
         removePresenter();
+        unSubscribe();
         super.onDestroy();
     }
 
@@ -137,6 +141,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             if (mQmuiTipDialog.isShowing()) {
                 mQmuiTipDialog.dismiss();
             }
+        }
+    }
+
+    protected void addSubscribe(Disposable subscription) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(subscription);
+    }
+
+    protected void unSubscribe() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
         }
     }
 
