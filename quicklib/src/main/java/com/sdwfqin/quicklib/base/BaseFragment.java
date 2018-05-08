@@ -210,14 +210,14 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         }
     }
 
-    protected void addSubscribe(Disposable subscription) {
+    public void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(subscription);
     }
 
-    protected void unSubscribe() {
+    public void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
         }
