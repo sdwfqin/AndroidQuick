@@ -54,15 +54,15 @@ public class AliPayTools {
      * 支付
      *
      * @param activity
-     * @param appid
-     * @param isRsa2
-     * @param alipay_rsa_private
+     * @param appid              支付宝分配给开发者的应用ID
+     * @param isRsa2             签名类型
+     * @param alipay_rsa_private 签名私钥
      * @param aliPayModel
-     * @param onRequestListener
+     * @param onRequestListener  回调监听
      */
     public static void aliPay(final Activity activity, String appid, boolean isRsa2, String alipay_rsa_private, AliPayModel aliPayModel, OnRequestListener onRequestListener) {
         sOnRequestListener = onRequestListener;
-        Map<String, String> params = AliPayOrderInfoUtil.buildOrderParamMap(appid, isRsa2, aliPayModel.getOut_trade_no(), aliPayModel.getName(), aliPayModel.getMoney(), aliPayModel.getDetail());
+        Map<String, String> params = AliPayOrderInfoUtil.buildOrderParamMap(appid, isRsa2, aliPayModel);
         String orderParam = AliPayOrderInfoUtil.buildOrderParam(params);
 
         String privateKey = alipay_rsa_private;
@@ -86,7 +86,7 @@ public class AliPayTools {
     }
 
     /**
-     * 支付
+     * 支付 服务端返回orderInfo
      *
      * @param activity
      * @param orderInfo

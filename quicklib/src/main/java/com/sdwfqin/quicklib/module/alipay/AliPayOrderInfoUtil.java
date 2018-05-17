@@ -65,27 +65,37 @@ public class AliPayOrderInfoUtil {
      * @param app_id target_id
      * @return
      */
-    public static Map<String, String> buildOrderParamMap(String app_id, boolean rsa2, String out_trade_no, String name, String price, String detail) {
+    public static Map<String, String> buildOrderParamMap(String app_id, boolean rsa2, AliPayModel aliPayModel) {
         Map<String, String> keyValues = new HashMap<String, String>();
 
+        // 支付宝分配给开发者的应用ID
         keyValues.put("app_id", app_id);
 
+        // 业务请求参数的集合，最大长度不限，除公共参数外所有请求参数都必须放在这个参数中传递
         keyValues.put("biz_content",
                 "{\"timeout_express\":\"30m\"," +
                         "\"product_code\":\"QUICK_MSECURITY_PAY\"," +
-                        "\"total_amount\":\"" + price + "\"," +
-                        "\"subject\":\"" + detail + "\"," +
-                        "\"body\":\"" + name + "\"," +
-                        "\"out_trade_no\":\"" + out_trade_no + "\"}");
+                        "\"total_amount\":\"" + aliPayModel.getMoney() + "\"," +
+                        "\"subject\":\"" + aliPayModel.getName() + "\"," +
+                        "\"body\":\"" + aliPayModel.getDetail() + "\"," +
+                        "\"out_trade_no\":\"" + aliPayModel.getOut_trade_no() + "\"}");
 
+        // 请求使用的编码格式，如utf-8,gbk,gb2312等
         keyValues.put("charset", "utf-8");
 
+        // 支付宝服务器主动通知商户服务器里指定的页面http/https路径。建议商户使用https
+        keyValues.put("notify_url", aliPayModel.getNotify_url());
+
+        // 接口名称
         keyValues.put("method", "alipay.trade.app.pay");
 
+        // 商户生成签名字符串所使用的签名算法类型，目前支持RSA2和RSA，推荐使用RSA2
         keyValues.put("sign_type", rsa2 ? "RSA2" : "RSA");
 
-        keyValues.put("timestamp", "2016-07-29 16:55:53");
+        // 发送请求的时间
+        keyValues.put("timestamp", aliPayModel.getTimestamp());
 
+        // 调用的接口版本，固定为：1.0
         keyValues.put("version", "1.0");
 
         return keyValues;

@@ -56,7 +56,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.google.zxing:core:3.3.2'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.4'
-    compile files('libs/alipaySdk-20170922.jar')
+    compile files('libs/alipaySdk-20180403.jar')
 }
 
 def siteUrl = 'https://github.com/sdwfqin/AndroidQuick'      // 项目的主页
