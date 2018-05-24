@@ -150,6 +150,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
      */
     public void setNewData(List<T> data) {
         this.mData = data == null ? new ArrayList<T>() : data;
+        this.mCount = mData.size();
         notifyDataSetChanged();
     }
 
