@@ -101,6 +101,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         if (view == null) {
             return;
         }
+
         if (getOnItemClickListener() != null) {
             view.setOnClickListener(v ->
                     setOnItemClick(v, baseViewHolder.getLayoutPosition()));
@@ -168,6 +169,8 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     /**
      * Get the data item associated with the specified position in the data set.
+     * <p>
+     * 当前item中的位置：mDelegateAdapter.findOffsetPosition(position)
      *
      * @param position Position of the item whose data we want within the adapter's
      *                 data set.
@@ -183,6 +186,9 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     public interface OnItemClickListener {
 
+        /**
+         * 当前item中的位置：mDelegateAdapter.findOffsetPosition(position)
+         */
         void onItemClick(BaseVlayoutAdapter adapter, View view, int position);
     }
 
@@ -190,6 +196,9 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         mOnItemClickListener = listener;
     }
 
+    /**
+     * 当前item中的位置：mDelegateAdapter.findOffsetPosition(position)
+     */
     public interface OnItemChildClickListener {
 
         void onItemChildClick(BaseVlayoutAdapter adapter, View view, int position);
