@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    implementation('com.alibaba.android:vlayout:1.2.13@aar') {
+    implementation('com.alibaba.android:vlayout:1.2.15@aar') {
         transitive = true
     }
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'

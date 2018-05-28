@@ -2,8 +2,10 @@ package com.sdwfqin.quicklib.view.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,6 +154,31 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         this.mData = data == null ? new ArrayList<T>() : data;
         this.mCount = mData.size();
         notifyDataSetChanged();
+    }
+
+    /**
+     * 获取数据列表
+     *
+     * @return 列表数据
+     */
+    @NonNull
+    public List<T> getData() {
+        return mData;
+    }
+
+    /**
+     * Get the data item associated with the specified position in the data set.
+     *
+     * @param position Position of the item whose data we want within the adapter's
+     *                 data set.
+     * @return The data at the specified position.
+     */
+    @Nullable
+    public T getItem(@IntRange(from = 0) int position) {
+        if (position >= 0 && position < mData.size())
+            return mData.get(position);
+        else
+            return null;
     }
 
     public interface OnItemClickListener {
