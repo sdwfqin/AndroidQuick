@@ -22,7 +22,7 @@ public class MyFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void lazyLoadShow(boolean isLoad) {
 
     }
 

@@ -59,7 +59,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void lazyLoadShow(boolean isLoad) {
 
     }
 
