@@ -147,7 +147,11 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
      * @return
      */
     public List<T> getData() {
-        return mDataList;
+        List<T> temp = mDataList;
+        if (temp.get(temp.size() - 1) == null) {
+            temp.remove(temp.size() - 1);
+        }
+        return temp;
     }
 
     /**

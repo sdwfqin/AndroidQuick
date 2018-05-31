@@ -15,6 +15,5 @@
     <com.sdwfqin.quicklib.view.pictureupload.PictureUploadView
         android:id="@+id/pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"/>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

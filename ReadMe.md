@@ -13,9 +13,13 @@
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    // Vlayout
+    compile ('com.alibaba.android:vlayout:1.2.15@aar') {
+        transitive = true
+    }
     
     // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.23'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.2.0'
 
 > 最低支持api16，编译版本27，gradle4.4
 
