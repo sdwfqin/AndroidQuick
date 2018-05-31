@@ -16,6 +16,7 @@ import com.sdwfqin.quicklib.view.dialog.BottomDialogPhotoFragment;
 import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
+import com.sdwfqin.quickseed.ui.PictureUploadActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e})
+    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e, R.id.f})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.a:
@@ -118,6 +119,9 @@ public class HomeFragment extends BaseFragment {
                 if (fragmentManager != null) {
                     bottomSheetDialogFragment.show(fragmentManager, "dialog");
                 }
+                break;
+            case R.id.f:
+                startActivity(new Intent(mContext, PictureUploadActivity.class));
                 break;
         }
     }
