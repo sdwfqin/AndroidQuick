@@ -1,6 +1,8 @@
 package com.sdwfqin.quicklib.view.pictureupload;
 
 import android.support.annotation.Nullable;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -24,13 +26,25 @@ public class PictureUploadAdapter<T extends PictureUpModel> extends BaseQuickAda
 
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        ImageView ii_img = helper.getView(R.id.ii_img);
+        ImageView iiImg = helper.getView(R.id.ii_img);
 
         if (item != null) {
-            ImageLoader.loadCenterCropImage(mContext, ii_img, item.getImage());
+            ImageLoader.loadCenterCropImage(mContext, iiImg, item.getImage());
         } else {
-            ii_img.setImageResource(R.drawable.add_img);
+            iiImg.setImageResource(R.drawable.add_img);
         }
+
+        // 视图树的观察者，可以监听 View 的全局变化事件
+        iiImg.getViewTreeObserver()
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        iiImg.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        ViewGroup.LayoutParams layoutParams = iiImg.getLayoutParams();
+                        layoutParams.height = iiImg.getWidth();
+                        iiImg.setLayoutParams(layoutParams);
+                    }
+                });
 
         // 点击事件
         helper.addOnClickListener(R.id.ii_img)
