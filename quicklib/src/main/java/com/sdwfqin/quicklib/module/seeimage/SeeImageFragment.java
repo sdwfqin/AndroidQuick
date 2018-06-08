@@ -21,7 +21,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.base.QuickConstants;
 import com.sdwfqin.quicklib.utils.ImageLoader;
 
 import java.io.File;
@@ -105,13 +105,13 @@ public class SeeImageFragment extends BaseFragment {
             BitmapDrawable bitmapDrawable = null;
             try {
                 bitmapDrawable = (BitmapDrawable) mShowimageImg.getDrawable();
-                String file = Constants.SAVE_REAL_PATH + url.substring(url.lastIndexOf("/"));
+                String file = QuickConstants.SAVE_REAL_PATH + url.substring(url.lastIndexOf("/"));
                 if (FileUtils.createOrExistsFile(file)) {
                     byte[] bitmap2Bytes = ImageUtils.bitmap2Bytes(bitmapDrawable.getBitmap(), Bitmap.CompressFormat.JPEG);
                     if (FileIOUtils.writeFileFromBytesByStream(file, bitmap2Bytes)) {
-                        Snackbar.make(mView, "图片已保存至：" + Constants.SAVE_REAL_PATH, Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(mView, "图片已保存至：" + QuickConstants.SAVE_REAL_PATH, Snackbar.LENGTH_SHORT).show();
                         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                        Uri uri = Uri.fromFile(new File(Constants.SAVE_REAL_PATH));
+                        Uri uri = Uri.fromFile(new File(QuickConstants.SAVE_REAL_PATH));
                         intent.setData(uri);
                         mContext.sendBroadcast(intent);
                     } else {

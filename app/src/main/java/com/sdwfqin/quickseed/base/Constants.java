@@ -2,6 +2,7 @@ package com.sdwfqin.quickseed.base;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.SDCardUtils;
+import com.sdwfqin.quickseed.BuildConfig;
 
 /**
  * 描述：全局配置
@@ -38,9 +39,14 @@ public class Constants {
     public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     /**
+     * 微信appid
+     */
+    public static final String APP_ID = "123456";
+
+    /**
      * 是否打印日志，正式版需要设置为false
      */
-    public static final boolean LOG_TYPE = true;
+    public static final boolean LOG_TYPE = BuildConfig.DEBUG;
 
     /**
      * 图片保存位置

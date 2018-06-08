@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quicklib.module.wechat.pay.WechatPay;
 import com.sdwfqin.quickseed.R;
 import com.tencent.mm.opensdk.modelbase.BaseReq;

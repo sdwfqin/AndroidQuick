@@ -33,7 +33,6 @@ public class BaseApp extends Application {
         Bugly.init(getApplicationContext(), "66666666", false);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
-        QuickInit.setLog(Constants.LOG_TYPE);
     }
 
     private void initUtils() {

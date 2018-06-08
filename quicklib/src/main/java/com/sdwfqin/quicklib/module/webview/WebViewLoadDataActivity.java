@@ -10,7 +10,7 @@ import com.just.agentweb.AgentWeb;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.base.QuickConstants;
 
 /**
  * 描述：WebViewActivity
@@ -77,17 +77,17 @@ public class WebViewLoadDataActivity extends BaseActivity {
         if (StringUtils.isEmpty(mBaseUrl)) {
             agentWeb
                     .getUrlLoader()
-                    .loadData(Constants.HEAD +
+                    .loadData(QuickConstants.HEAD +
                                     mContent +
-                                    Constants.END
+                                    QuickConstants.END
                             , "text/html", "UTF-8");
         } else {
             agentWeb
                     .getUrlLoader()
-                    .loadDataWithBaseURL(Constants.BASE_URL,
-                            Constants.HEAD +
+                    .loadDataWithBaseURL(QuickConstants.BASE_URL,
+                            QuickConstants.HEAD +
                                     mContent +
-                                    Constants.END
+                                    QuickConstants.END
                             , "text/html", "UTF-8", null);
         }
 

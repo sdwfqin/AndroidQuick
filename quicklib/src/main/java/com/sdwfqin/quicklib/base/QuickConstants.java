@@ -6,12 +6,7 @@ package com.sdwfqin.quicklib.base;
  * @author 张钦
  * @date 2017/9/25
  */
-public class Constants {
-
-    /**
-     * 上传文件表单
-     */
-    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
+public class QuickConstants {
 
     /**
      * 图片保存位置
@@ -24,12 +19,9 @@ public class Constants {
     public static String BASE_URL = null;
 
     /**
-     * 是否打印日志，正式版需要设置为false
+     * 微信统一下单接口
      */
-    public static boolean LOG_TYPE = true;
-
-
-    public static String APP_ID = "123456789";
+    public static final String WX_TOTAL_ORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
 
     public static final String HEAD = "<!DOCTYPE html>\n" +

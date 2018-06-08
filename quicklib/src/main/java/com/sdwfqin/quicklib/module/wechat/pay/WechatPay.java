@@ -13,28 +13,42 @@ import org.json.JSONObject;
 
 /**
  * 描述：微信支付
+ * <p>
+ * 外部调起支付请使用WechatPayTools中的相关方法
+ * <p>
+ * 请在WXPayEntryActivity中调用 WechatPay.getInstance().onResp(resp.errCode);
  *
  * @author 张钦
  * @date 2018/1/25
  */
 public class WechatPay {
 
-    public static final int NO_OR_LOW_WX = 1;   //未安装微信或微信版本过低
-    public static final int ERROR_PAY_PARAM = 2;  //支付参数错误
-    public static final int ERROR_PAY = 3;  //支付失败
+    /**
+     * 未安装微信或微信版本过低
+     */
+    public static final int NO_OR_LOW_WX = 1;
+    /**
+     * 支付参数错误
+     */
+    public static final int ERROR_PAY_PARAM = 2;
+    /**
+     * 支付失败
+     */
+    public static final int ERROR_PAY = 3;
+
     private static WechatPay sMWechatPay;
     private IWXAPI mWXApi;
     private String mPayParam;
-    private WXPayResultCallBack mCallback;
+    private WechatPayResultCallBack mCallback;
 
-    public WechatPay(Context context, String wx_appid) {
+    public WechatPay(Context context, String wxAppid) {
         mWXApi = WXAPIFactory.createWXAPI(context, null);
-        mWXApi.registerApp(wx_appid);
+        mWXApi.registerApp(wxAppid);
     }
 
-    public static void init(Context context, String wx_appid) {
+    public static void init(Context context, String wxAppid) {
         if (sMWechatPay == null) {
-            sMWechatPay = new WechatPay(context, wx_appid);
+            sMWechatPay = new WechatPay(context, wxAppid);
         }
     }
 
@@ -42,15 +56,15 @@ public class WechatPay {
         return sMWechatPay;
     }
 
-    public  IWXAPI getWXApi() {
+    public IWXAPI getWXApi() {
         return mWXApi;
     }
 
     /**
      * 发起微信支付
      */
-    public void doPay(String pay_param, WXPayResultCallBack callback) {
-        mPayParam = pay_param;
+    public void doPay(String payParam, WechatPayResultCallBack callback) {
+        mPayParam = payParam;
         mCallback = callback;
 
         if (!check()) {
@@ -92,33 +106,58 @@ public class WechatPay {
         mWXApi.sendReq(req);
     }
 
-    //支付回调响应
-    public void onResp(int error_code) {
+    /**
+     * 支付回调响应
+     *
+     * @param errorCode
+     */
+    public void onResp(int errorCode) {
         if (mCallback == null) {
             return;
         }
 
-        if (error_code == 0) {   //成功
+        // 成功
+        if (errorCode == 0) {
             mCallback.onSuccess();
-        } else if (error_code == -1) {   //错误
+            // 错误
+        } else if (errorCode == -1) {
             mCallback.onError(ERROR_PAY);
-        } else if (error_code == -2) {   //取消
+            // 取消
+        } else if (errorCode == -2) {
             mCallback.onCancel();
         }
 
         mCallback = null;
     }
 
-    //检测是否支持微信支付
+    /**
+     * 检测是否支持微信支付
+     *
+     * @return
+     */
     private boolean check() {
         return mWXApi.isWXAppInstalled() && mWXApi.getWXAppSupportAPI() >= Build.PAY_SUPPORTED_SDK_INT;
     }
 
-    public interface WXPayResultCallBack {
-        void onSuccess(); //支付成功
+    /**
+     * 支付结果回调
+     */
+    public interface WechatPayResultCallBack {
+        /**
+         * 支付成功
+         */
+        void onSuccess();
 
-        void onError(int error_code);   //支付失败
+        /**
+         * 支付失败
+         *
+         * @param errorCode
+         */
+        void onError(int errorCode);
 
-        void onCancel();    //支付取消
+        /**
+         * 支付取消
+         */
+        void onCancel();
     }
 }

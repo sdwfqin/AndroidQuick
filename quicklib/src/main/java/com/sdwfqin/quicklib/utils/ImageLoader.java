@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.sdwfqin.quicklib.GlideApp;
 import com.sdwfqin.quicklib.R;
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.base.QuickConstants;
 
 /**
  * 描述：Glide 4.x 工具类
@@ -46,7 +46,7 @@ public class ImageLoader {
     public static void loadBaseCropImage(Context context, ImageView imageView, Object model) {
         GlideApp
                 .with(context)
-                .load(Constants.BASE_URL + model)
+                .load(QuickConstants.BASE_URL + model)
                 .centerCrop()
                 .into(imageView);
     }

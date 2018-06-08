@@ -1,6 +1,6 @@
 package com.sdwfqin.quicklib;
 
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.base.QuickConstants;
 
 /**
  * 描述：在Application中初始化
@@ -10,15 +10,22 @@ import com.sdwfqin.quicklib.base.Constants;
  */
 public class QuickInit {
 
+    /**
+     * 设置文件保存位置
+     *
+     * @param realPath
+     */
     public static void setRealPath(String realPath) {
-        Constants.SAVE_REAL_PATH = realPath;
+        QuickConstants.SAVE_REAL_PATH = realPath;
     }
 
+    /**
+     * 设置图片的根路径
+     *
+     * @param baseUrl
+     */
     public static void setBaseUrl(String baseUrl) {
-        Constants.BASE_URL = baseUrl;
+        QuickConstants.BASE_URL = baseUrl;
     }
 
-    public static void setLog(boolean log) {
-        Constants.LOG_TYPE = log;
-    }
 }

@@ -1,6 +1,7 @@
 package com.sdwfqin.quickseed.retrofit;
 
-import com.sdwfqin.quicklib.base.Constants;
+import com.sdwfqin.quicklib.base.QuickConstants;
+import com.sdwfqin.quickseed.base.Constants;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -42,7 +43,7 @@ public class RetrofitClient {
 
     private Retrofit createRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(QuickConstants.BASE_URL)
                 // 设置OkHttpclient
                 .client(initOkhttpClient())
                 // RxJava2

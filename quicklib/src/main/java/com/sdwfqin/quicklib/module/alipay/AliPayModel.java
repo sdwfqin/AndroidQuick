@@ -1,5 +1,11 @@
 package com.sdwfqin.quicklib.module.alipay;
 
+/**
+ * 描述：业务参数
+ *
+ * @author zhangqin
+ * @date 2018/6/8
+ */
 public class AliPayModel {
     /**
      * 商户网站唯一订单号
