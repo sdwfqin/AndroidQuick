@@ -38,7 +38,7 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "com.android.support:appcompat-v7:27.1.1"
-    implementation 'com.sdwfqin.quicklib:quicklib:1.1.17'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.2.1'
     api files('libs/BaiduTraceSDK_v3_0_7.jar')
     api files('libs/bos-android-sdk-1.0.3.jar')
     api files('libs/BaiduLBS_Android.jar')
