@@ -42,7 +42,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.dialog_hint);
+        setContentView(R.layout.quick_dialog_hint);
 
         mLayout = findViewById(R.id.root_view);
         mDialogTitle = findViewById(R.id.title);

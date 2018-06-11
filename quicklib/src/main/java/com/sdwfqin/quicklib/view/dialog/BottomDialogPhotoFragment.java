@@ -57,7 +57,7 @@ public class BottomDialogPhotoFragment extends BottomSheetDialogFragment impleme
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        View view = View.inflate(getContext(), R.layout.bottom_photo, null);
+        View view = View.inflate(getContext(), R.layout.quick_bottom_photo, null);
         mXaingce = view.findViewById(R.id.xiangce);
         mPaizhao = view.findViewById(R.id.paizhao);
         mExit = view.findViewById(R.id.exit);

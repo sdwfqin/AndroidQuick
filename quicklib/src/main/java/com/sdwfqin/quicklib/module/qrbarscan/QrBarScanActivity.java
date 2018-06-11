@@ -55,7 +55,7 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_qr_scan;
+        return R.layout.quick_activity_qr_scan;
     }
 
     @Override

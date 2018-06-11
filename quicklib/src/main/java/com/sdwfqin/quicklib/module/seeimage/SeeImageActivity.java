@@ -68,7 +68,7 @@ public class SeeImageActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_see_image;
+        return R.layout.quick_activity_see_image;
     }
 
     @Override

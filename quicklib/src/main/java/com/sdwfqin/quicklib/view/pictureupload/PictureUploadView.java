@@ -42,7 +42,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
     /**
      * 布局
      */
-    private int item_layout = R.layout.item_upload_img;
+    private int item_layout = R.layout.quick_item_upload_img;
 
     private RecyclerView mRecyclerView;
     private GridLayoutManager mGridLayoutManager;
@@ -57,7 +57,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
     public PictureUploadView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        LayoutInflater.from(context).inflate(R.layout.picture_upload_view, this);
+        LayoutInflater.from(context).inflate(R.layout.quick_picture_upload_view, this);
         mRecyclerView = findViewById(R.id.rv);
 
         mDataList.add(null);

@@ -31,7 +31,7 @@ public class PictureUploadAdapter<T extends PictureUpModel> extends BaseQuickAda
         if (item != null) {
             ImageLoader.loadCenterCropImage(mContext, iiImg, item.getImage());
         } else {
-            iiImg.setImageResource(R.drawable.add_img);
+            iiImg.setImageResource(R.drawable.quick_add_img);
         }
 
         // 视图树的观察者，可以监听 View 的全局变化事件

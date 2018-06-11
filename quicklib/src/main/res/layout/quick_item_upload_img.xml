@@ -10,7 +10,7 @@
         android:layout_height="120dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/add_img"/>
+        android:src="@drawable/quick_add_img"/>
 
     <ImageView
         android:id="@+id/ii_del"
@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:background="#88000000"
-        android:src="@drawable/ic_close_black"
+        android:src="@drawable/quick_ic_close"
         android:visibility="visible"/>
 </FrameLayout>

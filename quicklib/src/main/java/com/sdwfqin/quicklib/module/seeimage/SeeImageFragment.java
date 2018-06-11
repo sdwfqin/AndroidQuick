@@ -51,7 +51,7 @@ public class SeeImageFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_see_image;
+        return R.layout.quick_fragment_see_image;
     }
 
     @Override

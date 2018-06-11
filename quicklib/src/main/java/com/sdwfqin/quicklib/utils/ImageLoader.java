@@ -41,17 +41,6 @@ public class ImageLoader {
     }
 
     /**
-     * 简单加载图片+CenterCrop缩放
-     */
-    public static void loadBaseCropImage(Context context, ImageView imageView, Object model) {
-        GlideApp
-                .with(context)
-                .load(QuickConstants.BASE_URL + model)
-                .centerCrop()
-                .into(imageView);
-    }
-
-    /**
      * 默认占位图
      */
     public static void loadPlaceImage(Context context, ImageView imageView, Object model) {
@@ -94,5 +83,22 @@ public class ImageLoader {
                 .asBitmap()
                 .load(model)
                 .into(target);
+    }
+
+    /**
+     * ============================================
+     * ************       相对路径       ************
+     * ============================================
+     */
+
+    /**
+     * 简单加载图片+CenterCrop缩放
+     */
+    public static void loadBaseCropImage(Context context, ImageView imageView, Object model) {
+        GlideApp
+                .with(context)
+                .load(QuickConstants.BASE_URL + model)
+                .centerCrop()
+                .into(imageView);
     }
 }

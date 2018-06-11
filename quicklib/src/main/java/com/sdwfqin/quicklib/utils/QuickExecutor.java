@@ -13,19 +13,19 @@ import java.util.concurrent.TimeUnit;
  * @author zhangqin
  * @date 2018/6/2
  */
-public class CbtExecutor {
+public class QuickExecutor {
 
     private ExecutorService mSingleThreadPool;
 
-    public static CbtExecutor getInstance() {
+    public static QuickExecutor getInstance() {
         return CbtExecutorHolder.CBT_EXECUTOR;
     }
 
     private static class CbtExecutorHolder {
-        private static final CbtExecutor CBT_EXECUTOR = new CbtExecutor();
+        private static final QuickExecutor CBT_EXECUTOR = new QuickExecutor();
     }
 
-    private CbtExecutor() {
+    private QuickExecutor() {
         mSingleThreadPool = new ThreadPoolExecutor(1, 1,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(1024),

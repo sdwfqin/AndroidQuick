@@ -1,7 +1,7 @@
-### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，请不要直接引入，请先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
+### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
     // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.2.3'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.2.4'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
@@ -36,36 +36,38 @@
     |- BaseFragment
     |- MvpActivity
     |- MvpFragment
-    |- RxPresenter Presenter层封装
-    |- AliPayTools 支付宝支付工具类
-    |- WechatPayTools 微信支付工具类
-    |- WechatShareTools 微信分享工具类
-    |- QrBarScanActivity 解析二维码Activity
-    |- QrCreateCode 创建二维码工具类
-    |- SeeImageActivity 图片预览Activity（多图/单图）
-    |- WebViewActivity 传入url即可
-    |- WebViewLoadDataActivity 针对非url链接的网页
-    |- AppManager Activity栈管理
-    |- GsonUtil Gson工具类
-    |- ImageLoader Glide 4.x 工具类（封装了“wo”常用的）
-    |- RxUtil compose()统一线程处理
-    |- EventBusUtil EventBus工具类，使用时需要注意BaseActivity/BaseFragment中的方法，在里面做了封装
-    |- HintDialog 可配置提示弹窗
-    |- BottomDialogPhotoFragment 一个简单的可配置底部弹窗
-    |- AmountView 购物车商品数量选择
-    |- AutoLinesLayoutManager 自动换行的布局管理器
-    |- ClickViewPager 可以点击的ViewPager
-    |- DecimalEditText Double类型的EditText，支持限定小数点后的位数
-    |- NoScrollViewPager 可以禁止滑动的ViewPager
-    |- TrembleButton 可以漂浮颤抖的按钮
-    |- WrapContentHeightViewPager 处理NestedScrollView嵌套Viewpager+RecyclerView
-    |- AutoPollRecyclerView 跑马灯样式的RecyclerView
+    |- RxPresenter          Presenter层封装
+    |- AliPayTools          支付宝支付工具类
+    |- WechatPayTools       微信支付工具类
+    |- WechatShareTools     微信分享工具类
+    |- QrBarScanActivity    解析二维码Activity
+    |- QrCreateCode         创建二维码工具类
+    |- SeeImageActivity     图片预览Activity（多图/单图）
+    |- WebViewActivity      传入url即可
+    |- WebViewLoadDataActivity      针对非url链接的网页
+    |- AppManager           Activity栈管理
+    |- GsonUtil             Gson工具类
+    |- ImageLoader          Glide 4.x 工具类（封装了“wo”常用的）
+    |- RxUtil               compose()统一线程处理
+    |- EventBusUtil         EventBus工具类，使用时需要注意BaseActivity/BaseFragment中的方法，在里面做了封装
+    |- HintDialog           可配置提示弹窗
+    |- BottomDialogPhotoFragment    一个简单的可配置底部弹窗
+    |- AmountView           购物车商品数量选择
+    |- AutoLinesLayoutManager   自动换行的布局管理器（流式布局）
+    |- ClickViewPager       可以点击的ViewPager
+    |- DecimalEditText      Double类型的EditText，支持限定小数点后的位数
+    |- NoScrollViewPager    可以禁止滑动的ViewPager
+    |- TrembleButton        可以漂浮颤抖的按钮
+    |- WrapContentHeightViewPager   处理NestedScrollView嵌套Viewpager+RecyclerView
+    |- AutoPollRecyclerView         跑马灯样式的RecyclerView（自动滚动）
+    |- QuickExecutor        线程池
+    |- PictureUploadView    九宫格图片上传view
 |- app
-    |- IntroActivity 新用户引导页Activity
-    |- RetrofitClient Retrofit封装（内部类单例）
-    |- NetworkError 网络异常处理（在这里调用RetrofitException）
-    |- RetrofitException Retrofit异常处理
-    |- BaseResponse Retrofit的Response基类
+    |- IntroActivity        新用户引导页Activity
+    |- RetrofitClient       Retrofit封装（内部类单例）
+    |- NetworkError         网络异常处理（在这里调用RetrofitException）
+    |- RetrofitException    Retrofit异常处理
+    |- BaseResponse         Retrofit的Response基类
 ```
 
 # Apk http://fir.im/x97v
