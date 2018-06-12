@@ -10,40 +10,73 @@ import android.content.Context;
  */
 public class BaseResponse<T> {
 
-    private int code;
-    private String msg;
-    private T res;
+
+    private String method;
+    private String level;
+    private String code;
+    private String description;
+    private T data;
+
+    @Override
+    public String toString() {
+        return "BaseResponse{" +
+                "method='" + method + '\'' +
+                ", level='" + level + '\'' +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", data=" + data +
+                '}';
+    }
 
     public boolean isOk(Context context) {
-        if (code == 200) {
+        if (code.equals("000")) {
             return true;
+        } else if (code.equals("002")) {
+            // 无数据
+            return false;
         } else {
-            NetworkError.error(context, new ServerException(code, msg));
+            NetworkError.error(context, new ServerException(Integer.parseInt(code), description));
             return false;
         }
     }
 
-    public int getCode() {
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public T getRes() {
-        return res;
+    public T getData() {
+        return data;
     }
 
-    public void setRes(T res) {
-        this.res = res;
+    public void setData(T data) {
+        this.data = data;
     }
 }

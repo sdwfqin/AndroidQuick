@@ -25,6 +25,9 @@ public class NetworkError {
             case RetrofitException.ERROR.SSL_ERROR:
                 Toast.makeText(context, responeThrowable.message, Toast.LENGTH_SHORT).show();
                 break;
+            case -1:
+                // 跳转到登陆页面
+                break;
             default:
                 Toast.makeText(context, responeThrowable.message, Toast.LENGTH_SHORT).show();
                 break;

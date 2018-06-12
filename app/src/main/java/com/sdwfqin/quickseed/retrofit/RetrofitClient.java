@@ -1,9 +1,11 @@
 package com.sdwfqin.quickseed.retrofit;
 
-import com.sdwfqin.quicklib.base.QuickConstants;
+import com.sdwfqin.quickseed.BuildConfig;
 import com.sdwfqin.quickseed.base.Constants;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -19,11 +21,11 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitClient {
 
     public Retrofit mRetrofit;
-    public TestApi gService;
+    public ServiceApi gService;
 
     private RetrofitClient() {
         mRetrofit = createRetrofit();
-        gService = createService(TestApi.class);
+        gService = createService(ServiceApi.class);
     }
 
     private static class RetrofitClientHolder {
@@ -43,7 +45,7 @@ public class RetrofitClient {
 
     private Retrofit createRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(QuickConstants.BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 // 设置OkHttpclient
                 .client(initOkhttpClient())
                 // RxJava2
@@ -62,11 +64,6 @@ public class RetrofitClient {
      */
     private OkHttpClient initOkhttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
-        if (Constants.LOG_TYPE) {
-            // OkHttp日志拦截器
-            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-        }
 //        builder.addInterceptor(chain -> {
 //            Request original = chain.request();
 //            Request request = original.newBuilder()
@@ -77,6 +74,32 @@ public class RetrofitClient {
 //                    .build();
 //            return chain.proceed(request);
 //        });
+        // 通过拦截器添加除method以外的系统级参数
+        builder.addInterceptor(chain -> {
+            Request request = chain.request();
+            if (request.method().equals("POST")) {
+                if (request.body() instanceof FormBody) {
+                    FormBody.Builder bodyBuilder = new FormBody.Builder();
+                    FormBody formBody = (FormBody) request.body();
+                    bodyBuilder
+                            .addEncoded("appKey", "002")
+                            .addEncoded("v", "1.0")
+                            .addEncoded("format", "JSON")
+                            .addEncoded("type", "1");
+                    //把原来的参数添加到新的构造器
+                    for (int i = 0; i < formBody.size(); i++) {
+                        bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
+                    }
+                    formBody = bodyBuilder.build();
+                    request = request.newBuilder().post(formBody).build();
+                }
+            }
+            return chain.proceed(request);
+        });
+        if (BuildConfig.DEBUG) {
+            // OkHttp日志拦截器
+            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+        }
         return builder.build();
     }
 }

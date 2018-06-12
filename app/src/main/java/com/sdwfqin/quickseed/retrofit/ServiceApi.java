@@ -6,6 +6,6 @@ package com.sdwfqin.quickseed.retrofit;
  * @author 张钦
  * @date 2017/9/25
  */
-public interface TestApi {
+public interface ServiceApi {
 
 }
