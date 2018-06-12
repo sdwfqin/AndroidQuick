@@ -2,31 +2,72 @@ package com.sdwfqin.quickseed.base;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.SDCardUtils;
-import com.sdwfqin.quickseed.BuildConfig;
 
 /**
  * 描述：全局配置
  *
- * @author  张钦
+ * @author 张钦
  * @date 2017/9/25
  */
 public class Constants {
 
-    // 活动请求码
+    /**
+     * BaseUrl
+     */
+    public static final String BASE_URL = "http://www.sdwfqin.com/";
+    public static final String BASE_API = "api";
+    public static final String BASE_SHARE = BASE_URL + "index.do?id=";
+
+    /**
+     * 支付宝
+     */
+    public static final String A_LI_PAY_ID = "##########";
+    public static final String A_LI_PAY_URL = BASE_URL + "/alipayBalance.do";
+    public static final String A_LI_PAY_RES = "##################";
+
+    /**
+     * ========================================
+     * ********        状态请求码        ********
+     * ========================================
+     */
     public static final int RESULT_CODE_1 = 101;
     public static final int RESULT_CODE_2 = 102;
     public static final int RESULT_CODE_3 = 103;
     public static final int RESULT_CODE_4 = 104;
     public static final int RESULT_CODE_5 = 105;
+    public static final int RESULT_CODE_6 = 106;
+    public static final int RESULT_CODE_7 = 107;
+    public static final int RESULT_CODE_8 = 108;
 
     /**
-     * 刷新我的页面
+     * ========================================
+     * ********        sp文件key        ********
+     * ========================================
      */
-    public static final int EVENT_1 = 105;
+    public static final String TEST = "######";
+
+
     /**
-     * 刷新选择银行卡页面
+     * =======================================
+     * ********      EventBus标识      ********
+     * =======================================
      */
-    public static final int EVENT_2 = 106;
+
+    /**
+     * 账户余额列表
+     */
+    public static final int EVENT_1 = 205;
+
+    /**
+     * 充值后更新我的页面
+     */
+    public static final int EVENT_2 = 206;
+
+    /**
+     * =======================================
+     * ********        其他配置        ********
+     * =======================================
+     */
 
     /**
      * 状态栏高度
@@ -34,24 +75,9 @@ public class Constants {
     public static int STATUS_HEIGHT = ConvertUtils.dp2px(25);
 
     /**
-     * 上传文件表单
-     */
-    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
-
-    /**
-     * 微信appid
-     */
-    public static final String APP_ID = "123456";
-
-    /**
-     * 是否打印日志，正式版需要设置为false
-     */
-    public static final boolean LOG_TYPE = BuildConfig.DEBUG;
-
-    /**
      * 图片保存位置
      */
-    public static final String SAVE_REAL_PATH = SDCardUtils.getSDCardPaths().get(0) + "/AndroidQuick";
+    public static final String SAVE_REAL_PATH = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin";
 
     /**
      * 文件共享
@@ -59,10 +85,9 @@ public class Constants {
     public static final String FILE_PROVIDER = "com.sdwfqin.quickseed.fileprovider";
 
     /**
-     * BaseUrl
+     * 上传文件表单
      */
-    public static final String BASE_URL = "http://app.dedehr.com/";
-
+    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     public static final String HEAD = "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
