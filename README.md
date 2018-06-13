@@ -1,11 +1,11 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
     // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.2.4'
+    implementation 'com.sdwfqin.quicklib:quicklib:1.2.5'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-> 最低支持api16，编译版本27，gradle4.4
+> 最低支持api17，编译版本27，gradle4.4
 
     minSdkVersion 17
     targetSdkVersion 27

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-version = "1.2.4"
+version = "1.2.5"
 
 // gradlew install
 // gradlew bintrayUpload
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 39
+        versionCode 40
         versionName version
     }
 
