@@ -82,8 +82,23 @@
         app:autoSize="true"
         app:divideLineWidth="1dp"
         app:isPwd="false"
-        app:maxCount="6"
+        app:maxCount="4"
         app:psdType="block"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:inputType="number"
+        app:autoSize="true"
+        app:divideLineWidth="1dp"
+        app:isPwd="false"
+        app:maxCount="6"
+        app:psdType="weChat"
         app:rectAngle="0dp"/>
 
 </LinearLayout>

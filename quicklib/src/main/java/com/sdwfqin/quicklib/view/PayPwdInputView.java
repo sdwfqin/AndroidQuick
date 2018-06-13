@@ -9,8 +9,6 @@ import android.graphics.RectF;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.sdwfqin.quicklib.R;
@@ -28,9 +26,11 @@ public class PayPwdInputView extends AppCompatEditText {
     /**
      * 输入框类型
      */
-    private final static int Type_weChat = 0;
-    private final static int Type_bottomLine = 1;
-    private final static int Type_block = 2;
+    private final static int TYPE_WECHAT = 0;
+    private final static int TYPE_BOTTOM_LINE = 1;
+    private final static int TYPE_BLOCK = 2;
+
+    private final static int DEFAULT_HEIGHT = ConvertUtils.dp2px(45);
 
     private Context mContext;
 
@@ -70,7 +70,7 @@ public class PayPwdInputView extends AppCompatEditText {
     private int borderColor = Color.GRAY;
 
     /**
-     * 分割线开始的坐标x
+     * 分割线开始的坐标x（WECHAT样式用）
      */
     private int divideLineWStartX;
 
@@ -95,7 +95,7 @@ public class PayPwdInputView extends AppCompatEditText {
     private boolean isPwd = true;
 
     /**
-     * TODO: 自适用宽高（微信样式）
+     * 自适用宽高（微信样式）
      */
     private boolean autoSize = false;
 
@@ -104,6 +104,9 @@ public class PayPwdInputView extends AppCompatEditText {
      */
     private int height;
     private int width;
+    /**
+     * x轴线长度与空白
+     */
     private int bottomLineLength;
 
     /**
@@ -178,23 +181,11 @@ public class PayPwdInputView extends AppCompatEditText {
         initPaint();
 
         // 设置EditText背景为透明
-        this.setBackgroundColor(Color.TRANSPARENT);
+        setBackgroundColor(Color.TRANSPARENT);
         // 设置不显示光标
-        this.setCursorVisible(false);
+        setCursorVisible(false);
         // 设置EditText的最大长度
-        this.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCount)});
-
-        this.getViewTreeObserver()
-                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        ViewGroup.LayoutParams layoutParams = getLayoutParams();
-                        layoutParams.height = height;
-                        layoutParams.width = width;
-                        setLayoutParams(layoutParams);
-                    }
-                });
+        setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxCount)});
     }
 
     /**
@@ -263,11 +254,12 @@ public class PayPwdInputView extends AppCompatEditText {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        height = h;
-        width = w;
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        width = measureWidth(widthMeasureSpec);
+        height = measureHeight(heightMeasureSpec);
 
-        if (psdType == Type_weChat && autoSize) {
+        if (psdType == TYPE_WECHAT && autoSize) {
             int w1 = height * maxCount;
             if (w1 < width) {
                 width = w1;
@@ -275,30 +267,63 @@ public class PayPwdInputView extends AppCompatEditText {
                 height = width / maxCount;
             }
         }
-        h = height;
-        w = width;
 
-        super.onSizeChanged(w, h, oldw, oldh);
+        setMeasuredDimension(width, height);
+    }
 
+//    @Override
+//    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+//        super.onSizeChanged(w, h, oldw, oldh);
+//
+//        // 不设置padding有毛病
+//        setPadding(0, 0, 0, 0);
+//
+//        // 微信样式用
+//        divideLineWStartX = w / maxCount;
+//
+//        // 圆心坐标
+//        startX = w / maxCount / 2;
+//        startY = h / 2;
+//
+//        // 默认情况下x轴边线长度
+//        bottomLineLength = w / (maxCount + 2);
+//
+//        // 微信样式画一个大长方形
+//        rectF.set(0, 0, width, height);
+//
+//    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        int w = right - left;
+        int h = bottom - top;
+
+        // 不设置padding有毛病
+        setPadding(0, 0, 0, 0);
+
+        // 微信样式用
         divideLineWStartX = w / maxCount;
 
+        // 圆心坐标
         startX = w / maxCount / 2;
         startY = h / 2;
 
+        // 默认情况下x轴边线长度
         bottomLineLength = w / (maxCount + 2);
 
+        // 微信样式画一个大长方形
         rectF.set(0, 0, width, height);
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if (psdType == Type_weChat) {
+        if (psdType == TYPE_WECHAT) {
             drawWeChatBorder(canvas);
-        } else if (psdType == Type_bottomLine) {
+        } else if (psdType == TYPE_BOTTOM_LINE) {
             drawBottomBorder(canvas);
-        } else if (psdType == Type_block) {
+        } else if (psdType == TYPE_BLOCK) {
             drawBlockBorder(canvas);
         }
 
@@ -356,21 +381,23 @@ public class PayPwdInputView extends AppCompatEditText {
      */
     private void drawBlockBorder(Canvas canvas) {
 
+        // x轴边线y轴边线相同
+        bottomLineLength = height;
         // startX是底部横线的长度 cx是x轴横线的中间位置
         // 画底部横线
         for (int i = 0; i < maxCount; i++) {
             cX = startX + i * 2 * startX;
-            //上面的横线
+            // 上面的横线
             canvas.drawLine(cX - bottomLineLength / 2,
                     0,
                     cX + bottomLineLength / 2,
                     0, bottomLinePaint);
-            //左面的竖线
+            // 左面的竖线
             canvas.drawLine(cX - bottomLineLength / 2,
                     0,
                     cX - bottomLineLength / 2,
                     height, bottomLinePaint);
-            //右左面的竖线
+            // 右面的竖线
             canvas.drawLine(cX + bottomLineLength / 2,
                     0,
                     cX + bottomLineLength / 2,
@@ -443,6 +470,49 @@ public class PayPwdInputView extends AppCompatEditText {
         }
         // 重绘
         invalidate();
+    }
+
+    private int measureWidth(int measureSpec) {
+        int result = 200;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.UNSPECIFIED:
+                result = specSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                result = Math.min(result, specSize);
+                break;
+            case MeasureSpec.EXACTLY:
+                result = specSize;
+                break;
+            default:
+        }
+        return result;
+    }
+
+    private int measureHeight(int measureSpec) {
+        int result = 200;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode) {
+            // 父容器不对View有任何的限制，它不指定View的大小，即View想要多大就多大
+            case MeasureSpec.UNSPECIFIED:
+                result = specSize;
+                break;
+            // 最大值模式，即子View不能超过父控件的大小，对应LayoutParams中的wrap_content。
+            case MeasureSpec.AT_MOST:
+                // 如果高度为wrap_content，给一个默认值45dp
+                // result = Math.min(result, specSize);
+                result = DEFAULT_HEIGHT;
+                break;
+            // 精确测量的模式
+            case MeasureSpec.EXACTLY:
+                result = specSize;
+                break;
+            default:
+        }
+        return result;
     }
 
     /**
