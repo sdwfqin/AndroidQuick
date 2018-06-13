@@ -26,6 +26,11 @@ public class Constants {
     public static final String A_LI_PAY_RES = "##################";
 
     /**
+     * 微信
+     */
+    public static final String WECHAT_ID = "##########";
+
+    /**
      * ========================================
      * ********        状态请求码        ********
      * ========================================

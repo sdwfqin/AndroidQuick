@@ -40,8 +40,8 @@ public class BaseApp extends Application {
 
         // 设置日志
         LogUtils.Config config = LogUtils.getConfig();
-        config.setLogSwitch(Constants.LOG_TYPE)
-                .setConsoleSwitch(Constants.LOG_TYPE);
+        config.setLogSwitch(true)
+                .setConsoleSwitch(true);
     }
 
     /**

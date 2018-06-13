@@ -7,7 +7,7 @@
 
 > 最低支持api16，编译版本27，gradle4.4
 
-    minSdkVersion 16
+    minSdkVersion 17
     targetSdkVersion 27
     
 # 注意事项

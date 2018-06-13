@@ -31,6 +31,7 @@
         android:icon="@mipmap/quicklib_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -61,6 +62,8 @@
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.PictureUploadActivity">
+        </activity>
+        <activity android:name=".ui.home.PayPwdInputActivity">
         </activity>
     </application>
 

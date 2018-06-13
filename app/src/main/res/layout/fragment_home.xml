@@ -54,4 +54,10 @@
         android:layout_height="wrap_content"
         android:text="上传图片九宫格"/>
 
+    <Button
+        android:id="@+id/g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义输入密码验证码"/>
+
 </LinearLayout>

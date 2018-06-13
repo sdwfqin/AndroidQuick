@@ -64,7 +64,7 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e, R.id.f})
+    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e, R.id.f, R.id.g})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.a:
@@ -123,6 +123,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.f:
                 startActivity(new Intent(mContext, PictureUploadActivity.class));
                 break;
+            case R.id.g:
+                startActivity(new Intent(mContext, PayPwdInputActivity.class));
+                break;
+            default:
         }
     }
 
@@ -137,6 +141,7 @@ public class HomeFragment extends BaseFragment {
                         showMsg(code);
                     }
                     break;
+                default:
             }
         }
     }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.PayPwdInputActivity">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:divideLineWidth="1dp"
+        app:isPwd="true"
+        app:maxCount="6"
+        app:psdType="weChat"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:divideLineWidth="1dp"
+        app:isPwd="true"
+        app:maxCount="6"
+        app:psdType="bottomLine"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:divideLineWidth="1dp"
+        app:isPwd="false"
+        app:maxCount="6"
+        app:psdType="weChat"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:divideLineWidth="1dp"
+        app:isPwd="false"
+        app:maxCount="6"
+        app:psdType="bottomLine"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:autoSize="true"
+        app:divideLineWidth="1dp"
+        app:maxCount="6"
+        app:psdType="block"
+        app:rectAngle="0dp"/>
+
+    <com.sdwfqin.quicklib.view.PayPwdInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        app:autoSize="true"
+        app:divideLineWidth="1dp"
+        app:isPwd="false"
+        app:maxCount="6"
+        app:psdType="block"
+        app:rectAngle="0dp"/>
+
+</LinearLayout>
