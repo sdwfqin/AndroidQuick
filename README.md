@@ -62,6 +62,7 @@
     |- AutoPollRecyclerView         跑马灯样式的RecyclerView（自动滚动）
     |- QuickExecutor        线程池
     |- PictureUploadView    九宫格图片上传view
+    |- PayPwdInputView      自定义验证码/密码View
 |- app
     |- IntroActivity        新用户引导页Activity
     |- RetrofitClient       Retrofit封装（内部类单例）
