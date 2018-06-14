@@ -62,6 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected void onDestroy() {
         removePresenter();
         unSubscribe();
+        AppManager.removeActivity(this);
         super.onDestroy();
     }
 

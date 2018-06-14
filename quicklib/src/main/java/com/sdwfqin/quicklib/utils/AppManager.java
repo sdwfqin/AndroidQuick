@@ -56,6 +56,15 @@ public class AppManager {
     }
 
     /**
+     * 移除指定的Activity
+     */
+    public static void removeActivity(Activity activity) {
+        if (activity != null) {
+            activityStack.remove(activity);
+        }
+    }
+
+    /**
      * 结束指定类名的Activity
      */
     public static void finishActivity(Class<?> cls) {
