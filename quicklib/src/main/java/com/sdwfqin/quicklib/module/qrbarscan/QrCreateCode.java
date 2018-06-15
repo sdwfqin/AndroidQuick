@@ -68,7 +68,7 @@ public class QrCreateCode {
         }
     }
 
-    //----------------------------------------------------------------------------------------------以下为生成二维码算法
+    //------------------------------以下为生成二维码算法------------------------------
 
     public static Bitmap creatQRCode(CharSequence content, int QR_WIDTH, int QR_HEIGHT, int backgroundColor, int codeColor) {
         Bitmap bitmap = null;

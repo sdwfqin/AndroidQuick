@@ -30,8 +30,10 @@ public class QrBarTool {
     public static Result decodeFromPhoto(Bitmap photo) {
         Result rawResult = null;
         if (photo != null) {
-            Bitmap smallBitmap = ImageUtils.scale(photo, photo.getWidth() / 2, photo.getHeight() / 2);// 为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
-            photo.recycle(); // 释放原始图片占用的内存，防止out of memory异常发生
+            // 为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
+            Bitmap smallBitmap = ImageUtils.scale(photo, photo.getWidth() / 2, photo.getHeight() / 2);
+            // 释放原始图片占用的内存，防止out of memory异常发生
+            photo.recycle();
 
             MultiFormatReader multiFormatReader = new MultiFormatReader();
 
@@ -39,31 +41,30 @@ public class QrBarTool {
             Hashtable<DecodeHintType, Object> hints = new Hashtable<>(2);
             // 可以解析的编码类型
             Vector<BarcodeFormat> decodeFormats = new Vector<>();
-            if (decodeFormats.isEmpty()) {
-                decodeFormats = new Vector<>();
 
-                Vector<BarcodeFormat> PRODUCT_FORMATS = new Vector<>(5);
-                PRODUCT_FORMATS.add(BarcodeFormat.UPC_A);
-                PRODUCT_FORMATS.add(BarcodeFormat.UPC_E);
-                PRODUCT_FORMATS.add(BarcodeFormat.EAN_13);
-                PRODUCT_FORMATS.add(BarcodeFormat.EAN_8);
-                // PRODUCT_FORMATS.add(BarcodeFormat.RSS14);
-                Vector<BarcodeFormat> ONE_D_FORMATS = new Vector<>(PRODUCT_FORMATS.size() + 4);
-                ONE_D_FORMATS.addAll(PRODUCT_FORMATS);
-                ONE_D_FORMATS.add(BarcodeFormat.CODE_39);
-                ONE_D_FORMATS.add(BarcodeFormat.CODE_93);
-                ONE_D_FORMATS.add(BarcodeFormat.CODE_128);
-                ONE_D_FORMATS.add(BarcodeFormat.ITF);
-                Vector<BarcodeFormat> QR_CODE_FORMATS = new Vector<>(1);
-                QR_CODE_FORMATS.add(BarcodeFormat.QR_CODE);
-                Vector<BarcodeFormat> DATA_MATRIX_FORMATS = new Vector<>(1);
-                DATA_MATRIX_FORMATS.add(BarcodeFormat.DATA_MATRIX);
+            decodeFormats.add(BarcodeFormat.UPC_A);
+            decodeFormats.add(BarcodeFormat.UPC_E);
+            decodeFormats.add(BarcodeFormat.UPC_EAN_EXTENSION);
+            decodeFormats.add(BarcodeFormat.CODABAR);
+            decodeFormats.add(BarcodeFormat.RSS_14);
+            decodeFormats.add(BarcodeFormat.RSS_EXPANDED);
+            // 商品码
+            decodeFormats.add(BarcodeFormat.EAN_13);
+            decodeFormats.add(BarcodeFormat.EAN_8);
+            decodeFormats.add(BarcodeFormat.CODE_39);
+            decodeFormats.add(BarcodeFormat.CODE_93);
+            // CODE128码是广泛应用在企业内部管理、生产流程、物流控制系统方面的条码码制
+            decodeFormats.add(BarcodeFormat.CODE_128);
+            // 主要用于运输包装，是印刷条件较差，不允许印刷EAN-13和UPC-A条码时应选用的一种条码。
+            decodeFormats.add(BarcodeFormat.ITF);
+            // 矩阵二维码
+            decodeFormats.add(BarcodeFormat.QR_CODE);
+            // 二维码（防伪、统筹等）
+            decodeFormats.add(BarcodeFormat.DATA_MATRIX);
 
-                // 这里设置可扫描的类型，我这里选择了都支持
-                decodeFormats.addAll(ONE_D_FORMATS);
-                decodeFormats.addAll(QR_CODE_FORMATS);
-                decodeFormats.addAll(DATA_MATRIX_FORMATS);
-            }
+            decodeFormats.add(BarcodeFormat.AZTEC);
+            decodeFormats.add(BarcodeFormat.MAXICODE);
+            decodeFormats.add(BarcodeFormat.PDF_417);
             hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
             // 设置继续的字符编码格式为UTF8
             // hints.put(DecodeHintType.CHARACTER_SET, "UTF8");

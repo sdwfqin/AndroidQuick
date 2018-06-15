@@ -12,7 +12,6 @@
             <option value="$PROJECT_DIR$/baidumaplib" />
             <option value="$PROJECT_DIR$/paylib" />
             <option value="$PROJECT_DIR$/quicklib" />
-            <option value="$PROJECT_DIR$/viewlib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

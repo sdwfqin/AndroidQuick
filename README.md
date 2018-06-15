@@ -1,13 +1,15 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
-    // 当前项目
-    implementation 'com.sdwfqin.quicklib:quicklib:1.2.7'
+    // 主模块
+    implementation 'com.sdwfqin.quicklib:quicklib:1.3.0'
+    // 支付模块（可以不依赖quicklib单独引入）
+    implementation 'com.sdwfqin.quicklib:paylib:1.0.0'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-> 最低支持api17，编译版本27，gradle4.4
+> 最低支持api18
 
-    minSdkVersion 17
+    minSdkVersion 18
     targetSdkVersion 27
     
 # 注意事项
@@ -37,8 +39,6 @@
     |- MvpActivity
     |- MvpFragment
     |- RxPresenter          Presenter层封装
-    |- AliPayTools          支付宝支付工具类
-    |- WechatPayTools       微信支付工具类
     |- WechatShareTools     微信分享工具类
     |- QrBarScanActivity    解析二维码Activity
     |- QrCreateCode         创建二维码工具类
@@ -63,6 +63,9 @@
     |- QuickExecutor        线程池
     |- PictureUploadView    九宫格图片上传view
     |- PayPwdInputView      自定义验证码/密码View
+|- paylib
+    |- AliPayTools          支付宝支付工具类
+    |- WechatPayTools       微信支付工具类
 |- app
     |- IntroActivity        新用户引导页Activity
     |- RetrofitClient       Retrofit封装（内部类单例）

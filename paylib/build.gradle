@@ -4,8 +4,8 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    // gradlew install
-    // gradlew bintrayUpload
+    // gradlew pay:install
+    // gradlew pay:bintrayUpload
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion

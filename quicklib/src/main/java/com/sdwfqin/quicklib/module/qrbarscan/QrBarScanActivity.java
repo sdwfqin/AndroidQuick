@@ -226,17 +226,6 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
         setResult(RESULT_OK, intent);
         finish();
 
-        // showMsg(realContent);
-
-//        if (BarcodeFormat.QR_CODE.equals(type)) {
-//            rxDialogSure.setTitle("二维码扫描结果");
-//        } else if (BarcodeFormat.EAN_13.equals(type)) {
-//            rxDialogSure.setTitle("条形码扫描结果");
-//        } else {
-//            rxDialogSure.setTitle("扫描结果");
-//        }
-        // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-        // handler.sendEmptyMessage(R.id.restart_preview);
     }
 
     public void handleDecode(Result result) {

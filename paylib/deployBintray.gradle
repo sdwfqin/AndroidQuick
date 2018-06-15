@@ -11,8 +11,8 @@ install {
             project {
                 packaging 'aar'
                 // Add your description here
-                description 'Android 快速开发库'  //项目描述
-                name 'quicklib'
+                description '支付模块'  //项目描述
+                name 'pay'
                 url siteUrl
                 // Set your license
                 licenses {
@@ -68,7 +68,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "quicklib"  //发布到Bintray的那个仓库里，默认账户有四个库，我们这里上传到maven库
-        name = "quicklib"  //发布到Bintray上的项目名字
+        name = "pay"  //发布到Bintray上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

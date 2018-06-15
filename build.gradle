@@ -64,6 +64,6 @@ ext {
     retrofit = '2.4.0'
     PhotoView = '2.0.0'
     gson = '2.8.2'
-    zxing = '3.3.2'
+    zxing = '3.3.3'
     wechat = '5.1.4'
 }
