@@ -3,7 +3,7 @@
     // 主模块
     implementation 'com.sdwfqin.quicklib:quicklib:1.3.0'
     // 支付模块（可以不依赖quicklib单独引入）
-    implementation 'com.sdwfqin.quicklib:paylib:1.0.0'
+    implementation 'com.sdwfqin.quicklib:paylib:1.0.1'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
