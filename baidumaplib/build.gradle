@@ -42,6 +42,3 @@ dependencies {
     api files('libs/BaiduLBS_Android.jar')
     api files('libs/IndoorscapeAlbumPlugin.jar')
 }
-repositories {
-    mavenCentral()
-}

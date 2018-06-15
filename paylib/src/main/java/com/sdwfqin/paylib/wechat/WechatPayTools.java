@@ -220,7 +220,7 @@ public class WechatPayTools {
      */
     public static void doWXPay(Context mContext, String wxAppid, String payParam, final OnRequestListener onRequestListener) {
         // 要在支付前调用
-        WechatPay.Companion.init(mContext, wxAppid);
+        WechatPay.init(mContext, wxAppid);
         // 调起支付
         WechatPay.getInstance().doPay(payParam, new WechatPay.WechatPayResultCallBack() {
             @Override
@@ -231,15 +231,15 @@ public class WechatPayTools {
             @Override
             public void onError(int errorCode) {
                 switch (errorCode) {
-                    case WechatPay.Companion.getNO_OR_LOW_WX():
+                    case WechatPay.NO_OR_LOW_WX:
                         onRequestListener.onError("未安装微信或微信版本过低");
                         break;
 
-                    case WechatPay.Companion.getERROR_PAY_PARAM():
+                    case WechatPay.ERROR_PAY_PARAM:
                         onRequestListener.onError("参数错误");
                         break;
 
-                    case WechatPay.Companion.getERROR_PAY():
+                    case WechatPay.ERROR_PAY:
                         onRequestListener.onError("支付失败");
                         break;
                     default:

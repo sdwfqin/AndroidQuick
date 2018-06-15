@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/baidumaplib/baidumaplib.iml" filepath="$PROJECT_DIR$/baidumaplib/baidumaplib.iml" />
       <module fileurl="file://$PROJECT_DIR$/paylib/paylib.iml" filepath="$PROJECT_DIR$/paylib/paylib.iml" />
       <module fileurl="file://$PROJECT_DIR$/quicklib/quicklib.iml" filepath="$PROJECT_DIR$/quicklib/quicklib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewlib/viewlib.iml" filepath="$PROJECT_DIR$/viewlib/viewlib.iml" />
     </modules>
   </component>
 </project>

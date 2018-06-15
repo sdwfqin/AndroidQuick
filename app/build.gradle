@@ -42,6 +42,3 @@ dependencies {
     implementation project(':quicklib')
     implementation project(':paylib')
 }
-repositories {
-    mavenCentral()
-}

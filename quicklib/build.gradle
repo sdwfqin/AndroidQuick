@@ -58,6 +58,3 @@ dependencies {
 }
 
 apply from: "deployBintray.gradle"
-repositories {
-    mavenCentral()
-}
