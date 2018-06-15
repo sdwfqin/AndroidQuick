@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.wechat.pay;
+package com.sdwfqin.quicklib.utils;
 
 import java.security.MessageDigest;
 
