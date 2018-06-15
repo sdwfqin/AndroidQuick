@@ -4,6 +4,9 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+    // gradlew install
+    // gradlew bintrayUpload
+
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -22,26 +25,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    sourceSets {
-        main {
-            jni.srcDirs = []
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$support"
-    implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
-    api files('libs/BaiduTraceSDK_v3_0_7.jar')
-    api files('libs/bos-android-sdk-1.0.3.jar')
-    api files('libs/BaiduLBS_Android.jar')
-    api files('libs/IndoorscapeAlbumPlugin.jar')
+    api "com.squareup.okhttp3:okhttp:$okhttp"
+    api "com.google.code.gson:gson:$gson"
+    api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
+    api files('libs/alipaySdk-20180403.jar')
 }
+
+apply from: "deployBintray.gradle"
 repositories {
     mavenCentral()
 }

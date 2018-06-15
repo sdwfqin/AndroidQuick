@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.wechat.pay;
+package com.sdwfqin.paylib.wechat;
 
 /**
  * 描述：微信统一下单业务参数

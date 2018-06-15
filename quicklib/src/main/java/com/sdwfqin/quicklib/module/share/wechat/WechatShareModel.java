@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.wechat.share;
+package com.sdwfqin.quicklib.module.share.wechat;
 
 public class WechatShareModel {
     private String url;

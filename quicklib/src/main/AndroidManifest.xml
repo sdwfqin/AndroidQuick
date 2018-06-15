@@ -15,22 +15,7 @@
     <!-- 许可调用相机自动对焦 -->
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true">
-        <activity
-            android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
-            android:exported="false"
-            android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity
-            android:name="com.alipay.sdk.app.H5AuthActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+    <application>
         <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewActivity"/>
         <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewLoadDataActivity"/>
         <activity android:name="com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity"/>

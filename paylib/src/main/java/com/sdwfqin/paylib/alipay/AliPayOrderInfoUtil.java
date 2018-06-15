@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.alipay;
+package com.sdwfqin.paylib.alipay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

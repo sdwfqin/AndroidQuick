@@ -18,12 +18,6 @@ public class QuickConstants {
      */
     public static String BASE_URL = null;
 
-    /**
-     * 微信统一下单接口
-     */
-    public static final String WX_TOTAL_ORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-
-
     public static final String HEAD = "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
             "    <head>\n" +

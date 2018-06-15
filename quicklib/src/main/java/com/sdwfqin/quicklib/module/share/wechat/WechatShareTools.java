@@ -1,9 +1,10 @@
-package com.sdwfqin.quicklib.module.wechat.share;
+package com.sdwfqin.quicklib.module.share.wechat;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.sdwfqin.quicklib.utils.QuickUtils;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -13,7 +14,6 @@ import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.sdwfqin.quicklib.module.wechat.pay.WechatPayTools;
 
 /**
  * 发送到聊天界面——WXSceneSession
@@ -38,7 +38,7 @@ public class WechatShareTools {
         msg.description = text;
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = WechatPayTools.getCurrTime();
+        req.transaction = QuickUtils.getCurrTime();
 
         req.message = msg;
         switch (sharePlace) {
@@ -70,7 +70,7 @@ public class WechatShareTools {
         msg.thumbData = ConvertUtils.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = WechatPayTools.getCurrTime();
+        req.transaction = QuickUtils.getCurrTime();
 
         req.message = msg;
         switch (sharePlace) {
@@ -104,7 +104,7 @@ public class WechatShareTools {
         msg.thumbData = shareModel.getThumbData();
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = WechatPayTools.getCurrTime();
+        req.transaction = QuickUtils.getCurrTime();
         req.message = msg;
 
         switch (sharePlace) {
@@ -137,7 +137,7 @@ public class WechatShareTools {
         msg.thumbData = shareModel.getThumbData();
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = WechatPayTools.getCurrTime();
+        req.transaction = QuickUtils.getCurrTime();
         req.message = msg;
 
         switch (sharePlace) {
@@ -170,7 +170,7 @@ public class WechatShareTools {
         msg.thumbData = shareModel.getThumbData();
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = WechatPayTools.getCurrTime();
+        req.transaction = QuickUtils.getCurrTime();
         req.message = msg;
 
         switch (sharePlace) {

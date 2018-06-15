@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.alipay;
+package com.sdwfqin.paylib.alipay;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
-import com.sdwfqin.quicklib.module.interfaces.OnRequestListener;
+import com.sdwfqin.paylib.interfaces.OnRequestListener;
 
 import java.util.Map;
 
@@ -26,6 +26,7 @@ public class AliPayTools {
     @SuppressLint("HandlerLeak")
     private static Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
+        @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case SDK_PAY_FLAG: {

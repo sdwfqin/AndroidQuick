@@ -1,12 +1,10 @@
-package com.sdwfqin.quicklib.module.wechat.pay;
+package com.sdwfqin.paylib.wechat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.google.gson.Gson;
-import com.sdwfqin.quicklib.base.QuickConstants;
-import com.sdwfqin.quicklib.module.interfaces.OnRequestListener;
+import com.sdwfqin.paylib.interfaces.OnRequestListener;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,6 +42,11 @@ import okhttp3.Response;
  * @date 2018/1/25
  */
 public class WechatPayTools {
+
+    /**
+     * 微信统一下单接口
+     */
+    public static final String WX_TOTAL_ORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
     /**
      * 商户发起生成预付单请求
@@ -94,7 +97,7 @@ public class WechatPayTools {
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(xml, xmlParams);
         Request request = new Request.Builder()
-                .url(QuickConstants.WX_TOTAL_ORDER)
+                .url(WX_TOTAL_ORDER)
                 .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -217,31 +220,26 @@ public class WechatPayTools {
      */
     public static void doWXPay(Context mContext, String wxAppid, String payParam, final OnRequestListener onRequestListener) {
         // 要在支付前调用
-        WechatPay.init(mContext, wxAppid);
+        WechatPay.Companion.init(mContext, wxAppid);
         // 调起支付
         WechatPay.getInstance().doPay(payParam, new WechatPay.WechatPayResultCallBack() {
             @Override
             public void onSuccess() {
-                LogUtils.e("微信支付成功");
                 onRequestListener.onSuccess("微信支付成功");
             }
 
             @Override
             public void onError(int errorCode) {
-                LogUtils.e(errorCode);
                 switch (errorCode) {
-                    case WechatPay.NO_OR_LOW_WX:
-                        LogUtils.e("未安装微信或微信版本过低");
+                    case WechatPay.Companion.getNO_OR_LOW_WX():
                         onRequestListener.onError("未安装微信或微信版本过低");
                         break;
 
-                    case WechatPay.ERROR_PAY_PARAM:
-                        LogUtils.e("参数错误");
+                    case WechatPay.Companion.getERROR_PAY_PARAM():
                         onRequestListener.onError("参数错误");
                         break;
 
-                    case WechatPay.ERROR_PAY:
-                        LogUtils.e("支付失败");
+                    case WechatPay.Companion.getERROR_PAY():
                         onRequestListener.onError("支付失败");
                         break;
                     default:
@@ -250,7 +248,6 @@ public class WechatPayTools {
 
             @Override
             public void onCancel() {
-                LogUtils.e("支付取消");
                 onRequestListener.onError("支付取消");
             }
         });

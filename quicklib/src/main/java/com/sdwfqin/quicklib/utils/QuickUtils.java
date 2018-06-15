@@ -1,6 +1,10 @@
 package com.sdwfqin.quicklib.utils;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,5 +35,17 @@ public class QuickUtils {
             }
         }
         return result;
+    }
+
+    /**
+     * 获取当前时间 yyyyMMddHHmmss
+     *
+     * @return String
+     */
+    public static String getCurrTime() {
+        Date now = new Date();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat outFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return outFormat.format(now);
     }
 }

@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.alipay;
+package com.sdwfqin.paylib.alipay;
 
 /**
  * 描述：业务参数
