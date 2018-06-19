@@ -1,5 +1,4 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+apply from: "config.gradle"
 buildscript {
 
     ext.kotlin_version = '1.2.50'
@@ -37,33 +36,4 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    // Sdk and tools
-    minSdkVersion = 18
-    targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = '27.0.3'
-
-    support = '27.1.1'
-    constraint = '1.1.2'
-    glide = '4.7.1'
-    butterknife = '8.8.1'
-    vlayout = '1.2.15'
-    quicklib = '1.2.7'
-    qmui = '1.1.5'
-    brvah = '2.9.40'
-    banner = '1.4.10'
-    utilcode = '1.16.4'
-    eventbus = '3.1.1'
-    rxjava = '2.1.14'
-    rxandroid = '2.0.2'
-    agentweb = '4.0.2'
-    okhttp = '3.10.0'
-    retrofit = '2.4.0'
-    PhotoView = '2.0.0'
-    gson = '2.8.2'
-    zxing = '3.3.3'
-    wechat = '5.1.4'
 }

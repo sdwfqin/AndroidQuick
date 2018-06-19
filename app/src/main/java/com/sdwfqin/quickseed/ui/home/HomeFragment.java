@@ -5,13 +5,14 @@ import android.os.Build;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quicklib.module.webview.WebViewActivity;
 import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
 import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
+import com.sdwfqin.quicklib.module.webview.WebViewActivity;
 import com.sdwfqin.quicklib.view.dialog.BottomDialogPhotoFragment;
 import com.sdwfqin.quicklib.view.dialog.HintDialog;
 import com.sdwfqin.quickseed.R;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -34,12 +34,22 @@ import static android.app.Activity.RESULT_OK;
  */
 public class HomeFragment extends BaseFragment {
 
+    @BindView(R.id.list)
+    ListView list;
     @BindView(R.id.status_view)
     View mStatusView;
-    @BindView(R.id.home_msg)
-    ImageView mHomeMsg;
-    @BindView(R.id.home_title_tv)
-    TextView mHomeTitleTv;
+    @BindView(R.id.topbar)
+    QMUITopBar mTopbar;
+
+    private String[] mTitle = new String[]{"跳转网页",
+            "扫描二维码",
+            "颤抖的按钮",
+            "图片预览",
+            "底部弹窗",
+            "上传图片九宫格",
+            "自定义验证码/密码View",
+            "自定义Webview",
+    };
 
     @Override
     protected int getLayout() {
@@ -55,79 +65,85 @@ public class HomeFragment extends BaseFragment {
             mStatusView.getLayoutParams().height = Constants.STATUS_HEIGHT;
         }
 
-        mHomeTitleTv.setText("首页");
+        mTopbar.setTitle("首页");
 
+        list.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
+        initListener();
+    }
+
+    private void initListener() {
+        list.setOnItemClickListener((adapterView, view, i, l) -> {
+            switch (i) {
+                case 0:
+                    WebViewActivity.launch(mContext, "https://www.baidu.com");
+                    break;
+                case 1:
+                    startActivityForResult(new Intent(mContext, QrBarScanActivity.class), Constants.RESULT_CODE_1);
+                    break;
+                case 2:
+                    HintDialog hintDialog = new HintDialog(mContext);
+                    hintDialog.show();
+                    hintDialog.setTitle("啊啊啊啊啊啊");
+                    hintDialog.hideRight();
+                    hintDialog.setLeftText("取消");
+                    hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
+                        @Override
+                        public void left() {
+                            showMsg("您点击了取消！");
+                        }
+
+                        @Override
+                        public void right() {
+
+                        }
+                    });
+                    break;
+                case 3:
+                    List<String> strings = new ArrayList<>();
+                    strings.add("http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg");
+                    strings.add("http://img.taopic.com/uploads/allimg/140729/240450-140HZP45790.jpg");
+                    SeeImageActivity.launch(mContext, strings);
+                    break;
+                case 4:
+                    BottomDialogPhotoFragment.Builder builder = new BottomDialogPhotoFragment.Builder();
+                    BottomSheetDialogFragment bottomSheetDialogFragment = builder.setOnClickListener(new BottomDialogPhotoFragment.OnDialogClickListener() {
+                        @Override
+                        public void xiangce() {
+
+                        }
+
+                        @Override
+                        public void paizhao() {
+
+                        }
+
+                        @Override
+                        public void exit() {
+
+                        }
+                    }).builder();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    if (fragmentManager != null) {
+                        bottomSheetDialogFragment.show(fragmentManager, "dialog");
+                    }
+                    break;
+                case 5:
+                    startActivity(new Intent(mContext, PictureUploadActivity.class));
+                    break;
+                case 6:
+                    startActivity(new Intent(mContext, PayPwdInputActivity.class));
+                    break;
+                case 7:
+                    startActivity(new Intent(mContext, CustomWebviewActivity.class));
+                    break;
+                default:
+            }
+        });
     }
 
     @Override
     protected void lazyLoadShow(boolean isLoad) {
 
-    }
-
-    @OnClick({R.id.a, R.id.b, R.id.c, R.id.d, R.id.e, R.id.f, R.id.g})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.a:
-                WebViewActivity.launch(mContext, "https://www.baidu.com");
-                break;
-            case R.id.b:
-                startActivityForResult(new Intent(mContext, QrBarScanActivity.class), Constants.RESULT_CODE_1);
-                break;
-            case R.id.c:
-                HintDialog hintDialog = new HintDialog(mContext);
-                hintDialog.show();
-                hintDialog.setTitle("啊啊啊啊啊啊");
-                hintDialog.hideRight();
-                hintDialog.setLeftText("取消");
-                hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
-                    @Override
-                    public void left() {
-                        showMsg("您点击了取消！");
-                    }
-
-                    @Override
-                    public void right() {
-
-                    }
-                });
-                break;
-            case R.id.d:
-                List<String> strings = new ArrayList<>();
-                strings.add("http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg");
-                strings.add("http://img.taopic.com/uploads/allimg/140729/240450-140HZP45790.jpg");
-                SeeImageActivity.launch(mContext, strings);
-                break;
-            case R.id.e:
-                BottomDialogPhotoFragment.Builder builder = new BottomDialogPhotoFragment.Builder();
-                BottomSheetDialogFragment bottomSheetDialogFragment = builder.setOnClickListener(new BottomDialogPhotoFragment.OnDialogClickListener() {
-                    @Override
-                    public void xiangce() {
-
-                    }
-
-                    @Override
-                    public void paizhao() {
-
-                    }
-
-                    @Override
-                    public void exit() {
-
-                    }
-                }).builder();
-                FragmentManager fragmentManager = getFragmentManager();
-                if (fragmentManager != null) {
-                    bottomSheetDialogFragment.show(fragmentManager, "dialog");
-                }
-                break;
-            case R.id.f:
-                startActivity(new Intent(mContext, PictureUploadActivity.class));
-                break;
-            case R.id.g:
-                startActivity(new Intent(mContext, PayPwdInputActivity.class));
-                break;
-            default:
-        }
     }
 
     @Override

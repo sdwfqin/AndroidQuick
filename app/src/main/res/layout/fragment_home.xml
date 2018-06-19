@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -10,54 +9,14 @@
         android:layout_height="25dp"
         android:background="@color/white"/>
 
-    <include layout="@layout/home_title"/>
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转网页"/>
-
-    <Button
-        android:id="@+id/b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="扫描二维码"/>
-
-    <com.sdwfqin.quicklib.view.TrembleButton
-        android:id="@+id/c"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@mipmap/quicklib_launcher"
-        android:gravity="center"
-        android:text="颤抖的button"
-        app:durationMax="6000"
-        app:durationMin="5000"
-        app:translationMax="20"
-        app:translationMin="15"/>
-
-    <Button
-        android:id="@+id/d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="图片预览"/>
-
-    <Button
-        android:id="@+id/e"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="选择图片弹窗"/>
-
-    <Button
-        android:id="@+id/f"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="上传图片九宫格"/>
-
-    <Button
-        android:id="@+id/g"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="自定义输入密码验证码"/>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
