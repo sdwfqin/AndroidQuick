@@ -11,8 +11,7 @@ import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.sdwfqin.quicklib.base.MvpActivity;
-import com.sdwfqin.quicklib.view.NoScrollViewPager;
-import com.sdwfqin.quicklib.view.dialog.HintDialog;
+import com.sdwfqin.quicklib.view.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.contract.MainContract;
@@ -20,6 +19,7 @@ import com.sdwfqin.quickseed.presenter.MainPresenter;
 import com.sdwfqin.quickseed.ui.find.FindFragment;
 import com.sdwfqin.quickseed.ui.home.HomeFragment;
 import com.sdwfqin.quickseed.ui.my.MyFragment;
+import com.sdwfqin.widget.NoScrollViewPager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.HashMap;

@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 // gradlew widget:install
 // gradlew widget:bintrayUpload
-
-version = "1.0.0"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -12,7 +11,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName version
+        versionName rootProject.ext.widget
     }
 
     buildTypes {
@@ -22,12 +21,34 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$support"
+    implementation "com.android.support:recyclerview-v7:$support"
+    implementation "com.android.support.constraint:constraint-layout:$constraint"
+    api("com.alibaba.android:vlayout:${vlayout}@aar") {
+        transitive = true
+    }
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$brvah"
+    api "com.blankj:utilcode:$utilcode"
+    implementation project(':imageloader')
 }
 
-apply from: "deployBintray.gradle"
+Properties properties = new Properties()
+// 加载本地配置
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+publish {
+    userOrg = properties.getProperty("bintray.user")
+    groupId = 'com.sdwfqin.quick'
+    artifactId = 'widget'
+    publishVersion = rootProject.ext.widget
+    desc = 'Android View组件库'
+    website = 'https://github.com/sdwfqin/AndroidQuick'
+    licences = ['Apache-2.0']
+}

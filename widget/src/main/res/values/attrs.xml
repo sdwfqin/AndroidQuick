@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AmountView">
+        <!-- 左右2边+-按钮的宽度 -->
+        <attr name="btnWidth" format="dimension" />
+        <!-- 中间TextView的宽度 -->
+        <attr name="tvWidth" format="dimension" />
+        <!--<attr name="tvColor" format="color"/>-->
+        <attr name="tvTextSize" format="dimension"/>
+        <attr name="btnTextSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="DecimalEditText">
+        <!-- 小数的位数 -->
+        <attr name="decimalLength" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="TrembleButton">
+        <attr name="durationMax" format="integer" />
+        <attr name="durationMin" format="integer" />
+        <attr name="translationMax" format="integer" />
+        <attr name="translationMin" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="PayPwdInputView">
+
+        <attr name="maxCount" format="integer" />
+        <attr name="circleColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="bottomLineColor" format="color" />
+        <attr name="pwdRadius" format="dimension" />
+        <attr name="divideLineWidth" format="dimension" />
+        <attr name="divideLineColor" format="color" />
+        <attr name="rectAngle" format="dimension" />
+        <attr name="isPwd" format="boolean" />
+        <attr name="autoSize" format="boolean" />
+        <attr name="psdType" format="enum">
+            <enum name="weChat" value="0" />
+            <enum name="bottomLine" value="1" />
+            <enum name="block" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

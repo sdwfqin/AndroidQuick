@@ -1,19 +1,15 @@
 apply plugin: 'com.android.library'
-
-version "1.0.1"
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    // gradlew pay:install
-    // gradlew pay:bintrayUpload
-
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName version
+        versionName rootProject.ext.pay
     }
 
     buildTypes {
@@ -38,4 +34,15 @@ dependencies {
     api files('libs/alipaySdk-20180403.jar')
 }
 
-apply from: "deployBintray.gradle"
+Properties properties = new Properties()
+// 加载本地配置
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+publish {
+    userOrg = properties.getProperty("bintray.user")
+    groupId = 'com.sdwfqin.quick'
+    artifactId = 'pay'
+    publishVersion = rootProject.ext.pay
+    desc = 'Android 支付组件库'
+    website = 'https://github.com/sdwfqin/AndroidQuick'
+    licences = ['Apache-2.0']
+}

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.sdwfqin.quicklib.view.NoScrollViewPager
+    <com.sdwfqin.widget.NoScrollViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

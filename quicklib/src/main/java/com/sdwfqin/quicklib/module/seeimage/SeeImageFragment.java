@@ -5,24 +5,21 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.sdwfqin.imageloader.ImageLoader;
+import com.sdwfqin.imageloader.progress.CircleProgressView;
+import com.sdwfqin.imageloader.progress.OnProgressListener;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.base.QuickConstants;
-import com.sdwfqin.quicklib.utils.ImageLoader;
 
 import java.io.File;
 
@@ -35,7 +32,7 @@ import java.io.File;
 public class SeeImageFragment extends BaseFragment {
 
     private PhotoView mShowimageImg;
-    private ProgressBar mProgressBar;
+    private CircleProgressView mProgressBar;
     private String url;
     private int position;
 
@@ -66,13 +63,21 @@ public class SeeImageFragment extends BaseFragment {
             LogUtils.i("initEventAndData: " + url);
         }
 
-        ImageLoader.loadBitmapImage(mContext, url, new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                mShowimageImg.setImageBitmap(resource);
-                mProgressBar.setVisibility(View.GONE);
-            }
-        });
+        ImageLoader
+                .init(mShowimageImg)
+                .load(url, R.mipmap.image_loading, R.mipmap.image_load_err)
+                .setOnProgressListener(new OnProgressListener() {
+                    @Override
+                    public void onLoading(int progress) {
+                        mProgressBar.setVisibility(View.VISIBLE);
+                        mProgressBar.setProgress(progress);
+                    }
+
+                    @Override
+                    public void onLoadSuccess() {
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+                });
 
         // setOnLongClickListener中return的值决定是否在长按后再加一个短按动作
         // true为不加短按,false为加入短按

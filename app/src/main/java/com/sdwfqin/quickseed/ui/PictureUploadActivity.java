@@ -8,10 +8,9 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sdwfqin.quicklib.base.BaseActivity;
-import com.sdwfqin.quicklib.view.pictureupload.PictureUpModel;
-import com.sdwfqin.quicklib.view.pictureupload.PictureUploadCallback;
-import com.sdwfqin.quicklib.view.pictureupload.PictureUploadView;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
+import com.sdwfqin.widget.pictureupload.PictureUploadView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class PictureUploadActivity extends BaseActivity {
     @BindView(R.id.topbar)
     QMUITopBar mTopbar;
     @BindView(R.id.pic)
-    PictureUploadView mPic;
+    PictureUploadView<PictureModel> mPic;
 
     @Override
     protected int getLayout() {
@@ -42,24 +41,33 @@ public class PictureUploadActivity extends BaseActivity {
         mTopbar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
-        mPic.setPicUploadCallback(new PictureUploadCallback() {
+        mPic.setPicUploadCallback(new PictureUploadCallback<PictureModel>() {
+            @Override
+            public void click(int position, PictureModel pictureModel, List<PictureModel> list) {
+
+            }
+
             @Override
             public void remove(int position, List list) {
 
             }
 
             @Override
-            public void click(int position, PictureUpModel pictureUpModel, List list) {
-
-            }
-
-            @Override
             public void onAddPic(int maxPic, List list) {
+//                List<LocalMedia> localMedia = new ArrayList<>();
+//                List data = mPic.getData();
+//                if (data.size() > 0) {
+//                    for (int i = 0; i < data.size(); i++) {
+//                        if (data.get(i) instanceof PictureModel) {
+//                            localMedia.add((LocalMedia) data.get(i));
+//                        }
+//                    }
+//                }
                 PictureSelector.create(mContext)
                         .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                         .maxSelectNum(maxPic)// 最大图片选择数量 int
                         .minSelectNum(1)// 最小选择数量 int
-                        .imageSpanCount(4)// 每行显示个数 int
+                        .imageSpanCount(3)// 每行显示个数 int
                         .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                         .previewImage(true)// 是否可预览图片 true or false
                         .isCamera(true)// 是否显示拍照按钮 true or false
@@ -69,7 +77,7 @@ public class PictureUploadActivity extends BaseActivity {
                         .enableCrop(false)// 是否裁剪 true or false
                         .compress(true)// 是否压缩 true or false
                         .isGif(false)// 是否显示gif图片 true or false
-                        // .selectionMedia()// 是否传入已选图片 List<LocalMedia> list
+//                        .selectionMedia(localMedia)// 是否传入已选图片 List<LocalMedia> list
                         .minimumCompressSize(100)// 小于100kb的图片不压缩
                         .synOrAsy(true)//同步true或异步false 压缩 默认同步
                         .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
@@ -83,13 +91,14 @@ public class PictureUploadActivity extends BaseActivity {
         if (resultCode == -1) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
-                    List<PictureUpModel> models = new ArrayList<>();
+                    List<PictureModel> models = new ArrayList<>();
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     for (int i = 0; i < selectList.size(); i++) {
-                        models.add(new PictureUpModel(selectList.get(i).getPath()));
+                        models.add(new PictureModel(selectList.get(i)));
                     }
                     mPic.setAddData(models);
                     break;
+                default:
             }
         }
     }
