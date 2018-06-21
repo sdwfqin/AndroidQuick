@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+// gradlew qrscan:clean qrscan:build qrscan:bintrayUpload
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName rootProject.ext.qrscan
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api "com.android.support:appcompat-v7:$support"
+
+}
+
+Properties properties = new Properties()
+// 加载本地配置
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+publish {
+    userOrg = properties.getProperty("bintray.user")
+    repoName = 'quicklib'
+    groupId = 'com.sdwfqin.quick'
+    artifactId = 'qrscan'
+    publishVersion = rootProject.ext.qrscan
+    licences = ['Apache-2.0']
+    uploadName = 'qrscan'
+    desc = 'Android 条码扫描库'
+    website = 'https://github.com/sdwfqin/AndroidQuick'
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    dryRun = false
+}

@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 44
+        versionCode 45
         versionName rootProject.ext.quicklib
     }
 
@@ -45,8 +45,8 @@ dependencies {
     api "com.squareup.okhttp3:logging-interceptor:$okhttp"
     api "com.github.chrisbanes:PhotoView:$PhotoView"
     api "com.google.code.gson:gson:$gson"
-    api "com.google.zxing:core:$zxing"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
+    api "com.google.zxing:core:$zxing"
     implementation project(':imageloader')
 }
 
