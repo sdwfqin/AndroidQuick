@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
-// gradlew quicklib:install
-// gradlew quicklib:bintrayUpload
+// gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -56,10 +55,15 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 publish {
     userOrg = properties.getProperty("bintray.user")
+    repoName = 'quicklib'
     groupId = 'com.sdwfqin.quick'
     artifactId = 'quicklib'
     publishVersion = rootProject.ext.quicklib
+    licences = ['Apache-2.0']
+    uploadName = 'quicklib'
     desc = 'Android 快速开发库'
     website = 'https://github.com/sdwfqin/AndroidQuick'
-    licences = ['Apache-2.0']
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    dryRun = false
 }

@@ -1,8 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
-// gradlew widget:install
-// gradlew widget:bintrayUpload
+// gradlew widget:clean widget:build widget:bintrayUpload
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -29,9 +28,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$support"
-    implementation "com.android.support:recyclerview-v7:$support"
-    implementation "com.android.support.constraint:constraint-layout:$constraint"
+    api "com.android.support:appcompat-v7:$support"
+    api "com.android.support:design:$support"
+    api "com.android.support:cardview-v7:$support"
+    api "com.android.support:recyclerview-v7:$support"
+    api "com.android.support.constraint:constraint-layout:$constraint"
     api("com.alibaba.android:vlayout:${vlayout}@aar") {
         transitive = true
     }
@@ -45,10 +46,15 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 publish {
     userOrg = properties.getProperty("bintray.user")
+    repoName = 'quicklib'
     groupId = 'com.sdwfqin.quick'
     artifactId = 'widget'
     publishVersion = rootProject.ext.widget
+    licences = ['Apache-2.0']
+    uploadName = 'widget'
     desc = 'Android View组件库'
     website = 'https://github.com/sdwfqin/AndroidQuick'
-    licences = ['Apache-2.0']
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    dryRun = false
 }
