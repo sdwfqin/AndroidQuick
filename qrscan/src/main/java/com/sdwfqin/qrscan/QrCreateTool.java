@@ -18,16 +18,16 @@ import java.util.Hashtable;
  * @author 张钦
  * @date 2018/1/25
  */
-public class QrCreateCode {
+public class QrCreateTool {
 
     /**
      * 获取建造者
      *
      * @param text 样式字符串文本
-     * @return {@link QrCreateCode.Builder}
+     * @return {@link QrCreateTool.Builder}
      */
-    public static QrCreateCode.Builder builder(@NonNull CharSequence text) {
-        return new QrCreateCode.Builder(text);
+    public static QrCreateTool.Builder builder(@NonNull CharSequence text) {
+        return new QrCreateTool.Builder(text);
     }
 
     public static class Builder {
@@ -60,7 +60,7 @@ public class QrCreateCode {
         }
 
         public Bitmap into(ImageView imageView) {
-            Bitmap bitmap = QrCreateCode.creatQRCode(content, codeSide, codeSide, backgroundColor, codeColor);
+            Bitmap bitmap = QrCreateTool.creatQRCode(content, codeSide, codeSide, backgroundColor, codeColor);
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
             }

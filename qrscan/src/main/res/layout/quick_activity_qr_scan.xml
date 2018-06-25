@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/quick_scan_mask">
+        android:background="@drawable/quick_qr_mask">
 
         <ImageView
             android:id="@+id/top_mask"
@@ -73,7 +73,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/capture_crop_layout"
-        android:background="@drawable/quick_scan_mask"
+        android:background="@drawable/quick_qr_mask"
         android:contentDescription="@string/app_name" />
 
     <ImageView
@@ -84,7 +84,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/rl_title"
         android:layout_toLeftOf="@id/capture_crop_layout"
-        android:background="@drawable/quick_scan_mask"
+        android:background="@drawable/quick_qr_mask"
         android:contentDescription="@string/app_name" />
 
     <ImageView
@@ -95,7 +95,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/rl_title"
         android:layout_toRightOf="@id/capture_crop_layout"
-        android:background="@drawable/quick_scan_mask"
+        android:background="@drawable/quick_qr_mask"
         android:contentDescription="@string/app_name" />
 
 </RelativeLayout>
