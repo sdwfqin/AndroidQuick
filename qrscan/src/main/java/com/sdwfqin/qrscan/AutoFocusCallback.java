@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.hardware.Camera;
 import android.os.Handler;

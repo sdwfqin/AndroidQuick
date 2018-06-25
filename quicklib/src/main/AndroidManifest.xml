@@ -18,7 +18,6 @@
     <application>
         <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewActivity"/>
         <activity android:name="com.sdwfqin.quicklib.module.webview.WebViewLoadDataActivity"/>
-        <activity android:name="com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity"/>
         <activity android:name=".module.seeimage.SeeImageActivity"/>
     </application>
 </manifest>

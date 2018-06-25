@@ -25,6 +25,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "com.android.support:appcompat-v7:$support"
+    api "com.google.zxing:core:$zxing"
+    api "com.blankj:utilcode:$utilcode"
 
 }
 

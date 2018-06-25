@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/imageloader" />
             <option value="$PROJECT_DIR$/paylib" />
+            <option value="$PROJECT_DIR$/qrscan" />
             <option value="$PROJECT_DIR$/quicklib" />
             <option value="$PROJECT_DIR$/widget" />
           </set>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.graphics.Point;
 import android.hardware.Camera;
@@ -41,6 +41,7 @@ public final class PreviewCallback implements Camera.PreviewCallback {
         this.previewMessage = previewMessage;
     }
 
+    @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
         Point cameraResolution = configManager.getCameraResolution();
         if (!useOneShotPreviewCallback) {

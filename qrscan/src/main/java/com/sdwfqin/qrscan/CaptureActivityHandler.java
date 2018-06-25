@@ -1,10 +1,9 @@
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.os.Handler;
 import android.os.Message;
 
 import com.google.zxing.Result;
-import com.sdwfqin.quicklib.R;
 
 
 /**

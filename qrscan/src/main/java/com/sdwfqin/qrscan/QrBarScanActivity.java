@@ -1,13 +1,17 @@
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -16,13 +20,11 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.Result;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.sdwfqin.quicklib.R;
-import com.sdwfqin.quicklib.base.BaseActivity;
-import com.sdwfqin.quicklib.module.qrbarscan.decoding.InactivityTimer;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,9 +35,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author 张钦
  * @date 2018/1/23
  */
-public class QrBarScanActivity extends BaseActivity implements View.OnClickListener {
+public class QrBarScanActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int GET_IMAGE_FROM_PHONE = 5002;
+
+    private Context mContext;
 
     ImageView mCaptureScanLine;
     SurfaceView mCapturePreview;
@@ -46,7 +50,6 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
     private ImageView mTop_openpicture;
     private ImageView mTop_back;
 
-    private InactivityTimer inactivityTimer;
     private CaptureActivityHandler handler;//扫描处理
     private int mCropWidth = 0;//扫描边界的宽度
     private int mCropHeight = 0;//扫描边界的高度
@@ -54,14 +57,13 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
     private boolean mFlashing = true;//闪光灯开启状态
 
     @Override
-    protected int getLayout() {
-        return R.layout.quick_activity_qr_scan;
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.quick_activity_qr_scan);
 
-    @Override
-    protected void initEventAndData() {
+        mContext = this;
 
-        QMUIStatusBarHelper.translucent(mContext);
+        BarUtils.setStatusBarAlpha(this);
 
         mCaptureScanLine = findViewById(R.id.capture_scan_line);
         mCapturePreview = findViewById(R.id.capture_preview);
@@ -76,7 +78,6 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
         initScanerAnimation();//扫描动画初始化
         CameraManager.init(mContext);//初始化 CameraManager
         hasSurface = false;
-        inactivityTimer = new InactivityTimer(this);
 
         mTop_mask.setOnClickListener(this);
         mTop_openpicture.setOnClickListener(this);
@@ -127,7 +128,6 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        inactivityTimer.shutdown();
         super.onDestroy();
     }
 
@@ -208,7 +208,7 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
                 if (rawResult != null) {
                     initResultData(rawResult);
                 } else {
-                    showMsg("图片识别失败");
+                    Toast.makeText(mContext, "图片识别失败", Toast.LENGTH_SHORT).show();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -229,8 +229,6 @@ public class QrBarScanActivity extends BaseActivity implements View.OnClickListe
     }
 
     public void handleDecode(Result result) {
-        inactivityTimer.onActivity();
-
         String result1 = result.getText();
         LogUtils.v("二维码/条形码 扫描结果", result1);
         // showMsg(result1);

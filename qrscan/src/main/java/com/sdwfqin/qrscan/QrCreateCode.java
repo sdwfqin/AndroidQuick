@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;

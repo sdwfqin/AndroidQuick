@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sdwfqin.quicklib.module.qrbarscan.decoding;
+package com.sdwfqin.qrscan.decoding;
 
 import android.app.Activity;
 
@@ -61,6 +61,7 @@ public final class InactivityTimer {
     }
 
     private static final class DaemonThreadFactory implements ThreadFactory {
+        @Override
         public Thread newThread(Runnable runnable) {
             Thread thread = new Thread(runnable);
             thread.setDaemon(true);

@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.sdwfqin.qrscan.QrBarScanActivity;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quicklib.module.qrbarscan.QrBarScanActivity;
 import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
 import com.sdwfqin.quicklib.module.webview.WebViewActivity;
 import com.sdwfqin.quicklib.view.BottomDialogPhotoFragment;

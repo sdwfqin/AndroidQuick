@@ -44,4 +44,5 @@ dependencies {
     implementation project(':quicklib')
     implementation project(':paylib')
     implementation project(':widget')
+    implementation project(':qrscan')
 }

@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.qrbarscan;
+package com.sdwfqin.qrscan;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +14,6 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
-import com.sdwfqin.quicklib.R;
 
 import java.util.Hashtable;
 import java.util.Vector;
@@ -84,8 +83,9 @@ final class DecodeHandler extends Handler {
         //modify here
         byte[] rotatedData = new byte[data.length];
         for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < width; x++) {
                 rotatedData[x * height + height - y - 1] = data[x + y * width];
+            }
         }
         int tmp = width;// Here we are swapping, that's the difference to #11
         width = height;

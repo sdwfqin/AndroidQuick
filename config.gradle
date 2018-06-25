@@ -18,7 +18,7 @@ ext {
     qmui = '1.1.5'
     brvah = '2.9.40'
     banner = '1.4.10'
-    utilcode = '1.16.4'
+    utilcode = '1.17.0'
     eventbus = '3.1.1'
     rxjava = '2.1.14'
     rxandroid = '2.0.2'
