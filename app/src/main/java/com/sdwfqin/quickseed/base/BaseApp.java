@@ -9,6 +9,7 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sdwfqin.quicklib.QuickInit;
+import com.sdwfqin.quicklib.utils.DensityUtils;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.sdwfqin.quickseed.R;
@@ -33,6 +34,9 @@ public class BaseApp extends Application {
         Bugly.init(getApplicationContext(), "66666666", false);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
+        QuickInit.setUiHeight(640);
+        QuickInit.setUiWidth(360);
+        DensityUtils.init(this);
     }
 
     private void initUtils() {

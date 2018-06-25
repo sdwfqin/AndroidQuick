@@ -67,6 +67,8 @@
         </activity>
         <activity android:name=".ui.home.CustomWebviewActivity">
         </activity>
+        <activity android:name=".ui.home.DensityActivity">
+        </activity>
     </application>
 
 </manifest>

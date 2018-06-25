@@ -18,6 +18,16 @@ public class QuickConstants {
      */
     public static String BASE_URL = null;
 
+    /**
+     * UI给的效果图宽度/2
+     */
+    public static int UI_WIDTH = 360;
+
+    /**
+     * UI给的效果图高度/2
+     */
+    public static int UI_HEIGHT = 640;
+
     public static final String HEAD = "<!DOCTYPE html>\n" +
             "<html lang=\"en\">\n" +
             "    <head>\n" +

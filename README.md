@@ -3,7 +3,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.0.0_beta2'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.0.0_beta3'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -71,6 +71,7 @@
 | BottomDialogPhotoFragment | 一个简单的可配置底部弹窗 |
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
+| DensityUtils | 屏幕适配 |
 
 2. paylib
 

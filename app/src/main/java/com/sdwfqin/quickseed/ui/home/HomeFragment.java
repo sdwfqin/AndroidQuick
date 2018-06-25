@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment {
             "上传图片九宫格",
             "自定义验证码/密码View",
             "自定义Webview",
+            "屏幕适配测试",
     };
 
     @Override
@@ -135,6 +136,9 @@ public class HomeFragment extends BaseFragment {
                     break;
                 case 7:
                     startActivity(new Intent(mContext, CustomWebviewActivity.class));
+                    break;
+                case 8:
+                    startActivity(new Intent(mContext, DensityActivity.class));
                     break;
                 default:
             }
