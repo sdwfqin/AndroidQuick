@@ -61,6 +61,7 @@
 | RxPresenter | Presenter层封装 |
 | WechatShareTools | 微信分享工具类 |
 | SeeImageActivity | 图片预览Activity（多图/单图） |
+| BaseWebView | ViewActivity基类 |
 | WebViewActivity | 传入url即可 |
 | WebViewLoadDataActivity | 针对非url链接的网页 |
 | GsonUtil | Gson工具类 |
