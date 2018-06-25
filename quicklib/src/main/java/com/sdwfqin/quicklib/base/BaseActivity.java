@@ -27,8 +27,8 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected Activity mContext;
-    private QMUITipDialog mQmuiTipDialog;
     protected CompositeDisposable mCompositeDisposable;
+    private QMUITipDialog mQmuiTipDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

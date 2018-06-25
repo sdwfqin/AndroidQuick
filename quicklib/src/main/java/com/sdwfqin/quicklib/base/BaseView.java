@@ -10,7 +10,7 @@ public interface BaseView {
     /**
      * 显示吐司
      *
-     * @param msg
+     * @param msg 提示消息
      */
     void showMsg(String msg);
 

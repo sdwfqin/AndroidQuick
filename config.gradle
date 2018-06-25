@@ -4,7 +4,7 @@ ext {
     compileSdkVersion = 27
     buildToolsVersion = '27.0.3'
 
-    quicklib = '2.0.0_beta3'
+    quicklib = '2.0.0_beta4'
     pay = '1.0.1'
     widget = '1.0.2'
     imageLoader = '1.0.1'

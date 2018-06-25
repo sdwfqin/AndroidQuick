@@ -3,7 +3,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.0.0_beta3'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.0.0_beta4'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -56,8 +56,8 @@
 | :-------- | :--------|
 | BaseActivity |  |
 | BaseFragment |  |
-| MvpActivity |  |
-| MvpFragment |  |
+| BaseMvpActivity |  |
+| BaseMvpFragment |  |
 | RxPresenter | Presenter层封装 |
 | WechatShareTools | 微信分享工具类 |
 | SeeImageActivity | 图片预览Activity（多图/单图） |

@@ -47,8 +47,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * 需要手动在lazyLoad()方法中做判断
      */
     protected boolean isLoad = false;
-    private Unbinder mUnBinder;
     private QMUITipDialog mQmuiTipDialog;
+    private Unbinder mUnBinder;
     protected CompositeDisposable mCompositeDisposable;
 
     /**

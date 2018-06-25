@@ -1,12 +1,12 @@
 package com.sdwfqin.quicklib.base;
 
 /**
- * 描述：Fragment基类
+ * 描述：Mvp Activity基类
  *
  * @author 张钦
- * @date 2017/8/3
  */
-public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment {
+public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActivity {
+
     protected T mPresenter;
 
     @Override
@@ -24,5 +24,11 @@ public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment 
         }
     }
 
+    /**
+     * 创建Presenter
+     *
+     * @return
+     */
     protected abstract T createPresenter();
+
 }

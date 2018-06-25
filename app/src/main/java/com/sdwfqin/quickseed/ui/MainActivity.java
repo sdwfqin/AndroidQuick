@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
-import com.sdwfqin.quicklib.base.MvpActivity;
+import com.sdwfqin.quicklib.base.BaseMvpActivity;
 import com.sdwfqin.quicklib.view.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
@@ -31,7 +31,7 @@ import butterknife.BindView;
  *
  * @author 张钦
  */
-public class MainActivity extends MvpActivity<MainContract.Presenter> implements MainContract.View {
+public class MainActivity extends BaseMvpActivity<MainContract.Presenter> implements MainContract.View {
 
     @BindView(R.id.pager)
     NoScrollViewPager mPager;

@@ -8,12 +8,12 @@ import io.reactivex.disposables.Disposable;
  *
  * @author zhangqin
  */
-public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
+public abstract class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
-    protected CompositeDisposable mCompositeDisposable;
+    private CompositeDisposable mCompositeDisposable;
 
-    protected void unSubscribe() {
+    private void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
         }
@@ -28,7 +28,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     @Override
     public void attachView(T view) {
-        this.mView = view;
+        mView = view;
     }
 
     @Override
