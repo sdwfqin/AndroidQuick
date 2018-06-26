@@ -46,7 +46,7 @@ dependencies {
     api "com.github.chrisbanes:PhotoView:$PhotoView"
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
-    implementation project(':imageloader')
+    api 'com.sdwfqin.quick:imageLoader:1.0.1'
 }
 
 Properties properties = new Properties()
@@ -55,7 +55,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 publish {
     userOrg = properties.getProperty("bintray.user")
     repoName = 'quicklib'
-    groupId = 'com.sdwfqin.quick'
+    groupId = 'com.sdwfqin.quicklib'
     artifactId = 'quicklib'
     publishVersion = rootProject.ext.quicklib
     licences = ['Apache-2.0']

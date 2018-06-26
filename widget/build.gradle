@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 4
         versionName rootProject.ext.widget
     }
 
@@ -38,7 +38,7 @@ dependencies {
     }
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$brvah"
     api "com.blankj:utilcode:$utilcode"
-    implementation project(':imageloader')
+    api 'com.sdwfqin.quick:imageLoader:1.0.1'
 }
 
 Properties properties = new Properties()

@@ -42,8 +42,8 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 publish {
     userOrg = properties.getProperty("bintray.user")
     repoName = 'quicklib'
-    groupId = 'com.sdwfqin.quick'
-    artifactId = 'pay'
+    groupId = 'com.sdwfqin.quicklib'
+    artifactId = 'paylib'
     publishVersion = rootProject.ext.pay
     licences = ['Apache-2.0']
     uploadName = 'pay'

@@ -5,8 +5,8 @@ ext {
     buildToolsVersion = '27.0.3'
 
     quicklib = '2.0.0'
-    pay = '1.0.1'
-    widget = '1.0.2'
+    pay = '1.0.3'
+    widget = '1.0.4'
     imageLoader = '1.0.1'
     qrscan = '1.0.0'
 

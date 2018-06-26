@@ -3,12 +3,12 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quick:quicklib:2.0.0'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.0.0'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
     // 支付模块
-    implementation 'com.sdwfqin.quick:paylib:1.0.1'
+    implementation 'com.sdwfqin.quicklib:pay:1.0.3'
     
     // Android 条码/二维码扫描库
     implementation 'com.sdwfqin.quick:qrscan:1.0.0'
@@ -17,7 +17,7 @@
     implementation 'com.sdwfqin.quick:imageLoader:1.0.1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:1.0.2'
+    implementation 'com.sdwfqin.quick:widget:1.0.4'
     
 
 > 最低支持api18
