@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -34,10 +33,7 @@ import com.otaliastudios.cameraview.SizeSelectors;
 import java.io.IOException;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 描述：二维码/条形码识别Activity
@@ -48,7 +44,6 @@ import io.reactivex.schedulers.Schedulers;
 public class QrBarScanActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int GET_IMAGE_FROM_PHONE = 5002;
-    private static final String TAG = "QrBarScanActivity";
 
     private Context mContext;
 
@@ -59,19 +54,11 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
      */
     private RelativeLayout mCaptureCropLayout;
     /**
-     * root_view
-     */
-    private RelativeLayout mCaptureContainter;
-    private ImageView mTop_mask;
-    private ImageView mTop_openpicture;
-    private ImageView mTop_back;
-    /**
      * 闪光灯开启状态
      */
     private boolean mFlashing = true;
 
     private CompositeDisposable mCompositeDisposable;
-    private CameraListener mCameraListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,19 +72,17 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
         mCaptureScanLine = findViewById(R.id.capture_scan_line);
         mCameraView = findViewById(R.id.capture_camera);
         mCaptureCropLayout = findViewById(R.id.capture_crop_layout);
-        mCaptureContainter = findViewById(R.id.capture_containter);
-        mCaptureContainter = findViewById(R.id.capture_containter);
 
-        mTop_mask = findViewById(R.id.top_mask);
-        mTop_openpicture = findViewById(R.id.top_openpicture);
-        mTop_back = findViewById(R.id.top_back);
+        ImageView topMask = findViewById(R.id.top_mask);
+        ImageView topOpenpicture = findViewById(R.id.top_openpicture);
+        ImageView topBack = findViewById(R.id.top_back);
 
         //扫描动画初始化
         initScanerAnimation();
 
-        mTop_mask.setOnClickListener(this);
-        mTop_openpicture.setOnClickListener(this);
-        mTop_back.setOnClickListener(this);
+        topMask.setOnClickListener(this);
+        topOpenpicture.setOnClickListener(this);
+        topBack.setOnClickListener(this);
 
         initCamera();
     }
@@ -112,24 +97,28 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
         SizeSelector width = SizeSelectors.maxWidth(ScreenUtils.getScreenWidth());
         SizeSelector height = SizeSelectors.maxWidth(ScreenUtils.getScreenHeight());
         SizeSelector dimensions = SizeSelectors.and(width, height);
-        final SizeSelector ratio = SizeSelectors.aspectRatio(AspectRatio.of(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()), 0);
-
+        SizeSelector ratio = SizeSelectors.aspectRatio(AspectRatio.of(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()), 0);
         mCameraView.setPictureSize(SizeSelectors.and(ratio, dimensions));
 
-        Observable<Result> observable = Observable.create((ObservableOnSubscribe<Result>) e ->
+        Observable<Result> observable = Observable.create(emitter ->
                 mCameraView.addCameraListener(new CameraListener() {
                     @Override
                     public void onPictureTaken(byte[] picture) {
                         Bitmap bitmap = ImageUtils.bytes2Bitmap(picture);
+                        int left = mCaptureCropLayout.getLeft();
+                        int top = mCaptureCropLayout.getTop();
+                        int width = mCaptureCropLayout.getRight() - left;
+                        int height = mCaptureCropLayout.getBottom() - top;
+
                         Bitmap clip = ImageUtils.clip(bitmap,
-                                mCaptureCropLayout.getLeft(),
-                                mCaptureCropLayout.getTop(),
-                                mCaptureCropLayout.getRight() - mCaptureCropLayout.getLeft(),
-                                mCaptureCropLayout.getBottom() - mCaptureCropLayout.getTop(),
+                                left,
+                                top,
+                                width,
+                                height,
                                 true);
                         Result rawResult = QrBarTool.decodeFromPhoto(clip);
                         if (rawResult != null) {
-                            e.onNext(rawResult);
+                            emitter.onNext(rawResult);
                         } else {
                             mCameraView.captureSnapshot();
                         }
@@ -139,15 +128,15 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
                     public void onCameraOpened(CameraOptions options) {
                         mCameraView.captureSnapshot();
                     }
-                })).subscribeOn(Schedulers.io());
+                }));
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(observable
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::initResultData, throwable -> {
-                    Log.e(TAG, "onError: ", throwable);
-                }));
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::initResultData)
+        );
     }
 
     @Override
@@ -194,9 +183,7 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
             // 关闪光灯
             mCameraView.setFlash(Flash.OFF);
         }
-
         mFlashing = !mFlashing;
-
     }
 
     @Override
