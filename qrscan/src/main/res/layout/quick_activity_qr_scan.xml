@@ -11,8 +11,8 @@
         android:id="@+id/capture_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="true"
         android:keepScreenOn="true"
+        app:cameraCropOutput="false"
         app:cameraGesturePinch="zoom"
         app:cameraGestureTap="focus"
         app:cameraSessionType="picture"/>

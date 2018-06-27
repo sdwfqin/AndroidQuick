@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -19,9 +20,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.ImageUtils;
+import com.blankj.utilcode.util.SDCardUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.google.zxing.Result;
+import com.otaliastudios.cameraview.AspectRatio;
+import com.otaliastudios.cameraview.CameraListener;
 import com.otaliastudios.cameraview.CameraView;
-import com.otaliastudios.cameraview.Flash;
+import com.otaliastudios.cameraview.SizeSelector;
+import com.otaliastudios.cameraview.SizeSelectors;
 
 import java.io.IOException;
 
@@ -34,12 +42,19 @@ import java.io.IOException;
 public class QrBarScanActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int GET_IMAGE_FROM_PHONE = 5002;
+    private static final String TAG = "QrBarScanActivity";
 
     private Context mContext;
 
     private ImageView mCaptureScanLine;
     private CameraView mCameraView;
+    /**
+     * 中间剪裁框
+     */
     private RelativeLayout mCaptureCropLayout;
+    /**
+     * root_view
+     */
     private RelativeLayout mCaptureContainter;
     private ImageView mTop_mask;
     private ImageView mTop_openpicture;
@@ -91,13 +106,33 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
      * 初始化Camera
      */
     private void initCamera() {
-        int cropWidth = mCaptureCropLayout.getWidth();
-        int cropHeight = mCaptureCropLayout.getHeight();
-        setCropWidth(cropWidth);
-        setCropHeight(cropHeight);
+
+        mCameraView.setPlaySounds(false);
+        mCameraView.addCameraListener(new CameraListener() {
+            @Override
+            public void onPictureTaken(byte[] picture) {
+                String s = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin/" + System.currentTimeMillis() + ".jpg";
+//                FileIOUtils.writeFileFromBytesByStream(s, picture);
+                Log.e(TAG, "onBitmapReady: " + mCaptureCropLayout.getTop());
+                Bitmap bitmap = ImageUtils.bytes2Bitmap(picture);
+                Bitmap clip = ImageUtils.clip(bitmap,
+                        mCaptureCropLayout.getLeft(),
+                        mCaptureCropLayout.getTop(),
+                        mCaptureCropLayout.getRight() - mCaptureCropLayout.getLeft(),
+                        mCaptureCropLayout.getBottom() - mCaptureCropLayout.getTop(),
+                        true);
+                FileIOUtils.writeFileFromBytesByStream(s, ImageUtils.bitmap2Bytes(clip, Bitmap.CompressFormat.JPEG));
+            }
+        });
+
+        SizeSelector width = SizeSelectors.maxWidth(ScreenUtils.getScreenWidth());
+        SizeSelector height = SizeSelectors.maxWidth(ScreenUtils.getScreenHeight());
+        SizeSelector dimensions = SizeSelectors.and(width, height);
+        SizeSelector ratio = SizeSelectors.aspectRatio(AspectRatio.of(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()), 0);
+
+        mCameraView.setPictureSize(SizeSelectors.and(ratio, dimensions));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     protected void onResume() {
         super.onResume();
@@ -128,38 +163,25 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
         mCaptureScanLine.startAnimation(animation);
     }
 
-    public int getCropWidth() {
-        return mCropWidth;
-    }
-
-    public void setCropWidth(int cropWidth) {
-        mCropWidth = cropWidth;
-        // CameraManager.FRAME_WIDTH = mCropWidth;
-
-    }
-
-    public int getCropHeight() {
-        return mCropHeight;
-    }
-
-    public void setCropHeight(int cropHeight) {
-        this.mCropHeight = cropHeight;
-        // CameraManager.FRAME_HEIGHT = mCropHeight;
-    }
-
     /**
      * 闪光灯
      */
     private void flash() {
-        if (mFlashing) {
-            // 开闪光灯
-            mCameraView.setFlash(Flash.ON);
-        } else {
-            // 关闪光灯
-            mCameraView.setFlash(Flash.OFF);
-        }
-
-        mFlashing = !mFlashing;
+        // TODO: Test
+        mCameraView.captureSnapshot();
+//        Bitmap bitmap = ImageUtils.view2Bitmap(mCameraView);
+//        String s = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin/" + System.currentTimeMillis() + ".jpg";
+//        byte[] bytes = ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.JPEG);
+//        FileIOUtils.writeFileFromBytesByStream(s, bytes);
+//        if (mFlashing) {
+//            // 开闪光灯
+//            mCameraView.setFlash(Flash.TORCH);
+//        } else {
+//            // 关闪光灯
+//            mCameraView.setFlash(Flash.OFF);
+//        }
+//
+//        mFlashing = !mFlashing;
 
     }
 
