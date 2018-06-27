@@ -3,6 +3,7 @@ package com.sdwfqin.qrscan;
 import android.graphics.Bitmap;
 
 import com.blankj.utilcode.util.ImageUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -76,6 +77,7 @@ public class QrBarTool {
                 rawResult = multiFormatReader.decodeWithState(new BinaryBitmap(new HybridBinarizer(new BitmapLuminanceSource(smallBitmap))));
             } catch (Exception e) {
                 e.printStackTrace();
+                LogUtils.e(e);
             }
         }
         return rawResult;

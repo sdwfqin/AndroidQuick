@@ -20,18 +20,24 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.ImageUtils;
-import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.google.zxing.Result;
 import com.otaliastudios.cameraview.AspectRatio;
 import com.otaliastudios.cameraview.CameraListener;
+import com.otaliastudios.cameraview.CameraOptions;
 import com.otaliastudios.cameraview.CameraView;
+import com.otaliastudios.cameraview.Flash;
 import com.otaliastudios.cameraview.SizeSelector;
 import com.otaliastudios.cameraview.SizeSelectors;
 
 import java.io.IOException;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 描述：二维码/条形码识别Activity
@@ -59,19 +65,13 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
     private ImageView mTop_mask;
     private ImageView mTop_openpicture;
     private ImageView mTop_back;
-
-    /**
-     * 扫描边界的宽度
-     */
-    private int mCropWidth = 0;
-    /**
-     * 扫描边界的高度
-     */
-    private int mCropHeight = 0;
     /**
      * 闪光灯开启状态
      */
     private boolean mFlashing = true;
+
+    private CompositeDisposable mCompositeDisposable;
+    private CameraListener mCameraListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,29 +108,46 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
     private void initCamera() {
 
         mCameraView.setPlaySounds(false);
-        mCameraView.addCameraListener(new CameraListener() {
-            @Override
-            public void onPictureTaken(byte[] picture) {
-                String s = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin/" + System.currentTimeMillis() + ".jpg";
-//                FileIOUtils.writeFileFromBytesByStream(s, picture);
-                Log.e(TAG, "onBitmapReady: " + mCaptureCropLayout.getTop());
-                Bitmap bitmap = ImageUtils.bytes2Bitmap(picture);
-                Bitmap clip = ImageUtils.clip(bitmap,
-                        mCaptureCropLayout.getLeft(),
-                        mCaptureCropLayout.getTop(),
-                        mCaptureCropLayout.getRight() - mCaptureCropLayout.getLeft(),
-                        mCaptureCropLayout.getBottom() - mCaptureCropLayout.getTop(),
-                        true);
-                FileIOUtils.writeFileFromBytesByStream(s, ImageUtils.bitmap2Bytes(clip, Bitmap.CompressFormat.JPEG));
-            }
-        });
 
         SizeSelector width = SizeSelectors.maxWidth(ScreenUtils.getScreenWidth());
         SizeSelector height = SizeSelectors.maxWidth(ScreenUtils.getScreenHeight());
         SizeSelector dimensions = SizeSelectors.and(width, height);
-        SizeSelector ratio = SizeSelectors.aspectRatio(AspectRatio.of(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()), 0);
+        final SizeSelector ratio = SizeSelectors.aspectRatio(AspectRatio.of(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()), 0);
 
         mCameraView.setPictureSize(SizeSelectors.and(ratio, dimensions));
+
+        Observable<Result> observable = Observable.create((ObservableOnSubscribe<Result>) e ->
+                mCameraView.addCameraListener(new CameraListener() {
+                    @Override
+                    public void onPictureTaken(byte[] picture) {
+                        Bitmap bitmap = ImageUtils.bytes2Bitmap(picture);
+                        Bitmap clip = ImageUtils.clip(bitmap,
+                                mCaptureCropLayout.getLeft(),
+                                mCaptureCropLayout.getTop(),
+                                mCaptureCropLayout.getRight() - mCaptureCropLayout.getLeft(),
+                                mCaptureCropLayout.getBottom() - mCaptureCropLayout.getTop(),
+                                true);
+                        Result rawResult = QrBarTool.decodeFromPhoto(clip);
+                        if (rawResult != null) {
+                            e.onNext(rawResult);
+                        } else {
+                            mCameraView.captureSnapshot();
+                        }
+                    }
+
+                    @Override
+                    public void onCameraOpened(CameraOptions options) {
+                        mCameraView.captureSnapshot();
+                    }
+                })).subscribeOn(Schedulers.io());
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::initResultData, throwable -> {
+                    Log.e(TAG, "onError: ", throwable);
+                }));
     }
 
     @Override
@@ -148,6 +165,9 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
+        }
         mCameraView.destroy();
     }
 
@@ -167,21 +187,15 @@ public class QrBarScanActivity extends AppCompatActivity implements View.OnClick
      * 闪光灯
      */
     private void flash() {
-        // TODO: Test
-        mCameraView.captureSnapshot();
-//        Bitmap bitmap = ImageUtils.view2Bitmap(mCameraView);
-//        String s = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin/" + System.currentTimeMillis() + ".jpg";
-//        byte[] bytes = ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.JPEG);
-//        FileIOUtils.writeFileFromBytesByStream(s, bytes);
-//        if (mFlashing) {
-//            // 开闪光灯
-//            mCameraView.setFlash(Flash.TORCH);
-//        } else {
-//            // 关闪光灯
-//            mCameraView.setFlash(Flash.OFF);
-//        }
-//
-//        mFlashing = !mFlashing;
+        if (mFlashing) {
+            // 开闪光灯
+            mCameraView.setFlash(Flash.TORCH);
+        } else {
+            // 关闪光灯
+            mCameraView.setFlash(Flash.OFF);
+        }
+
+        mFlashing = !mFlashing;
 
     }
 

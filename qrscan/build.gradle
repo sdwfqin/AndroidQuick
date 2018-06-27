@@ -20,15 +20,20 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api "com.android.support:appcompat-v7:$support"
     api "com.google.zxing:core:$zxing"
     api 'com.otaliastudios:cameraview:1.5.1'
     api "com.blankj:utilcode:$utilcode"
-
+    api "io.reactivex.rxjava2:rxandroid:$rxandroid"
+    api "io.reactivex.rxjava2:rxjava:$rxjava"
 }
 
 Properties properties = new Properties()
