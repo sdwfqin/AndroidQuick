@@ -8,7 +8,7 @@ ext {
     pay = '1.0.3'
     widget = '1.0.4'
     imageLoader = '1.0.1'
-    qrscan = '1.0.0'
+    qrscan = '2.0.0'
 
     support = '27.1.1'
     constraint = '1.1.2'

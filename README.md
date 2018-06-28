@@ -11,7 +11,7 @@
     implementation 'com.sdwfqin.quicklib:pay:1.0.3'
     
     // Android 条码/二维码扫描库
-    implementation 'com.sdwfqin.quick:qrscan:1.0.0'
+    implementation 'com.sdwfqin.quick:qrscan:2.0.0'
     
     // Android 图片加载库（Glide封装）
     implementation 'com.sdwfqin.quick:imageLoader:1.0.1'
