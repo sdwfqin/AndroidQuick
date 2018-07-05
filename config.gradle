@@ -6,7 +6,7 @@ ext {
 
     quicklib = '2.0.0'
     pay = '1.0.3'
-    widget = '1.0.5'
+    widget = '1.0.6'
     imageLoader = '1.0.1'
     qrscan = '2.0.0'
 

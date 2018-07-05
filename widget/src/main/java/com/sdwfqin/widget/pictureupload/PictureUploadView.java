@@ -48,6 +48,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
     private PictureUploadAdapter<T> mUploadAdapter;
 
     private PictureUploadCallback<T> mCallback;
+    private GridLayoutManager mGridLayoutManager;
 
     public PictureUploadView(Context context) {
         this(context, null);
@@ -64,8 +65,8 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
     }
 
     private void initList() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, mMaxCol);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mGridLayoutManager = new GridLayoutManager(mContext, mMaxCol);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
         // 设置padding
         RecyclerView.ItemDecoration decoration = new RecyclerView.ItemDecoration() {
             @Override
@@ -119,6 +120,9 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
      */
     public void setMaxColumn(int maxCol) {
         mMaxCol = maxCol;
+        if (mGridLayoutManager != null){
+            mGridLayoutManager.setSpanCount(maxCol);
+        }
     }
 
     /**

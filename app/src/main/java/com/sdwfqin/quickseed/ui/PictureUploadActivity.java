@@ -41,6 +41,7 @@ public class PictureUploadActivity extends BaseActivity {
         mTopbar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
+        mPic.setMaxColumn(4);
         mPic.setPicUploadCallback(new PictureUploadCallback<PictureModel>() {
             @Override
             public void click(int position, PictureModel pictureModel, List<PictureModel> list) {
