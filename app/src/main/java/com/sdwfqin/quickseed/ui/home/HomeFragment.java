@@ -49,7 +49,7 @@ public class HomeFragment extends BaseFragment {
             "上传图片九宫格",
             "自定义验证码/密码View",
             "自定义Webview",
-            "屏幕适配测试",
+            "生成二维码",
     };
 
     @Override
@@ -138,7 +138,7 @@ public class HomeFragment extends BaseFragment {
                     startActivity(new Intent(mContext, CustomWebviewActivity.class));
                     break;
                 case 8:
-                    startActivity(new Intent(mContext, DensityActivity.class));
+                    startActivity(new Intent(mContext, CreateQrActivity.class));
                     break;
                 default:
             }

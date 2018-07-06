@@ -11,13 +11,13 @@
     implementation 'com.sdwfqin.quicklib:pay:1.0.3'
     
     // Android 条码/二维码扫描库
-    implementation 'com.sdwfqin.quick:qrscan:2.0.0'
+    implementation 'com.sdwfqin.quick:qrscan:2.0.1'
     
     // Android 图片加载库（Glide封装）
     implementation 'com.sdwfqin.quick:imageLoader:1.0.1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:1.0.4'
+    implementation 'com.sdwfqin.quick:widget:1.0.6'
     
 
 > 最低支持api18

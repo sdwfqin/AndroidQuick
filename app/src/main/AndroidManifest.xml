@@ -67,7 +67,7 @@
         </activity>
         <activity android:name=".ui.home.CustomWebviewActivity">
         </activity>
-        <activity android:name=".ui.home.DensityActivity">
+        <activity android:name=".ui.home.CreateQrActivity">
         </activity>
     </application>
 
