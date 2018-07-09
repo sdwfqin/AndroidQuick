@@ -6,18 +6,17 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.qrscan.QrBarScanActivity;
-import com.sdwfqin.quicklib.base.BaseMvpActivity;
+import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
 import com.sdwfqin.quicklib.module.webview.WebViewActivity;
 import com.sdwfqin.quicklib.view.BottomDialogPhotoFragment;
 import com.sdwfqin.quicklib.view.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
-import com.sdwfqin.quickseed.contract.MainContract;
-import com.sdwfqin.quickseed.presenter.MainPresenter;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import butterknife.BindView;
  *
  * @author 张钦
  */
-public class MainActivity extends BaseMvpActivity<MainContract.Presenter> implements MainContract.View {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.list)
     ListView list;
@@ -64,11 +63,6 @@ public class MainActivity extends BaseMvpActivity<MainContract.Presenter> implem
         initListener();
     }
 
-    @Override
-    protected MainContract.Presenter createPresenter() {
-        return new MainPresenter();
-    }
-
     private void getPermissions() {
 
         String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -76,8 +70,8 @@ public class MainActivity extends BaseMvpActivity<MainContract.Presenter> implem
         addSubscribe(new RxPermissions(mContext)
                 .request(perms)
                 .subscribe(granted -> {
-                    if (granted) { // Always true pre-M
-                        // I can control the camera now
+                    if (granted) {
+                        Toast.makeText(mContext, "取得权限", Toast.LENGTH_SHORT).show();
                     } else {
                         showPermissionsDialog();
                     }

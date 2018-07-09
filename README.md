@@ -71,7 +71,6 @@
 | BottomDialogPhotoFragment | 一个简单的可配置底部弹窗 |
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
-| DensityUtils | 屏幕适配 |
 
 2. paylib
 
