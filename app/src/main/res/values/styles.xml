@@ -16,12 +16,12 @@
         ***********************************************-->
     <style name="QDTopBar" parent="QMUI.TopBar">
         <item name="qmui_topbar_height">45dp</item>
-        <item name="qmui_topbar_title_color">@color/black1</item>
+        <item name="qmui_topbar_title_color">@color/white</item>
         <item name="qmui_topbar_bg_color">@color/colorPrimary</item>
-        <item name="qmui_topbar_left_back_drawable_id">@mipmap/back</item>
+        <item name="qmui_topbar_left_back_drawable_id">@drawable/ic_back</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="qmui_topbar_image_btn_width">38dp</item>
-        <item name="qmui_topbar_text_btn_color_state_list">@color/black1</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/white</item>
     </style>
 
     <style name="transactionTheme" parent="AppTheme">

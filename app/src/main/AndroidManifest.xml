@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions"/>
@@ -61,14 +62,10 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.PictureUploadActivity">
-        </activity>
-        <activity android:name=".ui.home.PayPwdInputActivity">
-        </activity>
-        <activity android:name=".ui.home.CustomWebviewActivity">
-        </activity>
-        <activity android:name=".ui.home.CreateQrActivity">
-        </activity>
+        <activity android:name=".ui.PictureUploadActivity"/>
+        <activity android:name=".ui.PayPwdInputActivity"/>
+        <activity android:name=".ui.CustomWebviewActivity"/>
+        <activity android:name=".ui.CreateQrActivity"/>
     </application>
 
 </manifest>

@@ -10,10 +10,10 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sdwfqin.quicklib.QuickInit;
 import com.sdwfqin.quicklib.utils.DensityUtils;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.ui.MainActivity;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 /**
  * 描述：Application

@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui.home;
+package com.sdwfqin.quickseed.ui;
 
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sdwfqin.quicklib.base.BaseActivity;

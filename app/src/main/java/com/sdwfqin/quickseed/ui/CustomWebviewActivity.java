@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui.home;
+package com.sdwfqin.quickseed.ui;
 
 import com.sdwfqin.quicklib.module.webview.BaseWebView;
 

@@ -68,10 +68,10 @@ public class BottomDialogPayFragment extends BottomSheetDialogFragment implement
                 .setBackgroundResource(R.color.tm);
 
         mRg.setOnCheckedChangeListener((group, checkedId) -> {
-            Drawable wechat = getResources().getDrawable(R.mipmap.weixin);
-            Drawable alipay = getResources().getDrawable(R.mipmap.zhifubao);
-            Drawable choose1 = getResources().getDrawable(R.mipmap.choose1);
-            Drawable no_choose1 = getResources().getDrawable(R.mipmap.no_choose1);
+            Drawable wechat = getResources().getDrawable(R.mipmap.wechat);
+            Drawable alipay = getResources().getDrawable(R.mipmap.alipay);
+            Drawable choose1 = getResources().getDrawable(R.mipmap.choose_y);
+            Drawable no_choose1 = getResources().getDrawable(R.mipmap.choose_n);
             switch (checkedId) {
                 case R.id.wechat:
                     mWechat.setCompoundDrawablesWithIntrinsicBounds(wechat, null, choose1, null);
