@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 
@@ -18,7 +17,6 @@ import com.sdwfqin.quicklib.base.BaseActivity;
  * @date 2018/6/19
  */
 public abstract class BaseWebView extends BaseActivity {
-    protected QMUITopBarLayout mTopbar;
     protected LinearLayout mContainer;
 
     protected String mUrl;
@@ -32,7 +30,6 @@ public abstract class BaseWebView extends BaseActivity {
     @Override
     protected void initEventAndData() {
 
-        mTopbar = findViewById(R.id.topbar);
         mContainer = findViewById(R.id.container);
 
         if (!StringUtils.isEmpty(getUrl())) {
@@ -42,9 +39,9 @@ public abstract class BaseWebView extends BaseActivity {
             finish();
         }
 
-        mTopbar.setTitle(getActivityTitle());
+        mTopBar.setTitle(getActivityTitle());
 
-        mTopbar.addLeftBackImageButton().setOnClickListener(v -> {
+        mTopBar.addLeftBackImageButton().setOnClickListener(v -> {
             // true表示AgentWeb处理了该事件
             if (!mAgentWeb.back()) {
                 finish();
@@ -63,7 +60,7 @@ public abstract class BaseWebView extends BaseActivity {
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
                         super.onReceivedTitle(view, title);
-                        mTopbar.setTitle(title);
+                        mTopBar.setTitle(title);
                     }
                 })
                 //.defaultProgressBarColor() // 使用默认进度条颜色

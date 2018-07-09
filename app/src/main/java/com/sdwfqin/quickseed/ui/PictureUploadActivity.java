@@ -6,7 +6,6 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
@@ -25,8 +24,6 @@ import butterknife.BindView;
  */
 public class PictureUploadActivity extends BaseActivity {
 
-    @BindView(R.id.topbar)
-    QMUITopBar mTopbar;
     @BindView(R.id.pic)
     PictureUploadView<PictureModel> mPic;
 
@@ -37,8 +34,8 @@ public class PictureUploadActivity extends BaseActivity {
 
     @Override
     protected void initEventAndData() {
-        mTopbar.setTitle("九宫格上传图片");
-        mTopbar.addLeftBackImageButton()
+        mTopBar.setTitle("九宫格上传图片");
+        mTopBar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
         mPic.setMaxColumn(4);

@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 
@@ -29,7 +28,6 @@ import java.util.List;
  */
 public class SeeImageActivity extends BaseActivity {
 
-    private QMUITopBarLayout mTopbar;
     private ViewPager mViewPager;
     private TextView mPosition;
     protected Button mSave;
@@ -83,13 +81,12 @@ public class SeeImageActivity extends BaseActivity {
             finish();
         }
 
-        mTopbar = findViewById(R.id.topbar);
         mViewPager = findViewById(R.id.viewpager);
         mPosition = findViewById(R.id.position);
 
-        mTopbar.setTitle("查看图片");
-        mTopbar.addLeftBackImageButton().setOnClickListener(v -> finish());
-        mSave = mTopbar.addRightTextButton("保存", R.id.add);
+        mTopBar.setTitle("查看图片");
+        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mSave = mTopBar.addRightTextButton("保存", R.id.add);
 
         mShowImagePagerAdapter = new ShowImagePagerAdapter();
         mViewPager.setAdapter(mShowImagePagerAdapter);

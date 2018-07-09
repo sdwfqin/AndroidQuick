@@ -187,10 +187,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      */
     @Override
     public void showProgress() {
+        showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载");
+    }
+
+    /**
+     * 显示QmuiTip
+     */
+    @Override
+    public void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord) {
         if (mQmuiTipDialog == null) {
             mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
-                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord("正在加载")
+                    .setIconType(iconType)
+                    .setTipWord(tipWord)
                     .create();
         }
         if (!mQmuiTipDialog.isShowing()) {
@@ -203,6 +211,14 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      */
     @Override
     public void hideProgress() {
+        hideTip();
+    }
+
+    /**
+     * 关闭QmuiTip
+     */
+    @Override
+    public void hideTip() {
         if (mQmuiTipDialog != null) {
             if (mQmuiTipDialog.isShowing()) {
                 mQmuiTipDialog.dismiss();
@@ -210,6 +226,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         }
     }
 
+    /**
+     * RxJava 添加订阅者
+     */
     public void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
@@ -217,6 +236,9 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         mCompositeDisposable.add(subscription);
     }
 
+    /**
+     * RxJava 解除所有订阅者
+     */
     public void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();

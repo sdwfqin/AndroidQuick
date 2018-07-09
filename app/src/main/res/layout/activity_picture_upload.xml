@@ -7,11 +7,6 @@
     android:orientation="vertical"
     tools:context="com.sdwfqin.quickseed.ui.PictureUploadActivity">
 
-    <com.qmuiteam.qmui.widget.QMUITopBar
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <com.sdwfqin.widget.pictureupload.PictureUploadView
         android:id="@+id/pic"
         android:layout_width="match_parent"

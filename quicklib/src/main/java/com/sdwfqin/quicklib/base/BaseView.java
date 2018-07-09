@@ -1,5 +1,7 @@
 package com.sdwfqin.quicklib.base;
 
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+
 /**
  * 描述：View的基类
  *
@@ -20,7 +22,18 @@ public interface BaseView {
     void showProgress();
 
     /**
+     * 显示提示
+     */
+    void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord);
+
+    /**
      * 关闭加载动画
      */
     void hideProgress();
+
+    /**
+     * 关闭提示
+     */
+    void hideTip();
+
 }

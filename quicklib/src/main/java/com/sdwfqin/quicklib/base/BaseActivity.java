@@ -2,12 +2,17 @@ package com.sdwfqin.quicklib.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
@@ -27,17 +32,26 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected Activity mContext;
+    /**
+     * Rxjava 订阅管理
+     */
     protected CompositeDisposable mCompositeDisposable;
+    protected LinearLayout mRoot_view;
+    /**
+     * 顶部标题栏
+     */
+    protected QMUITopBar mTopBar;
     private QMUITipDialog mQmuiTipDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initContentView(R.layout.activity_base);
         setContentView(getLayout());
+        mTopBar = findViewById(R.id.base_topbar);
         ButterKnife.bind(this);
         mContext = this;
         AppManager.addActivity(this);
-        QMUIStatusBarHelper.setStatusBarLightMode(mContext);
         initPresenter();
         initEventAndData();
     }
@@ -64,6 +78,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         unSubscribe();
         AppManager.removeActivity(this);
         super.onDestroy();
+    }
+
+    private void initContentView(@LayoutRes int layoutResID) {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        viewGroup.removeAllViews();
+        mRoot_view = new LinearLayout(this);
+        mRoot_view.setOrientation(LinearLayout.VERTICAL);
+        //  add mRoot_view in viewGroup
+        viewGroup.addView(mRoot_view);
+        //  add the layout of BaseActivity in mRoot_view
+        LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        //  added the sub-activity layout id in mRoot_view
+        LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
     }
 
     /**
@@ -122,10 +153,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     @Override
     public void showProgress() {
+        showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载");
+    }
+
+    /**
+     * 显示QmuiTip
+     */
+    @Override
+    public void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord) {
         if (mQmuiTipDialog == null) {
             mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
-                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                    .setTipWord("正在加载")
+                    .setIconType(iconType)
+                    .setTipWord(tipWord)
                     .create();
         }
         if (!mQmuiTipDialog.isShowing()) {
@@ -138,6 +177,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      */
     @Override
     public void hideProgress() {
+        hideTip();
+    }
+
+    /**
+     * 关闭QmuiTip
+     */
+    @Override
+    public void hideTip() {
         if (mQmuiTipDialog != null) {
             if (mQmuiTipDialog.isShowing()) {
                 mQmuiTipDialog.dismiss();
@@ -145,6 +192,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
+    /**
+     * RxJava 添加订阅者
+     */
     public void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
@@ -152,6 +202,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mCompositeDisposable.add(subscription);
     }
 
+    /**
+     * RxJava 解除所有订阅者
+     */
     public void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();

@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.base.QuickConstants;
@@ -20,7 +19,6 @@ import com.sdwfqin.quicklib.base.QuickConstants;
  */
 public class WebViewLoadDataActivity extends BaseActivity {
 
-    QMUITopBarLayout mTopbar;
     LinearLayout mContainer;
 
     private String mTitle;
@@ -50,15 +48,14 @@ public class WebViewLoadDataActivity extends BaseActivity {
     @Override
     protected void initEventAndData() {
 
-        mTopbar = findViewById(R.id.topbar);
         mContainer = findViewById(R.id.container);
 
         mTitle = getIntent().getStringExtra("title");
         mContent = getIntent().getStringExtra("content");
         mBaseUrl = getIntent().getStringExtra("baseUrl");
 
-        mTopbar.addLeftBackImageButton().setOnClickListener(v -> finish());
-        mTopbar.setTitle(mTitle);
+        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mTopBar.setTitle(mTitle);
 
         initWebView();
     }
