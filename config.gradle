@@ -4,7 +4,7 @@ ext {
     compileSdkVersion = 27
     buildToolsVersion = '27.0.3'
 
-    quicklib = '2.0.1'
+    quicklib = '2.0.2'
     pay = '1.0.3'
     widget = '1.0.6'
     imageLoader = '1.0.1'
@@ -29,4 +29,5 @@ ext {
     gson = '2.8.2'
     zxing = '3.3.3'
     wechat = '5.1.4'
+    swipebacklayout = '1.3.0'
 }

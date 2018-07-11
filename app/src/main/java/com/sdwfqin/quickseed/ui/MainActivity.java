@@ -78,6 +78,11 @@ public class MainActivity extends BaseActivity {
                 }));
     }
 
+    @Override
+    public boolean isStartSwipeBack() {
+        return false;
+    }
+
     private void showPermissionsDialog() {
         HintDialog hintDialog = new HintDialog(mContext);
         hintDialog.show();

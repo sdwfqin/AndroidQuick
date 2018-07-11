@@ -81,8 +81,8 @@ public class SeeImageActivity extends BaseActivity {
             finish();
         }
 
-        mViewPager = findViewById(R.id.viewpager);
-        mPosition = findViewById(R.id.position);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mPosition = (TextView) findViewById(R.id.position);
 
         mTopBar.setTitle("查看图片");
         mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());

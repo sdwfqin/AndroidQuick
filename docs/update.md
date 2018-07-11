@@ -1,5 +1,9 @@
 # 更新文档
 
+### quicklib 2.0.2
+
+1. 在BaseActivity中添加侧滑关闭
+
 ### Qrscan 2.0.0
 
 1. 修改相机实现，改为CameraView+RxJava2

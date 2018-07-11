@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -23,34 +22,49 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends SwipeBackActivity implements BaseView {
 
     protected Activity mContext;
+    protected LinearLayout mRoot_view;
     /**
      * Rxjava 订阅管理
      */
     protected CompositeDisposable mCompositeDisposable;
-    protected LinearLayout mRoot_view;
     /**
      * 顶部标题栏
      */
     protected QMUITopBar mTopBar;
-    private QMUITipDialog mQmuiTipDialog;
+    /**
+     * TipDialog
+     */
+    protected QMUITipDialog mQmuiTipDialog;
+    /**
+     * 侧滑关闭
+     */
+    protected SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initContentView(R.layout.activity_base);
         setContentView(getLayout());
-        mTopBar = findViewById(R.id.base_topbar);
+        mTopBar = (QMUITopBar) findViewById(R.id.base_topbar);
         ButterKnife.bind(this);
         mContext = this;
+        mSwipeBackLayout = getSwipeBackLayout();
+        if (isStartSwipeBack()) {
+            mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        } else {
+            mSwipeBackLayout.setEnableGesture(false);
+        }
         AppManager.addActivity(this);
         initPresenter();
         initEventAndData();
@@ -81,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     private void initContentView(@LayoutRes int layoutResID) {
-        ViewGroup viewGroup = findViewById(android.R.id.content);
+        ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
         viewGroup.removeAllViews();
         mRoot_view = new LinearLayout(this);
         mRoot_view.setOrientation(LinearLayout.VERTICAL);
@@ -95,6 +109,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     public void setContentView(@LayoutRes int layoutResID) {
         //  added the sub-activity layout id in mRoot_view
         LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
+    }
+
+    /**
+     * 开启侧滑关闭
+     */
+    public boolean isStartSwipeBack() {
+        return true;
     }
 
     /**

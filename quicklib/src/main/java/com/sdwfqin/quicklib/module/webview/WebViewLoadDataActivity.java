@@ -48,7 +48,7 @@ public class WebViewLoadDataActivity extends BaseActivity {
     @Override
     protected void initEventAndData() {
 
-        mContainer = findViewById(R.id.container);
+        mContainer = (LinearLayout) findViewById(R.id.container);
 
         mTitle = getIntent().getStringExtra("title");
         mContent = getIntent().getStringExtra("content");

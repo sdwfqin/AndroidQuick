@@ -30,7 +30,7 @@ public abstract class BaseWebView extends BaseActivity {
     @Override
     protected void initEventAndData() {
 
-        mContainer = findViewById(R.id.container);
+        mContainer = (LinearLayout) findViewById(R.id.container);
 
         if (!StringUtils.isEmpty(getUrl())) {
             mUrl = getUrl();
