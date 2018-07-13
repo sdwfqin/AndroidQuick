@@ -8,7 +8,9 @@ import android.view.View;
  *
  * @author 张钦
  * @date 2018/1/27
+ * @deprecated 建议使用https://github.com/google/flexbox-layout
  */
+@Deprecated
 public class AutoLinesLayoutManager extends RecyclerView.LayoutManager {
 
     @Override

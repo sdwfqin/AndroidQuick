@@ -93,7 +93,7 @@
 | WrapContentHeightViewPager | 处理NestedScrollView嵌套Viewpager+RecyclerView |
 | AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
 | AmountView | 购物车商品数量选择 |
-| AutoLinesLayoutManager | 自动换行的布局管理器（流式布局） |
+| ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用flexbox-layout代替 |
 
 4. qrscan
 
