@@ -8,7 +8,7 @@
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
     // 支付模块
-    implementation 'com.sdwfqin.quicklib:pay:1.0.3'
+    implementation 'com.sdwfqin.quicklib:paylib:1.0.3'
     
     // Android 条码/二维码扫描库
     implementation 'com.sdwfqin.quick:qrscan:2.0.1'
