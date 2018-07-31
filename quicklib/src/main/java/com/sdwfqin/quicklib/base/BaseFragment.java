@@ -242,6 +242,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
+            mCompositeDisposable.clear();
         }
     }
 
