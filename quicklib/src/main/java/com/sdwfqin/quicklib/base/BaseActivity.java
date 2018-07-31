@@ -229,6 +229,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     public void unSubscribe() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
+            mCompositeDisposable.clear();
+            mCompositeDisposable = new CompositeDisposable();
         }
     }
 

@@ -3,6 +3,7 @@ package com.sdwfqin.quicklib.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -74,7 +75,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(getLayout(), null);
         //指出fragment愿意添加item到选项菜单
         setHasOptionsMenu(true);
@@ -124,6 +125,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void onDestroyView() {
+        isPrepared = false;
         removePresenter();
         unSubscribe();
         mUnBinder.unbind();
@@ -243,6 +245,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.dispose();
             mCompositeDisposable.clear();
+            mCompositeDisposable = new CompositeDisposable();
         }
     }
 

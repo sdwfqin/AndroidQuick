@@ -1,5 +1,9 @@
 # 更新文档
 
+### quicklib 2.1.0
+
+1. 修复Fragment与ViewPager+TabLayout的相关Bug
+
 ### quicklib 2.0.2
 
 1. 在BaseActivity中添加侧滑关闭
