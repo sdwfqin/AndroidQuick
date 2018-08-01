@@ -32,7 +32,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected View mView;
-    protected Activity mActivity;
+    protected BaseActivity mActivity;
     protected Context mContext;
     protected LayoutInflater mInflater;
     /**
@@ -68,7 +68,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void onAttach(Context context) {
-        mActivity = (Activity) context;
+        mActivity = (BaseActivity) context;
         mContext = context;
         super.onAttach(context);
     }
@@ -177,8 +177,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * Toast
      *
      * @param msg
+     * @Deprecated 建议使用BaseActivity相关方法
      */
     @Override
+    @Deprecated
     public void showMsg(String msg) {
 //        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
         ToastUtils.showShort(msg);
@@ -186,16 +188,22 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     /**
      * 开启加载动画
+     *
+     * @Deprecated 建议使用BaseActivity相关方法
      */
     @Override
+    @Deprecated
     public void showProgress() {
         showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载");
     }
 
     /**
      * 显示QmuiTip
+     *
+     * @Deprecated 建议使用BaseActivity相关方法
      */
     @Override
+    @Deprecated
     public void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord) {
         if (mQmuiTipDialog == null) {
             mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
@@ -210,16 +218,22 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     /**
      * 关闭加载动画
+     *
+     * @Deprecated 建议使用BaseActivity相关方法
      */
     @Override
+    @Deprecated
     public void hideProgress() {
         hideTip();
     }
 
     /**
      * 关闭QmuiTip
+     *
+     * @Deprecated 建议使用BaseActivity相关方法
      */
     @Override
+    @Deprecated
     public void hideTip() {
         if (mQmuiTipDialog != null) {
             if (mQmuiTipDialog.isShowing()) {
