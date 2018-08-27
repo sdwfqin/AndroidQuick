@@ -1,6 +1,11 @@
 package com.sdwfqin.quickseed.base;
 
+import android.annotation.TargetApi;
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
@@ -8,11 +13,13 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.sdwfqin.quicklib.BuildConfig;
 import com.sdwfqin.quicklib.QuickInit;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.ui.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.tencent.tinker.loader.app.DefaultApplicationLike;
 
 /**
  * 描述：Application
@@ -20,7 +27,11 @@ import com.tencent.bugly.beta.Beta;
  * @author 张钦
  * @date 2017/8/3
  */
-public class BaseApp extends Application {
+public class SampleApplicationLike extends DefaultApplicationLike {
+
+    public SampleApplicationLike(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag, long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
+        super(application, tinkerFlags, tinkerLoadVerifyFlag, applicationStartElapsedTime, applicationStartMillisTime, tinkerResultIntent);
+    }
 
     @Override
     public void onCreate() {
@@ -30,13 +41,30 @@ public class BaseApp extends Application {
         initUtils();
         // 只能在某个Activity显示更新弹窗
         Beta.canShowUpgradeActs.add(MainActivity.class);
-        Bugly.init(getApplicationContext(), "66666666", false);
+        Bugly.init(getApplication(), "534e5a3930", BuildConfig.DEBUG);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
     }
 
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @Override
+    public void onBaseContextAttached(Context base) {
+        super.onBaseContextAttached(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+
+        // 安装tinker
+        // TinkerManager.installTinker(this); 替换成下面Bugly提供的方法
+        Beta.installTinker(this);
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public void registerActivityLifecycleCallback(Application.ActivityLifecycleCallbacks callbacks) {
+        getApplication().registerActivityLifecycleCallbacks(callbacks);
+    }
+
     private void initUtils() {
-        Utils.init(this);
+        Utils.init(getApplication());
 
         // 设置日志
         LogUtils.Config config = LogUtils.getConfig();
