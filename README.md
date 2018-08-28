@@ -49,6 +49,14 @@
 
 [更新文档](/docs/update.md)
 
+# 混淆
+
+可参考[Sample混淆文件](/app/proguard-rules.pro)
+
+# 其他
+
+热更新（Tinker）、Retrofit封装可参考[Sample](/app)
+
 # 功能
 
 1. quicklib
