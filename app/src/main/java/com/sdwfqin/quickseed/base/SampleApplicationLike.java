@@ -41,7 +41,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         initUtils();
         // 只能在某个Activity显示更新弹窗
         Beta.canShowUpgradeActs.add(MainActivity.class);
-        Bugly.init(getApplication(), "534e5a3930", BuildConfig.DEBUG);
+        Bugly.init(getApplication(), "534e5a3930", !BuildConfig.DEBUG);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
     }

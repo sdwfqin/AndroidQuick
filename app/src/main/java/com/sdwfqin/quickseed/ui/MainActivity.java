@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity {
                 case 2:
                     HintDialog hintDialog = new HintDialog(mContext);
                     hintDialog.show();
-                    hintDialog.setTitle("热更新测试11111");
+                    hintDialog.setTitle("热更新测试33333");
                     hintDialog.hideRight();
                     hintDialog.setLeftText("取消");
                     hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
