@@ -15,7 +15,7 @@ ext {
     glide = '4.7.1'
     butterknife = '8.8.1'
     vlayout = '1.2.17'
-    qmui = '1.1.6'
+    qmui = '1.1.7'
     brvah = '2.9.41'
     banner = '1.4.10'
     utilcode = '1.19.0'

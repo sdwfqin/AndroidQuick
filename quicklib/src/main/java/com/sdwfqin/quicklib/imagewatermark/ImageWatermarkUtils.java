@@ -2,12 +2,9 @@ package com.sdwfqin.quicklib.imagewatermark;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-
-import java.io.ByteArrayOutputStream;
 
 /**
  * 描述：图片水印工具类
