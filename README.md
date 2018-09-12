@@ -3,7 +3,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.1.2'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.1.3'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -14,7 +14,7 @@
     implementation 'com.sdwfqin.quick:qrscan:2.0.1'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageLoader:1.0.1'
+    implementation 'com.sdwfqin.quick:imageLoader:1.0.2'
     
     // Android 自定义View组件
     implementation 'com.sdwfqin.quick:widget:1.0.6'
@@ -104,6 +104,8 @@
 | ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用flexbox-layout代替 |
 
 4. qrscan
+
+> 感觉[BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android)蛮好用的
 
 | 文件名称 | 功能 |
 | :-------- | :--------|

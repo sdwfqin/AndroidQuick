@@ -17,11 +17,13 @@ android {
         targetSdkVersion 28
         versionCode 4
         versionName "2.0.2"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
             // 开启混淆
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.sdwfqinSigning
         }
@@ -56,6 +58,8 @@ dependencies {
     implementation('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {
         exclude module: "glide"
     }
+    implementation 'com.google.dagger:dagger:2.16'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
     implementation project(':quicklib')
     implementation project(':paylib')
     implementation project(':widget')

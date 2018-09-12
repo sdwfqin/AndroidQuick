@@ -178,6 +178,8 @@
 -dontwarn org.reactivestreams.**
 -keep class org.reactivestreams.** { *; }
 -dontwarn com.tencent.**
+-keep class dagger.** { *; }
+-dontwarn dagger.**
 -keep class com.tencent.** { *; }
 -dontwarn com.alipay.**
 -keep class com.alipay.** { *; }

@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 57
+        versionCode 58
         versionName rootProject.ext.quicklib
     }
 
@@ -48,7 +48,7 @@ dependencies {
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
     api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
-    api 'com.sdwfqin.quick:imageLoader:1.0.1'
+    api 'com.sdwfqin.quick:imageLoader:1.0.2'
 }
 
 Properties properties = new Properties()
