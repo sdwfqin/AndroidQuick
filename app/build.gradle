@@ -5,7 +5,7 @@ android {
         sdwfqinSigning {
             keyAlias 'sdwfqin'
             keyPassword 'sdwfqin.com'
-            storeFile file('AndroidQuick.jks')
+            storeFile file('sdwfqin.jks')
             storePassword 'sdwfqin.com'
         }
     }
