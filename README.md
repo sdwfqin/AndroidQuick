@@ -3,27 +3,24 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.1.3'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.1.4'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
     // 支付模块
-    implementation 'com.sdwfqin.quicklib:paylib:1.0.3'
-    
-    // Android 条码/二维码扫描库
-    implementation 'com.sdwfqin.quick:qrscan:2.0.1'
+    implementation 'com.sdwfqin.quicklib:paylib:1.0.5'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageLoader:1.0.2'
+    implementation 'com.sdwfqin.quick:imageloader:1.0.6'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:1.0.6'
+    implementation 'com.sdwfqin.quick:widget:1.0.7'
     
 
 > 最低支持api18
 
     minSdkVersion 18
-    targetSdkVersion 27
+    targetSdkVersion 28
     
 # 早期版本
 
@@ -80,6 +77,7 @@
 | BottomDialogPhotoFragment | 一个简单的可配置底部弹窗 |
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
+| ImageWatermarkUtils | 图片水印工具类 |
 
 2. paylib
 
@@ -103,17 +101,7 @@
 | AmountView | 购物车商品数量选择 |
 | ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用flexbox-layout代替 |
 
-4. qrscan
-
-> 感觉[BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android)蛮好用的
-
-| 文件名称 | 功能 |
-| :-------- | :--------|
-| QrBarScanActivity | 二维码/条码扫描Activity |
-| QrBarTool | 二维码/条码解析工具类 |
-| QrCreateTool | 创建二维码 |
-
-5. imageloader
+4. imageloader
 
 | 文件名称 | 功能 |
 | :-------- | :--------|

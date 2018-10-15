@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageloader/imageloader.iml" filepath="$PROJECT_DIR$/imageloader/imageloader.iml" />
       <module fileurl="file://$PROJECT_DIR$/paylib/paylib.iml" filepath="$PROJECT_DIR$/paylib/paylib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/qrscan/qrscan.iml" filepath="$PROJECT_DIR$/qrscan/qrscan.iml" />
       <module fileurl="file://$PROJECT_DIR$/quicklib/quicklib.iml" filepath="$PROJECT_DIR$/quicklib/quicklib.iml" />
       <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
     </modules>

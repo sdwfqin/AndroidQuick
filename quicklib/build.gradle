@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 // gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
+
+version = "2.1.4"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 58
-        versionName rootProject.ext.quicklib
+        versionCode 59
+        versionName version
     }
 
     buildTypes {
@@ -31,12 +32,12 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api "com.android.support:appcompat-v7:$support"
     api "com.android.support:support-v4:$support"
+    api "com.android.support:animated-vector-drawable:$support"
     api "com.android.support:design:$support"
     api "com.android.support:cardview-v7:$support"
     api "com.android.support.constraint:constraint-layout:$constraint"
     api "com.jakewharton:butterknife:$butterknife"
     api "com.qmuiteam:qmui:$qmui"
-    api "com.youth.banner:banner:$banner"
     api "com.blankj:utilcode:$utilcode"
     api "org.greenrobot:eventbus:$eventbus"
     api "io.reactivex.rxjava2:rxandroid:$rxandroid"
@@ -48,23 +49,7 @@ dependencies {
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
     api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
-    api 'com.sdwfqin.quick:imageLoader:1.0.2'
+    api 'com.sdwfqin.quick:imageloader:1.0.6'
 }
 
-Properties properties = new Properties()
-// 加载本地配置
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-publish {
-    userOrg = properties.getProperty("bintray.user")
-    repoName = 'quicklib'
-    groupId = 'com.sdwfqin.quicklib'
-    artifactId = 'quicklib'
-    publishVersion = rootProject.ext.quicklib
-    licences = ['Apache-2.0']
-    uploadName = 'quicklib'
-    desc = 'Android 快速开发库'
-    website = 'https://github.com/sdwfqin/AndroidQuick'
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-    dryRun = false
-}
+apply from: "deployBintray.gradle"

@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 // gradlew imageloader:clean imageloader:build imageloader:bintrayUpload
+
+version = "1.0.6"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName rootProject.ext.imageLoader
+        versionCode 6
+        versionName version
     }
 
     buildTypes {
@@ -35,20 +36,4 @@ dependencies {
     api "com.github.bumptech.glide:okhttp3-integration:$glide"
 }
 
-Properties properties = new Properties()
-// 加载本地配置
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-publish {
-    userOrg = properties.getProperty("bintray.user")
-    repoName = 'quicklib'
-    groupId = 'com.sdwfqin.quick'
-    artifactId = 'imageLoader'
-    publishVersion = rootProject.ext.imageLoader
-    licences = ['Apache-2.0']
-    uploadName = 'imageLoader'
-    desc = 'Android 图片加载库'
-    website = 'https://github.com/sdwfqin/AndroidQuick'
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-    dryRun = false
-}
+apply from: "deployBintray.gradle"

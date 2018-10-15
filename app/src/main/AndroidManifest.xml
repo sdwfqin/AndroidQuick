@@ -66,7 +66,6 @@
         <activity android:name=".ui.PictureUploadActivity" />
         <activity android:name=".ui.PayPwdInputActivity" />
         <activity android:name=".ui.CustomWebviewActivity" />
-        <activity android:name=".ui.CreateQrActivity" />
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"

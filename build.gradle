@@ -1,18 +1,18 @@
 apply from: "config.gradle"
 buildscript {
 
-    ext.kotlin_version = '1.2.61'
+    ext.kotlin_version = '1.2.71'
 
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.novoda:bintray-release:0.8.1'
-//        classpath ('com.tencent.tinker:tinker-patch-gradle-plugin:1.9.8')
-        classpath "com.tencent.bugly:tinker-support:1.1.2"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+//        classpath "com.tencent.bugly:tinker-support:1.1.5"
     }
 }
 

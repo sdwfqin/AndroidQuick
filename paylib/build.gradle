@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 // gradlew pay:clean pay:build pay:bintrayUpload
+
+version = "1.0.5"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName rootProject.ext.pay
+        versionCode 5
+        versionName version
     }
 
     buildTypes {
@@ -33,23 +34,7 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:$okhttp"
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
-    api files('libs/alipaySdk-20180403.jar')
+    api files('libs/alipaySdk-20180601.jar')
 }
 
-Properties properties = new Properties()
-// 加载本地配置
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-publish {
-    userOrg = properties.getProperty("bintray.user")
-    repoName = 'quicklib'
-    groupId = 'com.sdwfqin.quicklib'
-    artifactId = 'paylib'
-    publishVersion = rootProject.ext.pay
-    licences = ['Apache-2.0']
-    uploadName = 'pay'
-    desc = 'Android 支付组件库'
-    website = 'https://github.com/sdwfqin/AndroidQuick'
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-    dryRun = false
-}
+apply from: "deployBintray.gradle"
