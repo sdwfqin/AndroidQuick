@@ -27,23 +27,4 @@ public class QuickInit {
     public static void setBaseUrl(String baseUrl) {
         QuickConstants.BASE_URL = baseUrl;
     }
-
-    /**
-     * 设置屏幕适配宽度
-     *
-     * @param width
-     */
-    public static void setUiWidth(int width) {
-        QuickConstants.UI_WIDTH = width;
-    }
-
-    /**
-     * 设置屏幕适配高度
-     *
-     * @param height
-     */
-    public static void setUiHeight(int height) {
-        QuickConstants.UI_HEIGHT = height;
-    }
-
 }
