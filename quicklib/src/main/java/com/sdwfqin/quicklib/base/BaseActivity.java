@@ -1,20 +1,28 @@
 package com.sdwfqin.quicklib.base;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -118,6 +126,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
         return true;
     }
 
+    // ==================== EventBus事件 ====================
+
     /**
      * 是否注册事件分发
      *
@@ -159,6 +169,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
 
     }
 
+    // ==================== Toast ====================
+
     /**
      * Toast
      *
@@ -168,6 +180,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     public void showMsg(String msg) {
         ToastUtils.showShort(msg);
     }
+
+    // ==================== QmuiTip(加载动画) ====================
 
     /**
      * 开启加载动画
@@ -213,6 +227,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
         }
     }
 
+    // ==================== RxJava订阅管理 ====================
+
     /**
      * RxJava 添加订阅者
      */
@@ -233,6 +249,94 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
             mCompositeDisposable = new CompositeDisposable();
         }
     }
+
+    // ==================== 权限管理 ====================
+
+    protected interface OnPermissionCallback {
+
+        void onSuccess();
+
+        void onError();
+    }
+
+    /**
+     * 检查权限是否全部获取
+     *
+     * @param perms
+     * @param onPermissionCallback
+     */
+    protected void checkPermissionsSample(String[] perms, OnPermissionCallback onPermissionCallback) {
+        checkPermissions(perms, false, false, onPermissionCallback);
+    }
+
+    /**
+     * 检查权限是否全部获取
+     *
+     * @param perms                权限列表
+     * @param showDialog           true：拒绝显示弹窗
+     * @param allDialog            true：弹窗关闭继续弹出弹窗
+     * @param onPermissionCallback 权限回掉接口
+     */
+    protected void checkPermissions(String[] perms, boolean showDialog, boolean allDialog,
+                                    OnPermissionCallback onPermissionCallback) {
+
+        addSubscribe(new RxPermissions(this)
+                .requestEachCombined(perms)
+                .subscribe(permission -> {
+                    if (permission.granted) {
+                        onPermissionCallback.onSuccess();
+                    } else if (permission.shouldShowRequestPermissionRationale) {
+                        if (showDialog) {
+                            showPermissionsDialog(perms, false, allDialog, onPermissionCallback);
+                        } else {
+                            onPermissionCallback.onError();
+                        }
+                    } else {
+                        if (showDialog) {
+                            showPermissionsDialog(perms, true, allDialog, onPermissionCallback);
+                        } else {
+                            onPermissionCallback.onError();
+                        }
+                    }
+                }));
+    }
+
+    /**
+     * 拒绝权限弹窗
+     *
+     * @param allDialog
+     */
+    private void showPermissionsDialog(String[] perms, boolean isNever, boolean allDialog, OnPermissionCallback onPermissionCallback) {
+        QMUIDialog.MessageDialogBuilder messageDialogBuilder = new QMUIDialog.MessageDialogBuilder(mContext);
+        messageDialogBuilder
+                .setMessage("获取权限失败！")
+                .addAction("开启权限", (dialog, index) -> {
+                    if (!isNever) {
+                        dialog.dismiss();
+                        checkPermissions(perms, true, allDialog, onPermissionCallback);
+                    } else {
+                        if (PermissionUtils.isGranted(perms)) {
+                            onPermissionCallback.onSuccess();
+                            dialog.dismiss();
+                        } else {
+                            PermissionUtils.launchAppDetailsSettings();
+                        }
+                    }
+                })
+                .addAction("取消", (dialog, index) -> {
+                    if (allDialog) {
+                        showPermissionsDialog(perms, isNever, true, onPermissionCallback);
+                    } else {
+                        onPermissionCallback.onError();
+                    }
+                    dialog.dismiss();
+                })
+                .setCanceledOnTouchOutside(false)
+                .setCancelable(false)
+                .show();
+    }
+
+    // ==================== 提供的接口 ====================
 
     protected void initPresenter() {
 

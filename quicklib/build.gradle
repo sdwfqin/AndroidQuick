@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
 
-version = "2.1.4"
+version = "2.1.5"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 59
+        versionCode 69
         versionName version
     }
 
@@ -49,6 +49,7 @@ dependencies {
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
     api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
+    api "com.github.tbruyelle:rxpermissions:$rxpermissions"
     api 'com.sdwfqin.quick:imageloader:1.0.6'
 }
 
