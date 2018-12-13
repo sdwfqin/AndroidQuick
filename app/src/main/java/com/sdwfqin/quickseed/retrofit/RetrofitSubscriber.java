@@ -16,11 +16,11 @@ import java.lang.ref.WeakReference;
  * @author zhangqin
  * @date 2018/4/4
  */
-public abstract class RetrofitSubscriberA<T> implements Subscriber<T> {
+public abstract class RetrofitSubscriber<T> implements Subscriber<T> {
 
     private final WeakReference<BaseActivity> mContent;
 
-    public RetrofitSubscriberA(BaseActivity context) {
+    public RetrofitSubscriber(BaseActivity context) {
         super();
         mContent = new WeakReference<>(context);
     }

@@ -75,27 +75,27 @@ public class RetrofitClient {
 //            return chain.proceed(request);
 //        });
         // 通过拦截器添加除method以外的系统级参数
-        builder.addInterceptor(chain -> {
-            Request request = chain.request();
-            if (request.method().equals("POST")) {
-                if (request.body() instanceof FormBody) {
-                    FormBody.Builder bodyBuilder = new FormBody.Builder();
-                    FormBody formBody = (FormBody) request.body();
-                    bodyBuilder
-                            .addEncoded("appKey", "002")
-                            .addEncoded("v", "1.0")
-                            .addEncoded("format", "JSON")
-                            .addEncoded("type", "1");
-                    //把原来的参数添加到新的构造器
-                    for (int i = 0; i < formBody.size(); i++) {
-                        bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
-                    }
-                    formBody = bodyBuilder.build();
-                    request = request.newBuilder().post(formBody).build();
-                }
-            }
-            return chain.proceed(request);
-        });
+//        builder.addInterceptor(chain -> {
+//            Request request = chain.request();
+//            if (request.method().equals("POST")) {
+//                if (request.body() instanceof FormBody) {
+//                    FormBody.Builder bodyBuilder = new FormBody.Builder();
+//                    FormBody formBody = (FormBody) request.body();
+//                    bodyBuilder
+//                            .addEncoded("appKey", "002")
+//                            .addEncoded("v", "1.0")
+//                            .addEncoded("format", "JSON")
+//                            .addEncoded("type", "1");
+//                    //把原来的参数添加到新的构造器
+//                    for (int i = 0; i < formBody.size(); i++) {
+//                        bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i));
+//                    }
+//                    formBody = bodyBuilder.build();
+//                    request = request.newBuilder().post(formBody).build();
+//                }
+//            }
+//            return chain.proceed(request);
+//        });
         if (BuildConfig.DEBUG) {
             // OkHttp日志拦截器
             builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
