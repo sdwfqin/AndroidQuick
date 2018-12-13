@@ -28,11 +28,11 @@
 
 # 需要注意！！！
 
-1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的styles。
-2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化
-3. `quicklib`、`qrscan`、`widget`这几个模块因为项目引入了AndroidUtilCode，所以需要在Application初始化（Utils.init(this);）
-4. 如果需要实现侧滑关闭Activity请在style样式中添加`<item name="android:windowIsTranslucent">true</item>`
-5. 请在module的`build.gradle#android`中添加如下代码
+1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，可参考`app`项目中的相应代码。
+2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
+3. `quicklib`、`qrscan`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
+4. 如果需要实现侧滑关闭`Activity`请在`style`样式中添加`<item name="android:windowIsTranslucent">true</item>`
+5. 请在module的`build.gradle#android`中添加如下代码：
 
     ``` groovy
     compileOptions {
