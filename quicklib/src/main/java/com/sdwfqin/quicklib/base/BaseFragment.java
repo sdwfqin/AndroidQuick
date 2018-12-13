@@ -176,19 +176,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * Toast
      *
      * @param msg
-     * @Deprecated 建议使用BaseActivity相关方法
+     * @deprecated 建议使用 {@link BaseActivity#showMsg},这个方法会在v3移除
      */
     @Override
     @Deprecated
     public void showMsg(String msg) {
-//        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
         ToastUtils.showShort(msg);
     }
 
     /**
      * 开启加载动画
      *
-     * @Deprecated 建议使用BaseActivity相关方法
+     * @deprecated 建议使用 {@link BaseActivity#showProgress},这个方法会在v3移除
      */
     @Override
     @Deprecated
@@ -199,7 +198,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 显示QmuiTip
      *
-     * @Deprecated 建议使用BaseActivity相关方法
+     * @deprecated 建议使用 {@link BaseActivity#showTip},这个方法会在v3移除
      */
     @Override
     @Deprecated
@@ -218,7 +217,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 关闭加载动画
      *
-     * @Deprecated 建议使用BaseActivity相关方法
+     * @deprecated 建议使用 {@link BaseActivity#hideProgress},这个方法会在v3移除
      */
     @Override
     @Deprecated
@@ -229,7 +228,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 关闭QmuiTip
      *
-     * @Deprecated 建议使用BaseActivity相关方法
+     * @deprecated 建议使用 {@link BaseActivity#hideTip},这个方法会在v3移除
      */
     @Override
     @Deprecated

@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.utils;
+package com.sdwfqin.quicklib.utils.rx;
 
 import io.reactivex.FlowableTransformer;
 import io.reactivex.ObservableTransformer;
@@ -6,13 +6,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 描述：RxJava工具类
+ * 描述：RxJava线程切换工具类
  *
  * @author 张钦
- * @deprecated 请使用 {@link com.sdwfqin.quicklib.utils.rx.RxSchedulersUtils} 中的相应方法，RxUtil工具类将会在v3中删除
  */
-@Deprecated
-public class RxUtil {
+public class RxSchedulersUtils {
 
     /**
      * 统一线程处理

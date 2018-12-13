@@ -1,5 +1,9 @@
 # 更新文档
 
+### 2018/12/13
+
+1. `quicklib`添加RxJava定时任务，发布：2.2.0
+
 ### quicklib 2.1.0
 
 1. 修复Fragment与ViewPager+TabLayout的相关Bug
