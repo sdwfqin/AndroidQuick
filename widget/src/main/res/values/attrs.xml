@@ -23,7 +23,6 @@
     </declare-styleable>
 
     <declare-styleable name="PayPwdInputView">
-
         <attr name="maxCount" format="integer" />
         <attr name="circleColor" format="color" />
         <attr name="textSize" format="dimension" />

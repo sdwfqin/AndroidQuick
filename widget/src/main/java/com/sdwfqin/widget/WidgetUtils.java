@@ -1,5 +1,8 @@
 package com.sdwfqin.widget;
 
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +34,22 @@ public class WidgetUtils {
             }
         }
         return result;
+    }
+
+    /**
+     * 获取shape图形
+     *
+     * @param solidColor  实心
+     * @param strokeColor 边框颜色
+     * @param strokeWidth 边框宽度
+     * @param radius      半径角度
+     * @return
+     */
+    public static GradientDrawable getDrawable(int solidColor, int strokeColor, int strokeWidth, float radius) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(solidColor);
+        drawable.setStroke(strokeWidth, strokeColor);
+        drawable.setCornerRadius(radius);
+        return drawable;
     }
 }

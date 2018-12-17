@@ -42,6 +42,7 @@ public class TrembleButton extends AppCompatTextView {
             durationMin = typedArray.getInteger(R.styleable.TrembleButton_durationMin, 5000);
             translationMax = typedArray.getInteger(R.styleable.TrembleButton_translationMax, 20);
             translationMin = typedArray.getInteger(R.styleable.TrembleButton_translationMin, 15);
+            typedArray.recycle();
         }
 
         setAnimFloat(this);

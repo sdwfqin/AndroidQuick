@@ -16,7 +16,6 @@ import com.sdwfqin.quicklib.view.BottomDialogPhotoFragment;
 import com.sdwfqin.quicklib.view.HintDialog;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
