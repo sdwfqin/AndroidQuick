@@ -3,7 +3,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.2.1'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.2.2'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -87,6 +87,7 @@
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
 | ImageWatermarkUtils | 图片水印工具类 |
+| IClickListener | 按钮防抖 |
 
 2. paylib
 
