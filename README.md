@@ -3,7 +3,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.2.2'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.2.4'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -11,7 +11,7 @@
     implementation 'com.sdwfqin.quicklib:paylib:1.0.5'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageloader:1.0.6'
+    implementation 'com.sdwfqin.quick:imageloader:2.0.0'
     
     // Android 自定义View组件
     implementation 'com.sdwfqin.quick:widget:1.0.7'

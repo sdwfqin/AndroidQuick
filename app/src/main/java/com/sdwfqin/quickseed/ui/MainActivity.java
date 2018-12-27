@@ -107,8 +107,8 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 2:
                     List<String> strings = new ArrayList<>();
-                    strings.add("http://pic4.nipic.com/20091217/3885730_124701000519_2.jpg");
-                    strings.add("http://img.taopic.com/uploads/allimg/140729/240450-140HZP45790.jpg");
+                    strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(1).png");
+                    strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(4).png");
                     SeeImageActivity.launch(mContext, strings);
                     break;
                 case 3:

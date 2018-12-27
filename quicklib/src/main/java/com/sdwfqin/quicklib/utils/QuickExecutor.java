@@ -25,6 +25,15 @@ public class QuickExecutor {
         private static final QuickExecutor CBT_EXECUTOR = new QuickExecutor();
     }
 
+    /**
+     * corePoolSize：核心线程数。
+     * maximumPoolSize：“线程池允许创建的最大线程数。
+     * keepAliveTime：非核心线程闲置的超时时间。超过这个时间则回收。
+     * TimeUnit：keepAliveTime参数的时间单位。
+     * workQueue：任务队列。
+     * ThreadFactory：线程工厂。
+     * RejectedExecutionHandler：饱和策略。
+     */
     private QuickExecutor() {
         mSingleThreadPool = new ThreadPoolExecutor(1, 1,
                 0L, TimeUnit.MILLISECONDS,

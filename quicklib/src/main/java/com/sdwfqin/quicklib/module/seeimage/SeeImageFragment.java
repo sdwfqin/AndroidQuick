@@ -5,7 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.blankj.utilcode.util.FileIOUtils;
@@ -13,10 +16,15 @@ import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.sdwfqin.imageloader.GlideApp;
 import com.sdwfqin.imageloader.ImageLoader;
 import com.sdwfqin.imageloader.progress.CircleProgressView;
 import com.sdwfqin.imageloader.progress.OnProgressListener;
+import com.sdwfqin.imageloader.progress.ProgressManager;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.base.QuickConstants;
@@ -63,9 +71,12 @@ public class SeeImageFragment extends BaseFragment {
             LogUtils.i("initEventAndData: " + url);
         }
 
-        ImageLoader
-                .init(mShowimageImg)
-                .load(url, R.mipmap.image_loading, R.mipmap.image_load_err)
+        new ImageLoader.Builder()
+                .setImagePath(url)
+                .setPlaceholder(R.mipmap.image_loading)
+                .setErrorImage(R.mipmap.image_load_err)
+                .build(mShowimageImg)
+                .loadImage()
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
                     public void onLoading(int progress) {

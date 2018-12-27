@@ -28,17 +28,42 @@ public class ImageLoader {
     protected static final String HTTP = "http";
 
     private WeakReference<ImageView> imageViewWeakReference;
+    private Builder builder;
     private String url;
 
-    /**
-     * 初始化
-     */
-    public static ImageLoader init(ImageView imageView) {
-        return new ImageLoader(imageView);
+    private ImageLoader(ImageView imageView, Builder builder) {
+        imageViewWeakReference = new WeakReference<>(imageView);
+        this.builder = builder;
     }
 
-    private ImageLoader(ImageView imageView) {
-        imageViewWeakReference = new WeakReference<>(imageView);
+    /**
+     * 创建GlideRequest
+     */
+    public GlideRequest<Drawable> loadCustomImage() {
+        if (builder.image instanceof String && ((String) builder.image).toLowerCase().startsWith(HTTP)) {
+            url = (String) builder.image;
+        }
+        return GlideApp.with(getContext()).load(builder.image);
+    }
+
+    /**
+     * 加载到控件
+     */
+    public ImageLoader loadImage() {
+        GlideRequest<Drawable> glideRequest = loadCustomImage();
+        if (builder.placeholder != 0) {
+            glideRequest = glideRequest.placeholder(builder.placeholder);
+        }
+        if (builder.errorImage != 0) {
+            glideRequest = glideRequest.error(builder.errorImage);
+        }
+        if (builder.transformation != null) {
+            glideRequest = glideRequest.transform(builder.transformation);
+        } else if (builder.imageRadius != 0) {
+            glideRequest = glideRequest.transform(new RadiusTransformation(getContext(), builder.imageRadius));
+        }
+        glideRequest.into(getImageView());
+        return this;
     }
 
     /**
@@ -69,67 +94,6 @@ public class ImageLoader {
     }
 
     /**
-     * 简单
-     */
-    public ImageLoader load(Object obj) {
-        return load(obj, 0);
-    }
-
-    /**
-     * 带有占位图
-     */
-    public ImageLoader load(Object obj, @DrawableRes int placeholder) {
-        return load(obj, placeholder, 0);
-    }
-
-    /**
-     * 占位图+错误图
-     */
-    public ImageLoader load(Object obj, @DrawableRes int placeholder, @DrawableRes int error) {
-        return loadImage(obj, placeholder, error, null);
-    }
-
-    /**
-     * 加载图片
-     */
-    public ImageLoader load(Object obj, @DrawableRes int placeholder, @DrawableRes int error, int radius) {
-        return loadImage(obj, placeholder, error, new RadiusTransformation(getContext(), radius));
-    }
-
-    /**
-     * 加载图片
-     */
-    public ImageLoader load(Object obj, @DrawableRes int placeholder, @DrawableRes int error, Transformation<Bitmap> transformation) {
-        return loadImage(obj, placeholder, error, transformation);
-    }
-
-    /**
-     * 创建GlideRequest
-     */
-    public GlideRequest<Drawable> loadImage(Object obj) {
-        if (obj instanceof String && ((String) obj).toLowerCase().startsWith(HTTP)) {
-            url = (String) obj;
-        }
-        return GlideApp.with(getContext()).load(obj);
-    }
-
-    /**
-     * 加载到控件
-     */
-    public ImageLoader loadImage(Object obj, @DrawableRes int placeholder, @DrawableRes int error, Transformation<Bitmap> transformation) {
-        GlideRequest<Drawable> glideRequest = loadImage(obj);
-        if (placeholder != 0) {
-            glideRequest = glideRequest.placeholder(placeholder).error(error);
-        }
-
-        if (transformation != null) {
-            glideRequest = glideRequest.transform(transformation);
-        }
-        glideRequest.centerCrop().into(getImageView());
-        return this;
-    }
-
-    /**
      * 网络图片加载进度
      */
     public ImageLoader setOnProgressListener(OnProgressListener onProgressListener) {
@@ -137,5 +101,52 @@ public class ImageLoader {
             ProgressManager.addListener(url, onProgressListener);
         }
         return this;
+    }
+
+    public static class Builder {
+        // 图片地址/链接等
+        private Object image = null;
+        // 占位图
+        private int placeholder = 0;
+        // 错误图
+        private int errorImage = 0;
+        // 图片角度
+        private int imageRadius = 0;
+        private Transformation<Bitmap> transformation = null;
+
+        public Builder() {
+        }
+
+        public Builder setImagePath(Object image) {
+            this.image = image;
+            return this;
+        }
+
+        public Builder setPlaceholder(@DrawableRes int placeholder) {
+            this.placeholder = placeholder;
+            return this;
+        }
+
+        public Builder setErrorImage(@DrawableRes int errorImage) {
+            this.errorImage = errorImage;
+            return this;
+        }
+
+        public Builder setImageRadius(int imageRadius) {
+            this.imageRadius = imageRadius;
+            return this;
+        }
+
+        public Builder setTransformation(Transformation<Bitmap> transformation) {
+            this.transformation = transformation;
+            return this;
+        }
+
+        public ImageLoader build(ImageView imageView) {
+            if (image == null) {
+                throw new IllegalArgumentException("请检查图片地址是否有误");
+            }
+            return new ImageLoader(imageView, this);
+        }
     }
 }

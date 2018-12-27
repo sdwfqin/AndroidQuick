@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // ./gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
 
-version = "2.2.2"
+version = "2.2.4"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 72
+        versionCode 74
         versionName version
     }
 
@@ -45,12 +45,14 @@ dependencies {
     api "com.just.agentweb:agentweb:$agentweb"
     api "com.squareup.okhttp3:okhttp:$okhttp"
     api "com.squareup.okhttp3:logging-interceptor:$okhttp"
-    api "com.github.chrisbanes:PhotoView:$PhotoView"
+    api "com.github.chrisbanes:PhotoView:$photoView"
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
     api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
     api "com.github.tbruyelle:rxpermissions:$rxpermissions"
-    api 'com.sdwfqin.quick:imageloader:1.0.6'
+
+    api 'com.sdwfqin.quick:imageloader:2.0.0'
+//    api project(':imageloader')
 }
 
 apply from: "deployBintray.gradle"

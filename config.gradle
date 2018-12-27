@@ -19,7 +19,7 @@ ext {
     agentweb = '4.0.2'
     okhttp = '3.11.0'
     retrofit = '2.4.0'
-    PhotoView = '2.1.4'
+    photoView = '2.0.0'
     gson = '2.8.2'
     wechat = '5.1.6'
     swipebacklayout = '1.3.0'
