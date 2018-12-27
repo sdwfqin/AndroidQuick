@@ -71,24 +71,26 @@ public class SeeImageFragment extends BaseFragment {
             LogUtils.i("initEventAndData: " + url);
         }
 
-        new ImageLoader.Builder()
+        ImageLoader imageLoader = new ImageLoader.Builder()
                 .setImagePath(url)
                 .setPlaceholder(R.mipmap.image_loading)
                 .setErrorImage(R.mipmap.image_load_err)
-                .build(mShowimageImg)
-                .loadImage()
-                .setOnProgressListener(new OnProgressListener() {
-                    @Override
-                    public void onLoading(int progress) {
-                        mProgressBar.setVisibility(View.VISIBLE);
-                        mProgressBar.setProgress(progress);
-                    }
+                .build(mShowimageImg);
+        imageLoader
+                .loadDrawableImage()
+                .into(imageLoader.getImageView());
+        imageLoader.setOnProgressListener(new OnProgressListener() {
+            @Override
+            public void onLoading(int progress) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setProgress(progress);
+            }
 
-                    @Override
-                    public void onLoadSuccess() {
-                        mProgressBar.setVisibility(View.GONE);
-                    }
-                });
+            @Override
+            public void onLoadSuccess() {
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
 
         // setOnLongClickListener中return的值决定是否在长按后再加一个短按动作
         // true为不加短按,false为加入短按

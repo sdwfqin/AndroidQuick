@@ -39,18 +39,21 @@ public class ImageLoader {
     /**
      * 创建GlideRequest
      */
-    public GlideRequest<Drawable> loadCustomImage() {
+    public GlideRequests loadBaseImage() {
         if (builder.image instanceof String && ((String) builder.image).toLowerCase().startsWith(HTTP)) {
             url = (String) builder.image;
         }
-        return GlideApp.with(getContext()).load(builder.image);
+        return GlideApp.with(getContext());
     }
 
     /**
-     * 加载到控件
+     * 创建GlideRequest<Drawable>
      */
-    public ImageLoader loadImage() {
-        GlideRequest<Drawable> glideRequest = loadCustomImage();
+    public GlideRequest<Drawable> loadDrawableImage() {
+        if (builder.image instanceof String && ((String) builder.image).toLowerCase().startsWith(HTTP)) {
+            url = (String) builder.image;
+        }
+        GlideRequest<Drawable> glideRequest = loadBaseImage().load(builder.image);
         if (builder.placeholder != 0) {
             glideRequest = glideRequest.placeholder(builder.placeholder);
         }
@@ -62,6 +65,14 @@ public class ImageLoader {
         } else if (builder.imageRadius != 0) {
             glideRequest = glideRequest.transform(new RadiusTransformation(getContext(), builder.imageRadius));
         }
+        return glideRequest;
+    }
+
+    /**
+     * 加载到控件
+     */
+    public ImageLoader loadImage() {
+        GlideRequest<Drawable> glideRequest = loadDrawableImage();
         glideRequest.into(getImageView());
         return this;
     }
