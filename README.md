@@ -11,7 +11,7 @@
     implementation 'com.sdwfqin.quicklib:paylib:1.0.5'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageloader:2.0.1'
+    implementation 'com.sdwfqin.quick:imageloader:2.0.2'
     
     // Android 自定义View组件
     implementation 'com.sdwfqin.quick:widget:1.0.7'

@@ -154,9 +154,6 @@ public class ImageLoader {
         }
 
         public ImageLoader build(ImageView imageView) {
-            if (image == null) {
-                throw new IllegalArgumentException("请检查图片地址是否有误");
-            }
             return new ImageLoader(imageView, this);
         }
     }

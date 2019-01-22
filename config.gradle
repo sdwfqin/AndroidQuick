@@ -9,7 +9,7 @@ ext {
     glide = '4.8.0'
     butterknife = '8.8.1'
     vlayout = '1.2.18'
-    qmui = '1.1.10'
+    qmui = '1.1.12'
     brvah = '2.9.42'
     banner = '1.4.10'
     utilcode = '1.22.0'
