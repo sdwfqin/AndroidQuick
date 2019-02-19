@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew imageloader:clean imageloader:build imageloader:bintrayUpload
 
-version = "2.0.2"
+version = "3.0.0-beta1"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 12
+        versionCode 13
         versionName version
     }
 

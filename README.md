@@ -1,4 +1,4 @@
-### 支持AndroidX，正在测试
+### 支持AndroidX，正在测试，欢迎提交issues与pr
 
 ### 不支持AndroidX请查看`release`2.2.5
 
@@ -6,6 +6,24 @@
 
 # Gradle（使用前请查看注意事项）:
 
+    // 支持AndroidX
+    // quicklib(Base)
+    implementation 'com.sdwfqin.quicklib:quicklib:3.0.0-beta1'
+    // 如果使用butterknife请添加【可选】
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    
+    // 支付模块
+    implementation 'com.sdwfqin.quicklib:paylib:3.0.0-beta1'
+    
+    // Android 图片加载库（Glide封装）
+    implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
+    
+    // Android 自定义View组件
+    implementation 'com.sdwfqin.quick:widget:3.0.0-beta1'
+    
+    ==================== AndroidX 分界线 ====================
+    
+    // 支持不AndroidX
     // quicklib(Base)
     implementation 'com.sdwfqin.quicklib:quicklib:2.2.5'
     // 如果使用butterknife请添加【可选】
@@ -35,8 +53,7 @@
 1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，可参考`app`项目中的相应代码。
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
 3. `quicklib`、`qrscan`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
-4. 如果需要实现侧滑关闭`Activity`请在`style`样式中添加`<item name="android:windowIsTranslucent">true</item>`
-5. 请在module的`build.gradle#android`中添加如下代码：
+4. 请在module的`build.gradle#android`中添加如下代码：
 
     ``` groovy
     compileOptions {
