@@ -1,6 +1,5 @@
 package com.sdwfqin.quickseed.ui;
 
-import com.luck.picture.lib.entity.LocalMedia;
 import com.sdwfqin.widget.pictureupload.PictureUpModel;
 
 /**
@@ -11,18 +10,18 @@ import com.sdwfqin.widget.pictureupload.PictureUpModel;
  */
 public class PictureModel extends PictureUpModel {
 
-    private LocalMedia mLocalMedia;
+    private String imgPath;
 
-    public PictureModel(LocalMedia localMedia) {
-        super(localMedia.getPath());
-        mLocalMedia = localMedia;
+    public PictureModel(String imgPath) {
+        super(imgPath);
+        this.imgPath = imgPath;
     }
 
-    public LocalMedia getLocalMedia() {
-        return mLocalMedia;
+    public String getImgPath() {
+        return imgPath;
     }
 
-    public void setLocalMedia(LocalMedia localMedia) {
-        mLocalMedia = localMedia;
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

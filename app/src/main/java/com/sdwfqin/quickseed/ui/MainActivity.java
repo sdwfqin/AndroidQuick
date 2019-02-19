@@ -2,8 +2,8 @@ package com.sdwfqin.quickseed.ui;
 
 import android.Manifest;
 import android.content.Intent;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.FragmentManager;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import androidx.fragment.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
     ListView list;
 
     private String[] mTitle = new String[]{"跳转网页",
-            "颤抖的按钮",
+            "弹窗",
             "图片预览",
             "底部弹窗",
             "上传图片九宫格",
@@ -76,11 +76,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public boolean isStartSwipeBack() {
-        return false;
-    }
-
     private void initListener() {
         list.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
@@ -107,8 +102,8 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 2:
                     List<String> strings = new ArrayList<>();
-                    strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(1).png");
-                    strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(4).png");
+                    strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(1).png");
+                    strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(4).png");
                     SeeImageActivity.launch(mContext, strings);
                     break;
                 case 3:

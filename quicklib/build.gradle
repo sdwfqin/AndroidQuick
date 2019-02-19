@@ -30,12 +30,13 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$support"
-    api "com.android.support:support-v4:$support"
-    api "com.android.support:animated-vector-drawable:$support"
-    api "com.android.support:design:$support"
-    api "com.android.support:cardview-v7:$support"
-    api "com.android.support.constraint:constraint-layout:$constraint"
+    api "androidx.appcompat:appcompat:1.0.2"
+    api "androidx.annotation:annotation:1.0.1"
+    api "androidx.legacy:legacy-support-v4:1.0.0"
+    api "androidx.vectordrawable:vectordrawable-animated:1.0.0"
+    api "androidx.cardview:cardview:1.0.0"
+    api "androidx.constraintlayout:constraintlayout:1.1.3"
+    api "com.google.android.material:material:1.0.0"
     api "com.jakewharton:butterknife:$butterknife"
     api "com.qmuiteam:qmui:$qmui"
     api "com.blankj:utilcode:$utilcode"
@@ -48,11 +49,9 @@ dependencies {
     api "com.github.chrisbanes:PhotoView:$photoView"
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
-    api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
     api "com.github.tbruyelle:rxpermissions:$rxpermissions"
 
-    api 'com.sdwfqin.quick:imageloader:2.0.1'
-//    api project(':imageloader')
+    implementation project(':imageloader')
 }
 
 apply from: "deployBintray.gradle"

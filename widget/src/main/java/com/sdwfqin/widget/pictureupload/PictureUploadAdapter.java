@@ -1,6 +1,6 @@
 package com.sdwfqin.widget.pictureupload;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,9 +27,14 @@ public class PictureUploadAdapter<T extends PictureUpModel> extends BaseQuickAda
         ImageView iiImg = helper.getView(R.id.ii_img);
 
         if (item != null) {
-            ImageLoader
-                    .init(iiImg)
-                    .load(item.getImage(), R.mipmap.image_loading, R.mipmap.image_load_err);
+            ImageLoader imageLoader = new ImageLoader.Builder()
+                    .setImagePath(item.getImage())
+                    .setPlaceholder(R.mipmap.image_loading)
+                    .setErrorImage(R.mipmap.image_load_err)
+                    .build(iiImg);
+            imageLoader
+                    .loadDrawableImage()
+                    .into(imageLoader.getImageView());
         } else {
             iiImg.setImageResource(R.drawable.quick_add_img);
         }

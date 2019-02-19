@@ -1,10 +1,7 @@
 package com.sdwfqin.quickseed.ui;
 
-import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
-
-import butterknife.BindView;
 
 /**
  * 描述：自定义输入密码或验证码View
@@ -14,9 +11,6 @@ import butterknife.BindView;
  */
 public class PayPwdInputActivity extends BaseActivity {
 
-    @BindView(R.id.topbar)
-    QMUITopBar mTopbar;
-
     @Override
     protected int getLayout() {
         return R.layout.activity_pay_pwd_input;
@@ -24,7 +18,7 @@ public class PayPwdInputActivity extends BaseActivity {
 
     @Override
     protected void initEventAndData() {
-        mTopbar.setTitle("自定义输入密码或验证码View");
-        mTopbar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mTopBar.setTitle("自定义输入密码或验证码View");
+        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
     }
 }

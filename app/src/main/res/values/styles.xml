@@ -6,9 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
-        <!--滑动返回用-->
-        <item name="android:windowIsTranslucent">true</item>
-
         <!-- 配置qmui提供的theme -->
         <item name="qmui_config_color_blue">@color/colorPrimary</item>
         <item name="QMUITopBarStyle">@style/QDTopBar</item>

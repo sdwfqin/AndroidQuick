@@ -1,22 +1,15 @@
 package com.sdwfqin.quicklib.base;
 
 import android.app.Activity;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.utils.AppManager;
@@ -27,18 +20,19 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends SwipeBackActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
     protected Activity mContext;
     protected LinearLayout mRoot_view;
@@ -54,25 +48,15 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
      * TipDialog
      */
     protected QMUITipDialog mQmuiTipDialog;
-    /**
-     * 侧滑关闭
-     */
-    protected SwipeBackLayout mSwipeBackLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initContentView(R.layout.activity_base);
         setContentView(getLayout());
-        mTopBar = (QMUITopBar) findViewById(R.id.base_topbar);
+        mTopBar = findViewById(R.id.base_topbar);
         ButterKnife.bind(this);
         mContext = this;
-        mSwipeBackLayout = getSwipeBackLayout();
-        if (isStartSwipeBack()) {
-            mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-        } else {
-            mSwipeBackLayout.setEnableGesture(false);
-        }
         AppManager.addActivity(this);
         initPresenter();
         initEventAndData();
@@ -103,7 +87,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     }
 
     private void initContentView(@LayoutRes int layoutResID) {
-        ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
         viewGroup.removeAllViews();
         mRoot_view = new LinearLayout(this);
         mRoot_view.setOrientation(LinearLayout.VERTICAL);
@@ -117,13 +101,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
     public void setContentView(@LayoutRes int layoutResID) {
         //  added the sub-activity layout id in mRoot_view
         LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
-    }
-
-    /**
-     * 开启侧滑关闭
-     */
-    public boolean isStartSwipeBack() {
-        return true;
     }
 
     // ==================== EventBus事件 ====================

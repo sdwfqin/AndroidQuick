@@ -4,7 +4,7 @@
 
 package com.sdwfqin.baidumaplib.utils.clusterutil.clustering.algo;
 
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 
 import com.sdwfqin.baidumaplib.utils.clusterutil.clustering.Cluster;
 import com.sdwfqin.baidumaplib.utils.clusterutil.clustering.ClusterItem;
