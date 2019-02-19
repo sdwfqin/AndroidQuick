@@ -7,6 +7,7 @@
 # Gradle（使用前请查看注意事项）:
 
     // 支持AndroidX
+    
     // quicklib(Base)
     implementation 'com.sdwfqin.quicklib:quicklib:3.0.0-beta1'
     // 如果使用butterknife请添加【可选】
@@ -23,7 +24,8 @@
     
     ==================== AndroidX 分界线 ====================
     
-    // 支持不AndroidX
+    // 不支持AndroidX
+    
     // quicklib(Base)
     implementation 'com.sdwfqin.quicklib:quicklib:2.2.5'
     // 如果使用butterknife请添加【可选】
