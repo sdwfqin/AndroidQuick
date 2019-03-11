@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -32,7 +33,7 @@ import io.reactivex.disposables.Disposable;
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends QMUIActivity implements BaseView {
 
     protected Activity mContext;
     protected LinearLayout mRoot_view;

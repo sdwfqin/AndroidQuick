@@ -2,6 +2,7 @@ package com.sdwfqin.quickseed.base;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -41,6 +42,7 @@ public class SampleApplication extends MultiDexApplication {
         Bugly.init(this, "534e5a3930", !BuildConfig.DEBUG);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
+        QMUISwipeBackActivityManager.init(this);
     }
 
     private void initUtils() {

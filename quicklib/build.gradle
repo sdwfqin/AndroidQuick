@@ -39,6 +39,7 @@ dependencies {
     api "com.google.android.material:material:1.0.0"
     api "com.jakewharton:butterknife:$butterknife"
     api "com.qmuiteam:qmui:$qmui"
+    api "com.qmuiteam:arch:$qmui_arch"
     api "com.blankj:utilcode:$utilcode"
     api "org.greenrobot:eventbus:$eventbus"
     api "io.reactivex.rxjava2:rxandroid:$rxandroid"
