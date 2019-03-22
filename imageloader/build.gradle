@@ -5,12 +5,12 @@ apply plugin: 'com.android.library'
 version = "3.0.0-beta1"
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 13
         versionName version
     }
@@ -30,11 +30,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "androidx.annotation:annotation:1.0.1"
-    api "com.github.bumptech.glide:glide:$glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
-    api "com.github.bumptech.glide:okhttp3-integration:$glide"
+    implementation "androidx.annotation:annotation:1.0.2"
+    api imageDependencies.glide
+    annotationProcessor compilerDependencies["glide-compiler"]
+    api imageDependencies["glide-integration"]
 
     // Glide不兼容AndroidX的临时解决方案
     annotationProcessor 'com.android.support:support-annotations:28.0.0'

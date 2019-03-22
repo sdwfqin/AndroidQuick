@@ -1,4 +1,5 @@
 apply from: "config.gradle"
+
 buildscript {
 
     repositories {
@@ -9,7 +10,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-//        classpath "com.tencent.bugly:tinker-support:1.1.5"
+        // classpath "com.tencent.bugly:tinker-support:1.1.5"
     }
 }
 
@@ -19,7 +20,6 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
-        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     }
 
     tasks.withType(Javadoc) {

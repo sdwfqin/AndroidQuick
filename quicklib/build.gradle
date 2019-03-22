@@ -5,12 +5,12 @@ apply plugin: 'com.android.library'
 version = "3.0.0-beta1"
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 76
         versionName version
     }
@@ -30,27 +30,24 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api "androidx.appcompat:appcompat:1.0.2"
-    api "androidx.annotation:annotation:1.0.1"
-    api "androidx.legacy:legacy-support-v4:1.0.0"
-    api "androidx.vectordrawable:vectordrawable-animated:1.0.0"
-    api "androidx.cardview:cardview:1.0.0"
-    api "androidx.constraintlayout:constraintlayout:1.1.3"
-    api "com.google.android.material:material:1.0.0"
-    api "com.jakewharton:butterknife:$butterknife"
-    api "com.qmuiteam:qmui:$qmui"
-    api "com.qmuiteam:arch:$qmui_arch"
-    api "com.blankj:utilcode:$utilcode"
-    api "org.greenrobot:eventbus:$eventbus"
-    api "io.reactivex.rxjava2:rxandroid:$rxandroid"
-    api "io.reactivex.rxjava2:rxjava:$rxjava"
-    api "com.just.agentweb:agentweb:$agentweb"
-    api "com.squareup.okhttp3:okhttp:$okhttp"
-    api "com.squareup.okhttp3:logging-interceptor:$okhttp"
-    api "com.github.chrisbanes:PhotoView:$photoView"
-    api "com.google.code.gson:gson:$gson"
-    api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
-    api "com.github.tbruyelle:rxpermissions:$rxpermissions"
+    googleDependencies.each {
+        key, value -> api value
+    }
+    eventDependencies.each {
+        key, value -> api value
+    }
+    okhttpDependencies.each {
+        key, value -> api value
+    }
+    api viewDependencies.butterknife
+    api tencentDependencies.qmui
+    // api tencentDependencies.arch
+    api utilsDependencies.utilcodex
+    api utilsDependencies.agentweb
+    api imageDependencies.photoview
+    api utilsDependencies.gson
+    api tencentDependencies["wechat-sdk-mta"]
+    api utilsDependencies.rxpermissions
 
     implementation project(':imageloader')
 }

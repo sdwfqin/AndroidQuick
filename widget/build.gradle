@@ -6,11 +6,11 @@ apply plugin: 'com.android.library'
 version = "3.0.0-beta1"
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 8
         versionName version
     }
@@ -30,18 +30,14 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api "androidx.appcompat:appcompat:1.0.2"
-    api "androidx.legacy:legacy-support-v4:1.0.0"
-    api "androidx.vectordrawable:vectordrawable-animated:1.0.0"
-    api "com.google.android.material:material:1.0.0"
-    api "androidx.cardview:cardview:1.0.0"
-    api "androidx.recyclerview:recyclerview:1.0.0"
-    api "androidx.constraintlayout:constraintlayout:1.1.3"
+    googleDependencies.each {
+        k, v -> api v
+    }
     api("com.alibaba.android:vlayout:${vlayout}@aar") {
         transitive = true
     }
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$brvah"
-    api "com.blankj:utilcode:$utilcode"
+    api viewDependencies.brvah
+    api utilsDependencies.utilcodex
     implementation project(':imageloader')
 }
 
