@@ -86,7 +86,7 @@
     }
     ```
 
-2. 请将[支付宝的aar文件](https://github.com/sdwfqin/AndroidQuick/tree/3.x/paylib/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
+2. 请将[支付宝的aar文件](https://github.com/sdwfqin/AndroidQuick/tree/3.x/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
 
 # 支持Mvp与Mvc模式
 
