@@ -151,7 +151,7 @@
 | PayPwdInputView | 自定义验证码/密码View |
 | ClickViewPager | 可以点击的ViewPager |
 | DecimalEditText | Double类型的EditText，支持限定小数点后的位数 |
-| NoScrollViewPager | Double类型的EditText，支持限定小数点后的位数 |
+| NoScrollViewPager | 可以禁止左右滑动的ViewPager |
 | TrembleButton | 可以漂浮颤抖的按钮 |
 | WrapContentHeightViewPager | 处理NestedScrollView嵌套Viewpager+RecyclerView |
 | AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
