@@ -14,7 +14,7 @@
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     
     // 支付模块
-    implementation 'com.sdwfqin.quicklib:paylib:3.0.0-beta1'
+    implementation 'com.sdwfqin.quicklib:paylib:3.0.0-beta3'
     
     // Android 图片加载库（Glide封装）
     implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
@@ -63,6 +63,28 @@
         targetCompatibility JavaVersion.VERSION_1_8
     }
     ```
+
+# 关于支付模块支付宝支付的特殊说明
+
+> 因支付宝SDK改用aar打包，所以使用时需要添加如下代码
+
+1. 在您项目根目录的`build.gradle`中，添加下面的内容，将`libs`目录作为依赖仓库
+
+    ``` gradle
+    allprojects {
+        repositories {
+    
+            // 添加下面的内容
+            flatDir {
+                dirs '../libs'
+            }
+    
+            // ... jcenter() 等其他仓库
+        }
+    }
+    ```
+
+2. 请将[支付宝的aar文件](https://github.com/sdwfqin/AndroidQuick/tree/3.x/paylib/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
 
 # 支持Mvp与Mvc模式
 

@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     repositories {
         flatDir {
-            dirs 'libs'
+            dirs '../libs'
         }
         google()
         jcenter()
