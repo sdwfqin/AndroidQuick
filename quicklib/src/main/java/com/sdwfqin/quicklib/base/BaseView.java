@@ -2,6 +2,8 @@ package com.sdwfqin.quicklib.base;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * 描述：View的基类
  *
@@ -35,5 +37,17 @@ public interface BaseView {
      * 关闭提示
      */
     void hideTip();
+
+    /**
+     * 跳转页面
+     */
+    void startActivitySample(Class<?> cls);
+
+    /**
+     * Rx事件管理
+     *
+     * @param subscription
+     */
+    void addSubscribe(Disposable subscription);
 
 }

@@ -1,10 +1,13 @@
 package com.sdwfqin.quicklib.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,73 +179,74 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * Toast
      *
      * @param msg
-     * @deprecated 建议使用 {@link BaseActivity#showMsg},这个方法会在v3移除
      */
     @Override
-    @Deprecated
     public void showMsg(String msg) {
         ToastUtils.showShort(msg);
     }
 
     /**
      * 开启加载动画
-     *
-     * @deprecated 建议使用 {@link BaseActivity#showProgress},这个方法会在v3移除
      */
     @Override
-    @Deprecated
     public void showProgress() {
         showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载");
     }
 
     /**
      * 显示QmuiTip
-     *
-     * @deprecated 建议使用 {@link BaseActivity#showTip},这个方法会在v3移除
      */
     @Override
-    @Deprecated
     public void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord) {
-        if (mQmuiTipDialog == null) {
-            mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
-                    .setIconType(iconType)
-                    .setTipWord(tipWord)
-                    .create();
-        }
-        if (!mQmuiTipDialog.isShowing()) {
-            mQmuiTipDialog.show();
+        if (getActivity() instanceof BaseActivity) {
+            mActivity.showTip(iconType, tipWord);
+        } else {
+            if (mQmuiTipDialog == null) {
+                mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
+                        .setIconType(iconType)
+                        .setTipWord(tipWord)
+                        .create();
+            }
+            if (!mQmuiTipDialog.isShowing()) {
+                mQmuiTipDialog.show();
+            }
         }
     }
 
     /**
      * 关闭加载动画
-     *
-     * @deprecated 建议使用 {@link BaseActivity#hideProgress},这个方法会在v3移除
      */
     @Override
-    @Deprecated
     public void hideProgress() {
         hideTip();
     }
 
     /**
      * 关闭QmuiTip
-     *
-     * @deprecated 建议使用 {@link BaseActivity#hideTip},这个方法会在v3移除
      */
     @Override
-    @Deprecated
     public void hideTip() {
-        if (mQmuiTipDialog != null) {
-            if (mQmuiTipDialog.isShowing()) {
-                mQmuiTipDialog.dismiss();
+        if (getActivity() instanceof BaseActivity) {
+            mActivity.hideTip();
+        } else {
+            if (mQmuiTipDialog != null) {
+                if (mQmuiTipDialog.isShowing()) {
+                    mQmuiTipDialog.dismiss();
+                }
             }
         }
+    }
+
+    @Override
+    public void startActivitySample(Class<?> cls) {
+        Intent intent = new Intent(mContext, cls);
+        startActivity(intent);
     }
 
     /**
      * RxJava 添加订阅者
      */
+    @Override
     public void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();

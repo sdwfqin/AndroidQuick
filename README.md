@@ -11,7 +11,7 @@
     // 支持AndroidX
     
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:3.0.0-beta1'
+    implementation 'com.sdwfqin.quicklib:quicklib:3.0.0-beta2'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     
@@ -29,7 +29,7 @@
     // 不支持AndroidX
     
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.2.5'
+    implementation 'com.sdwfqin.quicklib:quicklib:2.3.0'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
@@ -91,7 +91,8 @@
 # 支持Mvp与Mvc模式
 
 1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
-2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承RxPresenter<T extends BaseView>类并实现Presenter接口，他们的区别是RxPresenter里面实现了BasePresenter的接口处理了View绑定并且添加了对RxJava事件的处理
+2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承SamplePresenter<T extends BaseView>类并实现Presenter接口，他们的区别是SamplePresenter里面实现了BasePresenter的接口处理了View绑定
+3. 网络部分可以参考DemoApp下面的`mvpretrofit`
 
 # 使用方法
 
