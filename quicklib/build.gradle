@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // ./gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
 
-version = "2.2.5"
+version = "2.3.0"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 75
+        versionCode 76
         versionName version
     }
 
@@ -51,7 +51,7 @@ dependencies {
     api "me.imid.swipebacklayout.lib:library:$swipebacklayout"
     api "com.github.tbruyelle:rxpermissions:$rxpermissions"
 
-    api 'com.sdwfqin.quick:imageloader:2.0.1'
+    api 'com.sdwfqin.quick:imageloader:2.0.2'
 //    api project(':imageloader')
 }
 

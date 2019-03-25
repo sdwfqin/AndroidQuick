@@ -1,7 +1,8 @@
-package com.sdwfqin.quickseed.retrofit;
+package com.sdwfqin.quickseed.mvpretrofit;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.sdwfqin.quicklib.base.BaseActivity;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.sdwfqin.quicklib.base.BaseView;
 
 import java.lang.ref.WeakReference;
 
@@ -18,29 +19,35 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class RetrofitSubscriber<T> implements Observer<T> {
 
-    private final WeakReference<BaseActivity> mContent;
+    private final WeakReference<BaseView> mView;
 
-    public RetrofitSubscriber(BaseActivity context) {
+    public RetrofitSubscriber(BaseView view) {
         super();
-        mContent = new WeakReference<>(context);
+        mView = new WeakReference<>(view);
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-        mContent.get().addSubscribe(d);
+        if (!NetworkUtils.isConnected()) {
+            mView.get().showMsg("网络未连接，请检查网络");
+            d.dispose();
+        } else {
+            mView.get().showProgress();
+            mView.get().addSubscribe(d);
+        }
     }
 
     @Override
     public void onComplete() {
-        if (mContent != null && mContent.get() != null) {
-            mContent.get().hideProgress();
+        if (mView != null && mView.get() != null) {
+            mView.get().hideProgress();
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        if (mContent != null && mContent.get() != null) {
-            mContent.get().hideProgress();
+        if (mView != null && mView.get() != null) {
+            mView.get().hideProgress();
         }
         onNetError(e);
     }
@@ -48,7 +55,7 @@ public abstract class RetrofitSubscriber<T> implements Observer<T> {
     @Override
     public void onNext(T response) {
         if (response instanceof BaseResponse) {
-            if (((BaseResponse) response).isOk(mContent.get())) {
+            if (((BaseResponse) response).isOk(mView.get())) {
                 onSuccess(response);
             } else {
                 onServiceError(response);
@@ -90,8 +97,8 @@ public abstract class RetrofitSubscriber<T> implements Observer<T> {
      */
     protected void onNetError(Throwable e) {
         LogUtils.e(e);
-        if (mContent != null && mContent.get() != null) {
-            NetworkError.error(mContent.get(), e);
+        if (mView != null && mView.get() != null) {
+            NetworkError.error(mView.get(), e);
         }
     }
 }

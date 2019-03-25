@@ -119,7 +119,7 @@ public class SeeImageFragment extends BaseFragment {
      * 保存图片
      */
     public void saveImage() {
-        if (SDCardUtils.isSDCardEnable()) {
+        if (SDCardUtils.isSDCardEnableByEnvironment()) {
             BitmapDrawable bitmapDrawable = null;
             try {
                 bitmapDrawable = (BitmapDrawable) mShowimageImg.getDrawable();

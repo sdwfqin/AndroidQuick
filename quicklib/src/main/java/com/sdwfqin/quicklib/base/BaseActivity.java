@@ -1,6 +1,7 @@
 package com.sdwfqin.quicklib.base;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -227,11 +228,18 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
         }
     }
 
+    @Override
+    public void startActivitySample(Class<?> cls) {
+        Intent intent = new Intent(mContext, cls);
+        startActivity(intent);
+    }
+
     // ==================== RxJava订阅管理 ====================
 
     /**
      * RxJava 添加订阅者
      */
+    @Override
     public void addSubscribe(Disposable subscription) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
