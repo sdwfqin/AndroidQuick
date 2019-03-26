@@ -1,6 +1,7 @@
 package com.sdwfqin.quickseed.base;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 
 /**
@@ -82,7 +83,7 @@ public class Constants {
     /**
      * 图片保存位置
      */
-    public static final String SAVE_REAL_PATH = SDCardUtils.getSDCardPaths().get(0) + "/sdwfqin";
+    public static final String SAVE_REAL_PATH = PathUtils.getExternalStoragePath() + "/sdwfqin";
 
     /**
      * 文件共享

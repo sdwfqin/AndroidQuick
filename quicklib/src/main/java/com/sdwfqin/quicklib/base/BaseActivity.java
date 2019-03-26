@@ -97,8 +97,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
 
     @Override
     protected void onDestroy() {
-        removePresenter();
         unSubscribe();
+        removePresenter();
         AppManager.removeActivity(this);
         super.onDestroy();
     }
@@ -260,7 +260,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
 
     // ==================== 权限管理 ====================
 
-    protected interface OnPermissionCallback {
+    public interface OnPermissionCallback {
 
         void onSuccess();
 
@@ -273,7 +273,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
      * @param perms
      * @param onPermissionCallback
      */
-    protected void checkPermissionsSample(String[] perms, OnPermissionCallback onPermissionCallback) {
+    public void checkPermissionsSample(String[] perms, OnPermissionCallback onPermissionCallback) {
         checkPermissions(perms, false, false, onPermissionCallback);
     }
 
@@ -285,7 +285,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements BaseView
      * @param allDialog            true：弹窗关闭继续弹出弹窗
      * @param onPermissionCallback 权限回掉接口
      */
-    protected void checkPermissions(String[] perms, boolean showDialog, boolean allDialog,
+    public void checkPermissions(String[] perms, boolean showDialog, boolean allDialog,
                                     OnPermissionCallback onPermissionCallback) {
 
         addSubscribe(new RxPermissions(this)
