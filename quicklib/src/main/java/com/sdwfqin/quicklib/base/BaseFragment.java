@@ -128,8 +128,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void onDestroyView() {
         isPrepared = false;
-        removePresenter();
         unSubscribe();
+        removePresenter();
         mUnBinder.unbind();
         super.onDestroyView();
     }
