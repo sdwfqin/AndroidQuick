@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.retrofit;
 
+import android.util.Log;
+
 import com.sdwfqin.quickseed.BuildConfig;
 import com.sdwfqin.quickseed.base.Constants;
 
@@ -98,7 +100,22 @@ public class RetrofitClient {
 //        });
         if (BuildConfig.DEBUG) {
             // OkHttp日志拦截器
-            builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+            builder.addInterceptor(new HttpLoggingInterceptor(message -> {
+                int strLength = message.length();
+                int start = 0;
+                int end = 2000;
+                for (int i = 0; i < 100; i++) {
+                    //剩下的文本还是大于规定长度则继续重复截取并输出
+                    if (strLength > end) {
+                        Log.d("okhttp", message.substring(start, end));
+                        start = end;
+                        end = end + 2000;
+                    } else {
+                        Log.d("okhttp", message.substring(start, strLength));
+                        break;
+                    }
+                }
+            }).setLevel(HttpLoggingInterceptor.Level.BODY));
         }
         return builder.build();
     }
