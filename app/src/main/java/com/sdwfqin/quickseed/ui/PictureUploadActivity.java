@@ -1,6 +1,7 @@
 package com.sdwfqin.quickseed.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
@@ -10,6 +11,7 @@ import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
 import com.sdwfqin.widget.pictureupload.PictureUploadView;
 import com.zhihu.matisse.Matisse;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +70,15 @@ public class PictureUploadActivity extends BaseActivity {
                         models.add(new PictureModel(selectList.get(i)));
                     }
                     mPic.setAddData(models);
+
+                    // 刷新相册图片
+                    if (selectList.size() == 1) {
+                        String saveAs = selectList.get(0);
+                        Uri contentUri = Uri.fromFile(new File(saveAs));
+                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
+                        sendBroadcast(mediaScanIntent);
+                    }
+
                     break;
                 default:
             }
