@@ -67,10 +67,8 @@ public class ImagePreviewFragment extends BaseFragment {
                 .setImagePath(url)
                 .setPlaceholder(R.mipmap.image_loading)
                 .setErrorImage(R.mipmap.image_load_err)
-                .build(mImage);
-        imageLoader
-                .loadDrawableImage()
-                .into(imageLoader.getImageView());
+                .build(mImage)
+                .loadImage();
         imageLoader.setOnProgressListener(new OnProgressListener() {
             @Override
             public void onLoading(int progress) {

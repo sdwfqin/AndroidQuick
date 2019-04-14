@@ -125,9 +125,6 @@ public class ImageLoader {
         private int imageRadius = 0;
         private Transformation<Bitmap> transformation = null;
 
-        public Builder() {
-        }
-
         public Builder setImagePath(Object image) {
             this.image = image;
             return this;
