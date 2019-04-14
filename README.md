@@ -131,7 +131,6 @@
 | RxTimerUtil | RxJava定时任务 |
 | EventBusUtil | EventBus工具类，使用时需要配合Base基类 |
 | HintDialog | 可配置提示弹窗 |
-| BottomDialogPhotoFragment | 一个简单的可配置底部弹窗 |
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
 | ImageWatermarkUtils | 图片水印工具类 |
@@ -157,7 +156,7 @@
 | WrapContentHeightViewPager | 处理NestedScrollView嵌套Viewpager+RecyclerView |
 | AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
 | AmountView | 购物车商品数量选择 |
-| ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用flexbox-layout代替 |
+| ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用[flexbox-layout](https://github.com/google/flexbox-layout)代替 |
 
 4. imageloader
 
