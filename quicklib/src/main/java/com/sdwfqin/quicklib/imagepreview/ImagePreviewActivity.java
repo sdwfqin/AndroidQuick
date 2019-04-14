@@ -1,22 +1,24 @@
-package com.sdwfqin.quicklib.module.seeimage;
+package com.sdwfqin.quicklib.imagepreview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 图片查看与保存Activity
@@ -26,14 +28,14 @@ import java.util.List;
  * @author zhangqin
  * @date 2017/8/7
  */
-public class SeeImageActivity extends BaseActivity {
+public class ImagePreviewActivity extends BaseActivity {
 
     private ViewPager mViewPager;
     private TextView mPosition;
-    protected Button mSave;
 
-    private List<String> mMainList;
+    private List<String> mImageList;
     private int position;
+
     private ShowImagePagerAdapter mShowImagePagerAdapter;
 
     /**
@@ -45,7 +47,7 @@ public class SeeImageActivity extends BaseActivity {
      */
     public static void launch(@NonNull Context context, @Nullable List<String> stringList) {
 
-        Intent intent = new Intent(context, SeeImageActivity.class);
+        Intent intent = new Intent(context, ImagePreviewActivity.class);
         intent.putStringArrayListExtra("data", (ArrayList<String>) stringList);
         context.startActivity(intent);
     }
@@ -58,7 +60,7 @@ public class SeeImageActivity extends BaseActivity {
      */
     public static void launch(@NonNull Context context, @Nullable List<String> stringList, int position) {
 
-        Intent intent = new Intent(context, SeeImageActivity.class);
+        Intent intent = new Intent(context, ImagePreviewActivity.class);
         intent.putStringArrayListExtra("data", (ArrayList<String>) stringList);
         intent.putExtra("position", position);
         context.startActivity(intent);
@@ -66,39 +68,37 @@ public class SeeImageActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.quick_activity_see_image;
+        return R.layout.quick_activity_image_preview;
     }
 
     @Override
     protected void initEventAndData() {
 
+        BarUtils.setStatusBarColor(mContext, 0xff000000);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            mMainList = this.getIntent().getStringArrayListExtra("data");
+            mImageList = this.getIntent().getStringArrayListExtra("data");
             position = this.getIntent().getIntExtra("position", 0);
         } else {
             showMsg("参数获取失败");
             finish();
         }
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mPosition = (TextView) findViewById(R.id.position);
-
-        mTopBar.setTitle("查看图片");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
-        mSave = mTopBar.addRightTextButton("保存", R.id.add);
+        mViewPager = findViewById(R.id.viewpager);
+        mPosition = findViewById(R.id.position);
 
         mShowImagePagerAdapter = new ShowImagePagerAdapter();
         mViewPager.setAdapter(mShowImagePagerAdapter);
         mViewPager.setCurrentItem(position);
 
-        if (mMainList.size() == 1) {
+        if (mImageList.size() == 1) {
             mPosition.setVisibility(View.GONE);
         } else {
             mPosition.setVisibility(View.VISIBLE);
         }
 
-        setTextSize(position + 1, mMainList.size());
+        setPosText(position + 1, mImageList.size());
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -108,7 +108,7 @@ public class SeeImageActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                setTextSize(position + 1, mMainList.size());
+                setPosText(position + 1, mImageList.size());
             }
 
             @Override
@@ -124,7 +124,8 @@ public class SeeImageActivity extends BaseActivity {
      * @param position
      * @param size
      */
-    public void setTextSize(int position, int size) {
+    @SuppressLint("SetTextI18n")
+    public void setPosText(int position, int size) {
         mPosition.setText(position + "/" + size);
     }
 
@@ -136,12 +137,12 @@ public class SeeImageActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return mMainList.size();
+            return mImageList.size();
         }
 
         @Override
         public Fragment getItem(int position) {
-            return SeeImageFragment.newInstance(mMainList.get(position), position);
+            return ImagePreviewFragment.newInstance(mImageList.get(position));
         }
 
     }

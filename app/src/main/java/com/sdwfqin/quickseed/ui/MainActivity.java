@@ -2,18 +2,15 @@ package com.sdwfqin.quickseed.ui;
 
 import android.Manifest;
 import android.content.Intent;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import androidx.fragment.app.FragmentManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.base.BaseActivity;
-import com.sdwfqin.quicklib.module.seeimage.SeeImageActivity;
-import com.sdwfqin.quicklib.module.webview.WebViewActivity;
-import com.sdwfqin.quicklib.view.BottomDialogPhotoFragment;
-import com.sdwfqin.quicklib.view.HintDialog;
+import com.sdwfqin.quicklib.dialog.HintDialog;
+import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
+import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
 
@@ -30,12 +27,12 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.list)
-    ListView list;
+    ListView mList;
 
-    private String[] mTitle = new String[]{"跳转网页",
+    private String[] mTitle = new String[]{
+            "跳转网页",
             "弹窗",
             "图片预览",
-            "底部弹窗",
             "上传图片九宫格",
             "自定义验证码/密码View",
             "自定义Webview",
@@ -55,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
         mTopBar.setTitle("首页");
 
-        list.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
+        mList.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
         initListener();
     }
 
@@ -77,7 +74,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initListener() {
-        list.setOnItemClickListener((adapterView, view, i, l) -> {
+        mList.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
                 case 0:
                     WebViewActivity.launch(mContext, "https://www.baidu.com");
@@ -104,38 +101,15 @@ public class MainActivity extends BaseActivity {
                     List<String> strings = new ArrayList<>();
                     strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(1).png");
                     strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(4).png");
-                    SeeImageActivity.launch(mContext, strings);
+                    ImagePreviewActivity.launch(mContext, strings);
                     break;
                 case 3:
-                    BottomDialogPhotoFragment.Builder builder = new BottomDialogPhotoFragment.Builder();
-                    BottomSheetDialogFragment bottomSheetDialogFragment = builder.setOnClickListener(new BottomDialogPhotoFragment.OnDialogClickListener() {
-                        @Override
-                        public void xiangce() {
-
-                        }
-
-                        @Override
-                        public void paizhao() {
-
-                        }
-
-                        @Override
-                        public void exit() {
-
-                        }
-                    }).builder();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    if (fragmentManager != null) {
-                        bottomSheetDialogFragment.show(fragmentManager, "dialog");
-                    }
-                    break;
-                case 4:
                     startActivity(new Intent(mContext, PictureUploadActivity.class));
                     break;
-                case 5:
+                case 4:
                     startActivity(new Intent(mContext, PayPwdInputActivity.class));
                     break;
-                case 6:
+                case 5:
                     startActivity(new Intent(mContext, CustomWebviewActivity.class));
                     break;
                 default:

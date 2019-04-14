@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.webview;
+package com.sdwfqin.quicklib.webview;
 
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;

@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.view;
+package com.sdwfqin.quicklib.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

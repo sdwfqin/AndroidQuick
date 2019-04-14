@@ -1,6 +1,6 @@
 package com.sdwfqin.quickseed.ui;
 
-import com.sdwfqin.quicklib.module.webview.BaseWebView;
+import com.sdwfqin.quicklib.webview.BaseWebView;
 
 /**
  * 描述：自定义Webview

@@ -61,7 +61,7 @@ public class PictureUploadActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == -1) {
+        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constants.RESULT_CODE_1:
                     List<PictureModel> models = new ArrayList<>();

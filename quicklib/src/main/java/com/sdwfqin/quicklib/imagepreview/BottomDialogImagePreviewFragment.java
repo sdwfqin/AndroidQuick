@@ -1,28 +1,25 @@
-package com.sdwfqin.quicklib.view;
+package com.sdwfqin.quicklib.imagepreview;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.sdwfqin.quicklib.R;
 
 /**
- * 描述：修改头像弹窗
+ * 描述：保存图片弹窗
  *
  * @author 张钦
  * @date 2018/1/16
  */
-public class BottomDialogPhotoFragment extends BottomSheetDialogFragment implements View.OnClickListener {
+public class BottomDialogImagePreviewFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private OnDialogClickListener mOnDialogClickListener;
-    private TextView mXaingce;
-    private TextView mPaizhao;
+    private TextView mSave;
     private TextView mExit;
-
-    private boolean HideView = false;
 
     /**
      * 按钮监听接口
@@ -32,12 +29,7 @@ public class BottomDialogPhotoFragment extends BottomSheetDialogFragment impleme
         /**
          * 相册
          */
-        void xiangce();
-
-        /**
-         * 拍照
-         */
-        void paizhao();
+        void save();
 
         /**
          * 取消
@@ -45,25 +37,14 @@ public class BottomDialogPhotoFragment extends BottomSheetDialogFragment impleme
         void exit();
     }
 
-    /**
-     * 设置监听
-     *
-     * @param onDialogClickListener
-     */
-    public void setOnClickListener(OnDialogClickListener onDialogClickListener) {
-        mOnDialogClickListener = onDialogClickListener;
-    }
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        View view = View.inflate(getContext(), R.layout.quick_bottom_photo, null);
-        mXaingce = view.findViewById(R.id.xiangce);
-        mPaizhao = view.findViewById(R.id.paizhao);
+        View view = View.inflate(getContext(), R.layout.quick_bottom_image_preview, null);
+        mSave = view.findViewById(R.id.save);
         mExit = view.findViewById(R.id.exit);
 
-        mXaingce.setOnClickListener(this);
-        mPaizhao.setOnClickListener(this);
+        mSave.setOnClickListener(this);
         mExit.setOnClickListener(this);
 
         dialog.setContentView(view);
@@ -78,11 +59,8 @@ public class BottomDialogPhotoFragment extends BottomSheetDialogFragment impleme
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.xiangce) {
-            mOnDialogClickListener.xiangce();
-            dismiss();
-        } else if (i == R.id.paizhao) {
-            mOnDialogClickListener.paizhao();
+        if (i == R.id.save) {
+            mOnDialogClickListener.save();
             dismiss();
         } else if (i == R.id.exit) {
             mOnDialogClickListener.exit();
@@ -92,10 +70,10 @@ public class BottomDialogPhotoFragment extends BottomSheetDialogFragment impleme
 
     public static class Builder {
 
-        private BottomDialogPhotoFragment mDialogFragment;
+        private BottomDialogImagePreviewFragment mDialogFragment;
 
         public Builder() {
-            mDialogFragment = new BottomDialogPhotoFragment();
+            mDialogFragment = new BottomDialogImagePreviewFragment();
         }
 
         public Builder setOnClickListener(OnDialogClickListener onClickListener) {

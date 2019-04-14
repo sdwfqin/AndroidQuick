@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.module.share.wechat;
+package com.sdwfqin.quicklib.share.wechat;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;

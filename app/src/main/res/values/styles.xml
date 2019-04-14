@@ -15,6 +15,7 @@
         *             qmui topbar style              *
         ***********************************************-->
     <style name="QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_separator_height">0px</item>
         <item name="qmui_topbar_height">45dp</item>
         <item name="qmui_topbar_title_color">@color/white</item>
         <item name="qmui_topbar_bg_color">@color/colorPrimary</item>
