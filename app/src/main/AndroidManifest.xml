@@ -13,17 +13,11 @@
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
-    <!-- 许可振动 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 打开闪光灯 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <!-- 许可使用照相机 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- 许可调用相机硬件 -->
-    <uses-feature android:name="android.hardware.camera" />
-    <!-- 许可调用相机自动对焦 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 许可振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 打开闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 许可使用照相机 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 许可调用相机硬件 -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- 许可调用相机自动对焦 -->
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -37,7 +31,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -59,16 +52,19 @@
             </intent-filter>
         </activity>
         <activity
-        android:name=".ui.PictureUploadActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:name=".ui.PictureUploadActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-        android:name=".ui.PayPwdInputActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:name=".ui.PayPwdInputActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-        android:name=".ui.CustomWebviewActivity"
-        android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:name=".ui.CustomWebviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".IntroActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ui.AutoPollRecyclerViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"

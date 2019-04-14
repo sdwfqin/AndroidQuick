@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
             "上传图片九宫格",
             "自定义验证码/密码View",
             "自定义Webview",
+            "跑马灯Demo",
     };
 
     @Override
@@ -111,6 +112,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 5:
                     startActivity(new Intent(mContext, CustomWebviewActivity.class));
+                    break;
+                case 6:
+                    startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
                     break;
                 default:
             }
