@@ -1,8 +1,6 @@
 ### 支持AndroidX，正在测试，欢迎提交issues与pr
 
-### 不支持AndroidX请切换分支到2.x
-
-# 目前2.x已在多个项目中使用，3.x还未用于正式生产项目，[可以点此切换到2.x](https://github.com/sdwfqin/AndroidQuick/tree/2.x)
+### 不支持AndroidX请[切换分支到2.x](https://github.com/sdwfqin/AndroidQuick/tree/2.x)
 
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
@@ -22,7 +20,7 @@
     implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.0-beta1'
+    implementation 'com.sdwfqin.quick:widget:3.0.0-beta2'
     
     ==================== AndroidX 分界线 ====================
     
