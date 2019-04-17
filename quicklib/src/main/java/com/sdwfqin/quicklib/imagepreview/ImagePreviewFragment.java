@@ -94,7 +94,7 @@ public class ImagePreviewFragment extends BaseFragment {
     }
 
     @Override
-    protected void lazyLoadShow(boolean isLoad) {
+    protected void lazyLoadShow() {
     }
 
     private void initSaveImageDialog() {

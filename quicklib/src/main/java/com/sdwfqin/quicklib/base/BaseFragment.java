@@ -40,16 +40,16 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 标志位，标志已经初始化完成。
      */
-    protected boolean isPrepared;
+    protected boolean mIsPrepared;
     /**
      * 当前界面是否可见
      */
-    protected boolean isVisible;
+    protected boolean mIsVisible;
     /**
      * 是否加载过，用于缓存处理
      * 需要手动在lazyLoad()方法中做判断
      */
-    protected boolean isLoad = false;
+    protected boolean mIsLoad = false;
     private QMUITipDialog mQmuiTipDialog;
     private Unbinder mUnBinder;
     protected CompositeDisposable mCompositeDisposable;
@@ -64,7 +64,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        isVisible = isVisibleToUser;
+        mIsVisible = isVisibleToUser;
         baseLazyLoad();
     }
 
@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         initPresenter();
         initEventAndData();
         // 界面加载完成
-        isPrepared = true;
+        mIsPrepared = true;
         baseLazyLoad();
     }
 
@@ -115,11 +115,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      * 懒加载条件判断
      */
     private void baseLazyLoad() {
-        if (isPrepared) {
-            if (isVisible) {
-                lazyLoadShow(isLoad);
+        if (mIsPrepared) {
+            if (isVisible()) {
+                lazyLoadShow();
             } else {
-                lazyLoadHide(isLoad);
+                lazyLoadHide();
             }
 
         }
@@ -127,7 +127,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void onDestroyView() {
-        isPrepared = false;
+        mIsPrepared = false;
         unSubscribe();
         removePresenter();
         mUnBinder.unbind();
@@ -287,12 +287,12 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     /**
      * 页面懒加载
      */
-    protected abstract void lazyLoadShow(boolean isLoad);
+    protected abstract void lazyLoadShow();
 
     /**
      * 页面懒加载
      */
-    protected void lazyLoadHide(boolean isLoad) {
+    protected void lazyLoadHide() {
 
     }
 }
