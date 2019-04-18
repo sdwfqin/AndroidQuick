@@ -20,7 +20,7 @@
     implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.0-beta2'
+    implementation 'com.sdwfqin.quick:widget:3.0.0-beta3'
     
     ==================== AndroidX 分界线 ====================
     
