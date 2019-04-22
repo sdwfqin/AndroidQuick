@@ -20,7 +20,7 @@
     implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.0-beta3'
+    implementation 'com.sdwfqin.quick:widget:3.0.0-beta5'
     
     ==================== AndroidX 分界线 ====================
     
@@ -120,7 +120,7 @@
 | BaseMvpFragment |  |
 | RxPresenter | Presenter层封装 |
 | WechatShareTools | 微信分享工具类 |
-| SeeImageActivity | 图片预览Activity（多图/单图） |
+| ImagePreviewActivity | 图片预览Activity（多图/单图） |
 | BaseWebView | ViewActivity基类 |
 | WebViewActivity | 传入url即可 |
 | WebViewLoadDataActivity | 针对非url链接的网页 |

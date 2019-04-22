@@ -2,10 +2,12 @@ package com.sdwfqin.widget.pictureupload;
 
 import android.content.Context;
 import android.graphics.Rect;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +84,14 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
         mUploadAdapter = new PictureUploadAdapter<>(itemLayout, mDataList);
         mRecyclerView.setAdapter(mUploadAdapter);
         mUploadAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+
+            List<T> tempData = new ArrayList<>(mUploadAdapter.getData());
+            for (int i = tempData.size() - 1; i >= 0; i--) {
+                if (tempData.get(i) == null) {
+                    tempData.remove(i);
+                }
+            }
+
             int i = view.getId();
             if (i == R.id.ii_img) {
                 int size = mDataList.size();
@@ -89,13 +99,13 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
                     if (mCallback == null) {
                         return;
                     }
-                    mCallback.onAddPic(mMaxSize - (mDataList.size() - 1), mUploadAdapter.getData());
+                    mCallback.onAddPic(mMaxSize - (mDataList.size() - 1), tempData);
                 } else {
                     if (mCallback == null) {
                         return;
                     }
                     T item = mUploadAdapter.getItem(position);
-                    mCallback.click(position, item, mUploadAdapter.getData());
+                    mCallback.click(position, item, tempData);
                 }
 
             } else if (i == R.id.ii_del) {
@@ -110,7 +120,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
                 if (mCallback == null) {
                     return;
                 }
-                mCallback.remove(position, mUploadAdapter.getData());
+                mCallback.remove(position, tempData);
             }
         });
     }
@@ -120,7 +130,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
      */
     public void setMaxColumn(int maxCol) {
         mMaxCol = maxCol;
-        if (mGridLayoutManager != null){
+        if (mGridLayoutManager != null) {
             mGridLayoutManager.setSpanCount(maxCol);
         }
     }
