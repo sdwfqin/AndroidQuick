@@ -3,6 +3,7 @@ package com.sdwfqin.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -51,7 +52,7 @@ public class ControlViewPager extends ViewPager {
                 mLastInterceptX = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(event.getX() - mLastInterceptX) > 20) {
+                if (Math.abs(event.getX() - mLastInterceptX) > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
                     return true;
                 }
                 break;
@@ -72,10 +73,10 @@ public class ControlViewPager extends ViewPager {
                 if (mLastX == 0) {
                     mLastX = event.getX();
                 }
-                if (mLastX - event.getX() > 100) {
+                if (mLastX - event.getX() > 150) {
                     // 从右到左滑
                     mDirection = 2;
-                } else if (mLastX - event.getX() < -100) {
+                } else if (mLastX - event.getX() < -150) {
                     // 从左到右滑
                     mDirection = 1;
                 }
