@@ -20,7 +20,7 @@
     implementation 'com.sdwfqin.quick:imageloader:3.0.0-beta1'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.0-beta5'
+    implementation 'com.sdwfqin.quick:widget:3.0.0-beta6'
     
     ==================== AndroidX 分界线 ====================
     
@@ -155,6 +155,7 @@
 | AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
 | AmountView | 购物车商品数量选择 |
 | ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用[flexbox-layout](https://github.com/google/flexbox-layout)代替 |
+| ControlViewPager | 可动态禁止（允许）左滑/右滑的ViewPager |
 
 4. imageloader
 
