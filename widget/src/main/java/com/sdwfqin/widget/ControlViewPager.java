@@ -7,6 +7,8 @@ import android.view.ViewConfiguration;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.ConvertUtils;
+
 /**
  * 标题：可动态禁止（允许）左滑/右滑的ViewPager
  * 详细描述：
@@ -23,17 +25,14 @@ public class ControlViewPager extends ViewPager {
     /**
      * 是否可以滑出左侧页面
      */
-    private boolean isLeftSlide = true;
+    private boolean isGoLeft = true;
     /**
      * 是否可以滑出右侧页面
      */
-    private boolean isRightSlide = true;
-    private float mLastInterceptX;
-    private float mLastX;
-    /**
-     * 1划出左侧界面、2划出右侧界面
-     */
-    private int mDirection;
+    private boolean isGoRight = true;
+    private float lastIX = 0;
+    private float lastIY = 0;
+    private int direction;
 
 
     public ControlViewPager(Context context) {
@@ -44,19 +43,37 @@ public class ControlViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    public boolean isGoLeft() {
+        return isGoLeft;
+    }
+
+    public void setGoLeft(boolean goLeft) {
+        isGoLeft = goLeft;
+    }
+
+    public boolean isGoRight() {
+        return isGoRight;
+    }
+
+    public void setGoRight(boolean goRight) {
+        isGoRight = goRight;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 获取起始坐标值
-                mLastInterceptX = event.getX();
+                //获取起始坐标值
+                lastIX = event.getRawX();
+                lastIY = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(event.getX() - mLastInterceptX) > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
+                if (Math.abs(event.getRawY() - lastIY) > Math.abs(event.getRawX() - lastIX)) {
+                    return false;
+                }
+                if (Math.abs(event.getRawX() - lastIX) > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
                     return true;
                 }
-                break;
-            case MotionEvent.ACTION_UP:
                 break;
         }
         return super.onInterceptTouchEvent(event);
@@ -66,25 +83,20 @@ public class ControlViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 获取起始坐标值（可能获取不到）
-                mLastX = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (mLastX == 0) {
-                    mLastX = event.getX();
-                }
-                if (mLastX - event.getX() > 150) {
-                    // 从右到左滑
-                    mDirection = 2;
-                } else if (mLastX - event.getX() < -150) {
-                    // 从左到右滑
-                    mDirection = 1;
+
+                if (lastIX - event.getRawX() > ConvertUtils.dp2px(80)) {
+                    //从右到左滑
+                    direction = 2;
+                } else if (lastIX - event.getRawX() < -ConvertUtils.dp2px(80)) {
+                    //从左到右滑
+                    direction = 1;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                mLastX = 0;
-                if (mDirection == 1) {
-                    if (isLeftSlide) {
+                if (direction == 1) {
+                    if (isGoLeft) {
                         // 划出左侧界面
                         try {
                             setCurrentItem(getCurrentItem() - 1);
@@ -92,8 +104,8 @@ public class ControlViewPager extends ViewPager {
                             e.printStackTrace();
                         }
                     }
-                } else {
-                    if (isRightSlide) {
+                } else if (direction == 2) {
+                    if (isGoRight) {
                         // 划出右侧界面
                         try {
                             setCurrentItem(getCurrentItem() + 1);
@@ -102,25 +114,9 @@ public class ControlViewPager extends ViewPager {
                         }
                     }
                 }
+                direction = -1;
                 break;
         }
-
         return true;
-    }
-
-    public boolean isLeftSlide() {
-        return isLeftSlide;
-    }
-
-    public void setLeftSlide(boolean leftSlide) {
-        isLeftSlide = leftSlide;
-    }
-
-    public boolean isRightSlide() {
-        return isRightSlide;
-    }
-
-    public void setRightSlide(boolean rightSlide) {
-        isRightSlide = rightSlide;
     }
 }
