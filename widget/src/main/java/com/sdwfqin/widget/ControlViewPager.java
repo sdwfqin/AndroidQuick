@@ -33,10 +33,14 @@ public class ControlViewPager extends ViewPager {
     private float lastIX = 0;
     private float lastIY = 0;
     private int direction;
+    /**
+     * 允许触摸
+     */
+    private boolean enableTouch = true;
 
 
     public ControlViewPager(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ControlViewPager(Context context, AttributeSet attrs) {
@@ -59,6 +63,23 @@ public class ControlViewPager extends ViewPager {
         isGoRight = goRight;
     }
 
+    public boolean isEnableTouch() {
+        return enableTouch;
+    }
+
+    public void setEnableTouch(boolean enableTouch) {
+        this.enableTouch = enableTouch;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (!enableTouch) {
+            return true;
+        } else {
+            return super.dispatchTouchEvent(ev);
+        }
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -68,13 +89,16 @@ public class ControlViewPager extends ViewPager {
                 lastIY = event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
+
                 if (Math.abs(event.getRawY() - lastIY) > Math.abs(event.getRawX() - lastIX)) {
                     return false;
                 }
+
                 if (Math.abs(event.getRawX() - lastIX) > ViewConfiguration.get(getContext()).getScaledTouchSlop()) {
                     return true;
                 }
                 break;
+
         }
         return super.onInterceptTouchEvent(event);
     }
@@ -83,6 +107,7 @@ public class ControlViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
                 break;
             case MotionEvent.ACTION_MOVE:
 
