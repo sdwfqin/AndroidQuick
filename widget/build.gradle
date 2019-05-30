@@ -30,14 +30,18 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    googleDependencies.each {
-        k, v -> api v
-    }
+    api googleDependencies["appcompat"]
+    api googleDependencies["annotation"]
+    api googleDependencies["legacy-support-v4"]
+    api googleDependencies["vectordrawable-animated"]
+    api googleDependencies["cardview"]
+    api googleDependencies["constraintlayout"]
+    api googleDependencies["material"]
     api("com.alibaba.android:vlayout:${vlayout}@aar") {
         transitive = true
     }
-    api viewDependencies.brvah
-    api utilsDependencies.utilcodex
+    api viewDependencies["brvah"]
+    api utilsDependencies["utilcodex"]
     implementation project(':imageloader')
 }
 

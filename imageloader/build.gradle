@@ -30,8 +30,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.annotation:annotation:1.0.2"
-    api imageDependencies.glide
+    implementation googleDependencies["annotation"]
+    api imageDependencies["glide"]
     annotationProcessor compilerDependencies["glide-compiler"]
     api imageDependencies["glide-integration"]
 

@@ -30,8 +30,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api okhttpDependencies.okhttp
-    api utilsDependencies.gson
+    api okhttpDependencies["okhttp"]
+    api utilsDependencies["gson"]
     api tencentDependencies["wechat-sdk-mta"]
     api (name: 'alipaySdk-15.6.0-20190226104053', ext: 'aar')
 }
