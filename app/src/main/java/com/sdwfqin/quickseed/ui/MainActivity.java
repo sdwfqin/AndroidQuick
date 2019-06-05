@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
             "自定义验证码/密码View",
             "自定义Webview",
             "跑马灯Demo",
+            "Camerax",
     };
 
     @Override
@@ -115,6 +116,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 6:
                     startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
+                    break;
+                case 7:
+                    startActivity(new Intent(mContext, CameraxDemoActivity.class));
                     break;
                 default:
             }

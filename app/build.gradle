@@ -13,7 +13,7 @@ android {
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId "com.sdwfqin.quickseed"
-        minSdkVersion rootProject.ext.android.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 6
         versionName "3.0.0"
@@ -40,6 +40,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // 添加 CameraX core
+    implementation "androidx.camera:camera-core:1.0.0-alpha01"
+    // 添加 CameraX Camera2 API 互操作支持
+    implementation "androidx.camera:camera-camera2:1.0.0-alpha01"
 
     implementation retrofitDependencies["retrofit"]
     implementation retrofitDependencies["converter-gson"]
