@@ -12,7 +12,7 @@ public class CustomWebviewActivity extends BaseWebView {
 
     @Override
     public String getUrl() {
-        return "https://www.sdwfqin.com";
+        return "https://www.baidu.com";
     }
 
     @Override

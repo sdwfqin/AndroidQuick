@@ -4,23 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="white">#ffffff</color>
-    <color name="gray1">#909090</color>
-    <color name="gray2">#FAFAFA</color>
-    <color name="gray3">#7F7F7F</color>
-    <color name="gray4">#9DAABA</color>
-    <color name="gray5">#F0F0F0</color>
-    <color name="gray6">#EBEBEB</color>
-    <color name="black">#000000</color>
-    <color name="black1">#323232</color>
-    <color name="red">#FF5A5A</color>
-    <color name="red1">#F23A65</color>
-    <color name="red2">#D14B3F</color>
-    <color name="qing">#25CDC9</color>
-    <color name="orange">#FF5100</color>
-    <color name="divider">#ffd2d2d2</color>
     <color name="style">#3F51B5</color>
-
-    <color name="tra">#88ffffff</color>
-    <color name="tm">#00ffffff</color>
 </resources>

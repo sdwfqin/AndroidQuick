@@ -12,11 +12,12 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" /> <!-- 许可振动 -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 打开闪光灯 -->
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 许可使用照相机 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 许可调用相机硬件 -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 许可调用相机自动对焦 -->
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -68,6 +69,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.CameraxDemoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ui.VLayoutSampleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"

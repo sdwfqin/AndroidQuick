@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/frame_gray_background_color"
+    android:gravity="bottom">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:text="历史订单"
+        android:textColor="@color/text_gray_dark_color"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+</LinearLayout>

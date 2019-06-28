@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initContentView(R.layout.activity_base);
+        initContentView(R.layout.quick_activity_base);
         setContentView(getLayout());
         mTopBar = findViewById(R.id.base_topbar);
         ButterKnife.bind(this);

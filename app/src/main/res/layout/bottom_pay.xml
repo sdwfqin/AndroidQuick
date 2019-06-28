@@ -21,12 +21,12 @@
                 android:layout_height="45dp"
                 android:gravity="center"
                 android:text="选择支付方式"
-                android:textColor="@color/black1" />
+                android:textColor="@color/text_black_color" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray2" />
+                android:background="@color/divide_line_color" />
 
             <RadioGroup
                 android:id="@+id/rg"
@@ -40,18 +40,18 @@
                     android:button="@null"
                     android:checked="true"
                     android:drawableLeft="@mipmap/wechat"
-                    android:drawablePadding="15dp"
                     android:drawableRight="@mipmap/choose_y"
+                    android:drawablePadding="15dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:text="微信"
-                    android:textColor="@color/black1" />
+                    android:textColor="@color/text_gray_dark_color" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray2" />
+                    android:background="@color/divide_line_color" />
 
                 <RadioButton
                     android:id="@+id/alipay"
@@ -59,13 +59,13 @@
                     android:layout_height="45dp"
                     android:button="@null"
                     android:drawableLeft="@mipmap/alipay"
-                    android:drawablePadding="15dp"
                     android:drawableRight="@mipmap/choose_n"
+                    android:drawablePadding="15dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:text="支付宝"
-                    android:textColor="@color/black1" />
+                    android:textColor="@color/text_gray_dark_color" />
 
             </RadioGroup>
 

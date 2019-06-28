@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
             "自定义Webview",
             "跑马灯Demo",
             "Camerax",
+            "VLayoutDemo",
     };
 
     @Override
@@ -119,6 +120,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 7:
                     startActivity(new Intent(mContext, CameraxDemoActivity.class));
+                    break;
+                case 8:
+                    startActivity(new Intent(mContext, VLayoutSampleActivity.class));
                     break;
                 default:
             }

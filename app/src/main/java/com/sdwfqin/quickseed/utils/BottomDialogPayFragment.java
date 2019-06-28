@@ -65,7 +65,7 @@ public class BottomDialogPayFragment extends BottomSheetDialogFragment implement
 
         dialog.getWindow().findViewById(R.id.design_bottom_sheet)
                 // #00ffffff
-                .setBackgroundResource(R.color.tm);
+                .setBackgroundResource(R.color.transparent);
 
         mRg.setOnCheckedChangeListener((group, checkedId) -> {
             Drawable wechat = getResources().getDrawable(R.mipmap.wechat);

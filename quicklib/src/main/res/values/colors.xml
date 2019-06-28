@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#ffffff</color>
+    <!--界面白色背景-->
+    <color name="frame_white_background_color">#ffffff</color>
+    <!--界面浅灰色背景-->
+    <color name="frame_gray_background_color">#F5F5F5</color>
+    <!--item分割线颜色-->
+    <color name="divide_line_color">#cccccc</color>
+    <!--黑色字体颜色-->
+    <color name="text_black_color">#2a2a2a</color>
+    <!--浅灰色字体颜色-->
+    <color name="text_gray_light_color">#999999</color>
+    <!--深灰色字体颜色-->
+    <color name="text_gray_dark_color">#666666</color>
+    <!--白色字体颜色-->
+    <color name="text_white_color">#ffffff</color>
+
+    <!--透明色 -->
+    <color name="transparent">#00000000</color>
+    <!--白色 -->
+    <color name="white">#FFFFFF</color>
+    <!--象牙色 -->
+    <color name="ivory">#FFFFF0</color>
+    <!--黄色 -->
+    <color name="yellow">#FFFF00</color>
+    <!--桃色 -->
+    <color name="peachpuff">#FFDAB9</color>
+    <!--金色 -->
+    <color name="gold">#FFD700</color>
+    <!--粉红色 -->
+    <color name="pink">#FFC0CB</color>
+    <!--橙色 -->
+    <color name="orange">#FFA500</color>
+    <!--红橙色 -->
+    <color name="orangered">#FF4500</color>
+    <!--深粉红色 -->
+    <color name="deeppink">#FF1493</color>
+    <!--紫红色 -->
+    <color name="fuchsia">#FF00FF</color>
+    <!--红色 -->
+    <color name="red">#FF0000</color>
+    <!--褐色 -->
+    <color name="brown">#A52A2A</color>
+    <!--赭色 -->
+    <color name="sienna">#A0522D</color>
+    <!--灰色 -->
+    <color name="gray">#808080</color>
+    <!--橄榄色 -->
+    <color name="olive">#808000</color>
+    <!--紫色 --> 
+    <color name="purple">#800080</color>
+    <!--碧绿色 -->
+    <color name="aquamarine">#7FFFD4</color>
+    <!--青色 -->
+    <color name="cyan">#00FFFF</color>
+    <!--绿色 -->
+    <color name="green">#008000</color>
+    <!--蓝色 -->
+    <color name="blue">#0000FF</color>
+    <!--黑色 -->
     <color name="black">#000000</color>
-    <color name="divider">#ffd2d2d2</color>
-    <color name="gray">#FAFAFA</color>
-    <color name="transparent">#01ffffff</color>
 </resources>
