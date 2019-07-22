@@ -104,12 +104,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         }
 
         if (getOnItemClickListener() != null) {
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setOnItemClick(view, position);
-                }
-            });
+            view.setOnClickListener(view1 -> setOnItemClick(view1, position));
         }
     }
 
@@ -125,20 +120,17 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         return mOnItemChildClickListener;
     }
 
-    public void addOnClickListener(final BaseViewHolder baseViewHolder, @IdRes final int viewId) {
+    public void addOnClickListener(final BaseViewHolder baseViewHolder, @IdRes final int viewId, final int position) {
         childClickViewIds.add(viewId);
-        final View view = baseViewHolder.getView(viewId);
+        View view = baseViewHolder.getView(viewId);
         if (view != null) {
             if (!view.isClickable()) {
                 view.setClickable(true);
             }
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (getOnItemChildClickListener() != null) {
-                        getOnItemChildClickListener()
-                                .onItemChildClick(BaseVlayoutAdapter.this, view, baseViewHolder.getLayoutPosition());
-                    }
+            view.setOnClickListener(view1 -> {
+                if (getOnItemChildClickListener() != null) {
+                    getOnItemChildClickListener()
+                            .onItemChildClick(BaseVlayoutAdapter.this, view1, position);
                 }
             });
         }
