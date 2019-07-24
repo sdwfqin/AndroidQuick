@@ -48,7 +48,7 @@ dependencies {
 
     api viewDependencies["butterknife"]
     api tencentDependencies["qmui"]
-    // api tencentDependencies.arch
+    // api tencentDependencies["arch"]
     api utilsDependencies["utilcodex"]
     api utilsDependencies["agentweb"]
     api imageDependencies["photoview"]

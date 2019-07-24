@@ -73,8 +73,8 @@ ext {
 
     tencentDependencies = [
             // qmui
-            "qmui"               : "com.qmuiteam:qmui:1.3.3",
-            "arch"               : "com.qmuiteam:arch:0.3.1",
+            "qmui"               : "com.qmuiteam:qmui:1.4.0",
+            "arch"               : "com.qmuiteam:arch:0.6.0",
             // 微信
             "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1",
             // bugly
