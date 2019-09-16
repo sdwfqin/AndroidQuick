@@ -1,12 +1,12 @@
 package com.sdwfqin.quicklib.webview;
 
 import android.view.KeyEvent;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
+import com.just.agentweb.WebChromeClient;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 
@@ -56,7 +56,7 @@ public abstract class BaseWebView extends BaseActivity {
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()// 使用默认进度条
-                .setWebChromeClient(new WebChromeClient() {
+                .setWebChromeClient(new WebChromeClient(){
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
                         super.onReceivedTitle(view, title);
