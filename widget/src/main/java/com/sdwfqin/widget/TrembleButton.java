@@ -38,10 +38,10 @@ public class TrembleButton extends AppCompatTextView {
 
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TrembleButton);
-            durationMax = typedArray.getInteger(R.styleable.TrembleButton_durationMax, 6000);
-            durationMin = typedArray.getInteger(R.styleable.TrembleButton_durationMin, 5000);
-            translationMax = typedArray.getInteger(R.styleable.TrembleButton_translationMax, 20);
-            translationMin = typedArray.getInteger(R.styleable.TrembleButton_translationMin, 15);
+            durationMax = typedArray.getInteger(R.styleable.TrembleButton_quick_durationMax, 6000);
+            durationMin = typedArray.getInteger(R.styleable.TrembleButton_quick_durationMin, 5000);
+            translationMax = typedArray.getInteger(R.styleable.TrembleButton_quick_translationMax, 20);
+            translationMin = typedArray.getInteger(R.styleable.TrembleButton_quick_translationMin, 15);
             typedArray.recycle();
         }
 

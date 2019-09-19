@@ -95,7 +95,7 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
                 }
 
                 @Override
-                public void onError(@NonNull ImageCapture.UseCaseError useCaseError, @NonNull String message, @Nullable Throwable cause) {
+                public void onError(@NonNull ImageCapture.ImageCaptureError imageCaptureError, @NonNull String message, @Nullable Throwable cause) {
                     String msg = "图片保存失败: " + message;
                     showMsg(msg);
                     LogUtils.e(msg);

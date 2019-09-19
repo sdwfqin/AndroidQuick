@@ -51,10 +51,10 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         etAmount.addTextChangedListener(this);
 
         TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.AmountView);
-        int btnWidth = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_btnWidth, LayoutParams.WRAP_CONTENT);
-        int tvWidth = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_tvWidth, 80);
-        int tvTextSize = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_tvTextSize, 0);
-        int btnTextSize = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_btnTextSize, 0);
+        int btnWidth = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_quick_btnWidth, LayoutParams.WRAP_CONTENT);
+        int tvWidth = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_quick_tvWidth, 80);
+        int tvTextSize = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_quick_tvTextSize, 0);
+        int btnTextSize = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_quick_btnTextSize, 0);
         obtainStyledAttributes.recycle();
 
         LayoutParams btnParams = new LayoutParams(btnWidth, LayoutParams.MATCH_PARENT);

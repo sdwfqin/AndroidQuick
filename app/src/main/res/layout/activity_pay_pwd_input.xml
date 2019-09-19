@@ -13,11 +13,11 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:divideLineWidth="1dp"
-        app:isPwd="true"
-        app:maxCount="6"
-        app:psdType="weChat"
-        app:rectAngle="0dp" />
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="true"
+        app:quick_maxCount="6"
+        app:quick_psdType="weChat"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -25,11 +25,11 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:divideLineWidth="1dp"
-        app:isPwd="true"
-        app:maxCount="6"
-        app:psdType="bottomLine"
-        app:rectAngle="0dp" />
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="true"
+        app:quick_maxCount="6"
+        app:quick_psdType="bottomLine"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -37,11 +37,11 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:divideLineWidth="1dp"
-        app:isPwd="false"
-        app:maxCount="6"
-        app:psdType="weChat"
-        app:rectAngle="0dp" />
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="false"
+        app:quick_maxCount="6"
+        app:quick_psdType="weChat"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -49,11 +49,11 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:divideLineWidth="1dp"
-        app:isPwd="false"
-        app:maxCount="6"
-        app:psdType="bottomLine"
-        app:rectAngle="0dp" />
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="false"
+        app:quick_maxCount="6"
+        app:quick_psdType="bottomLine"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -61,11 +61,11 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:autoSize="true"
-        app:divideLineWidth="1dp"
-        app:maxCount="6"
-        app:psdType="block"
-        app:rectAngle="0dp" />
+        app:quick_autoSize="true"
+        app:quick_divideLineWidth="1dp"
+        app:quick_maxCount="6"
+        app:quick_psdType="block"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -73,12 +73,12 @@
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:inputType="number"
-        app:autoSize="true"
-        app:divideLineWidth="1dp"
-        app:isPwd="false"
-        app:maxCount="4"
-        app:psdType="block"
-        app:rectAngle="0dp" />
+        app:quick_autoSize="true"
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="false"
+        app:quick_maxCount="4"
+        app:quick_psdType="block"
+        app:quick_rectAngle="0dp" />
 
     <com.sdwfqin.widget.PayPwdInputView
         android:layout_width="match_parent"
@@ -88,11 +88,11 @@
         android:layout_marginTop="20dp"
         android:background="@null"
         android:inputType="number"
-        app:autoSize="true"
-        app:divideLineWidth="1dp"
-        app:isPwd="false"
-        app:maxCount="6"
-        app:psdType="weChat"
-        app:rectAngle="0dp" />
+        app:quick_autoSize="true"
+        app:quick_divideLineWidth="1dp"
+        app:quick_isPwd="false"
+        app:quick_maxCount="6"
+        app:quick_psdType="weChat"
+        app:quick_rectAngle="0dp" />
 
 </LinearLayout>

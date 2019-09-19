@@ -197,18 +197,18 @@ public class PayPwdInputView extends AppCompatEditText {
      */
     private void getAtt(AttributeSet attrs) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.PayPwdInputView);
-        maxCount = typedArray.getInt(R.styleable.PayPwdInputView_maxCount, maxCount);
-        circleColor = typedArray.getColor(R.styleable.PayPwdInputView_circleColor, circleColor);
-        textSize = typedArray.getDimension(R.styleable.PayPwdInputView_textSize, textSize);
-        bottomLineColor = typedArray.getColor(R.styleable.PayPwdInputView_bottomLineColor, bottomLineColor);
-        pwdRadius = typedArray.getDimension(R.styleable.PayPwdInputView_pwdRadius, pwdRadius);
+        maxCount = typedArray.getInt(R.styleable.PayPwdInputView_quick_maxCount, maxCount);
+        circleColor = typedArray.getColor(R.styleable.PayPwdInputView_quick_circleColor, circleColor);
+        textSize = typedArray.getDimension(R.styleable.PayPwdInputView_quick_textSize, textSize);
+        bottomLineColor = typedArray.getColor(R.styleable.PayPwdInputView_quick_bottomLineColor, bottomLineColor);
+        pwdRadius = typedArray.getDimension(R.styleable.PayPwdInputView_quick_pwdRadius, pwdRadius);
 
-        divideLineWidth = typedArray.getDimension(R.styleable.PayPwdInputView_divideLineWidth, divideLineWidth);
-        divideLineColor = typedArray.getColor(R.styleable.PayPwdInputView_divideLineColor, divideLineColor);
-        psdType = typedArray.getInt(R.styleable.PayPwdInputView_psdType, psdType);
-        rectAngle = typedArray.getDimension(R.styleable.PayPwdInputView_rectAngle, rectAngle);
-        isPwd = typedArray.getBoolean(R.styleable.PayPwdInputView_isPwd, isPwd);
-        autoSize = typedArray.getBoolean(R.styleable.PayPwdInputView_autoSize, autoSize);
+        divideLineWidth = typedArray.getDimension(R.styleable.PayPwdInputView_quick_divideLineWidth, divideLineWidth);
+        divideLineColor = typedArray.getColor(R.styleable.PayPwdInputView_quick_divideLineColor, divideLineColor);
+        psdType = typedArray.getInt(R.styleable.PayPwdInputView_quick_psdType, psdType);
+        rectAngle = typedArray.getDimension(R.styleable.PayPwdInputView_quick_rectAngle, rectAngle);
+        isPwd = typedArray.getBoolean(R.styleable.PayPwdInputView_quick_isPwd, isPwd);
+        autoSize = typedArray.getBoolean(R.styleable.PayPwdInputView_quick_autoSize, autoSize);
 
         typedArray.recycle();
     }

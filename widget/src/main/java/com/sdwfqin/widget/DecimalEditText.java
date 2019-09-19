@@ -36,7 +36,7 @@ public class DecimalEditText extends AppCompatEditText implements TextWatcher {
 
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.DecimalEditText);
-            DECIMAL_DIGITS = typedArray.getInteger(R.styleable.DecimalEditText_decimalLength, 2);
+            DECIMAL_DIGITS = typedArray.getInteger(R.styleable.DecimalEditText_quick_decimalLength, 2);
             typedArray.recycle();
         }
     }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew pay:clean pay:build pay:bintrayUpload
 
-version = "3.0.1"
+version = "3.0.2"
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 9
+        versionCode 10
         versionName version
     }
 
@@ -33,7 +33,7 @@ dependencies {
     api okhttpDependencies["okhttp"]
     api utilsDependencies["gson"]
     api tencentDependencies["wechat-sdk-mta"]
-    api (name: 'alipaySdk-15.6.4-20190611174341', ext: 'aar')
+    api (name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
 }
 
 apply from: "deployBintray.gradle"
