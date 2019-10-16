@@ -10,7 +10,7 @@
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     
     // 支付模块
-    implementation 'com.sdwfqin.quicklib:paylib:1.0.5'
+    implementation 'com.sdwfqin.quicklib:paylib:1.0.8'
     
     // Android 图片加载库（Glide封装）
     implementation 'com.sdwfqin.quick:imageloader:2.0.2'

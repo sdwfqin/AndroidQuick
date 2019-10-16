@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
-import com.sdwfqin.paylib.interfaces.OnRequestListener;
+import com.sdwfqin.paylib.interfaces.OnAliPayRequestListener;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class AliPayTools {
 
     private static final int SDK_PAY_FLAG = 1;
 
-    private static OnRequestListener sOnRequestListener;
+    private static OnAliPayRequestListener sOnRequestListener;
     @SuppressLint("HandlerLeak")
     private static Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -37,12 +37,15 @@ public class AliPayTools {
                     // 同步返回需要验证的信息
                     String resultInfo = payResult.getResult();
                     String resultStatus = payResult.getResultStatus();
+                    String memo = payResult.getMemo();
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        sOnRequestListener.onSuccess(resultStatus);
+                        sOnRequestListener.onSuccess(resultStatus, memo);
+                        sOnRequestListener = null;
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        sOnRequestListener.onError(resultStatus);
+                        sOnRequestListener.onError(resultStatus, memo);
+                        sOnRequestListener = null;
                     }
                     break;
                 }
@@ -62,7 +65,7 @@ public class AliPayTools {
      * @param aliPayModel
      * @param onRequestListener  回调监听
      */
-    public static void aliPay(final Activity activity, String appid, boolean isRsa2, String alipay_rsa_private, AliPayModel aliPayModel, OnRequestListener onRequestListener) {
+    public static void aliPay(final Activity activity, String appid, boolean isRsa2, String alipay_rsa_private, AliPayModel aliPayModel, OnAliPayRequestListener onRequestListener) {
         sOnRequestListener = onRequestListener;
         Map<String, String> params = AliPayOrderInfoUtil.buildOrderParamMap(appid, isRsa2, aliPayModel);
         String orderParam = AliPayOrderInfoUtil.buildOrderParam(params);
@@ -94,7 +97,7 @@ public class AliPayTools {
      * @param orderInfo
      * @param onRequestListener
      */
-    public static void aliPay(final Activity activity, String orderInfo, OnRequestListener onRequestListener) {
+    public static void aliPay(final Activity activity, String orderInfo, OnAliPayRequestListener onRequestListener) {
         sOnRequestListener = onRequestListener;
         Runnable payRunnable = () -> {
             PayTask alipay = new PayTask(activity);

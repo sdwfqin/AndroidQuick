@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew pay:clean pay:build pay:bintrayUpload
 
-version = "1.0.5"
+version = "1.0.8"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
