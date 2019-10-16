@@ -41,11 +41,9 @@ public class AliPayTools {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         sOnRequestListener.onSuccess(resultStatus, memo);
-                        sOnRequestListener = null;
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         sOnRequestListener.onError(resultStatus, memo);
-                        sOnRequestListener = null;
                     }
                     break;
                 }
@@ -111,6 +109,13 @@ public class AliPayTools {
 
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+    /**
+     * 销毁回掉
+     */
+    public static void release(){
+        sOnRequestListener = null;
     }
 
 }
