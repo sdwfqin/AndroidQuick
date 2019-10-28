@@ -48,7 +48,7 @@ public class WechatPay {
      */
     public static final int WX_NETWORK_ERROR = 5;
 
-    private static WechatPay sMWechatPay;
+    private static WechatPay sWechatPay;
     private IWXAPI mWXApi;
     private String mPayParam;
     private WechatPayResultCallBack mCallback;
@@ -59,13 +59,13 @@ public class WechatPay {
     }
 
     public static void init(Context context, String wxAppid) {
-        if (sMWechatPay == null) {
-            sMWechatPay = new WechatPay(context, wxAppid);
+        if (sWechatPay == null) {
+            sWechatPay = new WechatPay(context, wxAppid);
         }
     }
 
     public static WechatPay getInstance() {
-        return sMWechatPay;
+        return sWechatPay;
     }
 
     public IWXAPI getWXApi() {
@@ -177,9 +177,9 @@ public class WechatPay {
      * 销毁方法
      */
     public static void detach(){
-        if (sMWechatPay != null){
-            sMWechatPay.getWXApi().detach();
+        if (sWechatPay != null){
+            sWechatPay.getWXApi().detach();
         }
-        sMWechatPay = null;
+        sWechatPay = null;
     }
 }

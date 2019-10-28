@@ -112,7 +112,7 @@ public class AliPayTools {
     }
 
     /**
-     * 销毁回掉
+     * 销毁
      */
     public static void detach() {
         sOnRequestListener = null;
