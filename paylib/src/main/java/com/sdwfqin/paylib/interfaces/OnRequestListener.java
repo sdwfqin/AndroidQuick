@@ -6,8 +6,7 @@ package com.sdwfqin.paylib.interfaces;
  * @author 张钦
  * @date 2018/1/25
  */
-public interface OnWechatRequestListener {
-    void onSuccess(String s);
+public interface OnRequestListener {
 
-    void onError(String s);
+    void onCallback(int code, String msg);
 }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew pay:clean pay:build pay:bintrayUpload
 
-version = "1.0.9"
+version = "1.1.1"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        versionCode 11
         versionName version
     }
 
@@ -30,7 +30,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$support"
     api "com.squareup.okhttp3:okhttp:$okhttp"
     api "com.google.code.gson:gson:$gson"
     api "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$wechat"
