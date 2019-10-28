@@ -37,13 +37,15 @@ public class AliPayTools {
                     // 同步返回需要验证的信息
                     String resultInfo = payResult.getResult();
                     String resultStatus = payResult.getResultStatus();
+                    String memo = payResult.getMemo();
                     // 判断resultStatus 为9000则代表支付成功
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        sOnRequestListener.onSuccess(resultStatus);
-                    } else {
-                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        sOnRequestListener.onError(resultStatus);
+                    int status = 0;
+                    try {
+                        status = Integer.parseInt(resultStatus);
+                    } catch (NumberFormatException e) {
+                        status = -1;
                     }
+                    sOnRequestListener.onCallback(status, memo);
                     break;
                 }
                 default:
@@ -110,4 +112,10 @@ public class AliPayTools {
         payThread.start();
     }
 
+    /**
+     * 销毁
+     */
+    public static void detach() {
+        sOnRequestListener = null;
+    }
 }

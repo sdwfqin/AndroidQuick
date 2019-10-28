@@ -26,6 +26,10 @@ public class WechatPay {
     /**
      * 未安装微信或微信版本过低
      */
+    public static final int SUCCESS_PAY = 0;
+    /**
+     * 未安装微信或微信版本过低
+     */
     public static final int NO_OR_LOW_WX = 1;
     /**
      * 支付参数错误
@@ -35,8 +39,16 @@ public class WechatPay {
      * 支付失败
      */
     public static final int ERROR_PAY = 3;
+    /**
+     * 支付取消
+     */
+    public static final int CANCEL_PAY = 4;
+    /**
+     * 统一下单网络异常
+     */
+    public static final int WX_NETWORK_ERROR = 5;
 
-    private static WechatPay sMWechatPay;
+    private static WechatPay sWechatPay;
     private IWXAPI mWXApi;
     private String mPayParam;
     private WechatPayResultCallBack mCallback;
@@ -47,13 +59,13 @@ public class WechatPay {
     }
 
     public static void init(Context context, String wxAppid) {
-        if (sMWechatPay == null) {
-            sMWechatPay = new WechatPay(context, wxAppid);
+        if (sWechatPay == null) {
+            sWechatPay = new WechatPay(context, wxAppid);
         }
     }
 
     public static WechatPay getInstance() {
-        return sMWechatPay;
+        return sWechatPay;
     }
 
     public IWXAPI getWXApi() {
@@ -159,5 +171,15 @@ public class WechatPay {
          * 支付取消
          */
         void onCancel();
+    }
+
+    /**
+     * 销毁方法
+     */
+    public static void detach(){
+        if (sWechatPay != null){
+            sWechatPay.getWXApi().detach();
+        }
+        sWechatPay = null;
     }
 }

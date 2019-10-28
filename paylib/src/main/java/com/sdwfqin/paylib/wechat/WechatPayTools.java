@@ -104,7 +104,7 @@ public class WechatPayTools {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                onRequestListener.onError(e.getMessage());
+                onRequestListener.onCallback(WechatPay.WX_NETWORK_ERROR, e.getMessage());
             }
 
             @Override
@@ -130,7 +130,7 @@ public class WechatPayTools {
 
                     wechatPayApp(mContext, appid, mchId, wxPrivateKey, sortedMap, onRequestListener);
                 } catch (IOException e) {
-                    onRequestListener.onError(e.getMessage());
+                    onRequestListener.onCallback(WechatPay.WX_NETWORK_ERROR, e.getMessage());
                 }
             }
         });
@@ -225,22 +225,22 @@ public class WechatPayTools {
         WechatPay.getInstance().doPay(payParam, new WechatPay.WechatPayResultCallBack() {
             @Override
             public void onSuccess() {
-                onRequestListener.onSuccess("微信支付成功");
+                onRequestListener.onCallback(WechatPay.SUCCESS_PAY, "微信支付成功");
             }
 
             @Override
             public void onError(int errorCode) {
                 switch (errorCode) {
                     case WechatPay.NO_OR_LOW_WX:
-                        onRequestListener.onError("未安装微信或微信版本过低");
+                        onRequestListener.onCallback(WechatPay.NO_OR_LOW_WX, "未安装微信或微信版本过低");
                         break;
 
                     case WechatPay.ERROR_PAY_PARAM:
-                        onRequestListener.onError("参数错误");
+                        onRequestListener.onCallback(WechatPay.ERROR_PAY_PARAM, "参数错误");
                         break;
 
                     case WechatPay.ERROR_PAY:
-                        onRequestListener.onError("支付失败");
+                        onRequestListener.onCallback(WechatPay.ERROR_PAY, "支付失败");
                         break;
                     default:
                 }
@@ -248,7 +248,7 @@ public class WechatPayTools {
 
             @Override
             public void onCancel() {
-                onRequestListener.onError("支付取消");
+                onRequestListener.onCallback(WechatPay.CANCEL_PAY, "支付取消");
             }
         });
     }
