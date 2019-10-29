@@ -57,6 +57,7 @@ ext {
             "photoview"        : "com.github.chrisbanes:PhotoView:2.3.0",
             // matisse
             "matisse"          : "com.zhihu.android:matisse:0.5.3-beta2",
+            "androidsvg"          : "com.caverock:androidsvg-aar:1.4",
     ]
 
     utilsDependencies = [

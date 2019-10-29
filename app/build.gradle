@@ -56,18 +56,24 @@ dependencies {
     implementation viewDependencies["pickerview"]
 
     implementation utilsDependencies["multidex"]
-    annotationProcessor compilerDependencies["butterknife-compiler"]
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation("com.alibaba.android:vlayout:${vlayout}@aar") {
         transitive = true
     }
     implementation tencentDependencies["crashreport_upgrade"]
 //    implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
+
     implementation imageDependencies["matisse"]
+    implementation imageDependencies["androidsvg"]
 
     implementation project(':imageloader')
     implementation project(':quicklib')
     implementation project(':paylib')
     implementation project(':widget')
+
+    annotationProcessor compilerDependencies["glide-compiler"]
+    annotationProcessor compilerDependencies["butterknife-compiler"]
 }
 
 //apply from: "tinker_config.gradle"

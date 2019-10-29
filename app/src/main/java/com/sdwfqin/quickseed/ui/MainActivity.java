@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
             "跑马灯Demo",
             "Camerax",
             "VLayoutDemo",
+            "展示SVG图片",
     };
 
     @Override
@@ -123,6 +124,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 8:
                     startActivity(new Intent(mContext, VLayoutSampleActivity.class));
+                    break;
+                case 9:
+                    startActivity(new Intent(mContext, ShowSvgActivity.class));
                     break;
                 default:
             }

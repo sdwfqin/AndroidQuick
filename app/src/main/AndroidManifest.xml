@@ -32,6 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.ShowSvgActivity"></activity>
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"
