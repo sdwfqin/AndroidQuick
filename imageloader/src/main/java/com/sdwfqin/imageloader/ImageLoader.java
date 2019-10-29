@@ -22,10 +22,7 @@ import java.lang.ref.WeakReference;
  */
 public class ImageLoader {
 
-    protected static final String ANDROID_RESOURCE = "android.resource://";
-    protected static final String FILE = "file://";
-    protected static final String SEPARATOR = "/";
-    protected static final String HTTP = "http";
+    private static final String HTTP = "http";
 
     private WeakReference<ImageView> imageViewWeakReference;
     private Builder builder;
@@ -50,9 +47,6 @@ public class ImageLoader {
      * 创建GlideRequest<Drawable>
      */
     public GlideRequest<Drawable> loadDrawableImage() {
-        if (builder.image instanceof String && ((String) builder.image).toLowerCase().startsWith(HTTP)) {
-            url = (String) builder.image;
-        }
         GlideRequest<Drawable> glideRequest = loadBaseImage().load(builder.image);
         if (builder.placeholder != 0) {
             glideRequest = glideRequest.placeholder(builder.placeholder);

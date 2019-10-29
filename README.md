@@ -9,18 +9,18 @@
     // 支持AndroidX
     
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:3.0.2'
+    implementation 'com.sdwfqin.quicklib:quicklib:3.0.3'
     // 如果使用butterknife请添加【可选】
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     
     // 支付模块
     implementation 'com.sdwfqin.quicklib:paylib:3.1.0'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageloader:3.0.2'
+    implementation 'com.sdwfqin.quick:imageloader:3.0.3'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.2'
+    implementation 'com.sdwfqin.quick:widget:3.0.3'
     
     ==================== AndroidX 分界线 ====================
     

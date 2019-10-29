@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // gradlew imageloader:clean imageloader:build imageloader:bintrayUpload
 
-version = "3.0.2"
+version = "3.0.3"
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 15
+        versionCode 16
         versionName version
     }
 
@@ -34,6 +34,7 @@ dependencies {
     api imageDependencies["glide"]
     annotationProcessor compilerDependencies["glide-compiler"]
     api imageDependencies["glide-integration"]
+    api imageDependencies["androidsvg"]
 }
 
 apply from: "deployBintray.gradle"

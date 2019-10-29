@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.utils.svg;
+package com.sdwfqin.imageloader.svg;
 
 import android.graphics.Picture;
 import android.graphics.drawable.PictureDrawable;

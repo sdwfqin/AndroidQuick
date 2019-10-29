@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 // ./gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
 
-version = "3.0.2"
+version = "3.0.3"
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 82
+        versionCode 83
         versionName version
     }
 

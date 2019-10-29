@@ -1,6 +1,6 @@
 ext {
 
-    vlayout = "1.2.26"
+    vlayout = "1.2.31"
 
     android = [
             compileSdkVersion: 28,
@@ -21,7 +21,7 @@ ext {
 
     eventDependencies = [
             // rxjava
-            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.12",
+            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.13",
             "rxandroid": "io.reactivex.rxjava2:rxandroid:2.1.1",
             // eventbus
             "eventbus" : "org.greenrobot:eventbus:3.1.1",
@@ -35,8 +35,8 @@ ext {
     ]
 
     okhttpDependencies = [
-            "okhttp"             : "com.squareup.okhttp3:okhttp:4.2.0",
-            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.2.0",
+            "okhttp"             : "com.squareup.okhttp3:okhttp:4.2.2",
+            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.2.2",
     ]
 
     viewDependencies = [
@@ -45,9 +45,9 @@ ext {
             // smartrefresh
             "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
             // pickerview
-            "pickerview"  : "com.contrarywind:Android-PickerView:4.1.8",
+            "pickerview"  : "com.contrarywind:Android-PickerView:4.1.9",
             // butterknife
-            "butterknife" : "com.jakewharton:butterknife:10.1.0",
+            "butterknife" : "com.jakewharton:butterknife:10.2.0",
     ]
 
     imageDependencies = [
@@ -56,7 +56,7 @@ ext {
             // photoView 图片放大
             "photoview"        : "com.github.chrisbanes:PhotoView:2.3.0",
             // matisse
-            "matisse"          : "com.zhihu.android:matisse:0.5.3-beta2",
+            "matisse"          : "com.zhihu.android:matisse:0.5.3-beta3",
             "androidsvg"          : "com.caverock:androidsvg-aar:1.4",
     ]
 
@@ -77,7 +77,7 @@ ext {
             "qmui"               : "com.qmuiteam:qmui:1.4.0",
             "arch"               : "com.qmuiteam:arch:0.6.0",
             // 微信
-            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1",
+            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.4.0",
             // bugly
             "crashreport_upgrade": "com.tencent.bugly:crashreport_upgrade:1.4.1",
     ]

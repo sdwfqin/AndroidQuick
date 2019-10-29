@@ -65,14 +65,12 @@ dependencies {
 //    implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
 
     implementation imageDependencies["matisse"]
-    implementation imageDependencies["androidsvg"]
 
     implementation project(':imageloader')
     implementation project(':quicklib')
     implementation project(':paylib')
     implementation project(':widget')
 
-    annotationProcessor compilerDependencies["glide-compiler"]
     annotationProcessor compilerDependencies["butterknife-compiler"]
 }
 

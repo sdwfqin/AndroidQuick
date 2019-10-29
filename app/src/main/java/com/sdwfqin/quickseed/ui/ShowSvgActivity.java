@@ -4,10 +4,10 @@ import android.graphics.drawable.PictureDrawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.RequestBuilder;
+import com.sdwfqin.imageloader.GlideApp;
+import com.sdwfqin.imageloader.svg.SvgSoftwareLayerSetter;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.utils.svg.GlideApp;
-import com.sdwfqin.quickseed.utils.svg.SvgSoftwareLayerSetter;
 
 import butterknife.BindView;
 

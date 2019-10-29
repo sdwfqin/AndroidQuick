@@ -103,8 +103,8 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 2:
                     List<String> strings = new ArrayList<>();
-                    strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(1).png");
-                    strings.add("http://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/MicroText%20(4).png");
+                    strings.add("https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=80a0e826da160924c828aa49b56e5e9f/f636afc379310a5585445184bd4543a982261059.jpg");
+                    strings.add("https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=b214b363d754564ef168ec6bd2b7f7e7/7e3e6709c93d70cfc087257df2dcd100baa12b45.jpg");
                     ImagePreviewActivity.launch(mContext, strings);
                     break;
                 case 3:
