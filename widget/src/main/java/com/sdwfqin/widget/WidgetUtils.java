@@ -1,7 +1,6 @@
 package com.sdwfqin.widget;
 
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,14 +3,15 @@ package com.sdwfqin.quickseed;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.ConvertUtils;
 

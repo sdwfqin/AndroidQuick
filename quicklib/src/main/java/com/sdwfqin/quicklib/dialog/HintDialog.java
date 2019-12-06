@@ -3,14 +3,15 @@ package com.sdwfqin.quicklib.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 import com.sdwfqin.quicklib.R;
 

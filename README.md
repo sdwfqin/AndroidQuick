@@ -63,6 +63,32 @@
         targetCompatibility JavaVersion.VERSION_1_8
     }
     ```
+    
+# v3.2+ 注意事项！！！
+
+1. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
+2. 因状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
+
+    ``` java
+    // 设置状态栏黑色字体图标
+    QMUIStatusBarHelper.setStatusBarLightMode(mContext);
+    // 设置状态栏白色字体图标
+    QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
+    ```
+
+3. `BaseActivity`集成了侧划关闭组件，如需关闭请在对应`Activity`覆写`protected boolean canDragBack()`
+
+    ``` java
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
+    ```
+4. 开启侧划关闭需要在`Application`中添加如下代码：
+
+    ``` java
+    QMUISwipeBackActivityManager.init(this);
+    ```
 
 # 关于支付模块支付宝支付的特殊说明
 

@@ -7,18 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.BarUtils;
-import com.sdwfqin.quicklib.R;
-import com.sdwfqin.quicklib.base.BaseActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.sdwfqin.quicklib.R;
+import com.sdwfqin.quicklib.base.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 图片查看与保存Activity
@@ -74,7 +74,8 @@ public class ImagePreviewActivity extends BaseActivity {
     @Override
     protected void initEventAndData() {
 
-        BarUtils.setStatusBarColor(mContext, 0xff000000);
+        QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
+        mTopBar.setVisibility(View.GONE);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

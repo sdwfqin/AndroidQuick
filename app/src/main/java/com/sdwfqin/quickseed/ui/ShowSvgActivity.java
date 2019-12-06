@@ -6,8 +6,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.RequestBuilder;
 import com.sdwfqin.imageloader.GlideApp;
 import com.sdwfqin.imageloader.svg.SvgSoftwareLayerSetter;
-import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 
 import butterknife.BindView;
 
@@ -20,7 +20,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * @author 张钦
  * @date 2019-10-29
  */
-public class ShowSvgActivity extends BaseActivity {
+public class ShowSvgActivity extends SampleBaseActivity {
 
     @BindView(R.id.img)
     ImageView mImg;

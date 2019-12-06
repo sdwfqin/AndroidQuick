@@ -2,7 +2,6 @@ package com.sdwfqin.quickseed.base;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.PathUtils;
-import com.blankj.utilcode.util.SDCardUtils;
 
 /**
  * 描述：全局配置

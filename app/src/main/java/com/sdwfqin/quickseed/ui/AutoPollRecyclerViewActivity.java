@@ -1,15 +1,16 @@
 package com.sdwfqin.quickseed.ui;
 
-import com.sdwfqin.quicklib.base.BaseActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.adapter.AutoPollRecyclerAdapter;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.widget.recyclerview.AutoPollRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
 /**
@@ -23,7 +24,7 @@ import butterknife.BindView;
  * 修改时间：2019/4/14
  * 修改内容：
  */
-public class AutoPollRecyclerViewActivity extends BaseActivity {
+public class AutoPollRecyclerViewActivity extends SampleBaseActivity {
 
     @BindView(R.id.list_v)
     AutoPollRecyclerView mListV;

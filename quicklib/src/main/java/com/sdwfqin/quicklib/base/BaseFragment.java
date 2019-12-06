@@ -3,14 +3,13 @@ package com.sdwfqin.quicklib.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;

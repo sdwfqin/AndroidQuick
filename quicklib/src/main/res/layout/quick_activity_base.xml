@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.widget.QMUITopBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/base_topbar"
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2 xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quick_root_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white">
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/quick_base_topbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/quick_base_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quick_base_topbar" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2>

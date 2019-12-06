@@ -3,9 +3,9 @@ package com.sdwfqin.quickseed.ui;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.utils.picture.PictureSelectUtils;
 import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
 import com.sdwfqin.widget.pictureupload.PictureUploadView;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * @author zhangqin
  * @date 2018/5/31
  */
-public class PictureUploadActivity extends BaseActivity {
+public class PictureUploadActivity extends SampleBaseActivity {
 
     @BindView(R.id.pic)
     PictureUploadView<PictureModel> mPic;

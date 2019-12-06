@@ -1,7 +1,8 @@
 package com.sdwfqin.widget.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 描述：自动换行布局管理

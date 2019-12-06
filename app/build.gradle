@@ -55,9 +55,8 @@ dependencies {
     implementation viewDependencies["smartrefresh"]
     implementation viewDependencies["pickerview"]
 
-    implementation utilsDependencies["multidex"]
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation googleDependencies["multidex"]
+
     implementation("com.alibaba.android:vlayout:${vlayout}@aar") {
         transitive = true
     }
@@ -72,6 +71,9 @@ dependencies {
     implementation project(':widget')
 
     annotationProcessor compilerDependencies["butterknife-compiler"]
+    annotationProcessor compilerDependencies["arch-compiler"]
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
 }
 
 //apply from: "tinker_config.gradle"

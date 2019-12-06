@@ -2,16 +2,15 @@ package com.sdwfqin.widget.pictureupload;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.sdwfqin.widget.R;

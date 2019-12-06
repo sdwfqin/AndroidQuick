@@ -7,12 +7,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.dialog.HintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.Constants;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +24,22 @@ import butterknife.BindView;
  *
  * @author 张钦
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends SampleBaseActivity {
 
     @BindView(R.id.list)
     ListView mList;
 
     private String[] mTitle = new String[]{
-            "跳转网页",
-            "弹窗",
             "图片预览",
             "上传图片九宫格",
             "自定义验证码/密码View",
-            "自定义Webview",
             "跑马灯Demo",
             "Camerax",
             "VLayoutDemo",
             "展示SVG图片",
+            "跳转网页",
+            "自定义Webview",
+            "弹窗",
     };
 
     @Override
@@ -81,9 +81,36 @@ public class MainActivity extends BaseActivity {
         mList.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
                 case 0:
-                    WebViewActivity.launch(mContext, "https://www.baidu.com");
+                    List<String> strings = new ArrayList<>();
+                    strings.add("https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=80a0e826da160924c828aa49b56e5e9f/f636afc379310a5585445184bd4543a982261059.jpg");
+                    strings.add("https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=b214b363d754564ef168ec6bd2b7f7e7/7e3e6709c93d70cfc087257df2dcd100baa12b45.jpg");
+                    ImagePreviewActivity.launch(mContext, strings);
                     break;
                 case 1:
+                    startActivity(new Intent(mContext, PictureUploadActivity.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(mContext, PayPwdInputActivity.class));
+                    break;
+                case 3:
+                    startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
+                    break;
+                case 4:
+                    startActivity(new Intent(mContext, CameraxDemoActivity.class));
+                    break;
+                case 5:
+                    startActivity(new Intent(mContext, VLayoutSampleActivity.class));
+                    break;
+                case 6:
+                    startActivity(new Intent(mContext, ShowSvgActivity.class));
+                    break;
+                case 7:
+                    WebViewActivity.launch(mContext, "https://www.baidu.com");
+                    break;
+                case 8:
+                    startActivity(new Intent(mContext, CustomWebviewActivity.class));
+                    break;
+                case 9:
                     HintDialog hintDialog = new HintDialog(mContext);
                     hintDialog.show();
                     hintDialog.setTitle("热更新测试33333");
@@ -100,33 +127,6 @@ public class MainActivity extends BaseActivity {
 
                         }
                     });
-                    break;
-                case 2:
-                    List<String> strings = new ArrayList<>();
-                    strings.add("https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=80a0e826da160924c828aa49b56e5e9f/f636afc379310a5585445184bd4543a982261059.jpg");
-                    strings.add("https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike116%2C5%2C5%2C116%2C38/sign=b214b363d754564ef168ec6bd2b7f7e7/7e3e6709c93d70cfc087257df2dcd100baa12b45.jpg");
-                    ImagePreviewActivity.launch(mContext, strings);
-                    break;
-                case 3:
-                    startActivity(new Intent(mContext, PictureUploadActivity.class));
-                    break;
-                case 4:
-                    startActivity(new Intent(mContext, PayPwdInputActivity.class));
-                    break;
-                case 5:
-                    startActivity(new Intent(mContext, CustomWebviewActivity.class));
-                    break;
-                case 6:
-                    startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
-                    break;
-                case 7:
-                    startActivity(new Intent(mContext, CameraxDemoActivity.class));
-                    break;
-                case 8:
-                    startActivity(new Intent(mContext, VLayoutSampleActivity.class));
-                    break;
-                case 9:
-                    startActivity(new Intent(mContext, ShowSvgActivity.class));
                     break;
                 default:
             }

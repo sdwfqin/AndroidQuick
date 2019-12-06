@@ -1,7 +1,10 @@
 package com.sdwfqin.quickseed.base;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -12,8 +15,6 @@ import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.ui.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
-
-import androidx.multidex.MultiDexApplication;
 
 /**
  * 描述：tinker热更新配置
@@ -33,6 +34,8 @@ public class SampleApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        QMUISwipeBackActivityManager.init(this);
 
         // 初始化工具类
         initUtils();
