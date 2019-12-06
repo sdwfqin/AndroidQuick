@@ -1,7 +1,5 @@
 ### 支持AndroidX，正在测试，欢迎提交issues与pr
 
-### 不支持AndroidX请[切换分支到2.x](https://github.com/sdwfqin/AndroidQuick/tree/2.x)
-
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
 # Gradle（使用前请查看注意事项）:
@@ -41,10 +39,10 @@
     implementation 'com.sdwfqin.quick:widget:1.0.7'
     
 
-> 最低支持api18
+> 最低支持api19
 
-    minSdkVersion 18
-    targetSdkVersion 28
+    minSdkVersion 19
+    targetSdkVersion 29
     
 # 早期版本
 
@@ -76,7 +74,7 @@
     QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
     ```
 
-3. `BaseActivity`集成了侧划关闭组件，如需关闭请在对应`Activity`覆写`protected boolean canDragBack()`
+3. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
 
     ``` java
     @Override
