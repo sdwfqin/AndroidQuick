@@ -1,16 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
-        <!-- 配置qmui提供的theme -->
-        <item name="qmui_config_color_blue">@color/colorPrimary</item>
-        <item name="QMUITopBarStyle">@style/QDTopBar</item>
-    </style>
-
     <!--**********************************************
         *             qmui topbar style              *
         ***********************************************-->

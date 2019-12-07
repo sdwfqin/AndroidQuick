@@ -1,10 +1,15 @@
 package com.sdwfqin.quickseed.base;
 
+import android.content.Context;
+import android.content.res.Configuration;
+
+import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -13,6 +18,7 @@ import com.sdwfqin.quicklib.BuildConfig;
 import com.sdwfqin.quicklib.QuickInit;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.ui.MainActivity;
+import com.sdwfqin.quickseed.utils.skin.SkinManager;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
@@ -23,6 +29,12 @@ import com.tencent.bugly.beta.Beta;
  * @date 2018/8/23
  */
 public class SampleApplication extends MultiDexApplication {
+
+    private static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
 
 //    public SampleApplication() {
 //        super(ShareConstants.TINKER_ENABLE_ALL,
@@ -35,6 +47,8 @@ public class SampleApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
+        context = this;
+
         QMUISwipeBackActivityManager.init(this);
 
         // 初始化工具类
@@ -44,6 +58,14 @@ public class SampleApplication extends MultiDexApplication {
         Bugly.init(this, "534e5a3930", !BuildConfig.DEBUG);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
+
+        SkinManager.install(this);
+
+        QMUISkinManager skinManager = QMUISkinManager.defaultInstance(this);
+        skinManager.addSkin(1, R.style.app_skin_blue);
+        skinManager.addSkin(2, R.style.app_skin_dark);
+        skinManager.changeSkin(SkinManager.getCurrentSkin());
+
     }
 
     private void initUtils() {
@@ -53,6 +75,16 @@ public class SampleApplication extends MultiDexApplication {
         LogUtils.Config config = LogUtils.getConfig();
         config.setLogSwitch(true)
                 .setConsoleSwitch(true);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
+            SkinManager.changeSkin(SkinManager.SKIN_DARK);
+        }else if(SkinManager.getCurrentSkin() == SkinManager.SKIN_DARK){
+            SkinManager.changeSkin(SkinManager.SKIN_BLUE);
+        }
     }
 
     /**
