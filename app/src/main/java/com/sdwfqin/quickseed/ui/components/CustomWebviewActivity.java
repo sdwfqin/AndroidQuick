@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import android.os.Bundle;
 

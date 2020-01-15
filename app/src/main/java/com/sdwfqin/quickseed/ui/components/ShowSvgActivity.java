@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import android.graphics.drawable.PictureDrawable;
 import android.widget.ImageView;

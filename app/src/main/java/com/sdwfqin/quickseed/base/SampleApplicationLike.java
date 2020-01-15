@@ -16,7 +16,7 @@
 //import com.sdwfqin.quicklib.BuildConfig;
 //import com.sdwfqin.quicklib.QuickInit;
 //import com.sdwfqin.quickseed.R;
-//import com.sdwfqin.quickseed.ui.MainActivity;
+//import com.sdwfqin.quickseed.ui.main.MainActivity;
 //import com.tencent.bugly.Bugly;
 //import com.tencent.bugly.beta.Beta;
 //import com.tencent.tinker.loader.app.DefaultApplicationLike;

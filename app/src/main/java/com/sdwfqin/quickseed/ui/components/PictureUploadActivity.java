@@ -1,11 +1,11 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import android.content.Intent;
 import android.net.Uri;
 
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.model.PictureModel;
 import com.sdwfqin.quickseed.utils.picture.PictureSelectUtils;
 import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
 import com.sdwfqin.widget.pictureupload.PictureUploadView;
@@ -24,6 +24,8 @@ import butterknife.BindView;
  * @date 2018/5/31
  */
 public class PictureUploadActivity extends SampleBaseActivity {
+
+    public static final int RESULT_PHOTO_SELECT = 101;
 
     @BindView(R.id.pic)
     PictureUploadView<PictureModel> mPic;
@@ -53,7 +55,7 @@ public class PictureUploadActivity extends SampleBaseActivity {
 
             @Override
             public void onAddPic(int maxPic, List list) {
-                PictureSelectUtils.SelectSystemPhoto(mContext, Constants.RESULT_CODE_1, maxPic);
+                PictureSelectUtils.SelectSystemPhoto(mContext, RESULT_PHOTO_SELECT, maxPic);
             }
         });
     }
@@ -63,7 +65,7 @@ public class PictureUploadActivity extends SampleBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case Constants.RESULT_CODE_1:
+                case RESULT_PHOTO_SELECT:
                     List<PictureModel> models = new ArrayList<>();
                     List<String> selectList = Matisse.obtainPathResult(data);
                     for (int i = 0; i < selectList.size(); i++) {

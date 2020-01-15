@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dip"
         android:alpha="0"
-        android:background="@drawable/button"
+        android:background="@drawable/bg_primary_radius_66"
         android:paddingBottom="5dip"
         android:paddingLeft="20dip"
         android:paddingRight="20dip"

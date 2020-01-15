@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;

@@ -7,19 +7,19 @@ import android.preference.PreferenceManager;
 /**
  * Created by cgspine on 2018/1/14.
  */
-public class SkinPreferenceManager {
+public class QMUISkinPreferenceManager {
     private static SharedPreferences sPreferences;
-    private static SkinPreferenceManager sSkinPreferenceManager = null;
+    private static QMUISkinPreferenceManager sSkinPreferenceManager = null;
 
     private static final String APP_SKIN_INDEX = "app_skin_index";
 
-    private SkinPreferenceManager(Context context) {
+    private QMUISkinPreferenceManager(Context context) {
         sPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
     }
 
-    public static final SkinPreferenceManager getInstance(Context context) {
+    public static final QMUISkinPreferenceManager getInstance(Context context) {
         if (sSkinPreferenceManager == null) {
-            sSkinPreferenceManager = new SkinPreferenceManager(context);
+            sSkinPreferenceManager = new QMUISkinPreferenceManager(context);
         }
         return sSkinPreferenceManager;
     }
@@ -31,6 +31,6 @@ public class SkinPreferenceManager {
     }
 
     public int getSkinIndex() {
-        return sPreferences.getInt(APP_SKIN_INDEX, SkinManager.SKIN_BLUE);
+        return sPreferences.getInt(APP_SKIN_INDEX, QMUISkinCustManager.SKIN_BLUE);
     }
 }

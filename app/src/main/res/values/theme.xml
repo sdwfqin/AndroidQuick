@@ -18,7 +18,7 @@
         <item name="qmui_skin_support_topbar_image_tint_color">@color/qmui_config_color_white</item>
         <item name="QMUITopBarStyle">@style/QDTopBar</item>
 
-        <item name="qmui_config_color_blue">@color/style</item>
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
 
         <!-- 配置app自己的theme -->
         <item name="app_primary_color">?attr/qmui_config_color_blue</item>

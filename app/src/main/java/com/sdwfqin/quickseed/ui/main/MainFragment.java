@@ -1,18 +1,22 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.main;
 
-import android.Manifest;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.dialog.HintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.Constants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.ui.components.AutoPollRecyclerViewActivity;
+import com.sdwfqin.quickseed.ui.components.CameraxDemoActivity;
+import com.sdwfqin.quickseed.ui.components.CustomWebviewActivity;
+import com.sdwfqin.quickseed.ui.components.PayPwdInputActivity;
+import com.sdwfqin.quickseed.ui.components.PictureUploadActivity;
+import com.sdwfqin.quickseed.ui.components.ShowSvgActivity;
+import com.sdwfqin.quickseed.ui.components.VLayoutSampleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +28,10 @@ import butterknife.BindView;
  *
  * @author 张钦
  */
-public class MainActivity extends SampleBaseActivity {
+public class MainFragment extends BaseFragment {
 
+    @BindView(R.id.top_bar)
+    QMUITopBar mTopBar;
     @BindView(R.id.list)
     ListView mList;
 
@@ -44,37 +50,21 @@ public class MainActivity extends SampleBaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_main;
+        return R.layout.fragment_main;
     }
 
     @Override
     protected void initEventAndData() {
 
-        Constants.STATUS_HEIGHT = QMUIStatusBarHelper.getStatusbarHeight(mContext);
-
-        getPermissions();
-
-        mTopBar.setTitle("首页");
+        mTopBar.setTitle("组件");
 
         mList.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
         initListener();
     }
 
-    private void getPermissions() {
+    @Override
+    protected void lazyLoadShow() {
 
-        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-        checkPermissions(perms, true, true, new OnPermissionCallback() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(mContext, "取得权限", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onError() {
-                Toast.makeText(mContext, "没有取得权限", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void initListener() {
@@ -131,19 +121,5 @@ public class MainActivity extends SampleBaseActivity {
                 default:
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case Constants.RESULT_CODE_1:
-                    String code = data.getStringExtra("data");
-                    showMsg(code);
-                    break;
-                default:
-            }
-        }
     }
 }

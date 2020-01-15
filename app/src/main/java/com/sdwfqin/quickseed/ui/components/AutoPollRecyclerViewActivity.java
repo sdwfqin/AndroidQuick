@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

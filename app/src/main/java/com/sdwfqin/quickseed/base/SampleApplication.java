@@ -1,6 +1,5 @@
 package com.sdwfqin.quickseed.base;
 
-import android.content.Context;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
@@ -17,8 +16,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.sdwfqin.quicklib.BuildConfig;
 import com.sdwfqin.quicklib.QuickInit;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.ui.MainActivity;
-import com.sdwfqin.quickseed.utils.skin.SkinManager;
+import com.sdwfqin.quickseed.ui.main.MainActivity;
+import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
@@ -29,12 +28,6 @@ import com.tencent.bugly.beta.Beta;
  * @date 2018/8/23
  */
 public class SampleApplication extends MultiDexApplication {
-
-    private static Context context;
-
-    public static Context getContext() {
-        return context;
-    }
 
 //    public SampleApplication() {
 //        super(ShareConstants.TINKER_ENABLE_ALL,
@@ -47,8 +40,6 @@ public class SampleApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        context = this;
-
         QMUISwipeBackActivityManager.init(this);
 
         // 初始化工具类
@@ -59,12 +50,12 @@ public class SampleApplication extends MultiDexApplication {
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
 
-        SkinManager.install(this);
+        QMUISkinCustManager.install(this);
 
         QMUISkinManager skinManager = QMUISkinManager.defaultInstance(this);
         skinManager.addSkin(1, R.style.app_skin_blue);
         skinManager.addSkin(2, R.style.app_skin_dark);
-        skinManager.changeSkin(SkinManager.getCurrentSkin());
+        skinManager.changeSkin(QMUISkinCustManager.getCurrentSkin());
 
     }
 
@@ -81,9 +72,9 @@ public class SampleApplication extends MultiDexApplication {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
-            SkinManager.changeSkin(SkinManager.SKIN_DARK);
-        }else if(SkinManager.getCurrentSkin() == SkinManager.SKIN_DARK){
-            SkinManager.changeSkin(SkinManager.SKIN_BLUE);
+            QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_DARK);
+        }else if(QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_DARK){
+            QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_BLUE);
         }
     }
 

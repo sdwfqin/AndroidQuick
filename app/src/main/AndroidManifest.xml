@@ -32,7 +32,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.ShowSvgActivity"></activity>
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -45,7 +44,7 @@
         </provider>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,25 +53,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.PictureUploadActivity"
+            android:name=".ui.components.PictureUploadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.PayPwdInputActivity"
+            android:name=".ui.components.PayPwdInputActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.CustomWebviewActivity"
+            android:name=".ui.components.CustomWebviewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".IntroActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.AutoPollRecyclerViewActivity"
+            android:name=".ui.components.AutoPollRecyclerViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.CameraxDemoActivity"
+            android:name=".ui.components.CameraxDemoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.VLayoutSampleActivity"
+            android:name=".ui.components.VLayoutSampleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ui.components.ShowSvgActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
