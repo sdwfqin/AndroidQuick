@@ -1,7 +1,8 @@
 package com.sdwfqin.widget.pictureupload;
 
-import androidx.annotation.Nullable;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

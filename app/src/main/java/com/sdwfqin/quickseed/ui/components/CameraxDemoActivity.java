@@ -1,10 +1,11 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import android.graphics.Matrix;
 import android.util.Rational;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
@@ -46,6 +47,9 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
 
     @Override
     protected void initEventAndData() {
+
+        mTopBar.setVisibility(View.GONE);
+
         mViewFinder.post(this::startCamera);
 
         mViewFinder.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {

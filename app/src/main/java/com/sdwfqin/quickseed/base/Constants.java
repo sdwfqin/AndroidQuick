@@ -1,8 +1,6 @@
 package com.sdwfqin.quickseed.base;
 
-import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.PathUtils;
-import com.blankj.utilcode.util.SDCardUtils;
 
 /**
  * 描述：全局配置
@@ -33,20 +31,6 @@ public class Constants {
 
     /**
      * ========================================
-     * ********        状态请求码        ********
-     * ========================================
-     */
-    public static final int RESULT_CODE_1 = 101;
-    public static final int RESULT_CODE_2 = 102;
-    public static final int RESULT_CODE_3 = 103;
-    public static final int RESULT_CODE_4 = 104;
-    public static final int RESULT_CODE_5 = 105;
-    public static final int RESULT_CODE_6 = 106;
-    public static final int RESULT_CODE_7 = 107;
-    public static final int RESULT_CODE_8 = 108;
-
-    /**
-     * ========================================
      * ********        sp文件key        ********
      * ========================================
      */
@@ -74,12 +58,6 @@ public class Constants {
      * ********        其他配置        ********
      * =======================================
      */
-
-    /**
-     * 状态栏高度
-     */
-    public static int STATUS_HEIGHT = ConvertUtils.dp2px(25);
-
     /**
      * 图片保存位置
      */

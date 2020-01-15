@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval" >
     <!-- 定义圆角半径为5dip -->
-    <corners android:radius="5dip" />
+    <corners android:radius="5dp" />
     
     <solid android:color="@color/colorPrimary" />
 

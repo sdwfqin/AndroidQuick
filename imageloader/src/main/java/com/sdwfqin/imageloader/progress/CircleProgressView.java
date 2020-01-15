@@ -9,10 +9,11 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Parcelable;
-import androidx.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ProgressBar;
+
+import androidx.annotation.IntDef;
 
 import com.sdwfqin.imageloader.R;
 import com.sdwfqin.imageloader.util.DisplayUtil;

@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
 import android.widget.ImageView;
 
@@ -9,12 +9,12 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.BaseLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.blankj.utilcode.util.ConvertUtils;
-import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.adapter.StrokeCardAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeHistoryAdapter;
-import com.sdwfqin.quickseed.adapter.StrokeTitleAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeOrderAdapter;
+import com.sdwfqin.quickseed.adapter.StrokeTitleAdapter;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,7 +29,7 @@ import butterknife.BindView;
  * @author 张钦
  * @date 2019-06-28
  */
-public class VLayoutSampleActivity extends BaseActivity {
+public class VLayoutSampleActivity extends SampleBaseActivity {
 
     @BindView(R.id.rv_list)
     RecyclerView mRvList;

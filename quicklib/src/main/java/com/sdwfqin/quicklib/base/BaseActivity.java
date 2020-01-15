@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.View;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.arch.QMUIActivity;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
@@ -21,9 +25,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -33,10 +34,10 @@ import io.reactivex.disposables.Disposable;
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends QMUIActivity implements BaseView {
 
     protected Activity mContext;
-    protected LinearLayout mRoot_view;
+    protected LinearLayoutCompat mQuickBaseView;
     /**
      * Rxjava 订阅管理
      */
@@ -44,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * 顶部标题栏
      */
-    protected QMUITopBar mTopBar;
+    protected QMUITopBarLayout mTopBar;
     /**
      * TipDialog
      */
@@ -53,9 +54,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initContentView(R.layout.quick_activity_base);
-        setContentView(getLayout());
-        mTopBar = findViewById(R.id.base_topbar);
+        initContentView(getLayout());
+        mTopBar = findViewById(R.id.quick_base_topbar);
         ButterKnife.bind(this);
         mContext = this;
         AppManager.addActivity(this);
@@ -88,20 +88,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     private void initContentView(@LayoutRes int layoutResID) {
-        ViewGroup viewGroup = findViewById(android.R.id.content);
-        viewGroup.removeAllViews();
-        mRoot_view = new LinearLayout(this);
-        mRoot_view.setOrientation(LinearLayout.VERTICAL);
-        //  add mRoot_view in viewGroup
-        viewGroup.addView(mRoot_view);
-        //  add the layout of BaseActivity in mRoot_view
-        LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
-    }
-
-    @Override
-    public void setContentView(@LayoutRes int layoutResID) {
-        //  added the sub-activity layout id in mRoot_view
-        LayoutInflater.from(this).inflate(layoutResID, mRoot_view, true);
+        View quickBaseViewGroup = this.getLayoutInflater().inflate(R.layout.quick_activity_base, null);
+        mQuickBaseView = quickBaseViewGroup.findViewById(R.id.quick_base_view);
+        LayoutInflater.from(this).inflate(layoutResID, mQuickBaseView, true);
+        setContentView(quickBaseViewGroup);
     }
 
     // ==================== EventBus事件 ====================
@@ -263,7 +253,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
      * @param onPermissionCallback 权限回掉接口
      */
     public void checkPermissions(String[] perms, boolean showDialog, boolean allDialog,
-                                    OnPermissionCallback onPermissionCallback) {
+                                 OnPermissionCallback onPermissionCallback) {
 
         addSubscribe(new RxPermissions(this)
                 .requestEachCombined(perms)

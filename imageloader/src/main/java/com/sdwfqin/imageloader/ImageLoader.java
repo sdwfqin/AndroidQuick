@@ -3,9 +3,10 @@ package com.sdwfqin.imageloader;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
 
 import com.bumptech.glide.load.Transformation;
 import com.sdwfqin.imageloader.progress.OnProgressListener;

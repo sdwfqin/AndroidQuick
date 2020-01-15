@@ -1,7 +1,7 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
-import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.base.SampleBaseActivity;
 
 /**
  * 描述：自定义输入密码或验证码View
@@ -9,7 +9,7 @@ import com.sdwfqin.quickseed.R;
  * @author zhangqin
  * @date 2018/6/12
  */
-public class PayPwdInputActivity extends BaseActivity {
+public class PayPwdInputActivity extends SampleBaseActivity {
 
     @Override
     protected int getLayout() {

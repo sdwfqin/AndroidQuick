@@ -5,11 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.FileUtils;
@@ -17,6 +15,8 @@ import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 import com.sdwfqin.imageloader.ImageLoader;
 import com.sdwfqin.imageloader.progress.CircleProgressView;
 import com.sdwfqin.imageloader.progress.OnProgressListener;
@@ -25,8 +25,6 @@ import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.base.QuickConstants;
 
 import java.io.File;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * 描述：显示图片

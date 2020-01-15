@@ -38,6 +38,7 @@ dependencies {
     api googleDependencies["cardview"]
     api googleDependencies["constraintlayout"]
     api googleDependencies["material"]
+    api googleDependencies["gson"]
 
     api eventDependencies["rxjava"]
     api eventDependencies["rxandroid"]
@@ -48,13 +49,12 @@ dependencies {
 
     api viewDependencies["butterknife"]
     api tencentDependencies["qmui"]
-    // api tencentDependencies["arch"]
+    api tencentDependencies["wechat-sdk-mta"]
+    api tencentDependencies["arch"]
     api utilsDependencies["utilcodex"]
     api utilsDependencies["agentweb"]
-    api imageDependencies["photoview"]
-    api utilsDependencies["gson"]
-    api tencentDependencies["wechat-sdk-mta"]
     api utilsDependencies["rxpermissions"]
+    api imageDependencies["photoview"]
     implementation project(':imageloader')
 }
 

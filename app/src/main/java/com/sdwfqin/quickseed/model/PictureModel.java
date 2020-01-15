@@ -1,4 +1,4 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.model;
 
 import com.sdwfqin.widget.pictureupload.PictureUpModel;
 

@@ -1,7 +1,5 @@
 ### 支持AndroidX，正在测试，欢迎提交issues与pr
 
-### 不支持AndroidX请[切换分支到2.x](https://github.com/sdwfqin/AndroidQuick/tree/2.x)
-
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
 # Gradle（使用前请查看注意事项）:
@@ -41,10 +39,10 @@
     implementation 'com.sdwfqin.quick:widget:1.0.7'
     
 
-> 最低支持api18
+> 最低支持api19
 
-    minSdkVersion 18
-    targetSdkVersion 28
+    minSdkVersion 19
+    targetSdkVersion 29
     
 # 早期版本
 
@@ -62,6 +60,32 @@
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    ```
+    
+# v3.2+ 注意事项！！！
+
+1. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
+2. 因状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
+
+    ``` java
+    // 设置状态栏黑色字体图标
+    QMUIStatusBarHelper.setStatusBarLightMode(mContext);
+    // 设置状态栏白色字体图标
+    QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
+    ```
+
+3. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
+
+    ``` java
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
+    ```
+4. 开启侧划关闭需要在`Application`中添加如下代码：
+
+    ``` java
+    QMUISwipeBackActivityManager.init(this);
     ```
 
 # 关于支付模块支付宝支付的特殊说明

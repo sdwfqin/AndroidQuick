@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.AutoPollRecyclerViewActivity">
+    tools:context=".ui.components.AutoPollRecyclerViewActivity">
 
     <com.sdwfqin.widget.recyclerview.AutoPollRecyclerView
         android:id="@+id/list_v"

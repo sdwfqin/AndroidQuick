@@ -1,5 +1,10 @@
-package com.sdwfqin.quickseed.ui;
+package com.sdwfqin.quickseed.ui.components;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.webview.BaseWebView;
 
 /**
@@ -9,6 +14,13 @@ import com.sdwfqin.quicklib.webview.BaseWebView;
  * @date 2018/6/19
  */
 public class CustomWebviewActivity extends BaseWebView {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        QMUIStatusBarHelper.setStatusBarLightMode(mContext);
+    }
 
     @Override
     public String getUrl() {
