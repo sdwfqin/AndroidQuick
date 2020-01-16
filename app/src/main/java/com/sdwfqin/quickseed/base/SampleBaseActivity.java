@@ -1,9 +1,11 @@
 package com.sdwfqin.quickseed.base;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
@@ -20,13 +22,31 @@ public abstract class SampleBaseActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        if (QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_BLUE) {
-            // 设置状态栏黑色字体图标
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        QMUISkinManager.defaultInstance(this).addSkinChangeListener(mOnSkinChangeListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        QMUISkinManager.defaultInstance(this).removeSkinChangeListener(mOnSkinChangeListener);
+    }
+
+    private QMUISkinManager.OnSkinChangeListener mOnSkinChangeListener = (oldSkin, newSkin) -> {
+        if (newSkin == QMUISkinCustManager.SKIN_BLUE) {
             QMUIStatusBarHelper.setStatusBarLightMode(mContext);
-        } else if (QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_DARK) {
-            // 设置状态栏白色字体图标
+        } else {
             QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
         }
-    }
+    };
+
 }

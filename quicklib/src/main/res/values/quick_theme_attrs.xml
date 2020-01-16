@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- skin attr define-->
+    <!-- topbar -->
+    <attr name="app_primary_color" format="color" />
+    <!-- content-->
+    <!-- primary是主要背景色-->
+    <attr name="app_content_bg_primary_color" format="color" />
+    <attr name="app_content_bg_color" format="color" />
+</resources>

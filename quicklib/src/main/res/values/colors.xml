@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--主题色-->
+    <color name="colorPrimary">#009BE3</color>
+    <!--黑色主题色-->
+    <color name="colorDarkPrimary">#000000</color>
     <!--界面白色背景-->
     <color name="frame_white_background_color">#ffffff</color>
     <!--界面浅灰色背景-->
     <color name="frame_gray_background_color">#F5F5F5</color>
+    <color name="frame_dark_background_color">#49505A</color>
+    <color name="frame_dark_primary_background_color">#212832</color>
     <!--item分割线颜色-->
     <color name="divide_line_color">#cccccc</color>
     <!--黑色字体颜色-->

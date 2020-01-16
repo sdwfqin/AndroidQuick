@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="QuickTheme" parent="QMUI.Compat.NoActionBar">
+
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+
+        <!-- 配置app自己的theme -->
+        <item name="app_primary_color">@color/colorPrimary</item>
+        <item name="app_content_bg_primary_color">@color/frame_white_background_color</item>
+        <item name="app_content_bg_color">@color/frame_gray_background_color</item>
+    </style>
+</resources>

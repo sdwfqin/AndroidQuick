@@ -4,15 +4,16 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.blankj.utilcode.util.Utils;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.sdwfqin.quickseed.R;
 
 public class QMUISkinCustManager {
+
     public static final int SKIN_BLUE = 1;
     public static final int SKIN_DARK = 2;
 
-
     public static void install(Context context) {
-        com.qmuiteam.qmui.skin.QMUISkinManager skinManager = com.qmuiteam.qmui.skin.QMUISkinManager.defaultInstance(context);
+        QMUISkinManager skinManager = QMUISkinManager.defaultInstance(context);
         skinManager.addSkin(SKIN_BLUE, R.style.app_skin_blue);
         skinManager.addSkin(SKIN_DARK, R.style.app_skin_dark);
         boolean isDarkMode = (context.getResources().getConfiguration().uiMode
@@ -28,11 +29,11 @@ public class QMUISkinCustManager {
     }
 
     public static void changeSkin(int index) {
-        com.qmuiteam.qmui.skin.QMUISkinManager.defaultInstance(Utils.getApp()).changeSkin(index);
+        QMUISkinManager.defaultInstance(Utils.getApp()).changeSkin(index);
         QMUISkinPreferenceManager.getInstance(Utils.getApp()).setSkinIndex(index);
     }
 
     public static int getCurrentSkin() {
-        return com.qmuiteam.qmui.skin.QMUISkinManager.defaultInstance(Utils.getApp()).getCurrentSkin();
+        return QMUISkinManager.defaultInstance(Utils.getApp()).getCurrentSkin();
     }
 }
