@@ -51,12 +51,6 @@ public class SampleApplication extends MultiDexApplication {
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
 
         QMUISkinCustManager.install(this);
-
-        QMUISkinManager skinManager = QMUISkinManager.defaultInstance(this);
-        skinManager.addSkin(1, R.style.app_skin_blue);
-        skinManager.addSkin(2, R.style.app_skin_dark);
-        skinManager.changeSkin(QMUISkinCustManager.getCurrentSkin());
-
     }
 
     private void initUtils() {

@@ -3,6 +3,7 @@ package com.sdwfqin.quickseed.utils.skin;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.sdwfqin.quickseed.R;

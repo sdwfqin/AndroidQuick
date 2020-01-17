@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
  * Created by cgspine on 2018/1/14.
  */
 public class QMUISkinPreferenceManager {
+
     private static SharedPreferences sPreferences;
     private static QMUISkinPreferenceManager sSkinPreferenceManager = null;
 

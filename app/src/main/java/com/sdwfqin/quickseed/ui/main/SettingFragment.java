@@ -1,9 +1,6 @@
 package com.sdwfqin.quickseed.ui.main;
 
-import android.content.DialogInterface;
 import android.widget.Toast;
-
-import androidx.appcompat.widget.AppCompatTextView;
 
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
