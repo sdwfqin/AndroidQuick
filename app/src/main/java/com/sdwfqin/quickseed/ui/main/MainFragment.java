@@ -102,6 +102,7 @@ public class MainFragment extends BaseFragment {
                     break;
                 case 9:
                     HintDialog hintDialog = new HintDialog(mContext);
+                    hintDialog.setFollowSkin(true);
                     hintDialog.show();
                     hintDialog.setTitle("热更新测试33333");
                     hintDialog.hideRight();

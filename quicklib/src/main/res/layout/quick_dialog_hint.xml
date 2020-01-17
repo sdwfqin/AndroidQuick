@@ -1,55 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    cardview:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:qmui_skin_background="?attr/app_content_bg_primary_color">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:qmui_skin_background="?attr/app_content_bg_primary_color">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="center"
             android:text="亲，产品已激活成功，\n欢迎使用该产品！"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:qmui_skin_text_color="?attr/app_text_black_color" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/left"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="取消"
-                android:textColor="@color/white" />
+                app:qmui_skin_background="?attr/app_primary_color"
+                app:qmui_skin_text_color="?attr/app_text_white_color" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/right"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="1dp"
                 android:layout_weight="1"
-                android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="去查看"
-                android:textColor="@color/white" />
+                app:qmui_skin_background="?attr/app_primary_color"
+                app:qmui_skin_text_color="?attr/app_text_white_color" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

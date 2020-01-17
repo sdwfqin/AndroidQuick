@@ -8,10 +8,10 @@
         <item name="qmui_skin_support_topbar_separator_color">
             ?attr/qmui_skin_support_color_separator
         </item>
-        <item name="qmui_skin_support_topbar_title_color">@color/qmui_config_color_white</item>
-        <item name="qmui_skin_support_topbar_subtitle_color">@color/qmui_config_color_white</item>
-        <item name="qmui_skin_support_topbar_text_btn_color_state_list">@color/topbar_btn_color</item>
-        <item name="qmui_skin_support_topbar_image_tint_color">@color/qmui_config_color_white</item>
+        <item name="qmui_skin_support_topbar_title_color">?attr/app_text_white_color</item>
+        <item name="qmui_skin_support_topbar_subtitle_color">?attr/app_text_white_color</item>
+        <item name="qmui_skin_support_topbar_image_tint_color">?attr/app_content_bg_primary_color
+        </item>
         <item name="QMUITopBarStyle">@style/QDTopBar</item>
 
         <item name="qmui_config_color_blue">@color/colorPrimary</item>
@@ -29,6 +29,8 @@
         <item name="app_primary_color">@color/colorDarkPrimary</item>
         <item name="app_content_bg_primary_color">@color/frame_dark_background_color</item>
         <item name="app_content_bg_color">@color/frame_dark_primary_background_color</item>
+        <item name="app_text_black_color">@color/text_black_dark_color</item>
+        <item name="app_text_white_color">@color/text_white_dark_color</item>
     </style>
 
 </resources>

@@ -25,7 +25,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-<!--            app:qmui_skin_text_color=""-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/ll_change_skin"
                 android:layout_width="match_parent"
@@ -35,8 +34,9 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:text="换肤"
-                android:textSize="14sp"
-                app:qmui_skin_background="?attr/app_content_bg_primary_color" />
+                android:textSize="16sp"
+                app:qmui_skin_background="?attr/app_content_bg_primary_color"
+                app:qmui_skin_text_color="?attr/app_text_black_color" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

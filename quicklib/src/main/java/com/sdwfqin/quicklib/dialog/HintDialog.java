@@ -1,18 +1,19 @@
 package com.sdwfqin.quicklib.dialog;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.cardview.widget.CardView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.sdwfqin.quicklib.R;
 
 /**
@@ -21,7 +22,7 @@ import com.sdwfqin.quicklib.R;
  * @author 张钦
  * @date 2018/1/16
  */
-public class HintDialog extends Dialog implements View.OnClickListener {
+public class HintDialog extends AppCompatDialog implements View.OnClickListener {
 
     CardView mLayout;
     TextView mDialogTitle;
@@ -30,7 +31,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
 
     private Context mContext;
     private OnDialogClickListener mOnDialogClickListener;
-    private static final String TAG = "HintDialog";
+    private boolean mFollowSkin = false;
 
     public HintDialog(@NonNull Context context) {
         super(context, R.style.transactionDialog);
@@ -57,6 +58,24 @@ public class HintDialog extends Dialog implements View.OnClickListener {
 
         mLeft.setOnClickListener(this);
         mRight.setOnClickListener(this);
+    }
+
+    public void setFollowSkin(boolean followSkin) {
+        mFollowSkin = followSkin;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mFollowSkin) {
+            QMUISkinManager.defaultInstance(getContext()).register(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        QMUISkinManager.defaultInstance(getContext()).unRegister(this);
     }
 
     @Override
@@ -113,7 +132,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mDialogTitle.setText(title);
         } catch (Exception e) {
-            Log.e(TAG, "setTitle: ", e);
+            LogUtils.e("setTitle: ", e);
         }
     }
 
@@ -126,7 +145,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mDialogTitle.setTextColor(titleColor);
         } catch (Exception e) {
-            Log.e(TAG, "setTitleColor: ", e);
+            LogUtils.e("setTitleColor: ", e);
         }
     }
 
@@ -139,7 +158,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mRight.setText(rightText);
         } catch (Exception e) {
-            Log.e(TAG, "setRightText: ", e);
+            LogUtils.e("setRightText: ", e);
         }
     }
 
@@ -152,7 +171,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mRight.setBackgroundColor(rightBgColor);
         } catch (Exception e) {
-            Log.e(TAG, "setRightBgColor: ", e);
+            LogUtils.e("setRightBgColor: ", e);
         }
     }
 
@@ -165,7 +184,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mLeft.setText(leftText);
         } catch (Exception e) {
-            Log.e(TAG, "setLeftText: ", e);
+            LogUtils.e("setLeftText: ", e);
         }
     }
 
@@ -178,7 +197,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mLeft.setBackgroundColor(leftBgColor);
         } catch (Exception e) {
-            Log.e(TAG, "setLeftBgColor: ", e);
+            LogUtils.e("setLeftBgColor: ", e);
         }
     }
 
@@ -189,7 +208,7 @@ public class HintDialog extends Dialog implements View.OnClickListener {
         try {
             mRight.setVisibility(View.GONE);
         } catch (Exception e) {
-            Log.e(TAG, "hideRight: ", e);
+            LogUtils.e("hideRight: ", e);
         }
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:qmui_skin_background="?attr/app_content_bg_color">
 
     <com.sdwfqin.widget.StatusPlaceholderView
         android:layout_width="match_parent"

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    app:qmui_skin_background="?attr/app_content_bg_color"
     tools:context="com.sdwfqin.quickseed.ui.components.PictureUploadActivity">
 
     <com.sdwfqin.widget.pictureupload.PictureUploadView
         android:id="@+id/pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>

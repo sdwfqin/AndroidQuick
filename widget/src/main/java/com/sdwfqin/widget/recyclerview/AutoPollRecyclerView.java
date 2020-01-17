@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,8 +31,16 @@ public class AutoPollRecyclerView extends RecyclerView {
      */
     private boolean canRun;
 
-    public AutoPollRecyclerView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+    public AutoPollRecyclerView(@NonNull Context context) {
+        this(context, null);
+    }
+
+    public AutoPollRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public AutoPollRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
         autoPollTask = new AutoPollTask(this);
     }
 

@@ -9,5 +9,7 @@
         <item name="app_primary_color">@color/colorPrimary</item>
         <item name="app_content_bg_primary_color">@color/frame_white_background_color</item>
         <item name="app_content_bg_color">@color/frame_gray_background_color</item>
+        <item name="app_text_black_color">@color/text_black_color</item>
+        <item name="app_text_white_color">@color/text_white_color</item>
     </style>
 </resources>

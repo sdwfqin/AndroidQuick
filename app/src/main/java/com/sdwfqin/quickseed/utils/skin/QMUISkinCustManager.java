@@ -17,16 +17,17 @@ public class QMUISkinCustManager {
         QMUISkinManager skinManager = QMUISkinManager.defaultInstance(context);
         skinManager.addSkin(SKIN_BLUE, R.style.app_skin_blue);
         skinManager.addSkin(SKIN_DARK, R.style.app_skin_dark);
-        boolean isDarkMode = (context.getResources().getConfiguration().uiMode
-                & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
         int storeSkinIndex = QMUISkinPreferenceManager.getInstance(context).getSkinIndex();
-        if (isDarkMode && storeSkinIndex != SKIN_DARK) {
-            skinManager.changeSkin(SKIN_DARK);
-        } else if (!isDarkMode && storeSkinIndex == SKIN_DARK) {
-            skinManager.changeSkin(SKIN_BLUE);
-        }else{
-            skinManager.changeSkin(storeSkinIndex);
-        }
+//        boolean isDarkMode = (context.getResources().getConfiguration().uiMode
+//                & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+//        if (isDarkMode && storeSkinIndex != SKIN_DARK) {
+//            skinManager.changeSkin(SKIN_DARK);
+//        } else if (!isDarkMode && storeSkinIndex == SKIN_DARK) {
+//            skinManager.changeSkin(SKIN_BLUE);
+//        }else{
+//            skinManager.changeSkin(storeSkinIndex);
+//        }
+        skinManager.changeSkin(storeSkinIndex);
     }
 
     public static void changeSkin(int index) {

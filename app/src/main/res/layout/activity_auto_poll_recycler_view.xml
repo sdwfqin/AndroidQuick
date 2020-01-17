@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    app:qmui_skin_background="?attr/app_content_bg_color"
     tools:context=".ui.components.AutoPollRecyclerViewActivity">
 
     <com.sdwfqin.widget.recyclerview.AutoPollRecyclerView
         android:id="@+id/list_v"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        app:qmui_skin_background="?attr/app_content_bg_color" />
 
     <com.sdwfqin.widget.recyclerview.AutoPollRecyclerView
         android:id="@+id/list_h"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

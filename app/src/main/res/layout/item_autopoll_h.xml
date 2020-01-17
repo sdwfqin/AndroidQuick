@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/text"
     android:layout_width="30dp"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical" />
+    android:orientation="vertical"
+    app:qmui_skin_text_color="?attr/app_text_black_color" />
