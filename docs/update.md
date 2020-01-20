@@ -1,5 +1,13 @@
 # 更新文档
 
+### 2020/01/19
+
+1. 升级QMUI到2.0，支持侧滑返回，支持基于uiMode的换肤
+2. 升级BaseRecyclerViewAdapterHelper到3.0，不完全向前兼容
+3. retrofit 2.7.1
+4. glide:4.11.0
+5. okhttp:4.2.2
+
 ### 2019/04/14
 
 1. 修改`quicklib`目录结构

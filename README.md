@@ -7,18 +7,18 @@
     // 支持AndroidX
     
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:3.0.3'
+    implementation 'com.sdwfqin.quicklib:quicklib:3.2.0'
     // 如果使用butterknife请添加【可选】
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     
     // 支付模块
     implementation 'com.sdwfqin.quicklib:paylib:3.1.0'
     
     // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageloader:3.0.3'
+    implementation 'com.sdwfqin.quick:imageloader:3.2.0'
     
     // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:3.0.3'
+    implementation 'com.sdwfqin.quick:widget:3.2.0'
     
     ==================== AndroidX 分界线 ====================
     
@@ -50,9 +50,9 @@
 
 # 需要注意！！！
 
-1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，可参考`app`项目中的相应代码。
+1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，可参考`app`项目中的相应代码。V3.2+使用的`QMUI`2.0或更高版本，请参考`app`中的`theme.xml`，主题请继承`QuickTheme`
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
-3. `quicklib`、`qrscan`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
+3. `quicklib`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
 4. 请在module的`build.gradle#android`中添加如下代码：
 
     ``` groovy
@@ -180,6 +180,7 @@
 | AmountView | 购物车商品数量选择 |
 | ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用[flexbox-layout](https://github.com/google/flexbox-layout)代替 |
 | ControlViewPager | 可动态禁止（允许）左滑/右滑的ViewPager |
+| StatusPlaceholderView | 沉浸式状态栏占位 |
 
 4. imageloader
 

@@ -69,7 +69,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.components.CameraxDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true" />
         <activity
             android:name=".ui.components.VLayoutSampleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />

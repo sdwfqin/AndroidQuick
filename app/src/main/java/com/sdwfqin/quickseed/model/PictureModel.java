@@ -24,4 +24,12 @@ public class PictureModel extends PictureUpModel {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+
+    @Override
+    public String toString() {
+        return "PictureModel{" +
+                "imgPath='" + imgPath + '\'' +
+                ", image=" + image +
+                '}';
+    }
 }

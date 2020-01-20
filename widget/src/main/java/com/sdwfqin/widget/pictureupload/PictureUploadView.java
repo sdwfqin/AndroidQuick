@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.sdwfqin.widget.R;
 
 import java.util.ArrayList;
@@ -170,7 +171,8 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
             mDataList.add(null);
         }
         mDataList = data;
-        mUploadAdapter.setNewData(mDataList);
+        mUploadAdapter.notifyDataSetChanged();
+//        mUploadAdapter.setNewData(mDataList);
     }
 
     /**
@@ -186,7 +188,10 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
             // 如果数量小于最大值，添加一个null作为占位符
             mDataList.add(null);
         }
-        mUploadAdapter.setNewData(mDataList);
+        LogUtils.e(mDataList);
+        // fixme brvah3
+        mUploadAdapter.notifyDataSetChanged();
+//        mUploadAdapter.setNewData(mDataList);
     }
 
     /**

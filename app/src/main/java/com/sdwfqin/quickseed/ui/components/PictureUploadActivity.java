@@ -3,6 +3,7 @@ package com.sdwfqin.quickseed.ui.components;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.model.PictureModel;
@@ -80,7 +81,6 @@ public class PictureUploadActivity extends SampleBaseActivity {
                         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
                         sendBroadcast(mediaScanIntent);
                     }
-
                     break;
                 default:
             }

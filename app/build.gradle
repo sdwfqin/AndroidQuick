@@ -76,7 +76,7 @@ dependencies {
     annotationProcessor compilerDependencies["butterknife-compiler"]
     annotationProcessor compilerDependencies["arch-compiler"]
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
 }
 
 //apply from: "tinker_config.gradle"

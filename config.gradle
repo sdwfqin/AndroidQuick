@@ -23,17 +23,17 @@ ext {
 
     eventDependencies = [
             // rxjava
-            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.15",
+            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.17",
             "rxandroid": "io.reactivex.rxjava2:rxandroid:2.1.1",
             // eventbus
             "eventbus" : "org.greenrobot:eventbus:3.1.1",
     ]
 
     retrofitDependencies = [
-            "retrofit"         : "com.squareup.retrofit2:retrofit:2.6.1",
-            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.6.1",
-            "converter-scalars": "com.squareup.retrofit2:converter-scalars:2.6.1",
-            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:2.6.1",
+            "retrofit"         : "com.squareup.retrofit2:retrofit:2.7.1",
+            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.7.1",
+            "converter-scalars": "com.squareup.retrofit2:converter-scalars:2.7.1",
+            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:2.7.1",
     ]
 
     okhttpDependencies = [
@@ -43,18 +43,18 @@ ext {
 
     viewDependencies = [
             // brvah
-            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx",
+            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11",
             // smartrefresh
             "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
             // pickerview
             "pickerview"  : "com.contrarywind:Android-PickerView:4.1.9",
             // butterknife
-            "butterknife" : "com.jakewharton:butterknife:10.2.0",
+            "butterknife" : "com.jakewharton:butterknife:10.2.1",
     ]
 
     imageDependencies = [
-            "glide"            : "com.github.bumptech.glide:glide:4.10.0",
-            "glide-integration": "com.github.bumptech.glide:okhttp3-integration:4.10.0",
+            "glide"            : "com.github.bumptech.glide:glide:4.11.0",
+            "glide-integration": "com.github.bumptech.glide:okhttp3-integration:4.11.0",
             // photoView 图片放大
             "photoview"        : "com.github.chrisbanes:PhotoView:2.3.0",
             // matisse
@@ -82,8 +82,8 @@ ext {
     ]
 
     compilerDependencies = [
-            "glide-compiler"      : "com.github.bumptech.glide:compiler:4.10.0",
-            "butterknife-compiler": "com.jakewharton:butterknife-compiler:10.1.0",
-            "arch-compiler"       : "com.qmuiteam:arch-compiler:2.0.0-alpha01",
+            "glide-compiler"      : "com.github.bumptech.glide:compiler:4.11.0",
+            "butterknife-compiler": "com.jakewharton:butterknife-compiler:10.2.1",
+            "arch-compiler"       : "com.qmuiteam:arch-compiler:2.0.0-alpha03",
     ]
 }

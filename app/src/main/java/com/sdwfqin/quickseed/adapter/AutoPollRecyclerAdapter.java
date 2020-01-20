@@ -1,6 +1,6 @@
 package com.sdwfqin.quickseed.adapter;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.widget.recyclerview.BaseAutoPollAdapter;
 
