@@ -1,7 +1,8 @@
 package com.sdwfqin.quickseed.ui.components;
 
+import android.content.Intent;
 import android.graphics.Matrix;
-import android.util.Rational;
+import android.net.Uri;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
@@ -19,10 +20,13 @@ import androidx.camera.core.PreviewConfig;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 
@@ -39,6 +43,8 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
     TextureView mViewFinder;
     @BindView(R.id.capture_button)
     ImageButton mCaptureButton;
+
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected int getLayout() {
@@ -61,8 +67,8 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
 
         PreviewConfig previewConfig = new PreviewConfig
                 .Builder()
-                .setTargetAspectRatio(new Rational(1, 1))
-                .setTargetResolution(new Size(640, 640))
+                // .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+                .setTargetResolution(new Size(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight()))
                 .build();
 
         Preview preview = new Preview(previewConfig);
@@ -79,7 +85,6 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
 
         // 捕获图像配置
         ImageCaptureConfig imageCaptureConfig = new ImageCaptureConfig.Builder()
-                .setTargetAspectRatio(new Rational(1, 1))
                 // We don't set a resolution for image capture; instead, we
                 // select a capture mode which will infer the appropriate
                 // resolution based on aspect ration and requested mode
@@ -90,12 +95,15 @@ public class CameraxDemoActivity extends BaseActivity implements LifecycleOwner 
         ImageCapture imageCapture = new ImageCapture(imageCaptureConfig);
         mCaptureButton.setOnClickListener(v -> {
             File file = new File(getExternalMediaDirs()[0], System.currentTimeMillis() + ".jpg");
-            imageCapture.takePicture(file, new ImageCapture.OnImageSavedListener() {
+            imageCapture.takePicture(file, executor, new ImageCapture.OnImageSavedListener() {
                 @Override
                 public void onImageSaved(@NonNull File file) {
                     String msg = "图片保存成功: " + file.getAbsolutePath();
                     showMsg(msg);
                     LogUtils.d(msg);
+                    Uri contentUri = Uri.fromFile(new File(file.getAbsolutePath()));
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
+                    sendBroadcast(mediaScanIntent);
                 }
 
                 @Override
