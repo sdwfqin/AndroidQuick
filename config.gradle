@@ -23,29 +23,31 @@ ext {
 
     eventDependencies = [
             // rxjava
-            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.17",
+            "rxjava"   : "io.reactivex.rxjava2:rxjava:2.2.19",
             "rxandroid": "io.reactivex.rxjava2:rxandroid:2.1.1",
+            // "rxandroid": "io.reactivex.rxjava3:rxandroid:3.0.0",
+            // "rxjava"   : "io.reactivex.rxjava3:rxjava:3.0.1",
             // eventbus
-            "eventbus" : "org.greenrobot:eventbus:3.1.1",
+            "eventbus" : "org.greenrobot:eventbus:3.2.0",
     ]
 
     retrofitDependencies = [
-            "retrofit"         : "com.squareup.retrofit2:retrofit:2.7.1",
-            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.7.1",
-            "converter-scalars": "com.squareup.retrofit2:converter-scalars:2.7.1",
-            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:2.7.1",
+            "retrofit"         : "com.squareup.retrofit2:retrofit:2.7.2",
+            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.7.2",
+            "converter-scalars": "com.squareup.retrofit2:converter-scalars:2.7.2",
+            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:2.7.2",
     ]
 
     okhttpDependencies = [
-            "okhttp"             : "com.squareup.okhttp3:okhttp:4.2.2",
-            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.2.2",
+            "okhttp"             : "com.squareup.okhttp3:okhttp:4.4.1",
+            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.4.1",
     ]
 
     viewDependencies = [
             // brvah
-            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta11",
+            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1",
             // smartrefresh
-            "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0",
+            "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.1",
             // pickerview
             "pickerview"  : "com.contrarywind:Android-PickerView:4.1.9",
             // butterknife
@@ -68,13 +70,13 @@ ext {
             // utils
             "utilcodex"    : "com.blankj:utilcodex:1.26.0",
             // agentweb
-            "agentweb"     : "com.just.agentweb:agentweb:4.1.2",
+            "agentweb"     : "com.just.agentweb:agentweb:4.1.3",
     ]
 
     tencentDependencies = [
             // qmui
-            "qmui"               : "com.qmuiteam:qmui:2.0.0-alpha03",
-            "arch"               : "com.qmuiteam:arch:2.0.0-alpha03",
+            "qmui"               : "com.qmuiteam:qmui:2.0.0-alpha04",
+            "arch"               : "com.qmuiteam:arch:2.0.0-alpha04",
             // 微信
             "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.4.0",
             // bugly
@@ -84,6 +86,6 @@ ext {
     compilerDependencies = [
             "glide-compiler"      : "com.github.bumptech.glide:compiler:4.11.0",
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:10.2.1",
-            "arch-compiler"       : "com.qmuiteam:arch-compiler:2.0.0-alpha03",
+            "arch-compiler"       : "com.qmuiteam:arch-compiler:2.0.0-alpha04",
     ]
 }
