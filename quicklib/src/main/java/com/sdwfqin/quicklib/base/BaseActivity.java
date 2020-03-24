@@ -10,31 +10,35 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
-import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends QMUIActivity implements BaseView {
+public abstract class BaseActivity extends QMUIActivity implements BaseView, EasyPermissions.PermissionCallbacks {
+
+    private static final int PERMS_REQUEST_CODE = 1122;
 
     protected Activity mContext;
     protected LinearLayoutCompat mQuickBaseView;
@@ -50,6 +54,13 @@ public abstract class BaseActivity extends QMUIActivity implements BaseView {
      * TipDialog
      */
     protected QMUITipDialog mQmuiTipDialog;
+    /**
+     * 权限相关
+     */
+    private String[] mPerms;
+    private OnPermissionCallback mOnPermissionCallback;
+    private boolean mShowPermissionsDialog;
+    private boolean mLoopPermissionsDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -240,75 +251,91 @@ public abstract class BaseActivity extends QMUIActivity implements BaseView {
      * @param perms
      * @param onPermissionCallback
      */
-    public void checkPermissionsSample(String[] perms, OnPermissionCallback onPermissionCallback) {
-        checkPermissions(perms, false, false, onPermissionCallback);
+    public void initCheckPermissions(String[] perms, OnPermissionCallback onPermissionCallback) {
+        initCheckPermissions(perms, false, false, onPermissionCallback);
+    }
+
+    /**
+     * 初始化权限检查
+     *
+     * @param perms                 权限列表
+     * @param showPermissionsDialog true：拒绝显示弹窗
+     * @param loopPermissionsDialog true：弹窗关闭继续弹出弹窗
+     * @param onPermissionCallback  权限回掉接口
+     */
+    public void initCheckPermissions(String[] perms, boolean showPermissionsDialog, boolean loopPermissionsDialog,
+                                     OnPermissionCallback onPermissionCallback) {
+        mPerms = perms;
+        mShowPermissionsDialog = showPermissionsDialog;
+        mLoopPermissionsDialog = loopPermissionsDialog;
+        mOnPermissionCallback = onPermissionCallback;
+
+        checkPermissions();
     }
 
     /**
      * 检查权限是否全部获取
-     *
-     * @param perms                权限列表
-     * @param showDialog           true：拒绝显示弹窗
-     * @param allDialog            true：弹窗关闭继续弹出弹窗
-     * @param onPermissionCallback 权限回掉接口
      */
-    public void checkPermissions(String[] perms, boolean showDialog, boolean allDialog,
-                                 OnPermissionCallback onPermissionCallback) {
+    @AfterPermissionGranted(PERMS_REQUEST_CODE)
+    public void checkPermissions() {
 
-        addSubscribe(new RxPermissions(this)
-                .requestEachCombined(perms)
-                .subscribe(permission -> {
-                    if (permission.granted) {
-                        onPermissionCallback.onSuccess();
-                    } else if (permission.shouldShowRequestPermissionRationale) {
-                        if (showDialog) {
-                            showPermissionsDialog(perms, false, allDialog, onPermissionCallback);
-                        } else {
-                            onPermissionCallback.onError();
-                        }
-                    } else {
-                        if (showDialog) {
-                            showPermissionsDialog(perms, true, allDialog, onPermissionCallback);
-                        } else {
-                            onPermissionCallback.onError();
-                        }
-                    }
-                }));
+        if (EasyPermissions.hasPermissions(this, mPerms)) {
+            // Already have permission, do the thing
+            mOnPermissionCallback.onSuccess();
+        } else {
+            // Do not have permissions, request them now
+            if (mShowPermissionsDialog) {
+                EasyPermissions.requestPermissions(this, getString(R.string.quick_permissions_check_error),
+                        PERMS_REQUEST_CODE, mPerms);
+            } else {
+                mOnPermissionCallback.onError();
+            }
+        }
     }
 
-    /**
-     * 拒绝权限弹窗
-     *
-     * @param allDialog
-     */
-    private void showPermissionsDialog(String[] perms, boolean isNever, boolean allDialog, OnPermissionCallback onPermissionCallback) {
-        QMUIDialog.MessageDialogBuilder messageDialogBuilder = new QMUIDialog.MessageDialogBuilder(mContext);
-        messageDialogBuilder
-                .setMessage("获取权限失败！")
-                .addAction("开启权限", (dialog, index) -> {
-                    if (!isNever) {
-                        dialog.dismiss();
-                        checkPermissions(perms, true, allDialog, onPermissionCallback);
-                    } else {
-                        if (PermissionUtils.isGranted(perms)) {
-                            onPermissionCallback.onSuccess();
-                            dialog.dismiss();
-                        } else {
-                            PermissionUtils.launchAppDetailsSettings();
-                        }
-                    }
-                })
-                .addAction("取消", (dialog, index) -> {
-                    if (allDialog) {
-                        showPermissionsDialog(perms, isNever, true, onPermissionCallback);
-                    } else {
-                        onPermissionCallback.onError();
-                    }
-                    dialog.dismiss();
-                })
-                .setCanceledOnTouchOutside(false)
-                .setCancelable(false)
-                .show();
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        // Some permissions have been granted
+        if (perms.size() >= mPerms.length) {
+            mOnPermissionCallback.onSuccess();
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        // Some permissions have been denied
+        if (mLoopPermissionsDialog) {
+            if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+                AppSettingsDialog.Builder builder = new AppSettingsDialog.Builder(this);
+                AppSettingsDialog appSettingsDialog = builder.setTitle(R.string.quick_permissions_dialog_title_settings)
+                        .setRationale(R.string.quick_permissions_dialog_rationale_ask_again)
+                        .setNegativeButton(R.string.quick_permissions_dialog_cancel)
+                        .setPositiveButton(R.string.quick_permissions_dialog_to_setting)
+                        .build();
+                appSettingsDialog.show();
+            } else {
+                checkPermissions();
+            }
+        } else {
+            mOnPermissionCallback.onError();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            // Do something after user returned from app settings screen, like showing a Toast.
+            checkPermissions();
+        }
     }
 
     // ==================== 提供的接口 ====================

@@ -7,7 +7,7 @@
     // 支持AndroidX
     
     // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:3.2.0'
+    implementation 'com.sdwfqin.quicklib:quicklib:3.3.0'
     // 如果使用butterknife请添加【可选】
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     

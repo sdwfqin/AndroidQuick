@@ -96,16 +96,16 @@ public class MainActivity extends SampleBaseActivity {
     private void getPermissions() {
 
         String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-        checkPermissions(perms, true, true, new OnPermissionCallback() {
+        initCheckPermissions(perms, true, false, new OnPermissionCallback() {
             @Override
             public void onSuccess() {
                 Toast.makeText(mContext, "取得权限", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onError() {
                 Toast.makeText(mContext, "没有取得权限", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

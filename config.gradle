@@ -1,6 +1,11 @@
 ext {
 
-    vlayout = "1.2.31"
+    qmui = "2.0.0-alpha04"
+    butterknife = "10.2.1"
+    okhttp = "4.4.1"
+    retrofit = "2.8.0"
+    glide = "4.11.0"
+    vlayout = "1.2.36"
 
     android = [
             compileSdkVersion: 29,
@@ -32,15 +37,15 @@ ext {
     ]
 
     retrofitDependencies = [
-            "retrofit"         : "com.squareup.retrofit2:retrofit:2.7.2",
-            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.7.2",
-            "converter-scalars": "com.squareup.retrofit2:converter-scalars:2.7.2",
-            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:2.7.2",
+            "retrofit"         : "com.squareup.retrofit2:retrofit:$retrofit",
+            "converter-gson"   : "com.squareup.retrofit2:converter-gson:$retrofit",
+            "converter-scalars": "com.squareup.retrofit2:converter-scalars:$retrofit",
+            "adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:$retrofit",
     ]
 
     okhttpDependencies = [
-            "okhttp"             : "com.squareup.okhttp3:okhttp:4.4.1",
-            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.4.1",
+            "okhttp"             : "com.squareup.okhttp3:okhttp:$okhttp",
+            "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:$okhttp",
     ]
 
     viewDependencies = [
@@ -51,12 +56,12 @@ ext {
             // pickerview
             "pickerview"  : "com.contrarywind:Android-PickerView:4.1.9",
             // butterknife
-            "butterknife" : "com.jakewharton:butterknife:10.2.1",
+            "butterknife" : "com.jakewharton:butterknife:$butterknife",
     ]
 
     imageDependencies = [
-            "glide"            : "com.github.bumptech.glide:glide:4.11.0",
-            "glide-integration": "com.github.bumptech.glide:okhttp3-integration:4.11.0",
+            "glide"            : "com.github.bumptech.glide:glide:$glide",
+            "glide-integration": "com.github.bumptech.glide:okhttp3-integration:$glide",
             // photoView 图片放大
             "photoview"        : "com.github.chrisbanes:PhotoView:2.3.0",
             // matisse
@@ -65,18 +70,18 @@ ext {
     ]
 
     utilsDependencies = [
-            // rxpermissions
-            "rxpermissions": "com.github.tbruyelle:rxpermissions:0.10.2",
+            // easypermissions
+            "easypermissions": "pub.devrel:easypermissions:3.0.0",
             // utils
-            "utilcodex"    : "com.blankj:utilcodex:1.26.0",
+            "utilcodex"      : "com.blankj:utilcodex:1.26.0",
             // agentweb
-            "agentweb"     : "com.just.agentweb:agentweb:4.1.3",
+            "agentweb"       : "com.just.agentweb:agentweb:4.1.3",
     ]
 
     tencentDependencies = [
             // qmui
-            "qmui"               : "com.qmuiteam:qmui:2.0.0-alpha04",
-            "arch"               : "com.qmuiteam:arch:2.0.0-alpha04",
+            "qmui"               : "com.qmuiteam:qmui:$qmui",
+            "arch"               : "com.qmuiteam:arch:$qmui",
             // 微信
             "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.4.0",
             // bugly
@@ -84,8 +89,8 @@ ext {
     ]
 
     compilerDependencies = [
-            "glide-compiler"      : "com.github.bumptech.glide:compiler:4.11.0",
-            "butterknife-compiler": "com.jakewharton:butterknife-compiler:10.2.1",
-            "arch-compiler"       : "com.qmuiteam:arch-compiler:2.0.0-alpha04",
+            "glide-compiler"      : "com.github.bumptech.glide:compiler:$glide",
+            "butterknife-compiler": "com.jakewharton:butterknife-compiler:$butterknife",
+            "arch-compiler"       : "com.qmuiteam:arch-compiler:$qmui",
     ]
 }
