@@ -1,5 +1,13 @@
 <resources>
     <!--<string name="app_name">quickLib</string>-->
+
+    <string name="quick_cancel">取消</string>
+    <string name="quick_img_save">保存图片到手机</string>
+    <string name="quick_img_save_success">图片保存成功</string>
+    <string name="quick_img_save_error">图片保存失败</string>
+    <string name="quick_args_get_error">参数获取失败</string>
+    <string name="quick_sd_not_found">内存卡不可用</string>
+
     <string name="quick_permissions_check_error">获取权限失败！</string>
     <string name="quick_permissions_dialog_cancel">取消</string>
     <string name="quick_permissions_dialog_to_setting">去设置</string>

@@ -82,7 +82,7 @@ public class ImagePreviewActivity extends BaseActivity {
             mImageList = this.getIntent().getStringArrayListExtra("data");
             position = this.getIntent().getIntExtra("position", 0);
         } else {
-            showMsg("参数获取失败");
+            showMsg(getString(R.string.quick_args_get_error));
             finish();
         }
 

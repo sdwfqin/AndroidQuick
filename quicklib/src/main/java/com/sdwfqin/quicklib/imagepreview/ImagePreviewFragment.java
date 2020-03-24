@@ -124,22 +124,22 @@ public class ImagePreviewFragment extends BaseFragment {
                     BitmapDrawable bitmapDrawable = (BitmapDrawable) mImage.getDrawable();
                     byte[] bitmap2Bytes = ImageUtils.bitmap2Bytes(bitmapDrawable.getBitmap(), Bitmap.CompressFormat.JPEG);
                     if (FileIOUtils.writeFileFromBytesByStream(filePath, bitmap2Bytes)) {
-                        Snackbar.make(mView, "图片保存成功", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(mView, R.string.quick_img_save_success, Snackbar.LENGTH_SHORT).show();
                         Uri contentUri = Uri.fromFile(new File(filePath));
                         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
                         mContext.sendBroadcast(mediaScanIntent);
                     } else {
-                        throw new Exception("图片保存失败");
+                        throw new Exception(getString(R.string.quick_img_save_error));
                     }
                 } else {
-                    throw new Exception("图片保存失败");
+                    throw new Exception(getString(R.string.quick_img_save_error));
                 }
             } catch (Exception e) {
                 LogUtils.e(e);
                 showMsg(e.getMessage());
             }
         } else {
-            showMsg("内存卡不可用");
+            showMsg(getString(R.string.quick_sd_not_found));
         }
     }
 }

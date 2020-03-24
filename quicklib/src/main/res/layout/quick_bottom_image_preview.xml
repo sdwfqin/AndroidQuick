@@ -16,7 +16,7 @@
             android:layout_height="45dp"
             android:background="@color/white"
             android:gravity="center"
-            android:text="保存图片到手机" />
+            android:text="@string/quick_img_save" />
 
     </LinearLayout>
 
@@ -32,7 +32,7 @@
             android:layout_height="45dp"
             android:background="@color/white"
             android:gravity="center"
-            android:text="取消" />
+            android:text="@string/quick_cancel" />
 
     </LinearLayout>
 
