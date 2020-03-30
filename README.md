@@ -82,7 +82,7 @@
         return false;
     }
     ```
-4. 开启侧划关闭需要在`Application`中添加如下代码：
+4. 需要在`Application`中添加如下代码：
 
     ``` java
     QMUISwipeBackActivityManager.init(this);
