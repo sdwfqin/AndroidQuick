@@ -41,10 +41,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // 添加 CameraX core
-    implementation "androidx.camera:camera-core:1.0.0-alpha06"
-    // 添加 CameraX Camera2 API 互操作支持
-    implementation "androidx.camera:camera-camera2:1.0.0-alpha06"
+    def camerax_version = "1.0.0-beta01"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-view:1.0.0-alpha08"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 
     implementation retrofitDependencies["retrofit"]
     implementation retrofitDependencies["converter-gson"]
