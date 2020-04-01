@@ -18,6 +18,7 @@ import androidx.camera.core.CameraXConfig;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
@@ -29,6 +30,7 @@ import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 
 import java.io.File;
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
@@ -127,12 +129,18 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
         mImageAnalysis = new ImageAnalysis.Builder()
                 // 分辨率
                 .setTargetResolution(new Size(1280, 720))
+                // 非阻塞模式
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build();
 
         mImageAnalysis.setAnalyzer(executor, image -> {
             int rotationDegrees = image.getImageInfo().getRotationDegrees();
             LogUtils.e("Analysis#rotationDegrees", rotationDegrees);
+            ImageProxy.PlaneProxy[] planes = image.getPlanes();
+
+            ByteBuffer buffer = planes[0].getBuffer();
+            // TODO: 分析完成后关闭图像参考，以避免阻塞其他图像的产生
+            // image.close();
         });
     }
 
