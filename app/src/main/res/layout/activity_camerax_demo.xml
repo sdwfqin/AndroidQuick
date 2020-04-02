@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.components.CameraxDemoActivity">
 
-    <androidx.camera.view.PreviewView
+    <com.sdwfqin.quickseed.view.CameraxCustomPreviewView
         android:id="@+id/view_finder"
         android:layout_width="0dp"
         android:layout_height="0dp"

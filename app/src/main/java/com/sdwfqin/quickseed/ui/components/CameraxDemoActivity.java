@@ -1,5 +1,6 @@
 package com.sdwfqin.quickseed.ui.components;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.camera.camera2.Camera2Config;
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
+import androidx.camera.core.CameraControl;
+import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.CameraXConfig;
 import androidx.camera.core.ImageAnalysis;
@@ -20,14 +23,16 @@ import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
+import androidx.camera.core.ZoomState;
 import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.view.CameraxCustomPreviewView;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -47,7 +52,7 @@ import butterknife.OnClick;
 public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.Provider {
 
     @BindView(R.id.view_finder)
-    PreviewView mViewFinder;
+    CameraxCustomPreviewView mViewFinder;
     @BindView(R.id.capture_button)
     ImageButton mCaptureButton;
 
@@ -55,6 +60,8 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
     private ImageCapture mImageCapture;
     private ImageAnalysis mImageAnalysis;
     private Executor executor;
+    private CameraInfo mCameraInfo;
+    private CameraControl mCameraControl;
 
     @Override
     protected int getLayout() {
@@ -100,8 +107,13 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
 
         Camera camera = cameraProvider.bindToLifecycle(this, cameraSelector, mImageCapture, mImageAnalysis, preview);
 
+        mCameraInfo = camera.getCameraInfo();
+        mCameraControl = camera.getCameraControl();
+
+        initCameraListener();
+
         // TODO 对焦
-//        CameraControl cameraControl = camera.getCameraControl();
+//        cameraControl.setZoomRatio()
 //        MeteringPointFactory factory = new SurfaceOrientedMeteringPointFactory(150, 150);
 //        MeteringPoint point = factory.createPoint(50, 50);
 //        FocusMeteringAction action = new FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
@@ -119,6 +131,48 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
 //            } catch (Exception e) {
 //            }
 //        }, executor);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void initCameraListener() {
+        LiveData<ZoomState> zoomState = mCameraInfo.getZoomState();
+        float maxZoomRatio = zoomState.getValue().getMaxZoomRatio();
+        float minZoomRatio = zoomState.getValue().getMinZoomRatio();
+        LogUtils.e(maxZoomRatio);
+        LogUtils.e(minZoomRatio);
+
+        mViewFinder.setCustomTouchListener(new CameraxCustomPreviewView.CustomTouchListener() {
+            @Override
+            public void zoom() {
+                float zoomRatio = zoomState.getValue().getZoomRatio();
+                if (zoomRatio < maxZoomRatio) {
+                    mCameraControl.setZoomRatio((float) (zoomRatio + 0.1));
+                }
+            }
+
+            @Override
+            public void ZoomOut() {
+                float zoomRatio = zoomState.getValue().getZoomRatio();
+                if (zoomRatio > minZoomRatio) {
+                    mCameraControl.setZoomRatio((float) (zoomRatio - 0.1));
+                }
+            }
+
+            @Override
+            public void click(float x, float y) {
+
+            }
+
+            @Override
+            public void doubleClick(float x, float y) {
+
+            }
+
+            @Override
+            public void longClick(float x, float y) {
+
+            }
+        });
     }
 
     /**
@@ -139,7 +193,7 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
             ImageProxy.PlaneProxy[] planes = image.getPlanes();
 
             ByteBuffer buffer = planes[0].getBuffer();
-            // TODO: 分析完成后关闭图像参考，以避免阻塞其他图像的产生
+            // TODO: 分析完成后关闭图像参考，否则会阻塞其他图像的产生
             // image.close();
         });
     }
