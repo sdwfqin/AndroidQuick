@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ public class CameraXCustomPreviewView extends PreviewView {
      */
     private float currentDistance = 0;
     private float lastDistance = 0;
+//    private ScaleGestureDetector mScaleGestureDetector;
 
     /**
      * 缩放监听
@@ -81,6 +83,8 @@ public class CameraXCustomPreviewView extends PreviewView {
 
         mGestureDetector = new GestureDetector(context, onGestureListener);
         mGestureDetector.setOnDoubleTapListener(onDoubleTapListener);
+
+//        mScaleGestureDetector = new ScaleGestureDetector(context, onScaleGestureListener);
         // 解决长按屏幕无法拖动,但是会造成无法识别长按事件
         // mGestureDetector.setIsLongpressEnabled(false);
     }
@@ -91,50 +95,26 @@ public class CameraXCustomPreviewView extends PreviewView {
         return mGestureDetector.onTouchEvent(event);
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                currentDistance = 0;
-//                lastDistance = 0;
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                // 大于两个触摸点
-//                if (event.getPointerCount() >= 2) {
-//
-//                    //event中封存了所有屏幕被触摸的点的信息，第一个触摸的位置可以通过event.getX(0)/getY(0)得到
-//                    float offSetX = event.getX(0) - event.getX(1);
-//                    float offSetY = event.getY(0) - event.getY(1);
-//                    //运用三角函数的公式，通过计算X,Y坐标的差值，计算两点间的距离
-//                    currentDistance = (float) Math.sqrt(offSetX * offSetX + offSetY * offSetY);
-//                    if (lastDistance == 0) {//如果是第一次进行判断
-//                        lastDistance = currentDistance;
-//                    } else {
-//                        if (currentDistance - lastDistance > 10) {
-//                            // 放大
-//                            if (mZoomListener != null) {
-//                                mZoomListener.zoom();
-//                            }
-//                        } else if (lastDistance - currentDistance > 10) {
-//                            // 缩小
-//                            if (mZoomListener != null) {
-//                                mZoomListener.ZoomOut();
-//                            }
-//                        }
-//                    }
-//                    //在一次缩放操作完成后，将本次的距离赋值给lastDistance，以便下一次判断
-//                    //但这种方法写在move动作中，意味着手指一直没有抬起，监控两手指之间的变化距离超过10
-//                    //就执行缩放操作，不是在两次点击之间的距离变化来判断缩放操作
-//                    //故这种将本次距离留待下一次判断的方法，不能在两次点击之间使用
-//                    lastDistance = currentDistance;
-//                }
-//                break;
+    /**
+     * 缩放监听
+     */
+//    ScaleGestureDetector.OnScaleGestureListener onScaleGestureListener = new ScaleGestureDetector.OnScaleGestureListener() {
+//        @Override
+//        public boolean onScale(ScaleGestureDetector detector) {
+//            LogUtils.e(detector.getScaleFactor());
+//            return true;
 //        }
-//        return true;
-//    }
+//
+//        @Override
+//        public boolean onScaleBegin(ScaleGestureDetector detector) {
+//            return false;
+//        }
+//
+//        @Override
+//        public void onScaleEnd(ScaleGestureDetector detector) {
+//
+//        }
+//    };
 
     GestureDetector.OnGestureListener onGestureListener = new GestureDetector.OnGestureListener() {
         @Override
@@ -157,7 +137,6 @@ public class CameraXCustomPreviewView extends PreviewView {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             LogUtils.i("onScroll: 按下后拖动");
-            LogUtils.i(e1, e2);
             // 大于两个触摸点
             if (e2.getPointerCount() >= 2) {
 
