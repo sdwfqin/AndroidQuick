@@ -68,7 +68,7 @@
             android:name=".ui.components.AutoPollRecyclerViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.components.CameraxDemoActivity"
+            android:name=".ui.components.CameraXDemoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true" />
         <activity

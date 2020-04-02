@@ -32,7 +32,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.view.CameraxCustomPreviewView;
+import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -43,16 +43,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * CameraxDemo
+ * CameraX Demo
  * <p>
  *
  * @author 张钦
  * @date 2019-05-30
  */
-public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.Provider {
+public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.Provider {
 
     @BindView(R.id.view_finder)
-    CameraxCustomPreviewView mViewFinder;
+    CameraXCustomPreviewView mViewFinder;
     @BindView(R.id.capture_button)
     ImageButton mCaptureButton;
 
@@ -141,7 +141,7 @@ public class CameraxDemoActivity extends BaseActivity implements CameraXConfig.P
         LogUtils.e(maxZoomRatio);
         LogUtils.e(minZoomRatio);
 
-        mViewFinder.setCustomTouchListener(new CameraxCustomPreviewView.CustomTouchListener() {
+        mViewFinder.setCustomTouchListener(new CameraXCustomPreviewView.CustomTouchListener() {
             @Override
             public void zoom() {
                 float zoomRatio = zoomState.getValue().getZoomRatio();

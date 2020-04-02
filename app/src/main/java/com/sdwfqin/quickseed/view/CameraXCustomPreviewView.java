@@ -12,13 +12,13 @@ import androidx.camera.view.PreviewView;
 import com.blankj.utilcode.util.LogUtils;
 
 /**
- * 自定义Camerax预览页面
+ * 自定义CameraX预览页面
  * <p>
  *
  * @author 张钦
  * @date 2020/4/2
  */
-public class CameraxCustomPreviewView extends PreviewView {
+public class CameraXCustomPreviewView extends PreviewView {
 
     private GestureDetector mGestureDetector;
 
@@ -64,19 +64,19 @@ public class CameraxCustomPreviewView extends PreviewView {
         mCustomTouchListener = customTouchListener;
     }
 
-    public CameraxCustomPreviewView(@NonNull Context context) {
+    public CameraXCustomPreviewView(@NonNull Context context) {
         this(context, null);
     }
 
-    public CameraxCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CameraxCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public CameraxCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         mGestureDetector = new GestureDetector(context, onGestureListener);

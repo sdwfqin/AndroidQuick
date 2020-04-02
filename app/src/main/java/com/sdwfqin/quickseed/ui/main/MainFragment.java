@@ -11,7 +11,7 @@ import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.ui.components.AutoPollRecyclerViewActivity;
-import com.sdwfqin.quickseed.ui.components.CameraxDemoActivity;
+import com.sdwfqin.quickseed.ui.components.CameraXDemoActivity;
 import com.sdwfqin.quickseed.ui.components.CustomWebviewActivity;
 import com.sdwfqin.quickseed.ui.components.PayPwdInputActivity;
 import com.sdwfqin.quickseed.ui.components.PictureUploadActivity;
@@ -86,7 +86,7 @@ public class MainFragment extends BaseFragment {
                     startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
                     break;
                 case 4:
-                    startActivity(new Intent(mContext, CameraxDemoActivity.class));
+                    startActivity(new Intent(mContext, CameraXDemoActivity.class));
                     break;
                 case 5:
                     startActivity(new Intent(mContext, VLayoutSampleActivity.class));

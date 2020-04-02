@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.components.CameraxDemoActivity">
+    tools:context=".ui.components.CameraXDemoActivity">
 
-    <com.sdwfqin.quickseed.view.CameraxCustomPreviewView
+    <com.sdwfqin.quickseed.view.CameraXCustomPreviewView
         android:id="@+id/view_finder"
         android:layout_width="0dp"
         android:layout_height="0dp"
