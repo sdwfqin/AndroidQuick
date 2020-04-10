@@ -1,6 +1,6 @@
 ext {
 
-    qmui = "2.0.0-alpha04"
+    qmui = "2.0.0-alpha06"
     butterknife = "10.2.1"
     okhttp = "4.4.1"
     retrofit = "2.8.0"
