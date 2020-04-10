@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -19,8 +20,6 @@ import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -30,9 +29,9 @@ import io.reactivex.disposables.Disposable;
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class BaseFragment<V extends ViewBinding> extends Fragment implements BaseView {
 
-    protected View mView;
+    protected V mBinding;
     protected BaseActivity mActivity;
     protected Context mContext;
     protected LayoutInflater mInflater;
@@ -50,7 +49,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
      */
     protected boolean mIsLoad = false;
     private QMUITipDialog mQmuiTipDialog;
-    private Unbinder mUnBinder;
     protected CompositeDisposable mCompositeDisposable;
 
     /**
@@ -77,18 +75,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(getLayout(), null);
+        mBinding = getViewBinding(inflater, container, savedInstanceState);
         //指出fragment愿意添加item到选项菜单
         setHasOptionsMenu(true);
-        return mView;
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mUnBinder = ButterKnife.bind(this, view);
         mInflater = onGetLayoutInflater(savedInstanceState);
         initPresenter();
         initEventAndData();
+        initClickListener();
         // 界面加载完成
         mIsPrepared = true;
         baseLazyLoad();
@@ -129,7 +127,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         mIsPrepared = false;
         unSubscribe();
         removePresenter();
-        mUnBinder.unbind();
+        mBinding = null;
         super.onDestroyView();
     }
 
@@ -272,16 +270,20 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     }
 
-
     /**
      * 加载布局
      */
-    protected abstract int getLayout();
+    protected abstract V getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     /**
      * 加载数据
      */
     protected abstract void initEventAndData();
+
+    /**
+     * 点击事件
+     */
+    protected abstract void initClickListener();
 
     /**
      * 页面懒加载

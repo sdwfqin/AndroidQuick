@@ -1,15 +1,13 @@
-### 支持AndroidX，正在测试，欢迎提交issues与pr
+### 4.0版本全面拥抱Jetpack并且不会向前兼容
 
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
 # Gradle（使用前请查看注意事项）:
 
-    // 支持AndroidX
+    // AndroidX
     
     // quicklib(Base)
     implementation 'com.sdwfqin.quicklib:quicklib:3.3.0'
-    // 如果使用butterknife请添加【可选】
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     
     // 支付模块
     implementation 'com.sdwfqin.quicklib:paylib:3.1.0'
@@ -19,29 +17,10 @@
     
     // Android 自定义View组件
     implementation 'com.sdwfqin.quick:widget:3.2.0'
-    
-    ==================== AndroidX 分界线 ====================
-    
-    // 不支持AndroidX
-    
-    // quicklib(Base)
-    implementation 'com.sdwfqin.quicklib:quicklib:2.3.1'
-    // 如果使用butterknife请添加【可选】
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    
-    // 支付模块
-    implementation 'com.sdwfqin.quicklib:paylib:1.1.1'
-    
-    // Android 图片加载库（Glide封装）
-    implementation 'com.sdwfqin.quick:imageloader:2.0.2'
-    
-    // Android 自定义View组件
-    implementation 'com.sdwfqin.quick:widget:1.0.7'
-    
 
-> 最低支持api19
+> 最低支持api21
 
-    minSdkVersion 19
+    minSdkVersion 21
     targetSdkVersion 29
     
 # 早期版本
@@ -61,11 +40,9 @@
         targetCompatibility JavaVersion.VERSION_1_8
     }
     ```
-    
-# v3.2+ 注意事项！！！
-
-1. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
-2. 因状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
+   
+5. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
+6. 状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
 
     ``` java
     // 设置状态栏黑色字体图标
@@ -74,7 +51,7 @@
     QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
     ```
 
-3. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
+7. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
 
     ``` java
     @Override
@@ -82,7 +59,7 @@
         return false;
     }
     ```
-4. 需要在`Application`中添加如下代码：
+8. 需要在`Application`中添加如下代码：
 
     ``` java
     QMUISwipeBackActivityManager.init(this);

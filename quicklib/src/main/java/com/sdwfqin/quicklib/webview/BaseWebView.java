@@ -9,6 +9,7 @@ import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
 
 /**
  * 描述：
@@ -16,15 +17,15 @@ import com.sdwfqin.quicklib.base.BaseActivity;
  * @author zhangqin
  * @date 2018/6/19
  */
-public abstract class BaseWebView extends BaseActivity {
+public abstract class BaseWebView extends BaseActivity<QuickActivityWebViewBinding> {
     protected LinearLayout mContainer;
 
     protected String mUrl;
     protected AgentWeb mAgentWeb;
 
     @Override
-    protected int getLayout() {
-        return R.layout.quick_activity_web_view;
+    protected QuickActivityWebViewBinding getViewBinding() {
+        return QuickActivityWebViewBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -51,12 +52,17 @@ public abstract class BaseWebView extends BaseActivity {
         initWebView();
     }
 
+    @Override
+    protected void initClickListener() {
+
+    }
+
     private void initWebView() {
         mAgentWeb = AgentWeb.with(mContext)
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()// 使用默认进度条
-                .setWebChromeClient(new WebChromeClient(){
+                .setWebChromeClient(new WebChromeClient() {
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
                         super.onReceivedTitle(view, title);

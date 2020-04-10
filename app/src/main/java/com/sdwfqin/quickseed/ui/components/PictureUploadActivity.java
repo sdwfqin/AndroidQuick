@@ -3,9 +3,8 @@ package com.sdwfqin.quickseed.ui.components;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.databinding.ActivityPictureUploadBinding;
 import com.sdwfqin.quickseed.model.PictureModel;
 import com.sdwfqin.quickseed.utils.picture.PictureSelectUtils;
 import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
@@ -16,24 +15,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
  * 描述：九宫格上传图片
  *
  * @author zhangqin
  * @date 2018/5/31
  */
-public class PictureUploadActivity extends SampleBaseActivity {
+public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUploadBinding> {
 
     public static final int RESULT_PHOTO_SELECT = 101;
 
-    @BindView(R.id.pic)
-    PictureUploadView<PictureModel> mPic;
+//    PictureUploadView<PictureModel> mPic;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_picture_upload;
+    protected ActivityPictureUploadBinding getViewBinding() {
+        return ActivityPictureUploadBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -42,8 +38,10 @@ public class PictureUploadActivity extends SampleBaseActivity {
         mTopBar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
-        mPic.setMaxColumn(3);
-        mPic.setPicUploadCallback(new PictureUploadCallback<PictureModel>() {
+//        mPic = mBinding.pic;
+
+        mBinding.pic.setMaxColumn(3);
+        mBinding.pic.setPicUploadCallback(new PictureUploadCallback<PictureModel>() {
             @Override
             public void click(int position, PictureModel pictureModel, List<PictureModel> list) {
 
@@ -62,6 +60,11 @@ public class PictureUploadActivity extends SampleBaseActivity {
     }
 
     @Override
+    protected void initClickListener() {
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -72,7 +75,7 @@ public class PictureUploadActivity extends SampleBaseActivity {
                     for (int i = 0; i < selectList.size(); i++) {
                         models.add(new PictureModel(selectList.get(i)));
                     }
-                    mPic.setAddData(models);
+                    mBinding.pic.setAddData(models);
 
                     // 刷新相册图片
                     if (selectList.size() == 1) {

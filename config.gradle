@@ -1,7 +1,9 @@
 ext {
 
-    qmui = "2.0.0-alpha04"
-    butterknife = "10.2.1"
+    versionCode = 400
+    versionName = "4.0.0"
+
+    qmui = "2.0.0-alpha06"
     okhttp = "4.4.1"
     retrofit = "2.8.0"
     glide = "4.11.0"
@@ -9,8 +11,8 @@ ext {
 
     android = [
             compileSdkVersion: 29,
-            buildToolsVersion: "29.0.2",
-            minSdkVersion    : 19,
+            buildToolsVersion: "29.0.3",
+            minSdkVersion    : 21,
             targetSdkVersion : 29,
     ]
 
@@ -55,8 +57,6 @@ ext {
             "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.1",
             // pickerview
             "pickerview"  : "com.contrarywind:Android-PickerView:4.1.9",
-            // butterknife
-            "butterknife" : "com.jakewharton:butterknife:$butterknife",
     ]
 
     imageDependencies = [
@@ -90,7 +90,6 @@ ext {
 
     compilerDependencies = [
             "glide-compiler"      : "com.github.bumptech.glide:compiler:$glide",
-            "butterknife-compiler": "com.jakewharton:butterknife-compiler:$butterknife",
             "arch-compiler"       : "com.qmuiteam:arch-compiler:$qmui",
     ]
 }

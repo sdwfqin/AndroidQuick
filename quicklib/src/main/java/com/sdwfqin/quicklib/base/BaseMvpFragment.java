@@ -1,12 +1,14 @@
 package com.sdwfqin.quicklib.base;
 
+import androidx.viewbinding.ViewBinding;
+
 /**
  * 描述：Fragment基类
  *
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragment {
+public abstract class BaseMvpFragment<V extends ViewBinding, T extends BasePresenter> extends BaseFragment<V> {
 
     protected T mPresenter;
 

@@ -1,15 +1,17 @@
 package com.sdwfqin.quickseed.ui.main;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.qmuiteam.qmui.widget.QMUITopBar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.databinding.FragmentSettingBinding;
 import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 配置页面
@@ -18,29 +20,26 @@ import butterknife.OnClick;
  * @author 张钦
  * @date 2020-01-15
  */
-public class SettingFragment extends BaseFragment {
-
-    @BindView(R.id.top_bar)
-    QMUITopBar mTopBar;
+public class SettingFragment extends BaseFragment<FragmentSettingBinding> {
 
     @Override
-    protected int getLayout() {
-        return R.layout.fragment_setting;
+    protected FragmentSettingBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return FragmentSettingBinding.inflate(inflater, container, false);
     }
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("配置");
+        mBinding.topBar.setTitle("配置");
+    }
+
+    @Override
+    protected void initClickListener() {
+        mBinding.llChangeSkin.setOnClickListener(v -> changeSkin());
     }
 
     @Override
     protected void lazyLoadShow() {
 
-    }
-
-    @OnClick(R.id.ll_change_skin)
-    public void onViewClicked() {
-        changeSkin();
     }
 
     private void changeSkin() {

@@ -8,19 +8,17 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.qmuiteam.qmui.widget.tab.QMUITab;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
-import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
-import com.sdwfqin.widget.NoScrollViewPager;
+import com.sdwfqin.quickseed.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * 主Acticity
@@ -29,19 +27,14 @@ import butterknife.BindView;
  * @author 张钦
  * @date 2020-01-15
  */
-public class MainActivity extends SampleBaseActivity {
-
-    @BindView(R.id.pager)
-    NoScrollViewPager mViewPager;
-    @BindView(R.id.tabs)
-    QMUITabSegment mTabs;
+public class MainActivity extends SampleBaseActivity<ActivityMainBinding> {
 
     private List<Fragment> mPages;
     private TabPagerAdapter mTabPagerAdapter;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_main;
+    protected ActivityMainBinding getViewBinding() {
+        return ActivityMainBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -57,6 +50,11 @@ public class MainActivity extends SampleBaseActivity {
         getPermissions();
     }
 
+    @Override
+    protected void initClickListener() {
+
+    }
+
     private void initPagers() {
         mPages = new ArrayList<>(2);
         mPages.add(new MainFragment());
@@ -64,12 +62,12 @@ public class MainActivity extends SampleBaseActivity {
 
         mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), mPages);
 
-        mViewPager.setOffscreenPageLimit(2);
-        mViewPager.setAdapter(mTabPagerAdapter);
+        mBinding.pager.setOffscreenPageLimit(2);
+        mBinding.pager.setAdapter(mTabPagerAdapter);
     }
 
     private void initTabs() {
-        QMUITabBuilder builder = mTabs.tabBuilder();
+        QMUITabBuilder builder = mBinding.tabs.tabBuilder();
         builder.setSelectedIconScale(1.2f)
                 .setTextSize(ConvertUtils.sp2px(13), ConvertUtils.sp2px(15))
                 .setDynamicChangeIconColor(false);
@@ -84,10 +82,10 @@ public class MainActivity extends SampleBaseActivity {
                 .setText("配置")
                 .build(mContext);
 
-        mTabs.addTab(component)
+        mBinding.tabs.addTab(component)
                 .addTab(util);
 
-        mTabs.setupWithViewPager(mViewPager, false);
+        mBinding.tabs.setupWithViewPager(mBinding.pager, false);
     }
 
     /**

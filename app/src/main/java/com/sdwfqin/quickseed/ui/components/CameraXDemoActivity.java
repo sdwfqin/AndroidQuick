@@ -9,10 +9,8 @@ import android.util.Size;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.camera.camera2.Camera2Config;
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
@@ -38,18 +36,14 @@ import androidx.lifecycle.LiveData;
 import com.blankj.utilcode.util.LogUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sdwfqin.quicklib.base.BaseActivity;
-import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
 import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
-import com.sdwfqin.quickseed.view.FocusImageView;
 
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * CameraX Demo
@@ -59,16 +53,7 @@ import butterknife.OnClick;
  * @author 张钦
  * @date 2019-05-30
  */
-public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.Provider {
-
-    @BindView(R.id.view_finder)
-    CameraXCustomPreviewView mViewFinder;
-    @BindView(R.id.capture_button)
-    ImageButton mCaptureButton;
-    @BindView(R.id.focus_view)
-    FocusImageView mFocusView;
-    @BindView(R.id.btn_light)
-    AppCompatButton mBtnLight;
+public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding> implements CameraXConfig.Provider {
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture mImageCapture;
@@ -78,8 +63,8 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
     private CameraControl mCameraControl;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_camerax_demo;
+    protected ActivityCameraxDemoBinding getViewBinding() {
+        return ActivityCameraxDemoBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -90,6 +75,27 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
         initCamera();
         initImageAnalysis();
         initImageCapture();
+    }
+
+    @Override
+    protected void initClickListener() {
+        mBinding.captureButton.setOnClickListener(v -> saveImage());
+        mBinding.btnLight.setOnClickListener(v -> {
+            switch (mImageCapture.getFlashMode()) {
+                case ImageCapture.FLASH_MODE_AUTO:
+                    mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
+                    mBinding.btnLight.setText("闪光灯：开");
+                    break;
+                case ImageCapture.FLASH_MODE_ON:
+                    mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
+                    mBinding.btnLight.setText("闪光灯：关");
+                    break;
+                case ImageCapture.FLASH_MODE_OFF:
+                    mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
+                    mBinding.btnLight.setText("闪光灯：自动");
+                    break;
+            }
+        });
     }
 
     private void initCamera() {
@@ -122,7 +128,7 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
         mCameraInfo = camera.getCameraInfo();
         mCameraControl = camera.getCameraControl();
 
-        preview.setSurfaceProvider(mViewFinder.createSurfaceProvider(mCameraInfo));
+        preview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider(mCameraInfo));
 
         initCameraListener();
     }
@@ -135,7 +141,7 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
         LogUtils.e(maxZoomRatio);
         LogUtils.e(minZoomRatio);
 
-        mViewFinder.setCustomTouchListener(new CameraXCustomPreviewView.CustomTouchListener() {
+        mBinding.viewFinder.setCustomTouchListener(new CameraXCustomPreviewView.CustomTouchListener() {
             @Override
             public void zoom() {
                 float zoomRatio = zoomState.getValue().getZoomRatio();
@@ -162,15 +168,15 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
                         .setAutoCancelDuration(3, TimeUnit.SECONDS)
                         .build();
 
-                mFocusView.startFocus(new Point((int) x, (int) y));
+                mBinding.focusView.startFocus(new Point((int) x, (int) y));
                 ListenableFuture future = mCameraControl.startFocusAndMetering(action);
                 future.addListener(() -> {
                     try {
                         FocusMeteringResult result = (FocusMeteringResult) future.get();
                         if (result.isFocusSuccessful()) {
-                            mFocusView.onFocusSuccess();
+                            mBinding.focusView.onFocusSuccess();
                         } else {
-                            mFocusView.onFocusFailed();
+                            mBinding.focusView.onFocusFailed();
                         }
                     } catch (Exception e) {
                     }
@@ -288,30 +294,5 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
                     }
                 }
         );
-    }
-
-    @OnClick({R.id.capture_button, R.id.btn_light})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.capture_button:
-                saveImage();
-                break;
-            case R.id.btn_light:
-                switch (mImageCapture.getFlashMode()) {
-                    case ImageCapture.FLASH_MODE_AUTO:
-                        mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_ON);
-                        mBtnLight.setText("闪光灯：开");
-                        break;
-                    case ImageCapture.FLASH_MODE_ON:
-                        mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_OFF);
-                        mBtnLight.setText("闪光灯：关");
-                        break;
-                    case ImageCapture.FLASH_MODE_OFF:
-                        mImageCapture.setFlashMode(ImageCapture.FLASH_MODE_AUTO);
-                        mBtnLight.setText("闪光灯：自动");
-                        break;
-                }
-                break;
-        }
     }
 }

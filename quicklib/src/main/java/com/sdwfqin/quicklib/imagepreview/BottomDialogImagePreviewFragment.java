@@ -3,11 +3,11 @@ package com.sdwfqin.quicklib.imagepreview;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.sdwfqin.quicklib.R;
+import com.sdwfqin.quicklib.databinding.QuickBottomImagePreviewBinding;
 
 /**
  * 描述：保存图片弹窗
@@ -18,8 +18,8 @@ import com.sdwfqin.quicklib.R;
 public class BottomDialogImagePreviewFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private OnDialogClickListener mOnDialogClickListener;
-    private TextView mSave;
-    private TextView mExit;
+
+    private QuickBottomImagePreviewBinding mBinding;
 
     /**
      * 按钮监听接口
@@ -40,14 +40,12 @@ public class BottomDialogImagePreviewFragment extends BottomSheetDialogFragment 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        View view = View.inflate(getContext(), R.layout.quick_bottom_image_preview, null);
-        mSave = view.findViewById(R.id.save);
-        mExit = view.findViewById(R.id.exit);
+        mBinding = QuickBottomImagePreviewBinding.inflate(getLayoutInflater());
 
-        mSave.setOnClickListener(this);
-        mExit.setOnClickListener(this);
+        mBinding.save.setOnClickListener(this);
+        mBinding.exit.setOnClickListener(this);
 
-        dialog.setContentView(view);
+        dialog.setContentView(mBinding.getRoot());
 
         dialog.getWindow().findViewById(R.id.design_bottom_sheet)
                 // #00ffffff

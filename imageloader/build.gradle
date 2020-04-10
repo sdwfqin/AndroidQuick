@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 
-// gradlew imageloader:clean imageloader:build imageloader:bintrayUpload
-
-version = "3.2.0"
+// ./gradlew clean build bintrayUpload
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 17
-        versionName version
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
 
     buildTypes {

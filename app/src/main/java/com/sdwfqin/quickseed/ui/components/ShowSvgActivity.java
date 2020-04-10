@@ -1,15 +1,12 @@
 package com.sdwfqin.quickseed.ui.components;
 
 import android.graphics.drawable.PictureDrawable;
-import android.widget.ImageView;
 
 import com.bumptech.glide.RequestBuilder;
 import com.sdwfqin.imageloader.GlideApp;
 import com.sdwfqin.imageloader.svg.SvgSoftwareLayerSetter;
-import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
-
-import butterknife.BindView;
+import com.sdwfqin.quickseed.databinding.ActivityShowSvgBinding;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -20,10 +17,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * @author 张钦
  * @date 2019-10-29
  */
-public class ShowSvgActivity extends SampleBaseActivity {
-
-    @BindView(R.id.img)
-    ImageView mImg;
+public class ShowSvgActivity extends SampleBaseActivity<ActivityShowSvgBinding> {
 
     private String mImgRes =
             "<?xml version=\"1.0\" standalone=\"no\"?>\n" +
@@ -76,8 +70,8 @@ public class ShowSvgActivity extends SampleBaseActivity {
                     "</svg>";
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_show_svg;
+    protected ActivityShowSvgBinding getViewBinding() {
+        return ActivityShowSvgBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -94,7 +88,12 @@ public class ShowSvgActivity extends SampleBaseActivity {
                         .listener(new SvgSoftwareLayerSetter());
         requestBuilder
                 .load(mImgRes.getBytes())
-                .into(mImg);
+                .into(mBinding.img);
+
+    }
+
+    @Override
+    protected void initClickListener() {
 
     }
 

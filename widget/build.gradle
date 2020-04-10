@@ -1,9 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
 
-// gradlew widget:clean widget:build widget:bintrayUpload
-
-version = "3.2.0"
+// ./gradlew clean build bintrayUpload
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 17
-        versionName version
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
 
     buildTypes {
@@ -25,6 +22,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 

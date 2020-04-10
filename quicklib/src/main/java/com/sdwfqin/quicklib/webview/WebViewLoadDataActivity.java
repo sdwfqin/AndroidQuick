@@ -10,6 +10,7 @@ import com.just.agentweb.AgentWeb;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.base.QuickConstants;
+import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
 
 /**
  * 描述：WebViewActivity
@@ -17,7 +18,7 @@ import com.sdwfqin.quicklib.base.QuickConstants;
  * @author 张钦
  * @date 2018/1/16
  */
-public class WebViewLoadDataActivity extends BaseActivity {
+public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBinding> {
 
     LinearLayout mContainer;
 
@@ -41,8 +42,8 @@ public class WebViewLoadDataActivity extends BaseActivity {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.quick_activity_web_view;
+    protected QuickActivityWebViewBinding getViewBinding() {
+        return QuickActivityWebViewBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -58,6 +59,11 @@ public class WebViewLoadDataActivity extends BaseActivity {
         mTopBar.setTitle(mTitle);
 
         initWebView();
+    }
+
+    @Override
+    protected void initClickListener() {
+
     }
 
     private void initWebView() {

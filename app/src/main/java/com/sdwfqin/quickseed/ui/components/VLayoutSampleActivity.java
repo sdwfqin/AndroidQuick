@@ -2,8 +2,6 @@ package com.sdwfqin.quickseed.ui.components;
 
 import android.widget.ImageView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.BaseLayoutHelper;
@@ -15,12 +13,11 @@ import com.sdwfqin.quickseed.adapter.StrokeHistoryAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeOrderAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeTitleAdapter;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.databinding.ActivityVlayoutSampleBinding;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * VLayoutSample
@@ -29,10 +26,7 @@ import butterknife.BindView;
  * @author 张钦
  * @date 2019-06-28
  */
-public class VLayoutSampleActivity extends SampleBaseActivity {
-
-    @BindView(R.id.rv_list)
-    RecyclerView mRvList;
+public class VLayoutSampleActivity extends SampleBaseActivity<ActivityVlayoutSampleBinding> {
 
     private VirtualLayoutManager mVirtualLayoutManager;
     private DelegateAdapter mDelegateAdapter;
@@ -42,8 +36,8 @@ public class VLayoutSampleActivity extends SampleBaseActivity {
     private StrokeOrderAdapter mStrokeOrderAdapter;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_vlayout_sample;
+    protected ActivityVlayoutSampleBinding getViewBinding() {
+        return ActivityVlayoutSampleBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -55,8 +49,8 @@ public class VLayoutSampleActivity extends SampleBaseActivity {
         mVirtualLayoutManager = new VirtualLayoutManager(mContext);
         mDelegateAdapter = new DelegateAdapter(mVirtualLayoutManager, false);
 
-        mRvList.setLayoutManager(mVirtualLayoutManager);
-        mRvList.setAdapter(mDelegateAdapter);
+        mBinding.rvList.setLayoutManager(mVirtualLayoutManager);
+        mBinding.rvList.setAdapter(mDelegateAdapter);
 
         mAdapters = new LinkedList<>();
 
@@ -69,6 +63,11 @@ public class VLayoutSampleActivity extends SampleBaseActivity {
         mDelegateAdapter.setAdapters(mAdapters);
 
         initData();
+    }
+
+    @Override
+    protected void initClickListener() {
+
     }
 
     private void initHeader() {

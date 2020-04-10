@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quicklib.databinding.QuickActivityImagePreviewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2017/8/7
  */
-public class ImagePreviewActivity extends BaseActivity {
-
-    private ViewPager mViewPager;
-    private TextView mPosition;
+public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreviewBinding> {
 
     private List<String> mImageList;
     private int position;
@@ -67,8 +64,8 @@ public class ImagePreviewActivity extends BaseActivity {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.quick_activity_image_preview;
+    protected QuickActivityImagePreviewBinding getViewBinding() {
+        return QuickActivityImagePreviewBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -86,22 +83,19 @@ public class ImagePreviewActivity extends BaseActivity {
             finish();
         }
 
-        mViewPager = findViewById(R.id.viewpager);
-        mPosition = findViewById(R.id.position);
-
         mShowImagePagerAdapter = new ShowImagePagerAdapter();
-        mViewPager.setAdapter(mShowImagePagerAdapter);
-        mViewPager.setCurrentItem(position);
+        mBinding.viewpager.setAdapter(mShowImagePagerAdapter);
+        mBinding.viewpager.setCurrentItem(position);
 
         if (mImageList.size() == 1) {
-            mPosition.setVisibility(View.GONE);
+            mBinding.position.setVisibility(View.GONE);
         } else {
-            mPosition.setVisibility(View.VISIBLE);
+            mBinding.position.setVisibility(View.VISIBLE);
         }
 
         setPosText(position + 1, mImageList.size());
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -119,6 +113,11 @@ public class ImagePreviewActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void initClickListener() {
+
+    }
+
     /**
      * 指示器
      *
@@ -127,7 +126,7 @@ public class ImagePreviewActivity extends BaseActivity {
      */
     @SuppressLint("SetTextI18n")
     public void setPosText(int position, int size) {
-        mPosition.setText(position + "/" + size);
+        mBinding.position.setText(position + "/" + size);
     }
 
     private class ShowImagePagerAdapter extends FragmentStatePagerAdapter {

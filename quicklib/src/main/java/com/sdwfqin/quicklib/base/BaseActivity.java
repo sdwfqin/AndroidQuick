@@ -3,12 +3,12 @@ package com.sdwfqin.quicklib.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.arch.QMUIActivity;
@@ -24,7 +24,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -36,11 +35,12 @@ import pub.devrel.easypermissions.EasyPermissions;
  *
  * @author 张钦
  */
-public abstract class BaseActivity extends QMUIActivity implements BaseView, EasyPermissions.PermissionCallbacks {
+public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements BaseView, EasyPermissions.PermissionCallbacks {
 
     private static final int PERMS_REQUEST_CODE = 1122;
 
     protected Activity mContext;
+    protected V mBinding;
     protected LinearLayoutCompat mQuickBaseView;
     /**
      * Rxjava 订阅管理
@@ -65,13 +65,14 @@ public abstract class BaseActivity extends QMUIActivity implements BaseView, Eas
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initContentView(getLayout());
+        mBinding = getViewBinding();
+        initContentView();
         mTopBar = findViewById(R.id.quick_base_topbar);
-        ButterKnife.bind(this);
         mContext = this;
         AppManager.addActivity(this);
         initPresenter();
         initEventAndData();
+        initClickListener();
     }
 
     @Override
@@ -98,10 +99,11 @@ public abstract class BaseActivity extends QMUIActivity implements BaseView, Eas
         super.onDestroy();
     }
 
-    private void initContentView(@LayoutRes int layoutResID) {
+    private void initContentView() {
         View quickBaseViewGroup = this.getLayoutInflater().inflate(R.layout.quick_activity_base, null);
         mQuickBaseView = quickBaseViewGroup.findViewById(R.id.quick_base_view);
-        LayoutInflater.from(this).inflate(layoutResID, mQuickBaseView, true);
+        mBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mQuickBaseView.addView(mBinding.getRoot());
         setContentView(quickBaseViewGroup);
     }
 
@@ -351,10 +353,15 @@ public abstract class BaseActivity extends QMUIActivity implements BaseView, Eas
     /**
      * 加载布局
      */
-    protected abstract int getLayout();
+    protected abstract V getViewBinding();
 
     /**
      * 加载数据
      */
     protected abstract void initEventAndData();
+
+    /**
+     * 点击事件
+     */
+    protected abstract void initClickListener();
 }

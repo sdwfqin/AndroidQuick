@@ -37,8 +37,7 @@ public abstract class BaseAutoPollAdapter<T> extends RecyclerView.Adapter<BaseVi
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(mLayoutResId, parent, false);
-        BaseViewHolder holder = new BaseViewHolder(view);
-        return holder;
+        return new BaseViewHolder(view);
     }
 
     @Override

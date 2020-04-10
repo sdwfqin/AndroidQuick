@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 
-// ./gradlew quicklib:clean quicklib:build quicklib:bintrayUpload
-
-version = "3.3.0"
+// ./gradlew clean build bintrayUpload
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -11,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 85
-        versionName version
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
 
     buildTypes {
@@ -25,6 +23,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 
@@ -47,7 +49,6 @@ dependencies {
     api okhttpDependencies["okhttp"]
     api okhttpDependencies["logging-interceptor"]
 
-    api viewDependencies["butterknife"]
     api tencentDependencies["qmui"]
     api tencentDependencies["wechat-sdk-mta"]
     api tencentDependencies["arch"]

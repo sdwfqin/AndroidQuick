@@ -1,15 +1,20 @@
 package com.sdwfqin.quickseed.ui.main;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.qmuiteam.qmui.widget.QMUITopBar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.dialog.HintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.databinding.FragmentMainBinding;
 import com.sdwfqin.quickseed.ui.components.AutoPollRecyclerViewActivity;
 import com.sdwfqin.quickseed.ui.components.CameraXDemoActivity;
 import com.sdwfqin.quickseed.ui.components.CustomWebviewActivity;
@@ -22,19 +27,12 @@ import com.sdwfqin.quickseed.ui.components.WindowFloatAndScreenshotActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
  * 描述：主Activity
  *
  * @author 张钦
  */
-public class MainFragment extends BaseFragment {
-
-    @BindView(R.id.top_bar)
-    QMUITopBar mTopBar;
-    @BindView(R.id.list)
-    ListView mList;
+public class MainFragment extends BaseFragment<FragmentMainBinding> {
 
     private String[] mTitle = new String[]{
             "图片预览",
@@ -51,26 +49,21 @@ public class MainFragment extends BaseFragment {
     };
 
     @Override
-    protected int getLayout() {
-        return R.layout.fragment_main;
+    protected FragmentMainBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return FragmentMainBinding.inflate(inflater);
     }
 
     @Override
     protected void initEventAndData() {
 
-        mTopBar.setTitle("组件");
+        mBinding.topBar.setTitle("组件");
 
-        mList.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
-        initListener();
+        mBinding.list.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
     }
 
     @Override
-    protected void lazyLoadShow() {
-
-    }
-
-    private void initListener() {
-        mList.setOnItemClickListener((adapterView, view, i, l) -> {
+    protected void initClickListener() {
+        mBinding.list.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
                 case 0:
                     List<String> strings = new ArrayList<>();
@@ -127,5 +120,10 @@ public class MainFragment extends BaseFragment {
                 default:
             }
         });
+    }
+
+    @Override
+    protected void lazyLoadShow() {
+
     }
 }

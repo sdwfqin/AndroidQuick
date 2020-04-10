@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.cardview.widget.CardView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.sdwfqin.quicklib.R;
+import com.sdwfqin.quicklib.databinding.QuickDialogHintBinding;
 
 /**
  * 描述：提示弹窗
@@ -24,11 +23,7 @@ import com.sdwfqin.quicklib.R;
  */
 public class HintDialog extends AppCompatDialog implements View.OnClickListener {
 
-    CardView mLayout;
-    TextView mDialogTitle;
-    TextView mLeft;
-    TextView mRight;
-
+    private QuickDialogHintBinding mBinding;
     private Context mContext;
     private OnDialogClickListener mOnDialogClickListener;
     private boolean mFollowSkin = false;
@@ -44,20 +39,16 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.quick_dialog_hint);
-
-        mLayout = findViewById(R.id.root_view);
-        mDialogTitle = findViewById(R.id.title);
-        mLeft = findViewById(R.id.left);
-        mRight = findViewById(R.id.right);
+        mBinding = QuickDialogHintBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
         // 设定窗口宽度为屏幕的70%
         DisplayMetrics dm = new DisplayMetrics();
         getWindow().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        mLayout.getLayoutParams().width = (int) ((dm.widthPixels) * 0.7);
+        mBinding.getRoot().getLayoutParams().width = (int) ((dm.widthPixels) * 0.7);
 
-        mLeft.setOnClickListener(this);
-        mRight.setOnClickListener(this);
+        mBinding.left.setOnClickListener(this);
+        mBinding.right.setOnClickListener(this);
     }
 
     public void setFollowSkin(boolean followSkin) {
@@ -130,7 +121,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setTitle(String title) {
         try {
-            mDialogTitle.setText(title);
+            mBinding.title.setText(title);
         } catch (Exception e) {
             LogUtils.e("setTitle: ", e);
         }
@@ -143,7 +134,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setTitleColor(@ColorInt int titleColor) {
         try {
-            mDialogTitle.setTextColor(titleColor);
+            mBinding.title.setTextColor(titleColor);
         } catch (Exception e) {
             LogUtils.e("setTitleColor: ", e);
         }
@@ -156,7 +147,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setRightText(String rightText) {
         try {
-            mRight.setText(rightText);
+            mBinding.right.setText(rightText);
         } catch (Exception e) {
             LogUtils.e("setRightText: ", e);
         }
@@ -169,7 +160,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setRightBgColor(@ColorInt int rightBgColor) {
         try {
-            mRight.setBackgroundColor(rightBgColor);
+            mBinding.right.setBackgroundColor(rightBgColor);
         } catch (Exception e) {
             LogUtils.e("setRightBgColor: ", e);
         }
@@ -182,7 +173,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setLeftText(String leftText) {
         try {
-            mLeft.setText(leftText);
+            mBinding.left.setText(leftText);
         } catch (Exception e) {
             LogUtils.e("setLeftText: ", e);
         }
@@ -195,7 +186,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void setLeftBgColor(@ColorInt int leftBgColor) {
         try {
-            mLeft.setBackgroundColor(leftBgColor);
+            mBinding.left.setBackgroundColor(leftBgColor);
         } catch (Exception e) {
             LogUtils.e("setLeftBgColor: ", e);
         }
@@ -206,7 +197,7 @@ public class HintDialog extends AppCompatDialog implements View.OnClickListener 
      */
     public void hideRight() {
         try {
-            mRight.setVisibility(View.GONE);
+            mBinding.right.setVisibility(View.GONE);
         } catch (Exception e) {
             LogUtils.e("hideRight: ", e);
         }

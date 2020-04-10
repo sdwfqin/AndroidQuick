@@ -10,11 +10,9 @@ import android.os.Build;
 import android.provider.Settings;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.databinding.ActivityWindowFloatAndScreenshotBinding;
 import com.sdwfqin.quickseed.view.QuickWindowFloatView;
-
-import butterknife.OnClick;
 
 /**
  * 悬浮窗与截图Demo
@@ -23,7 +21,7 @@ import butterknife.OnClick;
  * @author 张钦
  * @date 2020/4/10
  */
-public class WindowFloatAndScreenshotActivity extends SampleBaseActivity {
+public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<ActivityWindowFloatAndScreenshotBinding> {
 
     /**
      * 截图权限
@@ -37,8 +35,8 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity {
     private MediaProjectionManager mMediaProjectionManager;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_window_float_and_screenshot;
+    protected ActivityWindowFloatAndScreenshotBinding getViewBinding() {
+        return ActivityWindowFloatAndScreenshotBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -47,20 +45,22 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity {
         mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
     }
 
-    @OnClick(R.id.btn_screenshot)
-    public void onViewClicked() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(getApplicationContext())) {
-                //启动Activity让用户授权
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, REQUEST_ALERT);
+    @Override
+    protected void initClickListener() {
+        mBinding.btnScreenshot.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(getApplicationContext())) {
+                    //启动Activity让用户授权
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    startActivityForResult(intent, REQUEST_ALERT);
+                } else {
+                    requestCapturePermission();
+                }
             } else {
                 requestCapturePermission();
             }
-        } else {
-            requestCapturePermission();
-        }
+        });
     }
 
     private void requestCapturePermission() {

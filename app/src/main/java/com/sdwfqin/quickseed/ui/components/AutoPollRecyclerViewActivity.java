@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.adapter.AutoPollRecyclerAdapter;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
-import com.sdwfqin.widget.recyclerview.AutoPollRecyclerView;
+import com.sdwfqin.quickseed.databinding.ActivityAutoPollRecyclerViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * 标题：跑马灯Demo
@@ -24,16 +22,11 @@ import butterknife.BindView;
  * 修改时间：2019/4/14
  * 修改内容：
  */
-public class AutoPollRecyclerViewActivity extends SampleBaseActivity {
-
-    @BindView(R.id.list_v)
-    AutoPollRecyclerView mListV;
-    @BindView(R.id.list_h)
-    AutoPollRecyclerView mListH;
+public class AutoPollRecyclerViewActivity extends SampleBaseActivity<ActivityAutoPollRecyclerViewBinding> {
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_auto_poll_recycler_view;
+    protected ActivityAutoPollRecyclerViewBinding getViewBinding() {
+        return ActivityAutoPollRecyclerViewBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -48,15 +41,20 @@ public class AutoPollRecyclerViewActivity extends SampleBaseActivity {
         }
 
         AutoPollRecyclerAdapter adapterv = new AutoPollRecyclerAdapter(R.layout.item_autopoll_v, list);
-        mListV.setLayoutManager(new LinearLayoutManager(mContext));
-        mListV.setAdapter(adapterv);
-        mListV.start();
+        mBinding.listV.setLayoutManager(new LinearLayoutManager(mContext));
+        mBinding.listV.setAdapter(adapterv);
+        mBinding.listV.start();
 
         AutoPollRecyclerAdapter adapterh = new AutoPollRecyclerAdapter(R.layout.item_autopoll_h, list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        mListH.setLayoutManager(linearLayoutManager);
-        mListH.setAdapter(adapterh);
-        mListH.start();
+        mBinding.listH.setLayoutManager(linearLayoutManager);
+        mBinding.listH.setAdapter(adapterh);
+        mBinding.listH.start();
+    }
+
+    @Override
+    protected void initClickListener() {
+
     }
 }

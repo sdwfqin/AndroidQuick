@@ -8,9 +8,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.sdwfqin.widget.databinding.QuickAmountViewBinding;
 
 /**
  * 描述：商品数量
@@ -31,9 +31,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
 
     private OnAmountChangeListener mListener;
 
-    private EditText etAmount;
-    private Button btnDecrease;
-    private Button btnIncrease;
+    private QuickAmountViewBinding mBinding;
 
     public AmountView(Context context) {
         this(context, null);
@@ -42,13 +40,10 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
     public AmountView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        LayoutInflater.from(context).inflate(R.layout.quick_amount_view, this);
-        etAmount = findViewById(R.id.etAmount);
-        btnDecrease = findViewById(R.id.btnDecrease);
-        btnIncrease = findViewById(R.id.btnIncrease);
-        btnDecrease.setOnClickListener(this);
-        btnIncrease.setOnClickListener(this);
-        etAmount.addTextChangedListener(this);
+        mBinding = QuickAmountViewBinding.inflate(LayoutInflater.from(context));
+        mBinding.btnDecrease.setOnClickListener(this);
+        mBinding.btnIncrease.setOnClickListener(this);
+        mBinding.etAmount.addTextChangedListener(this);
 
         TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.AmountView);
         int btnWidth = obtainStyledAttributes.getDimensionPixelSize(R.styleable.AmountView_quick_btnWidth, LayoutParams.WRAP_CONTENT);
@@ -58,17 +53,17 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         obtainStyledAttributes.recycle();
 
         LayoutParams btnParams = new LayoutParams(btnWidth, LayoutParams.MATCH_PARENT);
-        btnDecrease.setLayoutParams(btnParams);
-        btnIncrease.setLayoutParams(btnParams);
+        mBinding.btnDecrease.setLayoutParams(btnParams);
+        mBinding.btnIncrease.setLayoutParams(btnParams);
         if (btnTextSize != 0) {
-            btnDecrease.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
-            btnIncrease.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
+            mBinding.btnDecrease.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
+            mBinding.btnIncrease.setTextSize(TypedValue.COMPLEX_UNIT_PX, btnTextSize);
         }
 
         LayoutParams textParams = new LayoutParams(tvWidth, LayoutParams.MATCH_PARENT);
-        etAmount.setLayoutParams(textParams);
+        mBinding.etAmount.setLayoutParams(textParams);
         if (tvTextSize != 0) {
-            etAmount.setTextSize(tvTextSize);
+            mBinding.etAmount.setTextSize(tvTextSize);
         }
     }
 
@@ -86,16 +81,16 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         if (i == R.id.btnDecrease) {
             if (amount > 1) {
                 amount--;
-                etAmount.setText(amount + "");
+                mBinding.etAmount.setText(amount + "");
             }
         } else if (i == R.id.btnIncrease) {
             if (amount < goods_storage) {
                 amount++;
-                etAmount.setText(amount + "");
+                mBinding.etAmount.setText(amount + "");
             }
         }
 
-        etAmount.clearFocus();
+        mBinding.etAmount.clearFocus();
 
         if (mListener != null) {
             mListener.onAmountChange(this, amount);
@@ -119,7 +114,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         }
         amount = Integer.valueOf(s.toString());
         if (amount > goods_storage) {
-            etAmount.setText(goods_storage + "");
+            mBinding.etAmount.setText(goods_storage + "");
             return;
         }
 
