@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewbinding.ViewBinding;
 
 import com.qmuiteam.qmui.skin.QMUISkinManager;
@@ -21,8 +20,6 @@ import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
  */
 public abstract class SampleBaseActivity<V extends ViewBinding> extends BaseActivity<V> {
 
-    private QMUISkinManager mSkinManager;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +35,7 @@ public abstract class SampleBaseActivity<V extends ViewBinding> extends BaseActi
     @Override
     protected void onStart() {
         super.onStart();
-        if(mSkinManager != null){
-            mSkinManager.register(this);
-        }
-        if(getSkinManager() != null){
+        if (getSkinManager() != null) {
             getSkinManager().addSkinChangeListener(mOnSkinChangeListener);
         }
     }
@@ -49,10 +43,7 @@ public abstract class SampleBaseActivity<V extends ViewBinding> extends BaseActi
     @Override
     protected void onStop() {
         super.onStop();
-        if(mSkinManager != null){
-            mSkinManager.unRegister(this);
-        }
-        if(getSkinManager() != null){
+        if (getSkinManager() != null) {
             getSkinManager().removeSkinChangeListener(mOnSkinChangeListener);
         }
     }
@@ -64,17 +55,5 @@ public abstract class SampleBaseActivity<V extends ViewBinding> extends BaseActi
             QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
         }
     };
-
-    public void setSkinManager(@Nullable QMUISkinManager skinManager){
-        if(mSkinManager != null){
-            mSkinManager.unRegister(this);
-        }
-        mSkinManager = skinManager;
-        if(skinManager != null){
-            if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)){
-                skinManager.register(this);
-            }
-        }
-    }
 
 }
