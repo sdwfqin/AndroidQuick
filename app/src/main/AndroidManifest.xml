@@ -32,6 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -77,6 +78,7 @@
         <activity
             android:name=".ui.components.ShowSvgActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name=".ui.components.WindowFloatAndScreenshotActivity" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"

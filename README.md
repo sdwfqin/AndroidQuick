@@ -181,6 +181,7 @@
 | ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用[flexbox-layout](https://github.com/google/flexbox-layout)代替 |
 | ControlViewPager | 可动态禁止（允许）左滑/右滑的ViewPager |
 | StatusPlaceholderView | 沉浸式状态栏占位 |
+| WindowFloatView | 悬浮窗基类 |
 
 4. imageloader
 
@@ -189,4 +190,4 @@
 | ImageLoader | 图片加载 |
 | CircleProgressView | 加载进度View |
 
-# Apk https://www.pgyer.com/tNyb
+# Apk https://www.pgyer.com/AndroidQuick

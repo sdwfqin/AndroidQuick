@@ -113,8 +113,6 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
         Preview preview = new Preview.Builder()
                 .build();
 
-        preview.setSurfaceProvider(mViewFinder.getPreviewSurfaceProvider());
-
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                 .build();
@@ -123,6 +121,8 @@ public class CameraXDemoActivity extends BaseActivity implements CameraXConfig.P
 
         mCameraInfo = camera.getCameraInfo();
         mCameraControl = camera.getCameraControl();
+
+        preview.setSurfaceProvider(mViewFinder.createSurfaceProvider(mCameraInfo));
 
         initCameraListener();
     }

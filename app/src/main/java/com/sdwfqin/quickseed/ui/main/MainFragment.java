@@ -17,6 +17,7 @@ import com.sdwfqin.quickseed.ui.components.PayPwdInputActivity;
 import com.sdwfqin.quickseed.ui.components.PictureUploadActivity;
 import com.sdwfqin.quickseed.ui.components.ShowSvgActivity;
 import com.sdwfqin.quickseed.ui.components.VLayoutSampleActivity;
+import com.sdwfqin.quickseed.ui.components.WindowFloatAndScreenshotActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MainFragment extends BaseFragment {
             "展示SVG图片",
             "跳转网页",
             "自定义Webview",
+            "悬浮窗与截图",
             "弹窗",
     };
 
@@ -101,6 +103,9 @@ public class MainFragment extends BaseFragment {
                     startActivity(new Intent(mContext, CustomWebviewActivity.class));
                     break;
                 case 9:
+                    startActivity(new Intent(mContext, WindowFloatAndScreenshotActivity.class));
+                    break;
+                case 10:
                     HintDialog hintDialog = new HintDialog(mContext);
                     hintDialog.setFollowSkin(true);
                     hintDialog.show();
