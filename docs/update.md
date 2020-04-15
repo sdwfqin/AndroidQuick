@@ -1,5 +1,11 @@
 # 更新文档
 
+### 2020/04/15
+
+1. 移除Butterknife改为ViewBinding
+2. imageLoader加载动画View移动到widget库中
+3. 添加MVVM模式支持
+
 ### 2020/01/19
 
 1. 升级QMUI到2.0，支持侧滑返回，支持基于uiMode的换肤

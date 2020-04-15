@@ -27,7 +27,7 @@
 
 # 需要注意！！！
 
-1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，可参考`app`项目中的相应代码。V3.2+使用的`QMUI`2.0或更高版本，请参考`app`中的`theme.xml`，主题请继承`QuickTheme`
+1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，参考`app`中的`theme.xml`，主题请继承`QuickTheme`
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
 3. `quicklib`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
 4. 请在module的`build.gradle#android`中添加如下代码：
@@ -85,11 +85,12 @@
 
 2. 请将[支付宝的aar文件](https://github.com/sdwfqin/AndroidQuick/tree/3.x/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
 
-# 支持Mvp与Mvc模式
+# 支持Mvc、Mvp、Mvvm模式
 
 1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
 2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承SamplePresenter<T extends BaseView>类并实现Presenter接口，他们的区别是SamplePresenter里面实现了BasePresenter的接口处理了View绑定
-3. 网络部分可以参考DemoApp下面的`mvpretrofit`
+2. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
+3. 网络部分可以参考DemoApp下面的[mvpretrofit](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
 
 # 使用方法
 
