@@ -2,17 +2,18 @@
 
 ### 2020/04/15
 
-1. 移除ButterKnife改为ViewBinding
-2. imageLoader加载动画View移动到widget库中
-3. 添加MVVM模式支持
+1. 移除`ButterKnife`改为`ViewBinding`
+2. imageLoader加载动画View移动到`widget`库中
+3. 添加MVVM支持，引入JetPack系列组件
+3. `widget`库添加悬浮窗基类
 
 ### 2020/01/19
 
 1. 升级QMUI到2.0，支持侧滑返回，支持基于uiMode的换肤
 2. 升级BaseRecyclerViewAdapterHelper到3.0，不完全向前兼容
-3. retrofit 2.7.1
-4. glide:4.11.0
-5. okhttp:4.2.2
+3. retrofit -> 2.7.1
+4. glide -> 4.11.0
+5. okhttp -> 4.2.2
 
 ### 2019/04/14
 

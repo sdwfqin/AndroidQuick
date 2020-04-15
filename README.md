@@ -116,9 +116,11 @@
 | :-------- | :--------|
 | BaseActivity |  |
 | BaseFragment |  |
-| BaseMvpActivity |  |
-| BaseMvpFragment |  |
+| BaseMvpActivity | 支持MVP的基类Activity |
+| BaseMvpFragment | 支持MVC的基类Fragment |
 | RxPresenter | Presenter层封装 |
+| BaseMvvmActivity | 支持MVVM的基类Activity |
+| BaseViewModel | ViewModel基类 |
 | WechatShareTools | 微信分享工具类 |
 | ImagePreviewActivity | 图片预览Activity（多图/单图） |
 | BaseWebView | ViewActivity基类 |
@@ -158,12 +160,12 @@
 | ControlViewPager | 可动态禁止（允许）左滑/右滑的ViewPager |
 | StatusPlaceholderView | 沉浸式状态栏占位 |
 | WindowFloatView | 悬浮窗基类 |
+| CircleProgressView | 加载进度View |
 
 4. imageloader
 
 | 文件名称 | 功能 |
 | :-------- | :--------|
 | ImageLoader | 图片加载 |
-| CircleProgressView | 加载进度View |
 
 # Apk https://www.pgyer.com/AndroidQuick
