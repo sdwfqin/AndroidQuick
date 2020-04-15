@@ -5,14 +5,15 @@
     // 测试版
     
     def quicklib = "4.0.0-alpha02"
+    
     // quicklib(Base)
     implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
     // 支付模块
     implementation "com.sdwfqin.quicklib:paylib:$quicklib"
     // Android 图片加载库（Glide封装）
-    implementation "com.sdwfqin.quick:imageloader:$quicklib"
+    implementation "com.sdwfqin.quicklib:imageloader:$quicklib"
     // Android 自定义View组件
-    implementation "com.sdwfqin.quick:widget:$quicklib"
+    implementation "com.sdwfqin.quicklib:widget:$quicklib"
 
     // =================================================
     
