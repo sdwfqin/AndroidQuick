@@ -14,18 +14,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sdwfqin.imageloader.progress.CircleProgressView
+    <com.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:progress="0"
         android:visibility="gone"
-        app:cpv_innerPadding="2dp"
-        app:cpv_outerColor="@color/transparent90_white"
-        app:cpv_outerSize="1dp"
-        app:cpv_progressNormalColor="@color/transparent"
-        app:cpv_progressReachColor="@color/transparent90_white"
-        app:cpv_progressStyle="FillInnerArc"
+        app:quick_innerPadding="2dp"
+        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerSize="1dp"
+        app:quick_progressNormalColor="@color/transparent"
+        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressStyle="FillInnerArc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

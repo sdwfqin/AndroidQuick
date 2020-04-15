@@ -60,24 +60,24 @@ public class ImagePreviewFragment extends BaseFragment<QuickFragmentImagePreview
             url = getArguments().getString("url");
         }
 
-        ImageLoader imageLoader = new ImageLoader.Builder()
+        new ImageLoader.Builder()
                 .setImagePath(url)
                 .setPlaceholder(R.mipmap.image_loading)
                 .setErrorImage(R.mipmap.image_load_err)
                 .build(mBinding.image)
-                .loadImage();
-        imageLoader.setOnProgressListener(new OnProgressListener() {
-            @Override
-            public void onLoading(int progress) {
-                mBinding.progressBar.setVisibility(View.VISIBLE);
-                mBinding.progressBar.setProgress(progress);
-            }
+                .loadImage()
+                .setOnProgressListener(new OnProgressListener() {
+                    @Override
+                    public void onLoading(int progress) {
+                        mBinding.progressBar.setVisibility(View.VISIBLE);
+                        mBinding.progressBar.setProgress(progress);
+                    }
 
-            @Override
-            public void onLoadSuccess() {
-                mBinding.progressBar.setVisibility(View.GONE);
-            }
-        });
+                    @Override
+                    public void onLoadSuccess() {
+                        mBinding.progressBar.setVisibility(View.GONE);
+                    }
+                });
 
         // setOnLongClickListener中return的值决定是否在长按后再加一个短按动作
         // true为不加短按,false为加入短按

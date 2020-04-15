@@ -1,6 +1,8 @@
-package com.sdwfqin.quicklib.base;
+package com.sdwfqin.quicklib.mvp;
 
 import androidx.viewbinding.ViewBinding;
+
+import com.sdwfqin.quicklib.base.BaseActivity;
 
 /**
  * 描述：Mvp Activity基类

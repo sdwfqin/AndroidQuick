@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.sdwfqin.quicklib.mvp.BaseView;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
 

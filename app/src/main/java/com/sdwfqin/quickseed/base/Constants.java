@@ -13,7 +13,7 @@ public class Constants {
     /**
      * BaseUrl
      */
-    public static final String BASE_URL = "http://www.sdwfqin.com/";
+    public static final String BASE_URL = "https://tianqiapi.com/";
     public static final String BASE_API = "api";
     public static final String BASE_SHARE = BASE_URL + "index.do?id=";
 

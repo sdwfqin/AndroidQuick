@@ -1,6 +1,8 @@
-package com.sdwfqin.quicklib.base;
+package com.sdwfqin.quicklib.mvp;
 
 import androidx.viewbinding.ViewBinding;
+
+import com.sdwfqin.quicklib.base.BaseFragment;
 
 /**
  * 描述：Fragment基类

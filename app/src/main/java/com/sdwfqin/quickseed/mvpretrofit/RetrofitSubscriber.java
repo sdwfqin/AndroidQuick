@@ -2,7 +2,7 @@ package com.sdwfqin.quickseed.mvpretrofit;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.sdwfqin.quicklib.base.BaseView;
+import com.sdwfqin.quicklib.mvp.BaseView;
 
 import java.lang.ref.WeakReference;
 

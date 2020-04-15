@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.base;
+package com.sdwfqin.quicklib.mvp;
 
 /**
  * 描述：Presenter基类

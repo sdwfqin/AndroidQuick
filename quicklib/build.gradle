@@ -57,6 +57,7 @@ dependencies {
     api utilsDependencies["easypermissions"]
     api imageDependencies["photoview"]
     implementation project(':imageloader')
+    implementation project(':widget')
 }
 
 apply from: "deployBintray.gradle"

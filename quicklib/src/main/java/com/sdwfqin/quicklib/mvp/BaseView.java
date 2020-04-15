@@ -1,4 +1,4 @@
-package com.sdwfqin.quicklib.base;
+package com.sdwfqin.quicklib.mvp;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 

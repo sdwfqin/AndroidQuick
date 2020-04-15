@@ -15,6 +15,7 @@ import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
+import com.sdwfqin.quicklib.mvp.BaseView;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
@@ -71,7 +72,9 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         mContext = this;
         AppManager.addActivity(this);
         initPresenter();
+        initViewModel();
         initEventAndData();
+        initListener();
         initClickListener();
     }
 
@@ -342,6 +345,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
 
     // ==================== 提供的接口 ====================
 
+    protected void initViewModel() {
+
+    }
+
     protected void initPresenter() {
 
     }
@@ -361,7 +368,16 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     protected abstract void initEventAndData();
 
     /**
+     * 监听器
+     */
+    protected void initListener() {
+
+    }
+
+    /**
      * 点击事件
      */
-    protected abstract void initClickListener();
+    protected void initClickListener() {
+
+    }
 }

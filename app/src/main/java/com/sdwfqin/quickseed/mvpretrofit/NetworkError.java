@@ -1,6 +1,6 @@
 package com.sdwfqin.quickseed.mvpretrofit;
 
-import com.sdwfqin.quicklib.base.BaseView;
+import com.sdwfqin.quicklib.mvp.BaseView;
 
 /**
  * 描述：网络统一异常处理
