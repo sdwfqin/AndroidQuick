@@ -2,7 +2,7 @@
 
 ### 2020/04/15
 
-1. 移除Butterknife改为ViewBinding
+1. 移除ButterKnife改为ViewBinding
 2. imageLoader加载动画View移动到widget库中
 3. 添加MVVM模式支持
 
