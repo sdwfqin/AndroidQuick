@@ -1,7 +1,7 @@
 ext {
 
-    versionCode = 400
-    versionName = "4.0.0"
+    versionCode = 40002
+    versionName = "4.0.0-alpha02"
 
     qmui = "2.0.0-alpha06"
     okhttp = "4.4.1"

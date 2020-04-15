@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     signingConfigs {
         sdwfqinSigning {
             keyAlias 'sdwfqin'
@@ -11,12 +12,13 @@ android {
     }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
+
     defaultConfig {
         applicationId "com.sdwfqin.quickseed"
         minSdkVersion 21
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode 10
-        versionName "3.3.1"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         multiDexEnabled true
         signingConfig signingConfigs.sdwfqinSigning
@@ -41,6 +43,10 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
