@@ -103,9 +103,9 @@
 # 支持Mvc、Mvp、Mvvm模式
 
 1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
-2. 如果使用Mvp模式，需要继承MvpActivity/MvpFragment，并且Contract接口或Presenter/View接口需要继承BaseView与BasePresenter<T extends BaseView>，Presenter实现类可以直接实现Presenter接口也可以继承SamplePresenter<T extends BaseView>类并实现Presenter接口，他们的区别是SamplePresenter里面实现了BasePresenter的接口处理了View绑定
-2. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
-3. 网络部分可以参考DemoApp下面的[mvpretrofit](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
+2. 如果使用Mvp模式，请参考[Demo中的Mvp实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvp)
+3. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
+4. 网络部分可以参考DemoApp下面的[mvpretrofit](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
 
 # 使用方法
 
