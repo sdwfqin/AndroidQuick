@@ -9,8 +9,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.R;
@@ -83,7 +85,7 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
             finish();
         }
 
-        mShowImagePagerAdapter = new ShowImagePagerAdapter();
+        mShowImagePagerAdapter = new ShowImagePagerAdapter(getSupportFragmentManager(), getLifecycle());
         mBinding.viewpager.setAdapter(mShowImagePagerAdapter);
         mBinding.viewpager.setCurrentItem(position);
 
@@ -95,20 +97,10 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
 
         setPosText(position + 1, mImageList.size());
 
-        mBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        mBinding.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 setPosText(position + 1, mImageList.size());
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
@@ -129,21 +121,21 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
         mBinding.position.setText(position + "/" + size);
     }
 
-    private class ShowImagePagerAdapter extends FragmentStatePagerAdapter {
+    private class ShowImagePagerAdapter extends FragmentStateAdapter {
 
-        public ShowImagePagerAdapter() {
-            super(getSupportFragmentManager());
+        public ShowImagePagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+            super(fragmentManager, lifecycle);
         }
 
+        @NonNull
         @Override
-        public int getCount() {
-            return mImageList.size();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return ImagePreviewFragment.newInstance(mImageList.get(position));
         }
 
+        @Override
+        public int getItemCount() {
+            return mImageList.size();
+        }
     }
 }
