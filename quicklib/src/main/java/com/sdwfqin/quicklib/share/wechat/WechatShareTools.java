@@ -67,7 +67,7 @@ public class WechatShareTools {
 
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
         bitmap.recycle();
-        msg.thumbData = ConvertUtils.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG);
+        msg.thumbData = ConvertUtils.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG, 100);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = QuickUtils.getCurrTime();

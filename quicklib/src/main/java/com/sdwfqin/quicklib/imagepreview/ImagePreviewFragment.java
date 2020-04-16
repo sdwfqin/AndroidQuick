@@ -126,7 +126,7 @@ public class ImagePreviewFragment extends BaseFragment<QuickFragmentImagePreview
                 String filePath = QuickConstants.SAVE_REAL_PATH + url.substring(url.lastIndexOf("/"));
                 if (FileUtils.createOrExistsFile(filePath)) {
                     BitmapDrawable bitmapDrawable = (BitmapDrawable) mBinding.image.getDrawable();
-                    byte[] bitmap2Bytes = ImageUtils.bitmap2Bytes(bitmapDrawable.getBitmap(), Bitmap.CompressFormat.JPEG);
+                    byte[] bitmap2Bytes = ImageUtils.bitmap2Bytes(bitmapDrawable.getBitmap(), Bitmap.CompressFormat.JPEG, 100);
                     if (FileIOUtils.writeFileFromBytesByStream(filePath, bitmap2Bytes)) {
                         Snackbar.make(mBinding.getRoot(), R.string.quick_img_save_success, Snackbar.LENGTH_SHORT).show();
                         Uri contentUri = Uri.fromFile(new File(filePath));

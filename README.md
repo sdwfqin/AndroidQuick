@@ -1,10 +1,10 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
-# Gradle（使用前请查看注意事项）:
+# Gradle（使用前请查看注意事项，3.x后版本仅支持AndroidX，可切换分支查看早期代码）:
 
     // 测试版
     
-    def quicklib = "4.0.0-alpha02"
+    def quicklib = "4.0.0-alpha03"
     
     // quicklib(Base)
     implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
@@ -35,6 +35,11 @@
 
     minSdkVersion 21
     targetSdkVersion 29
+    
+> 开发环境
+
+    AndroidStudio 3.6+
+    Gradle 5.6.4
     
 # 早期版本
 

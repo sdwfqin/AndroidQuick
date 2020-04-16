@@ -1,11 +1,11 @@
 ext {
 
-    versionCode = 40002
-    versionName = "4.0.0-alpha02"
+    versionCode = 40003
+    versionName = "4.0.0-alpha03"
 
     qmui = "2.0.0-alpha06"
-    okhttp = "4.4.1"
-    retrofit = "2.8.0"
+    okhttp = "4.5.0"
+    retrofit = "2.8.1"
     glide = "4.11.0"
     vlayout = "1.2.36"
 
@@ -52,7 +52,7 @@ ext {
 
     viewDependencies = [
             // brvah
-            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1",
+            "brvah"       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3",
             // smartrefresh
             "smartrefresh": "com.scwang.smartrefresh:SmartRefreshLayout:1.1.1",
             // pickerview
@@ -73,7 +73,7 @@ ext {
             // easypermissions
             "easypermissions": "pub.devrel:easypermissions:3.0.0",
             // utils
-            "utilcodex"      : "com.blankj:utilcodex:1.26.0",
+            "utilcodex"      : "com.blankj:utilcodex:1.28.0",
             // agentweb
             "agentweb"       : "com.just.agentweb:agentweb:4.1.3",
     ]
