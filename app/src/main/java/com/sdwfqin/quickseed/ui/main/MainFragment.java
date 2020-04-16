@@ -23,6 +23,7 @@ import com.sdwfqin.quickseed.ui.components.PictureUploadActivity;
 import com.sdwfqin.quickseed.ui.components.ShowSvgActivity;
 import com.sdwfqin.quickseed.ui.components.VLayoutSampleActivity;
 import com.sdwfqin.quickseed.ui.components.WindowFloatAndScreenshotActivity;
+import com.sdwfqin.quickseed.ui.mvp.WeatherMvpActivity;
 import com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmActivity;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
             "自定义Webview",
             "悬浮窗与截图",
             "弹窗",
-            "Mvvm",
+            "Mvvm Demo",
+            "Mvp Demo",
     };
 
     @Override
@@ -121,6 +123,9 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     break;
                 case 11:
                     startActivity(new Intent(mContext, WeatherMvvmActivity.class));
+                    break;
+                case 12:
+                    startActivity(new Intent(mContext, WeatherMvpActivity.class));
                     break;
                 default:
             }

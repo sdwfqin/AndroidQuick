@@ -1,9 +1,12 @@
 package com.sdwfqin.quickseed.mvpretrofit;
 
-import com.sdwfqin.quickseed.mvpretrofit.demomodel.LoginModel;
+import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
+import retrofit2.http.QueryMap;
 
 /**
  * 描述：Api接口
@@ -13,9 +16,6 @@ import retrofit2.http.POST;
  */
 public interface ServiceApi {
 
-    /**
-     * 测试接口
-     */
-    @POST("test")
-    Observable<BaseResponse<LoginModel>> login();
+    @GET("free/day")
+    Observable<WeatherBean> getWeather(@QueryMap Map<String, Object> maps);
 }
