@@ -8,10 +8,13 @@ import androidx.viewpager.widget.ViewPager;
 
 /**
  * 描述：可以禁止滑动的Viewpager
+ * <p>
+ * ViewPager2可以使用setUserInputEnabled(false)实现禁止滑动
  *
  * @author 张钦
  * @date 2017/9/25
  */
+@Deprecated
 public class NoScrollViewPager extends ViewPager {
 
     /**

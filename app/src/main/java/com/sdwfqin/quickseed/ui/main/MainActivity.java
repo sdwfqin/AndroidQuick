@@ -4,11 +4,12 @@ import android.Manifest;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewbinding.ViewBinding;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.qmuiteam.qmui.widget.tab.QMUITab;
@@ -60,10 +61,13 @@ public class MainActivity extends SampleBaseActivity<ActivityMainBinding> {
         mPages.add(new MainFragment());
         mPages.add(new SettingFragment());
 
-        mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), mPages);
+        mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), getLifecycle(), mPages);
 
         mBinding.pager.setOffscreenPageLimit(2);
         mBinding.pager.setAdapter(mTabPagerAdapter);
+
+        // 禁止ViewPager2的滑动
+        mBinding.pager.setUserInputEnabled(false);
     }
 
     private void initTabs() {
@@ -85,7 +89,7 @@ public class MainActivity extends SampleBaseActivity<ActivityMainBinding> {
         mBinding.tabs.addTab(component)
                 .addTab(util);
 
-        mBinding.tabs.setupWithViewPager(mBinding.pager, false);
+        mBinding.tabs.setupWithViewPager(mBinding.pager);
     }
 
     /**
@@ -108,22 +112,23 @@ public class MainActivity extends SampleBaseActivity<ActivityMainBinding> {
         });
     }
 
-    private class TabPagerAdapter extends FragmentPagerAdapter {
+    private class TabPagerAdapter extends FragmentStateAdapter {
 
         private List<Fragment> pagers;
 
-        public TabPagerAdapter(FragmentManager fm, List<Fragment> pagers) {
-            super(fm);
+        public TabPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> pagers) {
+            super(fragmentManager, lifecycle);
             this.pagers = pagers;
         }
 
+        @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return pagers.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return pagers.size();
         }
     }

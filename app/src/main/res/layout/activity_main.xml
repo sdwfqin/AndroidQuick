@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".ui.main.MainActivity">
 
-    <com.sdwfqin.widget.NoScrollViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+    <com.qmuiteam.qmui.widget.tab.QMUITabSegment2
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="50dp"
