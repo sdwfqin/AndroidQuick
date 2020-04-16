@@ -299,7 +299,9 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
      * ViewPager2已经可以实现原生懒加载
      */
     @Deprecated
-    protected abstract void lazyLoadShow();
+    protected void lazyLoadShow() {
+
+    }
 
     /**
      * 页面懒加载

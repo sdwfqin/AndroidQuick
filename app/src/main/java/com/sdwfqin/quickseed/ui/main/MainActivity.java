@@ -11,10 +11,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.qmuiteam.qmui.widget.tab.QMUITab;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityMainBinding;
 
@@ -58,8 +60,8 @@ public class MainActivity extends SampleBaseActivity<ActivityMainBinding> {
 
     private void initPagers() {
         mPages = new ArrayList<>(2);
-        mPages.add(new MainFragment());
-        mPages.add(new SettingFragment());
+        mPages.add((Fragment) ARouter.getInstance().build(ArouterConstants.MAIN_HOME).navigation());
+        mPages.add((Fragment) ARouter.getInstance().build(ArouterConstants.MAIN_MINE).navigation());
 
         mTabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), getLifecycle(), mPages);
 

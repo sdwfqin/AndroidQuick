@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.ui.components;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityPayPwdInputBinding;
 
@@ -9,6 +11,7 @@ import com.sdwfqin.quickseed.databinding.ActivityPayPwdInputBinding;
  * @author zhangqin
  * @date 2018/6/12
  */
+@Route(path = ArouterConstants.COMPONENTS_PAYPWD)
 public class PayPwdInputActivity extends SampleBaseActivity<ActivityPayPwdInputBinding> {
 
     @Override

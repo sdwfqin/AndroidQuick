@@ -2,6 +2,7 @@ package com.sdwfqin.quickseed.ui.components;
 
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.BaseLayoutHelper;
@@ -12,6 +13,7 @@ import com.sdwfqin.quickseed.adapter.StrokeCardAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeHistoryAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeOrderAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeTitleAdapter;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityVlayoutSampleBinding;
 
@@ -26,6 +28,7 @@ import java.util.List;
  * @author 张钦
  * @date 2019-06-28
  */
+@Route(path = ArouterConstants.COMPONENTS_VLAYOUTSAMPLE)
 public class VLayoutSampleActivity extends SampleBaseActivity<ActivityVlayoutSampleBinding> {
 
     private VirtualLayoutManager mVirtualLayoutManager;

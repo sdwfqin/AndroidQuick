@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.webview.BaseWebView;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 
 /**
  * 描述：自定义Webview
@@ -13,6 +15,7 @@ import com.sdwfqin.quicklib.webview.BaseWebView;
  * @author zhangqin
  * @date 2018/6/19
  */
+@Route(path = ArouterConstants.COMPONENTS_CUSTOMWEBVIEW)
 public class CustomWebviewActivity extends BaseWebView {
 
     @Override

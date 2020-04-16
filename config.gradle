@@ -1,7 +1,7 @@
 ext {
 
-    versionCode = 40003
-    versionName = "4.0.0-alpha03"
+    versionCode = 40005
+    versionName = "4.0.0-alpha05"
 
     qmui = "2.0.0-alpha06"
     okhttp = "4.5.0"
@@ -76,6 +76,8 @@ ext {
             "utilcodex"      : "com.blankj:utilcodex:1.28.0",
             // agentweb
             "agentweb"       : "com.just.agentweb:agentweb:4.1.3",
+            // arouter
+            "arouter"        : "com.alibaba:arouter-api:1.5.0",
     ]
 
     tencentDependencies = [
@@ -89,7 +91,8 @@ ext {
     ]
 
     compilerDependencies = [
-            "glide-compiler"      : "com.github.bumptech.glide:compiler:$glide",
-            "arch-compiler"       : "com.qmuiteam:arch-compiler:$qmui",
+            "glide-compiler"  : "com.github.bumptech.glide:compiler:$glide",
+            "arch-compiler"   : "com.qmuiteam:arch-compiler:$qmui",
+            "arouter-compiler": "com.alibaba:arouter-compiler:1.2.2",
     ]
 }

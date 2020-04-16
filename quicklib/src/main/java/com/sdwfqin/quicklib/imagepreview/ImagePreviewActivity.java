@@ -1,8 +1,6 @@
 package com.sdwfqin.quicklib.imagepreview;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,9 +12,12 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quicklib.base.QuickArouterConstants;
 import com.sdwfqin.quicklib.databinding.QuickActivityImagePreviewBinding;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2017/8/7
  */
+@Route(path = QuickArouterConstants.QUICK_IMAGEPREVIEW)
 public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreviewBinding> {
 
     private List<String> mImageList;
@@ -40,29 +42,25 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
     /**
      * 图片预览
      *
-     * @param context
      * @param stringList 图片链接
      * @return
      */
-    public static void launch(@NonNull Context context, @Nullable List<String> stringList) {
-
-        Intent intent = new Intent(context, ImagePreviewActivity.class);
-        intent.putStringArrayListExtra("data", (ArrayList<String>) stringList);
-        context.startActivity(intent);
+    public static void launch(@Nullable List<String> stringList) {
+        launch(stringList, 0);
     }
 
     /**
-     * @param context
      * @param stringList
      * @param position   当前图片位置
      * @return
      */
-    public static void launch(@NonNull Context context, @Nullable List<String> stringList, int position) {
-
-        Intent intent = new Intent(context, ImagePreviewActivity.class);
-        intent.putStringArrayListExtra("data", (ArrayList<String>) stringList);
-        intent.putExtra("position", position);
-        context.startActivity(intent);
+    public static void launch(@Nullable List<String> stringList, int position) {
+        ARouter
+                .getInstance()
+                .build(QuickArouterConstants.QUICK_IMAGEPREVIEW)
+                .withStringArrayList("data", (ArrayList<String>) stringList)
+                .withInt("position", position)
+                .navigation();
     }
 
     @Override

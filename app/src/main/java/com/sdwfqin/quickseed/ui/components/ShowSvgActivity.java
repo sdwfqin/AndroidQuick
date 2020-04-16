@@ -2,9 +2,11 @@ package com.sdwfqin.quickseed.ui.components;
 
 import android.graphics.drawable.PictureDrawable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.RequestBuilder;
 import com.sdwfqin.imageloader.GlideApp;
 import com.sdwfqin.imageloader.svg.SvgSoftwareLayerSetter;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityShowSvgBinding;
 
@@ -17,6 +19,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * @author 张钦
  * @date 2019-10-29
  */
+@Route(path = ArouterConstants.COMPONENTS_SHOWSVG)
 public class ShowSvgActivity extends SampleBaseActivity<ActivityShowSvgBinding> {
 
     private String mImgRes =

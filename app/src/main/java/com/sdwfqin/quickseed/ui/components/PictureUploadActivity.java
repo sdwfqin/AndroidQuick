@@ -3,6 +3,8 @@ package com.sdwfqin.quickseed.ui.components;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityPictureUploadBinding;
 import com.sdwfqin.quickseed.model.PictureModel;
@@ -21,6 +23,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/5/31
  */
+@Route(path = ArouterConstants.COMPONENTS_PICTUREUPLOAD)
 public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUploadBinding> {
 
     public static final int RESULT_PHOTO_SELECT = 101;

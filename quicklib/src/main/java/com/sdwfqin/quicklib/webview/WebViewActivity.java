@@ -1,7 +1,8 @@
 package com.sdwfqin.quicklib.webview;
 
-import android.content.Context;
-import android.content.Intent;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.sdwfqin.quicklib.base.QuickArouterConstants;
 
 /**
  * 描述：WebViewActivity
@@ -9,32 +10,31 @@ import android.content.Intent;
  * @author 张钦
  * @date 2018/1/16
  */
+@Route(path = QuickArouterConstants.QUICK_WEBVIEW)
 public class WebViewActivity extends BaseWebView {
 
     /**
      * 加载网页
      *
-     * @param context
-     * @param url     页面地址
+     * @param url 页面地址
      */
-    public static void launch(Context context, String url) {
-        Intent i = new Intent(context, WebViewActivity.class);
-        i.putExtra("url", url);
-        context.startActivity(i);
+    public static void launch(String url) {
+        launch(url, null);
     }
 
     /**
      * 加载网页，带有默认标题
      *
-     * @param context
-     * @param url     页面地址
-     * @param title   默认标题
+     * @param url   页面地址
+     * @param title 默认标题
      */
-    public static void launch(Context context, String url, String title) {
-        Intent i = new Intent(context, WebViewActivity.class);
-        i.putExtra("url", url);
-        i.putExtra("title", title);
-        context.startActivity(i);
+    public static void launch(String url, String title) {
+        ARouter
+                .getInstance()
+                .build(QuickArouterConstants.QUICK_WEBVIEW)
+                .withString("url", url)
+                .withString("title", title)
+                .navigation();
     }
 
     @Override

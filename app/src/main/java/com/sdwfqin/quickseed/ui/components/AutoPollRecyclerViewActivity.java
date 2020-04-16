@@ -3,8 +3,10 @@ package com.sdwfqin.quickseed.ui.components;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.adapter.AutoPollRecyclerAdapter;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityAutoPollRecyclerViewBinding;
 
@@ -22,6 +24,7 @@ import java.util.List;
  * 修改时间：2019/4/14
  * 修改内容：
  */
+@Route(path = ArouterConstants.COMPONENTS_AUTOPOLLRECYCLER)
 public class AutoPollRecyclerViewActivity extends SampleBaseActivity<ActivityAutoPollRecyclerViewBinding> {
 
     @Override

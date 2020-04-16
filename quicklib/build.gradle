@@ -11,6 +11,12 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -59,9 +65,13 @@ dependencies {
     api utilsDependencies["utilcodex"]
     api utilsDependencies["agentweb"]
     api utilsDependencies["easypermissions"]
+    api utilsDependencies["arouter"]
     api imageDependencies["photoview"]
+
     implementation project(':imageloader')
     implementation project(':widget')
+
+    annotationProcessor compilerDependencies["arouter-compiler"]
 }
 
 apply from: "deployBintray.gradle"

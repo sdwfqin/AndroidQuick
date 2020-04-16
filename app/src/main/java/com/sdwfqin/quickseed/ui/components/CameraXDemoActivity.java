@@ -33,9 +33,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
 import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
@@ -53,6 +55,7 @@ import java.util.concurrent.TimeUnit;
  * @author 张钦
  * @date 2019-05-30
  */
+@Route(path = ArouterConstants.COMPONENTS_CAMERAX)
 public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding> implements CameraXConfig.Provider {
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;

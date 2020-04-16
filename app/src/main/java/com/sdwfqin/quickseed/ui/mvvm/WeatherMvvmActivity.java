@@ -1,6 +1,8 @@
 package com.sdwfqin.quickseed.ui.mvvm;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sdwfqin.quicklib.mvvm.BaseMvvmActivity;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityWeatherMvvmBinding;
 
 /**
@@ -10,6 +12,7 @@ import com.sdwfqin.quickseed.databinding.ActivityWeatherMvvmBinding;
  * @author 张钦
  * @date 2020/4/14
  */
+@Route(path = ArouterConstants.COMPONENTS_MVVM)
 public class WeatherMvvmActivity extends BaseMvvmActivity<ActivityWeatherMvvmBinding, WeatherViewModel> {
 
     @Override

@@ -9,7 +9,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.SampleBaseActivity;
 import com.sdwfqin.quickseed.databinding.ActivityWindowFloatAndScreenshotBinding;
 import com.sdwfqin.quickseed.view.QuickWindowFloatView;
@@ -21,6 +23,7 @@ import com.sdwfqin.quickseed.view.QuickWindowFloatView;
  * @author 张钦
  * @date 2020/4/10
  */
+@Route(path = ArouterConstants.COMPONENTS_WINDOWFLOATANDSCREENSHOT)
 public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<ActivityWindowFloatAndScreenshotBinding> {
 
     /**

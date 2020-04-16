@@ -1,6 +1,5 @@
 package com.sdwfqin.quickseed.ui.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,22 +8,15 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.dialog.HintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quicklib.webview.WebViewActivity;
 import com.sdwfqin.quickseed.R;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentMainBinding;
-import com.sdwfqin.quickseed.ui.components.AutoPollRecyclerViewActivity;
-import com.sdwfqin.quickseed.ui.components.CameraXDemoActivity;
-import com.sdwfqin.quickseed.ui.components.CustomWebviewActivity;
-import com.sdwfqin.quickseed.ui.components.PayPwdInputActivity;
-import com.sdwfqin.quickseed.ui.components.PictureUploadActivity;
-import com.sdwfqin.quickseed.ui.components.ShowSvgActivity;
-import com.sdwfqin.quickseed.ui.components.VLayoutSampleActivity;
-import com.sdwfqin.quickseed.ui.components.WindowFloatAndScreenshotActivity;
-import com.sdwfqin.quickseed.ui.mvp.WeatherMvpActivity;
-import com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +26,7 @@ import java.util.List;
  *
  * @author 张钦
  */
+@Route(path = ArouterConstants.MAIN_HOME)
 public class MainFragment extends BaseFragment<FragmentMainBinding> {
 
     private String[] mTitle = new String[]{
@@ -73,34 +66,34 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     List<String> strings = new ArrayList<>();
                     strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/service_v1.0.png");
                     strings.add("https://sdwfqin1-1252249614.costj.myqcloud.com/blog/shopping.gif");
-                    ImagePreviewActivity.launch(mContext, strings);
+                    ImagePreviewActivity.launch(strings);
                     break;
                 case 1:
-                    startActivity(new Intent(mContext, PictureUploadActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_PICTUREUPLOAD).navigation();
                     break;
                 case 2:
-                    startActivity(new Intent(mContext, PayPwdInputActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_PAYPWD).navigation();
                     break;
                 case 3:
-                    startActivity(new Intent(mContext, AutoPollRecyclerViewActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_AUTOPOLLRECYCLER).navigation();
                     break;
                 case 4:
-                    startActivity(new Intent(mContext, CameraXDemoActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_CAMERAX).navigation();
                     break;
                 case 5:
-                    startActivity(new Intent(mContext, VLayoutSampleActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_VLAYOUTSAMPLE).navigation();
                     break;
                 case 6:
-                    startActivity(new Intent(mContext, ShowSvgActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_SHOWSVG).navigation();
                     break;
                 case 7:
-                    WebViewActivity.launch(mContext, "https://www.baidu.com");
+                    WebViewActivity.launch("https://www.baidu.com");
                     break;
                 case 8:
-                    startActivity(new Intent(mContext, CustomWebviewActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_CUSTOMWEBVIEW).navigation();
                     break;
                 case 9:
-                    startActivity(new Intent(mContext, WindowFloatAndScreenshotActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_WINDOWFLOATANDSCREENSHOT).navigation();
                     break;
                 case 10:
                     HintDialog hintDialog = new HintDialog(mContext);
@@ -122,18 +115,13 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     });
                     break;
                 case 11:
-                    startActivity(new Intent(mContext, WeatherMvvmActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVVM).navigation();
                     break;
                 case 12:
-                    startActivity(new Intent(mContext, WeatherMvpActivity.class));
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVP).navigation();
                     break;
                 default:
             }
         });
-    }
-
-    @Override
-    protected void lazyLoadShow() {
-
     }
 }

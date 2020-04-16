@@ -14,7 +14,6 @@ import androidx.viewpager.widget.ViewPager;
  * @author 张钦
  * @date 2017/9/25
  */
-@Deprecated
 public class NoScrollViewPager extends ViewPager {
 
     /**

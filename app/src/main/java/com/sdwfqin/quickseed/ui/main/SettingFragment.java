@@ -8,8 +8,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.sdwfqin.quicklib.base.BaseFragment;
+import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentSettingBinding;
 import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
 
@@ -20,6 +22,7 @@ import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
  * @author 张钦
  * @date 2020-01-15
  */
+@Route(path = ArouterConstants.MAIN_MINE)
 public class SettingFragment extends BaseFragment<FragmentSettingBinding> {
 
     @Override
@@ -35,11 +38,6 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding> {
     @Override
     protected void initClickListener() {
         mBinding.llChangeSkin.setOnClickListener(v -> changeSkin());
-    }
-
-    @Override
-    protected void lazyLoadShow() {
-
     }
 
     private void changeSkin() {

@@ -1,14 +1,15 @@
 package com.sdwfqin.quicklib.webview;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quicklib.base.QuickArouterConstants;
 import com.sdwfqin.quicklib.base.QuickConstants;
 import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
 
@@ -18,6 +19,7 @@ import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
  * @author 张钦
  * @date 2018/1/16
  */
+@Route(path = QuickArouterConstants.QUICK_WEBVIEWLOADDATA)
 public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBinding> {
 
     LinearLayout mContainer;
@@ -26,19 +28,18 @@ public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBi
     private String mContent;
     private String mBaseUrl;
 
-    public static void launch(Context context, String title, String content) {
-        Intent i = new Intent(context, WebViewLoadDataActivity.class);
-        i.putExtra("title", title);
-        i.putExtra("content", content);
-        context.startActivity(i);
+    public static void launch(String title, String content) {
+        launch("", title, content);
     }
 
-    public static void launch(Context context, String baseUrl, String title, String content) {
-        Intent i = new Intent(context, WebViewLoadDataActivity.class);
-        i.putExtra("title", title);
-        i.putExtra("content", content);
-        i.putExtra("baseUrl", baseUrl);
-        context.startActivity(i);
+    public static void launch(String baseUrl, String title, String content) {
+        ARouter
+                .getInstance()
+                .build(QuickArouterConstants.QUICK_WEBVIEW)
+                .withString("title", title)
+                .withString("content", content)
+                .withString("baseUrl", baseUrl)
+                .navigation();
     }
 
     @Override

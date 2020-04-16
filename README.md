@@ -4,10 +4,12 @@
 
     // 测试版
     
-    def quicklib = "4.0.0-alpha03"
+    def quicklib = "4.0.0-alpha05"
     
     // quicklib(Base)
-    implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
+    implementation "com.sdwfqin.quicklib:quicklib:$quickli b"
+    annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha06"
+    annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
     // 支付模块
     implementation "com.sdwfqin.quicklib:paylib:$quicklib"
     // Android 图片加载库（Glide封装）
@@ -49,8 +51,7 @@
 
 1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，参考`app`中的`theme.xml`，主题请继承`QuickTheme`
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
-3. `quicklib`、`widget`这几个模块因为项目引入了`AndroidUtilCode`，所以需要在`Application`初始化`Utils.init(this);`
-4. 请在module的`build.gradle#android`中添加如下代码：
+3. 请在module的`build.gradle#android`中添加如下代码：
 
     ``` groovy
     compileOptions {
@@ -59,8 +60,8 @@
     }
     ```
    
-5. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
-6. 状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
+4. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
+5. 状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
 
     ``` java
     // 设置状态栏黑色字体图标
@@ -69,7 +70,7 @@
     QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
     ```
 
-7. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
+6. `BaseActivity`集成了侧划关闭组件，如需关闭某个页面请在对应`Activity`覆写`protected boolean canDragBack()`
 
     ``` java
     @Override
@@ -77,10 +78,12 @@
         return false;
     }
     ```
-8. 需要在`Application`中添加如下代码：
+7. 需要在`Application`中添加如下代码：
 
     ``` java
     QMUISwipeBackActivityManager.init(this);
+    ARouter.init(this);
+    Utils.init(this);
     ```
 
 # 关于支付模块支付宝支付的特殊说明
@@ -171,7 +174,7 @@
 | PayPwdInputView | 自定义验证码/密码View |
 | ClickViewPager | 可以点击的ViewPager |
 | DecimalEditText | Double类型的EditText，支持限定小数点后的位数 |
-| NoScrollViewPager | 可以禁止左右滑动的ViewPager |
+| NoScrollViewPager | 可以禁止左右滑动的ViewPager，ViewPager2现已支持禁止滑动 |
 | TrembleButton | 可以漂浮颤抖的按钮 |
 | WrapContentHeightViewPager | 处理NestedScrollView嵌套Viewpager+RecyclerView |
 | AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
