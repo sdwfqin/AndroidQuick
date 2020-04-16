@@ -39,15 +39,18 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     /**
      * 标志位，标志已经初始化完成。
      */
+    @Deprecated
     protected boolean mIsPrepared;
     /**
      * 当前界面是否可见
      */
+    @Deprecated
     protected boolean mIsVisible;
     /**
      * 是否加载过，用于缓存处理
      * 需要手动在lazyLoad()方法中做判断
      */
+    @Deprecated
     protected boolean mIsLoad = false;
     private QMUITipDialog mQmuiTipDialog;
     protected CompositeDisposable mCompositeDisposable;
@@ -56,8 +59,11 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
      * Fragment的UI是否是可见
      * <p>
      * 在onCreateView方法之前调用
-     *
-     * @param isVisibleToUser
+     * <p>
+     * ViewPager2已经可以实现原生懒加载
+     * <p>
+     * 如果还是用的ViewPager或其它方式可以参考以下方式实现懒加载
+     * https://juejin.im/post/5cdb7c15f265da036c57ac66
      */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -112,6 +118,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     /**
      * 懒加载条件判断
      */
+    @Deprecated
     private void baseLazyLoad() {
         if (mIsPrepared) {
             if (isVisible()) {
@@ -288,12 +295,18 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     /**
      * 页面懒加载
+     * <p>
+     * ViewPager2已经可以实现原生懒加载
      */
+    @Deprecated
     protected abstract void lazyLoadShow();
 
     /**
      * 页面懒加载
+     * <p>
+     * ViewPager2已经可以实现原生懒加载
      */
+    @Deprecated
     protected void lazyLoadHide() {
 
     }
