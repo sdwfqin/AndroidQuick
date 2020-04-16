@@ -1,6 +1,5 @@
 package com.sdwfqin.quicklib.mvvm;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewbinding.ViewBinding;
 
 import com.sdwfqin.quicklib.base.BaseActivity;
@@ -16,7 +15,7 @@ public abstract class BaseMvvmActivity<V extends ViewBinding, VM extends BaseVie
 
     @Override
     protected void initViewModel() {
-        mVm = new ViewModelProvider(this).get(getViewModel());
+        mVm = getViewModel();
 
         mVm.isLoading.observe(this, isLoading -> {
             if (isLoading) {
@@ -31,7 +30,7 @@ public abstract class BaseMvvmActivity<V extends ViewBinding, VM extends BaseVie
     /**
      * 获取ViewModel
      */
-    protected abstract Class<VM> getViewModel();
+    protected abstract VM getViewModel();
 
     /**
      * 通用网络异常回掉

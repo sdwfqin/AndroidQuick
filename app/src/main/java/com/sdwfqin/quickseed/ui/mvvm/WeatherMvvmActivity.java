@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.ui.mvvm;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sdwfqin.quicklib.mvvm.BaseMvvmActivity;
 import com.sdwfqin.quickseed.base.ArouterConstants;
@@ -21,8 +23,8 @@ public class WeatherMvvmActivity extends BaseMvvmActivity<ActivityWeatherMvvmBin
     }
 
     @Override
-    protected Class<WeatherViewModel> getViewModel() {
-        return WeatherViewModel.class;
+    protected WeatherViewModel getViewModel() {
+        return new ViewModelProvider(this).get(WeatherViewModel.class);
     }
 
     @Override

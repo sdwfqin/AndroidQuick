@@ -4,10 +4,10 @@
 
     // 测试版
     
-    def quicklib = "4.0.0-alpha05"
+    def quicklib = "4.0.0-alpha06"
     
     // quicklib(Base)
-    implementation "com.sdwfqin.quicklib:quicklib:$quickli b"
+    implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
     annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha06"
     annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
     // 支付模块
