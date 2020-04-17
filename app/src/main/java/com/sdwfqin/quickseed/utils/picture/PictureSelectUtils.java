@@ -26,7 +26,7 @@ public class PictureSelectUtils {
                 // 图片计数（第几张选中的）
                 .countable(false)
                 // 开启拍照
-                .capture(true)
+                .capture(false)
                 .captureStrategy(
                         new CaptureStrategy(true, Constants.FILE_PROVIDER))
                 .maxSelectable(imgCount)
