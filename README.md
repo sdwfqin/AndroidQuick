@@ -3,7 +3,7 @@
 ## 目录
 
 * [注意事项](#注意事项)
-* [Gradle](#Gradle)
+* [导入指南](#导入指南)
 * [相关文档](#相关文档)
 * [混淆](#混淆)
 * [其他](#其他)
@@ -11,7 +11,7 @@
 * [Demo下载](#Demo下载)
 * [License](#license)
 
-# 注意事项:
+# 注意事项
 
 > **使用前请查看注意事项**，3.x及以后版本仅支持AndroidX，可切换分支查看早期代码
 
@@ -25,7 +25,7 @@
     AndroidStudio 3.6+
     Gradle 5.6.4
 
-## 基础事项
+## 必读事项
 
 1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，参考`app`中的`theme.xml`，主题请继承`QuickTheme`
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
@@ -93,7 +93,7 @@
 3. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
 4. 网络部分可以参考DemoApp下面的[mvpretrofit](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
 
-# Gradle:
+# 导入指南
 
 ``` groovy
 // 测试版
