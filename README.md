@@ -130,15 +130,9 @@ implementation 'com.sdwfqin.quick:widget:3.2.0'
 
 # 相关文档
 
-## 早期版本
-
 [1.x文档](/docs/README_1_x.md)
 
-## 使用方法
-
 [Wiki](https://github.com/sdwfqin/AndroidQuick/wiki)
-
-## 更新文档
 
 [更新文档](/docs/update.md)
 
