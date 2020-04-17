@@ -23,6 +23,7 @@ import retrofit2.Response;
 public class WeatherViewModel extends BaseViewModel {
 
     public final MutableLiveData<WeatherBean> weatherBean = new MutableLiveData<>();
+    public final MutableLiveData<Long> birthDate = new MutableLiveData<>();
 
     public void loadWeather() {
         isLoading.postValue(true);

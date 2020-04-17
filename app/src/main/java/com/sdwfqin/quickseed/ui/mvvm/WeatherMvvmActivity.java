@@ -3,6 +3,7 @@ package com.sdwfqin.quickseed.ui.mvvm;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.LogUtils;
 import com.sdwfqin.quicklib.mvvm.BaseMvvmActivity;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityWeatherMvvmBinding;
@@ -35,6 +36,8 @@ public class WeatherMvvmActivity extends BaseMvvmActivity<ActivityWeatherMvvmBin
         mBinding.setViewModel(mVm);
         mBinding.setHandlers(new WeatherMvvmHandlers());
         mBinding.setLifecycleOwner(this);
+
+        mVm.birthDate.observe(this, LogUtils::e);
 
         mVm.loadWeather();
     }

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmConverter" />
+
         <variable
             name="viewModel"
             type="com.sdwfqin.quickseed.ui.mvvm.WeatherViewModel" />
@@ -27,6 +29,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/birth_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={WeatherMvvmConverter.dateToString(birthDate, viewModel.birthDate)}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_refresh"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <Button
             android:id="@+id/btn_refresh"
