@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.sdwfqin.quickseed.ui.mvvm.WeatherViewModel" />
+
+        <variable
+            name="handlers"
+            type="com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmHandlers" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,9 +34,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:onClick="@{() -> viewModel.loadWeather()}"
-            android:text="刷新"
+            android:text="刷新内容"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_test" />
+
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:onClick="@{handlers::onClickTest}"
+            android:text="点击测试"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/btn_refresh"
             app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

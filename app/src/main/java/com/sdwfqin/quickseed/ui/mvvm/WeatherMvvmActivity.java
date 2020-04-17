@@ -33,17 +33,15 @@ public class WeatherMvvmActivity extends BaseMvvmActivity<ActivityWeatherMvvmBin
         mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
 
         mBinding.setViewModel(mVm);
+        mBinding.setHandlers(new WeatherMvvmHandlers());
         mBinding.setLifecycleOwner(this);
 
         mVm.loadWeather();
     }
 
     @Override
-    protected void initClickListener() {
-    }
-
-    @Override
     protected void commonNetworkErrorListener(Throwable throwable) {
         showMsg(throwable.getMessage());
     }
+
 }
