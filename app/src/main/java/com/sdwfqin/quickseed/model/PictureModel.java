@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.model;
 
+import android.net.Uri;
+
 import com.sdwfqin.widget.pictureupload.PictureUpModel;
 
 /**
@@ -10,18 +12,18 @@ import com.sdwfqin.widget.pictureupload.PictureUpModel;
  */
 public class PictureModel extends PictureUpModel {
 
-    private String imgPath;
+    private Uri imgPath;
 
-    public PictureModel(String imgPath) {
+    public PictureModel(Uri imgPath) {
         super(imgPath);
         this.imgPath = imgPath;
     }
 
-    public String getImgPath() {
+    public Uri getImgPath() {
         return imgPath;
     }
 
-    public void setImgPath(String imgPath) {
+    public void setImgPath(Uri imgPath) {
         this.imgPath = imgPath;
     }
 
