@@ -207,6 +207,7 @@ implementation 'com.sdwfqin.quick:widget:3.2.0'
 # Demo下载
 
 https://www.pgyer.com/AndroidQuick
+安装密码：111111
 
 # License
 
