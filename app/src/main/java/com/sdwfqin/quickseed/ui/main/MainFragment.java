@@ -43,6 +43,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
             "弹窗",
             "Mvvm Demo",
             "Mvp Demo",
+            "圆（方）形加载进度条",
     };
 
     @Override
@@ -119,6 +120,9 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     break;
                 case 12:
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVP).navigation();
+                    break;
+                case 13:
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_CIRCLEPROGRESSDEMO).navigation();
                     break;
                 default:
             }

@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -16,17 +17,11 @@ import android.widget.ProgressBar;
 import androidx.annotation.IntDef;
 
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * 加载动画
- * <p>
- *
- * @author 张钦
- * @date 2020/4/14
- */
 public class CircleProgressView extends ProgressBar {
 
     private int mReachBarSize = ConvertUtils.dp2px(2); // 未完成进度条大小
@@ -59,12 +54,13 @@ public class CircleProgressView extends ProgressBar {
     private int mRealWidth;
     private int mRealHeight;
 
-    @IntDef({ProgressStyle.NORMAL, ProgressStyle.FILL_IN, ProgressStyle.FILL_IN_ARC})
+    @IntDef({ProgressStyle.NORMAL, ProgressStyle.FILL_IN, ProgressStyle.FILL_IN_ARC, ProgressStyle.Fill_IN_SQUARE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ProgressStyle {
         int NORMAL = 0;
         int FILL_IN = 1;
         int FILL_IN_ARC = 2;
+        int Fill_IN_SQUARE = 3;
     }
 
     public CircleProgressView(Context context) {
@@ -91,13 +87,13 @@ public class CircleProgressView extends ProgressBar {
 
         mNormalPaint = new Paint();
         mNormalPaint.setColor(mNormalBarColor);
-        mNormalPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC ? Paint.Style.FILL : Paint.Style.STROKE);
+        mNormalPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.Fill_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
         mNormalPaint.setAntiAlias(true);
         mNormalPaint.setStrokeWidth(mNormalBarSize);
 
         mReachPaint = new Paint();
         mReachPaint.setColor(mReachBarColor);
-        mReachPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC ? Paint.Style.FILL : Paint.Style.STROKE);
+        mReachPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.Fill_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
         mReachPaint.setAntiAlias(true);
         mReachPaint.setStrokeCap(mReachCapRound ? Paint.Cap.ROUND : Paint.Cap.BUTT);
         mReachPaint.setStrokeWidth(mReachBarSize);
@@ -162,6 +158,20 @@ public class CircleProgressView extends ProgressBar {
                 rectInner = new RectF(-mInnerRadius, -mInnerRadius, mInnerRadius, mInnerRadius);
 
                 break;
+            case ProgressStyle.Fill_IN_SQUARE:
+                mStartArc = ta.getInt(R.styleable.CircleProgressView_quick_progressStartArc, 0) + 270;
+                mInnerPadding = 0;
+                mOuterColor = 0;
+                mOuterSize = 0;
+                // 将画笔大小重置为0
+                mReachBarSize = 0;
+                mNormalBarSize = 0;
+                if (!ta.hasValue(R.styleable.CircleProgressView_quick_progressNormalColor)) {
+                    mNormalBarColor = Color.TRANSPARENT;
+                }
+                int mInner = mRadius - mInnerPadding;
+                rectInner = new RectF(-mInner, -mInner, mInner, mInner);
+                break;
             case ProgressStyle.NORMAL:
                 mReachCapRound = ta.getBoolean(R.styleable.CircleProgressView_quick_reachCapRound, true);
                 mStartArc = ta.getInt(R.styleable.CircleProgressView_quick_progressStartArc, 0) + 270;
@@ -183,6 +193,7 @@ public class CircleProgressView extends ProgressBar {
         int width = 0;
         switch (mProgressStyle) {
             case ProgressStyle.FILL_IN:
+            case ProgressStyle.Fill_IN_SQUARE:
                 height = getPaddingTop() + getPaddingBottom()  // 边距
                         + Math.abs(mRadius * 2);  // 直径
                 width = getPaddingLeft() + getPaddingRight()  // 边距
@@ -225,6 +236,9 @@ public class CircleProgressView extends ProgressBar {
             case ProgressStyle.FILL_IN_ARC:
                 drawFillInArcCircle(canvas);
                 break;
+            case ProgressStyle.Fill_IN_SQUARE:
+                drawFillInSquare(canvas);
+                break;
             default:
         }
     }
@@ -247,6 +261,27 @@ public class CircleProgressView extends ProgressBar {
             canvas.drawArc(rectInner, reachArc + mStartArc, 360 - reachArc, true, mNormalPaint);
         }
 
+        canvas.restore();
+    }
+
+    /**
+     * 绘制PROGRESS_STYLE_Fill_IN_SQUARE方形
+     */
+    private void drawFillInSquare(Canvas canvas) {
+        canvas.save();
+        canvas.translate(mRealWidth / 2, mRealHeight / 2);
+        // 绘制内层进度实心方形
+        // 内层圆弧半径
+        float reachArc = getProgress() * 1.0f / getMax() * 360;
+
+        if (reachArc > 0) {
+            canvas.drawPath(getSquarePath(reachArc), mReachPaint);
+        }
+
+        // 绘制未到达进度
+        if (reachArc != 360) {
+            canvas.drawPath(getSquarePathNot(reachArc), mNormalPaint);
+        }
         canvas.restore();
     }
 
@@ -306,6 +341,109 @@ public class CircleProgressView extends ProgressBar {
         // 绘制已到达进度
         canvas.drawArc(rectF, mStartArc, reachArc, false, mReachPaint);
         canvas.restore();
+    }
+
+    private Path getSquarePath(float reachArc) {
+        Path path = new Path();
+        path.moveTo(0, 0);
+        if (reachArc <= 45) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(getOpposite(reachArc), -mRadius);
+        } else if (reachArc > 45 && reachArc <= 90) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, getOpposite(reachArc - 45) - mRadius);
+        } else if (reachArc > 90 && reachArc <= 135) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, getOpposite(reachArc - 90));
+        } else if (reachArc > 135 && reachArc <= 180) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(mRadius - getOpposite(reachArc - 135), mRadius);
+        } else if (reachArc > 180 && reachArc <= 225) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-getOpposite(reachArc - 180), mRadius);
+        } else if (reachArc > 225 && reachArc <= 270) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius - getOpposite(reachArc - 225));
+        } else if (reachArc > 270 && reachArc <= 315) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -getOpposite(reachArc - 270));
+        } else if (reachArc > 315 && reachArc <= 360) {
+            path.lineTo(0, -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            LogUtils.e(reachArc, reachArc - 315, getOpposite(reachArc - 315));
+            path.lineTo(getOpposite(reachArc - 315) - mRadius, -mRadius);
+        }
+
+        path.close();
+        return path;
+    }
+
+    private Path getSquarePathNot(float reachArc) {
+        Path path = new Path();
+        path.moveTo(0, 0);
+        if (reachArc <= 45) {
+            path.lineTo(getOpposite(reachArc), -mRadius);
+            path.lineTo(mRadius, -mRadius);
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 45 && reachArc <= 90) {
+            path.lineTo(mRadius, -(mRadius - getOpposite(reachArc - 45)));
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 90 && reachArc <= 135) {
+            path.lineTo(mRadius, getOpposite(reachArc - 90));
+            path.lineTo(mRadius, mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 135 && reachArc <= 180) {
+            path.lineTo(mRadius - getOpposite(reachArc - 135), mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 180 && reachArc <= 225) {
+            path.lineTo(-getOpposite(reachArc - 180), mRadius);
+            path.lineTo(-mRadius, mRadius);
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 225 && reachArc <= 270) {
+            path.lineTo(-mRadius, mRadius - getOpposite(reachArc - 225));
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 270 && reachArc <= 315) {
+            path.lineTo(-mRadius, -getOpposite(reachArc - 270));
+            path.lineTo(-mRadius, -mRadius);
+            path.lineTo(0, -mRadius);
+        } else if (reachArc > 315 && reachArc <= 360) {
+            path.lineTo(-(mRadius - getOpposite(reachArc - 315)), -mRadius);
+            path.lineTo(0, -mRadius);
+        }
+
+        path.close();
+        return path;
+    }
+
+    private float getOpposite(float reachArc) {
+        return (float) (Math.tan(reachArc * Math.PI / 180) * mRadius);
     }
 
     /**

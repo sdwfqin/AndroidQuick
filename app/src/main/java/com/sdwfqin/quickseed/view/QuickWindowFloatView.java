@@ -1,5 +1,6 @@
 package com.sdwfqin.quickseed.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.hardware.display.VirtualDisplay;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -56,10 +58,11 @@ public class QuickWindowFloatView extends WindowFloatView {
     private VirtualDisplay mVirtualDisplay;
     private Disposable mSubscribe;
 
-    public QuickWindowFloatView(@NonNull Context context, MediaProjection mediaProjection) {
+    public QuickWindowFloatView(@NonNull Context context, Intent data) {
         super(context);
 
-        mMediaProjection = mediaProjection;
+        MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) context.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        mMediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data);
     }
 
     @Override

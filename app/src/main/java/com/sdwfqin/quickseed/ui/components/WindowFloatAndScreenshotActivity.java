@@ -1,9 +1,7 @@
 package com.sdwfqin.quickseed.ui.components;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Build;
@@ -72,8 +70,12 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
         startActivityForResult(mMediaProjectionManager.createScreenCaptureIntent(), REQUEST_MEDIA_PROJECTION);
     }
 
-    private void showFloat(MediaProjection mediaProjection) {
-        QuickWindowFloatView quickWindowFloatView = new QuickWindowFloatView(mContext, mediaProjection);
+    private void showFloat(Intent data) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ToastUtils.showShort("当前功能尚未适配Android 10，后续空闲会修改！");
+            return;
+        }
+        QuickWindowFloatView quickWindowFloatView = new QuickWindowFloatView(mContext, data);
         quickWindowFloatView.show();
     }
 
@@ -83,8 +85,7 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
         switch (requestCode) {
             case REQUEST_MEDIA_PROJECTION:
                 if (resultCode == RESULT_OK && data != null) {
-                    MediaProjection mMediaProjection = mMediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data);
-                    showFloat(mMediaProjection);
+                    showFloat(data);
                 }
                 break;
             case REQUEST_ALERT:

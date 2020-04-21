@@ -63,4 +63,9 @@ public class ArouterConstants {
      */
     public static final String COMPONENTS_MVP = "/components/mvp";
 
+    /**
+     * 圆（方）形加载进度条
+     */
+    public static final String COMPONENTS_CIRCLEPROGRESSDEMO = "/components/circleprogressdemo";
+
 }

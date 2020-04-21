@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.components.CircleProgressDemoActivity">
+
+    <Button
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="+2" />
+
+    <com.sdwfqin.widget.CircleProgressView
+        android:id="@+id/progressBar1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:progress="0"
+        app:quick_innerPadding="2dp"
+        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerSize="1dp"
+        app:quick_progressNormalColor="@color/transparent"
+        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressStyle="Normal" />
+
+    <com.sdwfqin.widget.CircleProgressView
+        android:id="@+id/progressBar2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:progress="0"
+        app:quick_innerPadding="2dp"
+        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerSize="1dp"
+        app:quick_progressNormalColor="@color/transparent"
+        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressStyle="FillInner" />
+
+    <com.sdwfqin.widget.CircleProgressView
+        android:id="@+id/progressBar3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:progress="0"
+        app:quick_innerPadding="2dp"
+        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerSize="1dp"
+        app:quick_progressNormalColor="@color/transparent"
+        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressStyle="FillInnerArc" />
+
+    <com.sdwfqin.widget.CircleProgressView
+        android:id="@+id/progressBar4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:progress="0"
+        app:quick_progressNormalColor="@color/transparent90_white"
+        app:quick_progressReachColor="@color/transparent"
+        app:quick_progressStyle="FillInnerSquare" />
+
+</LinearLayout>
