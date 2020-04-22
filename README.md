@@ -56,6 +56,7 @@
         return false;
     }
     ```
+
 7. 需要在`Application`中添加如下代码：
 
     ``` java
@@ -84,14 +85,14 @@
     }
     ```
 
-2. 请将[支付宝的aar文件](https://github.com/sdwfqin/AndroidQuick/tree/3.x/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
+2. 请将[支付宝的aar文件](/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
 
 ## 如何使用Mvc、Mvp、Mvvm模式
 
 1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
-2. 如果使用Mvp模式，请参考[Demo中的Mvp实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvp)
-3. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
-4. 网络部分可以参考DemoApp下面的[mvpretrofit](https://github.com/sdwfqin/AndroidQuick/tree/4.x/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
+2. 如果使用Mvp模式，请参考[Demo中的Mvp实现](/app/src/main/java/com/sdwfqin/quickseed/ui/mvp)
+3. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
+4. 网络部分可以参考DemoApp下面的[mvpretrofit](/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
 
 # 导入指南
 
@@ -132,7 +133,7 @@ implementation 'com.sdwfqin.quick:widget:3.2.0'
 
 [1.x文档](/docs/README_1_x.md)
 
-[Wiki](https://github.com/sdwfqin/AndroidQuick/wiki)
+[Wiki](/wiki)
 
 [更新文档](/docs/update.md)
 
