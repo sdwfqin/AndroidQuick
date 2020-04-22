@@ -1,7 +1,7 @@
 ext {
 
-    versionCode = 40007
-    versionName = "4.0.0-alpha07"
+    versionCode = 40008
+    versionName = "4.0.0-alpha08"
 
     qmui = "2.0.0-alpha06"
     okhttp = "4.5.0"
@@ -85,7 +85,7 @@ ext {
             "qmui"               : "com.qmuiteam:qmui:$qmui",
             "arch"               : "com.qmuiteam:arch:$qmui",
             // 微信
-            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.4.0",
+            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.5.8",
             // bugly
             "crashreport_upgrade": "com.tencent.bugly:crashreport_upgrade:1.4.2",
     ]

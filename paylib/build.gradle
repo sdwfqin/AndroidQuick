@@ -31,7 +31,7 @@ dependencies {
     api okhttpDependencies["okhttp"]
     api googleDependencies["gson"]
     api tencentDependencies["wechat-sdk-mta"]
-    api (name: 'alipaySdk-15.6.5-20190718211148', ext: 'aar')
+    api (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 }
 
 apply from: "deployBintray.gradle"
