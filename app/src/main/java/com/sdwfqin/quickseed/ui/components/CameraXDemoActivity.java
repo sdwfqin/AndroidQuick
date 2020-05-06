@@ -1,7 +1,6 @@
 package com.sdwfqin.quickseed.ui.components;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.util.Size;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.Camera2Config;
@@ -30,7 +28,6 @@ import androidx.camera.core.MeteringPointFactory;
 import androidx.camera.core.Preview;
 import androidx.camera.core.SurfaceOrientedMeteringPointFactory;
 import androidx.camera.core.ZoomState;
-import androidx.camera.core.impl.ImageOutputConfig;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -42,7 +39,6 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PathUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.sdwfqin.imageloader.ImageLoader;
-import com.sdwfqin.imageloader.progress.OnProgressListener;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
@@ -55,8 +51,6 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import static androidx.camera.core.impl.ImageOutputConfig.OPTION_TARGET_ASPECT_RATIO;
 
 /**
  * CameraX Demo
@@ -77,7 +71,6 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private CameraControl mCameraControl;
     private Preview mPreview;
     private CameraSelector mCameraSelector;
-    private ProcessCameraProvider mCameraProvider;
     private int mAspectRatioInt = AspectRatio.RATIO_16_9;
     private int mCameraSelectorInt = CameraSelector.LENS_FACING_BACK;
     /**
@@ -194,9 +187,9 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
         cameraProviderFuture.addListener(() -> {
             try {
-                mCameraProvider = cameraProviderFuture.get();
-                mCameraProvider.unbindAll();
-                bindPreview(mCameraProvider);
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                cameraProvider.unbindAll();
+                bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
                 // No errors need to be handled for this Future.
                 // This should never be reached.
