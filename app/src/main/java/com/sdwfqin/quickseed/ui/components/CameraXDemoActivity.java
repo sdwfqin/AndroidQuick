@@ -9,6 +9,7 @@ import android.util.Size;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.Camera2Config;
@@ -29,15 +30,23 @@ import androidx.camera.core.MeteringPointFactory;
 import androidx.camera.core.Preview;
 import androidx.camera.core.SurfaceOrientedMeteringPointFactory;
 import androidx.camera.core.ZoomState;
+import androidx.camera.core.impl.ImageOutputConfig;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.LiveData;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PathUtils;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.sdwfqin.imageloader.ImageLoader;
+import com.sdwfqin.imageloader.progress.OnProgressListener;
 import com.sdwfqin.quicklib.base.BaseActivity;
+import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
+import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
 import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
@@ -46,6 +55,8 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+
+import static androidx.camera.core.impl.ImageOutputConfig.OPTION_TARGET_ASPECT_RATIO;
 
 /**
  * CameraX Demo
@@ -64,6 +75,15 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private Executor executor;
     private CameraInfo mCameraInfo;
     private CameraControl mCameraControl;
+    private Preview mPreview;
+    private CameraSelector mCameraSelector;
+    private ProcessCameraProvider mCameraProvider;
+    private int mAspectRatioInt = AspectRatio.RATIO_16_9;
+    private int mCameraSelectorInt = CameraSelector.LENS_FACING_BACK;
+    /**
+     * 左下角图片uri
+     */
+    private Uri mImagePathUri;
 
     @Override
     protected ActivityCameraxDemoBinding getViewBinding() {
@@ -76,13 +96,19 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         mTopBar.setVisibility(View.GONE);
 
         initCamera();
-        initImageAnalysis();
-        initImageCapture();
     }
 
+    @SuppressLint({"SetTextI18n"})
     @Override
     protected void initClickListener() {
+        /**
+         * 保存图片
+         */
         mBinding.captureButton.setOnClickListener(v -> saveImage());
+
+        /**
+         * 修改闪光灯模式
+         */
         mBinding.btnLight.setOnClickListener(v -> {
             switch (mImageCapture.getFlashMode()) {
                 case ImageCapture.FLASH_MODE_AUTO:
@@ -99,6 +125,63 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                     break;
             }
         });
+
+        /**
+         * 修改比例
+         */
+        mBinding.btnAspect.setOnClickListener(v -> {
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mBinding.viewFinder.getLayoutParams();
+            switch (mAspectRatioInt) {
+                case AspectRatio.RATIO_16_9:
+
+                    layoutParams.dimensionRatio = "3:4";
+                    mBinding.viewFinder.setLayoutParams(layoutParams);
+                    mBinding.btnAspect.setText("16:9");
+
+                    mAspectRatioInt = AspectRatio.RATIO_4_3;
+                    break;
+                case AspectRatio.RATIO_4_3:
+
+                    layoutParams.dimensionRatio = "9:16";
+                    mBinding.viewFinder.setLayoutParams(layoutParams);
+                    mBinding.btnAspect.setText("4:3");
+
+                    mAspectRatioInt = AspectRatio.RATIO_16_9;
+                    break;
+            }
+
+            initCamera();
+        });
+
+        /**
+         * 切换摄像头
+         */
+        mBinding.btnCameraSelector.setOnClickListener(v -> {
+            switch (mCameraSelectorInt) {
+                case CameraSelector.LENS_FACING_BACK:
+                    mCameraSelectorInt = CameraSelector.LENS_FACING_FRONT;
+                    mBinding.btnCameraSelector.setText("后");
+                    break;
+                case CameraSelector.LENS_FACING_FRONT:
+                    mCameraSelectorInt = CameraSelector.LENS_FACING_BACK;
+                    mBinding.btnCameraSelector.setText("前");
+                    break;
+            }
+            initCamera();
+        });
+
+        /**
+         * 在相册打开图片
+         */
+        mBinding.ivPictures.setOnClickListener(v -> {
+            if (mImagePathUri != null) {
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setDataAndType(mImagePathUri, "image/*");
+                startActivity(intent);
+            }
+        });
     }
 
     private void initCamera() {
@@ -106,10 +189,14 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         executor = ContextCompat.getMainExecutor(this);
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+
+        initUseCases();
+
         cameraProviderFuture.addListener(() -> {
             try {
-                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                bindPreview(cameraProvider);
+                mCameraProvider = cameraProviderFuture.get();
+                mCameraProvider.unbindAll();
+                bindPreview(mCameraProvider);
             } catch (ExecutionException | InterruptedException e) {
                 // No errors need to be handled for this Future.
                 // This should never be reached.
@@ -119,20 +206,13 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     }
 
     private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
-        Preview preview = new Preview.Builder()
-                .build();
 
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-                .build();
-
-        Camera camera = cameraProvider.bindToLifecycle(this, cameraSelector, mImageCapture, mImageAnalysis, preview);
+        Camera camera = cameraProvider.bindToLifecycle(this, mCameraSelector, mImageCapture, mImageAnalysis, mPreview);
 
         mCameraInfo = camera.getCameraInfo();
         mCameraControl = camera.getCameraControl();
 
-        preview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider(mCameraInfo));
-
+        mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider(mCameraInfo));
         initCameraListener();
     }
 
@@ -205,13 +285,23 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     }
 
     /**
+     * 初始化配置信息
+     */
+    private void initUseCases() {
+        initImageAnalysis();
+        initImageCapture();
+        initPreview();
+        initCameraSelector();
+    }
+
+    /**
      * 图像分析
      */
     private void initImageAnalysis() {
 
         mImageAnalysis = new ImageAnalysis.Builder()
                 // 分辨率
-                .setTargetResolution(new Size(1280, 720))
+                .setTargetResolution(mAspectRatioInt == AspectRatio.RATIO_4_3 ? new Size(720, 960) : new Size(720, 1280))
                 // 非阻塞模式
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build();
@@ -238,12 +328,12 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         // 构建图像捕获用例
         mImageCapture = new ImageCapture.Builder()
                 .setFlashMode(ImageCapture.FLASH_MODE_AUTO)
-                .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+                .setTargetAspectRatio(mAspectRatioInt)
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build();
 
         // 旋转监听
-        OrientationEventListener orientationEventListener = new OrientationEventListener((Context) this) {
+        OrientationEventListener orientationEventListener = new OrientationEventListener(mContext) {
             @Override
             public void onOrientationChanged(int orientation) {
                 int rotation;
@@ -266,6 +356,24 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         orientationEventListener.enable();
     }
 
+    /**
+     * 构建图像预览
+     */
+    private void initPreview() {
+        mPreview = new Preview.Builder()
+                .setTargetAspectRatio(mAspectRatioInt)
+                .build();
+    }
+
+    /**
+     * 选择摄像头
+     */
+    private void initCameraSelector() {
+        mCameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(mCameraSelectorInt)
+                .build();
+    }
+
     @NonNull
     @Override
     public CameraXConfig getCameraXConfig() {
@@ -273,7 +381,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     }
 
     public void saveImage() {
-        File file = new File(getExternalMediaDirs()[0], System.currentTimeMillis() + ".jpg");
+        File file = new File(PathUtils.getExternalPicturesPath(), System.currentTimeMillis() + ".jpg");
         ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(file).build();
         mImageCapture.takePicture(outputFileOptions, executor,
@@ -284,8 +392,15 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                         String msg = "图片保存成功: " + file.getAbsolutePath();
                         showMsg(msg);
                         LogUtils.d(msg);
-                        Uri contentUri = Uri.fromFile(new File(file.getAbsolutePath()));
-                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentUri);
+                        mImagePathUri = FileProvider.getUriForFile(mContext, Constants.FILE_PROVIDER, file);
+                        Uri contentFileUri = Uri.fromFile(new File(file.getAbsolutePath()));
+                        new ImageLoader.Builder()
+                                .setImagePath(mImagePathUri)
+                                .setPlaceholder(R.mipmap.image_loading)
+                                .setErrorImage(R.mipmap.image_load_err)
+                                .build(mBinding.ivPictures)
+                                .loadImage();
+                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentFileUri);
                         sendBroadcast(mediaScanIntent);
                     }
 
