@@ -99,11 +99,11 @@
 ``` groovy
 // 测试版
 
-def quicklib = "4.0.0-alpha08"
+def quicklib = "4.0.0-alpha09"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
-annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha06"
+annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha08"
 annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
 // 支付模块
 implementation "com.sdwfqin.quicklib:paylib:$quicklib"
