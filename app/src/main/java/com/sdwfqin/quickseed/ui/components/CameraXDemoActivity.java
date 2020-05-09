@@ -2,6 +2,7 @@ package com.sdwfqin.quickseed.ui.components;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.net.Uri;
 import android.util.Size;
@@ -37,13 +38,19 @@ import androidx.lifecycle.LiveData;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.PlanarYUVLuminanceSource;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
 import com.sdwfqin.imageloader.ImageLoader;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
+import com.sdwfqin.quickseed.utils.qrbarscan.QrBarTool;
 import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
 import java.io.File;
@@ -77,6 +84,12 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
      * 左下角图片uri
      */
     private Uri mImagePathUri;
+
+    /**
+     * 是否分析下一张图片
+     * TODO： 如何优雅的处理连续扫描
+     */
+    private boolean mIsNextAnalysis = true;
 
     @Override
     protected ActivityCameraxDemoBinding getViewBinding() {
@@ -300,16 +313,38 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                 .build();
 
         mImageAnalysis.setAnalyzer(executor, image -> {
-            int rotationDegrees = image.getImageInfo().getRotationDegrees();
-            LogUtils.e("Analysis#rotationDegrees", rotationDegrees);
-            ImageProxy.PlaneProxy[] planes = image.getPlanes();
 
-            ByteBuffer buffer = planes[0].getBuffer();
-            // 转为byte[]
-            // byte[] b = new byte[buffer.remaining()];
-            // LogUtils.e(b);
-            // TODO: 分析完成后关闭图像参考，否则会阻塞其他图像的产生
-            // image.close();
+            /**
+             * 扫描二维码
+             *
+             * https://stackoverflow.com/questions/58113159/how-to-use-zxing-with-android-camerax-to-decode-barcode-and-qr-codes
+             */
+            if ((image.getFormat() == ImageFormat.YUV_420_888
+                    || image.getFormat() == ImageFormat.YUV_422_888
+                    || image.getFormat() == ImageFormat.YUV_444_888)
+                    && image.getPlanes().length == 3) {
+
+                ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                byte[] data = new byte[buffer.remaining()];
+                buffer.get(data);
+
+                PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, image.getWidth(), image.getHeight(), 0, 0, image.getWidth(), image.getHeight(), false);
+                BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
+                try {
+                    Result result = QrBarTool.getDefaultMultiFormatReader().decode(binaryBitmap);
+                    if (result != null) {
+                        LogUtils.e(result.toString());
+                        ToastUtils.showShort(result.getText());
+                        mIsNextAnalysis = false;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (mIsNextAnalysis) {
+                image.close();
+            }
         });
     }
 

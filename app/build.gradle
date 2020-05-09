@@ -69,6 +69,8 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha10"
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
 
+    implementation 'com.google.zxing:core:3.4.0'
+
     implementation retrofitDependencies["retrofit"]
     implementation retrofitDependencies["converter-gson"]
     implementation retrofitDependencies["converter-scalars"]
