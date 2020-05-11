@@ -38,6 +38,7 @@ import androidx.lifecycle.LiveData;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PathUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.zxing.BinaryBitmap;
@@ -87,9 +88,9 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
     /**
      * 是否分析下一张图片
-     * TODO： 如何优雅的处理连续扫描
      */
     private boolean mIsNextAnalysis = true;
+    private String mQrText = "";
 
     @Override
     protected ActivityCameraxDemoBinding getViewBinding() {
@@ -332,10 +333,12 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                 BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
                 try {
                     Result result = QrBarTool.getDefaultMultiFormatReader().decode(binaryBitmap);
-                    if (result != null) {
+                    if (result != null && (StringUtils.isEmpty(mQrText) || !StringUtils.equals(mQrText, result.getText()))) {
+                        mQrText = result.getText();
                         LogUtils.e(result.toString());
                         ToastUtils.showShort(result.getText());
-                        mIsNextAnalysis = false;
+                        // TODO 只扫描一张
+                        // mIsNextAnalysis = false;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
