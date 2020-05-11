@@ -34,7 +34,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
             "上传图片九宫格",
             "自定义验证码/密码View",
             "跑马灯Demo",
-            "Camerax",
+            "Camerax（支持二维码识别）",
             "VLayoutDemo",
             "展示SVG图片",
             "跳转网页",
