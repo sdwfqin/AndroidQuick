@@ -3,12 +3,12 @@ apply plugin: 'com.android.library'
 // ./gradlew clean build bintrayUpload
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
+        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
     }
@@ -28,9 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api okhttpDependencies["okhttp"]
-    api googleDependencies["gson"]
-    api tencentDependencies["wechat-sdk-mta"]
+    api netWorkDependencies["okhttp"]
+    api utilsDependencies["gson"]
+    api thirdDependencies["wechat-sdk-mta"]
     api (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 }
 

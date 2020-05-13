@@ -3,12 +3,12 @@ apply plugin: 'com.android.library'
 // ./gradlew clean build bintrayUpload
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
+        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
@@ -50,23 +50,26 @@ dependencies {
     api googleDependencies["cardview"]
     api googleDependencies["constraintlayout"]
     api googleDependencies["material"]
-    api googleDependencies["gson"]
 
     api eventDependencies["rxjava"]
     api eventDependencies["rxandroid"]
     api eventDependencies["eventbus"]
 
-    api okhttpDependencies["okhttp"]
-    api okhttpDependencies["logging-interceptor"]
+    api netWorkDependencies["okhttp"]
+    api netWorkDependencies["logging-interceptor"]
 
-    api tencentDependencies["qmui"]
-    api tencentDependencies["wechat-sdk-mta"]
-    api tencentDependencies["arch"]
+    api viewDependencies["qmui"]
+    api viewDependencies["arch"]
+
+    api imageDependencies["photoview"]
+
     api utilsDependencies["utilcodex"]
     api utilsDependencies["agentweb"]
     api utilsDependencies["easypermissions"]
     api utilsDependencies["arouter"]
-    api imageDependencies["photoview"]
+    api utilsDependencies["gson"]
+
+    api thirdDependencies["wechat-sdk-mta"]
 
     implementation project(':imageloader')
     implementation project(':widget')
