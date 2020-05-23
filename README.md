@@ -64,6 +64,17 @@
     ARouter.init(this);
     Utils.init(this);
     ```
+8. Base中封装了`viewBinding`/`dataBinding`相关代码，需在项目的`build.gradle`中启用`viewBinding`/`dataBinding`，请参考[Sample](/app)中的相关代码，请不要使用`setContentView`添加布局，应通过实现Base中的`getViewBinding`方法添加布局。
+
+    ``` groovy
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    ```
 
 ## 关于支付模块支付宝支付的特殊说明
 
