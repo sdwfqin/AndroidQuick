@@ -56,7 +56,7 @@ def pomConfig = {
         developer {
             id 'sdwfqin'
             name 'qinzhang'
-            email 'sdwfqin@gmail.com'
+            email 'sdwfqin@icloud.com'
         }
     }
     scm {
