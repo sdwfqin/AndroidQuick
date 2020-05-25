@@ -111,7 +111,7 @@
 ``` groovy
 // 测试版
 
-def quicklib = "4.0.0-beta01"
+def quicklib = "4.0.0"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
