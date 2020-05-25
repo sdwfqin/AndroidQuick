@@ -17,10 +17,10 @@
 
     <application>
         <activity
-            android:name=".webview.WebViewActivity"
+            android:name=".webview.QuickWebViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".webview.WebViewLoadDataActivity"
+            android:name=".webview.QuickWebViewLoadDataActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".imagepreview.ImagePreviewActivity"

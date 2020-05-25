@@ -41,6 +41,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         super(context, attrs);
 
         mBinding = QuickAmountViewBinding.inflate(LayoutInflater.from(context));
+        addView(mBinding.getRoot());
         mBinding.btnDecrease.setOnClickListener(this);
         mBinding.btnIncrease.setOnClickListener(this);
         mBinding.etAmount.addTextChangedListener(this);

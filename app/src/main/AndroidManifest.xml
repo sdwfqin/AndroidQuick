@@ -33,7 +33,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -13,7 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.dialog.HintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
-import com.sdwfqin.quicklib.webview.WebViewActivity;
+import com.sdwfqin.quicklib.webview.QuickWebViewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentMainBinding;
@@ -88,7 +88,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_SHOWSVG).navigation();
                     break;
                 case 7:
-                    WebViewActivity.launch("https://www.baidu.com");
+                    QuickWebViewActivity.launch("https://www.baidu.com");
                     break;
                 case 8:
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CUSTOMWEBVIEW).navigation();

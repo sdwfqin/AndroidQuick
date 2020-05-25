@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.sdwfqin.quicklib.webview.BaseWebView;
+import com.sdwfqin.quicklib.webview.QuickBaseWebViewActivity;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
 
@@ -18,7 +18,7 @@ import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
  * @date 2018/6/19
  */
 @Route(path = ArouterConstants.COMPONENTS_CUSTOMWEBVIEW)
-public class CustomWebviewActivity extends BaseWebView {
+public class CustomWebviewActivity extends QuickBaseWebViewActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

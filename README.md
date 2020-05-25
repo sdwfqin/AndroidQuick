@@ -111,7 +111,7 @@
 ``` groovy
 // 测试版
 
-def quicklib = "4.0.0"
+def quicklib = "4.0.4"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
@@ -172,9 +172,9 @@ implementation 'com.sdwfqin.quick:widget:3.2.0'
 | BaseViewModel | ViewModel基类 |
 | WechatShareTools | 微信分享工具类 |
 | ImagePreviewActivity | 图片预览Activity（多图/单图） |
-| BaseWebView | ViewActivity基类 |
-| WebViewActivity | 传入url即可 |
-| WebViewLoadDataActivity | 针对非url链接的网页 |
+| QuickBaseWebViewActivity | ViewActivity基类 |
+| QuickWebViewActivity | 传入url即可 |
+| QuickWebViewLoadDataActivity | 针对非url链接的网页 |
 | GsonUtil | Gson工具类 |
 | RxSchedulersUtils | compose()统一线程处理 |
 | RxTimerUtil | RxJava定时任务 |

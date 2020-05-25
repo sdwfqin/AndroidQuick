@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
-import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.base.QuickArouterConstants;
 import com.sdwfqin.quicklib.base.QuickConstants;
@@ -20,9 +19,7 @@ import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
  * @date 2018/1/16
  */
 @Route(path = QuickArouterConstants.QUICK_WEBVIEWLOADDATA)
-public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBinding> {
-
-    LinearLayout mContainer;
+public class QuickWebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBinding> {
 
     private String mTitle;
     private String mContent;
@@ -50,8 +47,6 @@ public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBi
     @Override
     protected void initEventAndData() {
 
-        mContainer = (LinearLayout) findViewById(R.id.container);
-
         mTitle = getIntent().getStringExtra("title");
         mContent = getIntent().getStringExtra("content");
         mBaseUrl = getIntent().getStringExtra("baseUrl");
@@ -70,7 +65,7 @@ public class WebViewLoadDataActivity extends BaseActivity<QuickActivityWebViewBi
     private void initWebView() {
         AgentWeb agentWeb = AgentWeb.with(mContext)
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
-                .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
+                .setAgentWebParent(mBinding.container, new LinearLayout.LayoutParams(-1, -1))
                 // 使用默认进度条
                 .useDefaultIndicator()
                 // .defaultProgressBarColor()

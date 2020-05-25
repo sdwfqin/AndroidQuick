@@ -67,5 +67,4 @@ public class ArouterConstants {
      * 圆（方）形加载进度条
      */
     public static final String COMPONENTS_CIRCLEPROGRESSDEMO = "/components/circleprogressdemo";
-
 }

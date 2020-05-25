@@ -11,7 +11,7 @@ import com.sdwfqin.quicklib.base.QuickArouterConstants;
  * @date 2018/1/16
  */
 @Route(path = QuickArouterConstants.QUICK_WEBVIEW)
-public class WebViewActivity extends BaseWebView {
+public class QuickWebViewActivity extends QuickBaseWebViewActivity {
 
     /**
      * 加载网页

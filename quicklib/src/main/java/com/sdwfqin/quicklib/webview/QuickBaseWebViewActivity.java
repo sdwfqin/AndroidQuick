@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
-import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
 
@@ -17,8 +16,7 @@ import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
  * @author zhangqin
  * @date 2018/6/19
  */
-public abstract class BaseWebView extends BaseActivity<QuickActivityWebViewBinding> {
-    protected LinearLayout mContainer;
+public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivityWebViewBinding> {
 
     protected String mUrl;
     protected AgentWeb mAgentWeb;
@@ -30,8 +28,6 @@ public abstract class BaseWebView extends BaseActivity<QuickActivityWebViewBindi
 
     @Override
     protected void initEventAndData() {
-
-        mContainer = (LinearLayout) findViewById(R.id.container);
 
         if (!StringUtils.isEmpty(getUrl())) {
             mUrl = getUrl();
@@ -60,7 +56,7 @@ public abstract class BaseWebView extends BaseActivity<QuickActivityWebViewBindi
     private void initWebView() {
         mAgentWeb = AgentWeb.with(mContext)
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
-                .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
+                .setAgentWebParent(mBinding.container, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()// 使用默认进度条
                 .setWebChromeClient(new WebChromeClient() {
                     @Override
