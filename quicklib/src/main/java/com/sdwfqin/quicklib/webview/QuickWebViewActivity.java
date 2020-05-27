@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.sdwfqin.quicklib.base.QuickArouterConstants;
 
 /**
- * 描述：WebViewActivity
+ * 描述：默认WebViewActivity
  *
  * @author 张钦
  * @date 2018/1/16
@@ -19,7 +19,7 @@ public class QuickWebViewActivity extends QuickBaseWebViewActivity {
      * @param url 页面地址
      */
     public static void launch(String url) {
-        launch(url, null);
+        launch(url, "");
     }
 
     /**
@@ -29,11 +29,23 @@ public class QuickWebViewActivity extends QuickBaseWebViewActivity {
      * @param title 默认标题
      */
     public static void launch(String url, String title) {
+        launch(url, "", true);
+    }
+
+    /**
+     * 加载网页，带有默认标题
+     *
+     * @param url          页面地址
+     * @param title        默认标题
+     * @param autoSetTitle 是否自动监听设置标题
+     */
+    public static void launch(String url, String title, boolean autoSetTitle) {
         ARouter
                 .getInstance()
                 .build(QuickArouterConstants.QUICK_WEBVIEW)
                 .withString("url", url)
                 .withString("title", title)
+                .withBoolean("autoSetTitle", autoSetTitle)
                 .navigation();
     }
 
@@ -48,5 +60,10 @@ public class QuickWebViewActivity extends QuickBaseWebViewActivity {
             return getIntent().getStringExtra("title");
         }
         return super.getActivityTitle();
+    }
+
+    @Override
+    protected boolean isAutoSetTitle() {
+        return getIntent().getBooleanExtra("autoSetTitle", true);
     }
 }

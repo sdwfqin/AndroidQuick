@@ -4,14 +4,13 @@ import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.util.StringUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quicklib.databinding.QuickActivityWebViewBinding;
 
 /**
- * 描述：
+ * 描述：WebViewActivity基类
  *
  * @author zhangqin
  * @date 2018/6/19
@@ -28,14 +27,6 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
 
     @Override
     protected void initEventAndData() {
-
-        if (!StringUtils.isEmpty(getUrl())) {
-            mUrl = getUrl();
-        } else {
-            showMsg("未获取到url地址");
-            finish();
-        }
-
         mTopBar.setTitle(getActivityTitle());
 
         mTopBar.addLeftBackImageButton().setOnClickListener(v -> {
@@ -48,13 +39,8 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
         initWebView();
     }
 
-    @Override
-    protected void initClickListener() {
-
-    }
-
-    private void initWebView() {
-        mAgentWeb = AgentWeb.with(mContext)
+    protected AgentWeb.CommonBuilder getWebViewCommonBuilder() {
+        return AgentWeb.with(mContext)
                 //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .setAgentWebParent(mBinding.container, new LinearLayout.LayoutParams(-1, -1))
                 .useDefaultIndicator()// 使用默认进度条
@@ -62,13 +48,19 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
                         super.onReceivedTitle(view, title);
-                        mTopBar.setTitle(title);
+                        if (isAutoSetTitle()) {
+                            mTopBar.setTitle(title);
+                        }
                     }
-                })
+                });
+    }
+
+    protected void initWebView() {
+        mAgentWeb = getWebViewCommonBuilder()
                 //.defaultProgressBarColor() // 使用默认进度条颜色
                 .createAgentWeb()
                 .ready()
-                .go(mUrl);
+                .go(mUrl = getUrl());
     }
 
     @Override
@@ -107,17 +99,20 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
 
     /**
      * 设置url地址
-     *
-     * @return
      */
     public abstract String getUrl();
 
     /**
      * 设置标题
-     *
-     * @return
      */
     public String getActivityTitle() {
         return "";
+    }
+
+    /**
+     * 是否监听标题变化
+     */
+    protected boolean isAutoSetTitle() {
+        return true;
     }
 }

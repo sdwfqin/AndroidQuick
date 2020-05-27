@@ -109,9 +109,7 @@
 # 导入指南
 
 ``` groovy
-// 测试版
-
-def quicklib = "4.0.4"
+def quicklib = "4.0.5"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
@@ -123,22 +121,6 @@ implementation "com.sdwfqin.quicklib:paylib:$quicklib"
 implementation "com.sdwfqin.quicklib:imageloader:$quicklib"
 // Android 自定义View组件
 implementation "com.sdwfqin.quicklib:widget:$quicklib"
-
-// =================================================
-
-// 稳定版
-
-// quicklib(Base)
-implementation 'com.sdwfqin.quicklib:quicklib:3.3.0'
-
-// 支付模块
-implementation 'com.sdwfqin.quicklib:paylib:3.1.0'
-
-// Android 图片加载库（Glide封装）
-implementation 'com.sdwfqin.quick:imageloader:3.2.0'
-
-// Android 自定义View组件
-implementation 'com.sdwfqin.quick:widget:3.2.0'
 ```
 
 # 相关文档
