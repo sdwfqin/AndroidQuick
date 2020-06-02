@@ -6,3 +6,4 @@
 /build
 /captures
 /gradle/deploy.properties
+/app/release/output.json

@@ -1,5 +1,6 @@
 package com.sdwfqin.quickseed.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentMainBinding;
+import com.sdwfqin.quickseed.ui.example.sortlist.SortListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
             "Mvvm Demo",
             "Mvp Demo",
             "圆（方）形加载进度条",
+            "仿京东分类列表",
     };
 
     @Override
@@ -118,6 +121,9 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     break;
                 case 12:
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CIRCLEPROGRESSDEMO).navigation();
+                    break;
+                case 13:
+                    startActivity(new Intent(mContext, SortListActivity.class));
                     break;
                 default:
             }

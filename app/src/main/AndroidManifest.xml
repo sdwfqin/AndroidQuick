@@ -33,7 +33,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <!-- FileProvider文件共享 -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -93,6 +92,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.components.CircleProgressDemoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ui.example.sortlist.SortListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"

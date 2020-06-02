@@ -117,6 +117,8 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     /**
      * 懒加载条件判断
+     * <p>
+     * 请查看当前类{@link #setUserVisibleHint}相关注释
      */
     @Deprecated
     private void baseLazyLoad() {
@@ -291,12 +293,16 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     /**
      * 点击事件
      */
-    protected abstract void initClickListener();
+    protected void initClickListener() {
+
+    }
 
     /**
      * 页面懒加载
      * <p>
      * ViewPager2已经可以实现原生懒加载
+     * <p>
+     * 请查看当前类{@link #setUserVisibleHint}相关注释
      */
     @Deprecated
     protected void lazyLoadShow() {
@@ -307,6 +313,8 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
      * 页面懒加载
      * <p>
      * ViewPager2已经可以实现原生懒加载
+     * <p>
+     * 请查看当前类{@link #setUserVisibleHint}相关注释
      */
     @Deprecated
     protected void lazyLoadHide() {
