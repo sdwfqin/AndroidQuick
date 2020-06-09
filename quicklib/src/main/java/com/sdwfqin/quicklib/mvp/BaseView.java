@@ -2,7 +2,7 @@ package com.sdwfqin.quicklib.mvp;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * 描述：View的基类

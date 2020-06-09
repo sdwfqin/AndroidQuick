@@ -1,9 +1,9 @@
 package com.sdwfqin.quicklib.utils.rx;
 
-import io.reactivex.FlowableTransformer;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.FlowableTransformer;
+import io.reactivex.rxjava3.core.ObservableTransformer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * 描述：RxJava线程切换工具类

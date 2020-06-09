@@ -37,7 +37,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
             "跑马灯Demo",
             "Camerax（支持二维码识别）",
             "VLayoutDemo",
-            "展示SVG图片",
+            "展示原生SVG图片",
             "WebView",
             "悬浮窗与截图",
             "支持换肤的弹窗",

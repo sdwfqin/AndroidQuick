@@ -109,11 +109,11 @@
 # 导入指南
 
 ``` groovy
-def quicklib = "4.0.5"
+def quicklib = "4.1.0"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
-annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha09"
+annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha10"
 annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
 // 支付模块
 implementation "com.sdwfqin.quicklib:paylib:$quicklib"
@@ -151,6 +151,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | BaseMvpFragment | 支持MVP的基类Fragment |
 | RxPresenter | Presenter层封装 |
 | BaseMvvmActivity | 支持MVVM的基类Activity |
+| BaseMvvmFragment | 支持MVVM的基类Fragment |
 | BaseViewModel | ViewModel基类 |
 | WechatShareTools | 微信分享工具类 |
 | ImagePreviewActivity | 图片预览Activity（多图/单图） |

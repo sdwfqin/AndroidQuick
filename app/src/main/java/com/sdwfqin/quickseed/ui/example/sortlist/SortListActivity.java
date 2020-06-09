@@ -16,8 +16,8 @@ import com.sdwfqin.quickseed.databinding.ActivitySortListBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 
 /**
  * 仿京东分类列表

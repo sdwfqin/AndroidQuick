@@ -4,7 +4,7 @@ import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
 
 import java.util.Map;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 

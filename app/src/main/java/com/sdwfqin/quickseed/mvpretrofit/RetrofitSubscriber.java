@@ -6,8 +6,8 @@ import com.sdwfqin.quicklib.mvp.BaseView;
 
 import java.lang.ref.WeakReference;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * 描述：Retrofit Subscriber 封装

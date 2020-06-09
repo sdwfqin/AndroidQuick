@@ -8,7 +8,7 @@ import com.sdwfqin.quickseed.base.Constants;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -49,7 +49,7 @@ public class RetrofitClient {
                 // 设置OkHttpclient
                 .client(initOkhttpClient())
                 // RxJava2
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 // 字符串
                 .addConverterFactory(ScalarsConverterFactory.create())
                 // Gson

@@ -32,9 +32,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * 悬浮窗View Demo

@@ -2,7 +2,7 @@ package com.sdwfqin.quicklib.utils.rx;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * 描述：RxJava定时任务
