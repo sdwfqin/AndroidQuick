@@ -148,7 +148,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | BaseActivity |  |
 | BaseFragment |  |
 | BaseMvpActivity | 支持MVP的基类Activity |
-| BaseMvpFragment | 支持MVC的基类Fragment |
+| BaseMvpFragment | 支持MVP的基类Fragment |
 | RxPresenter | Presenter层封装 |
 | BaseMvvmActivity | 支持MVVM的基类Activity |
 | BaseViewModel | ViewModel基类 |
