@@ -22,8 +22,8 @@
     
 > 开发环境
 
-    AndroidStudio 3.6+
-    Gradle 5.6.4
+    AndroidStudio 4+
+    Gradle 6.1.1
 
 ## 必读事项
 
@@ -68,12 +68,9 @@
 8. Base中封装了`viewBinding`/`dataBinding`相关代码，需在项目的`build.gradle`中启用`viewBinding`/`dataBinding`，两者可选其一，也可一起混合使用（非`dataBinding`页面使用`viewBinding`代替`findViewById`或`Butterknife`），请参考[Sample](/app)中的相关代码，请不要使用`setContentView`添加布局，应通过实现Base中的`getViewBinding`方法添加布局。
 
     ``` groovy
-    viewBinding {
-        enabled = true
-    }
-
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
     ```
 
