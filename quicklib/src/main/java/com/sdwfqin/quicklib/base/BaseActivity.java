@@ -3,6 +3,7 @@ package com.sdwfqin.quicklib.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,7 +28,6 @@ import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -62,6 +62,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     private OnPermissionCallback mOnPermissionCallback;
     private boolean mShowPermissionsDialog;
     private boolean mLoopPermissionsDialog;
+    /**
+     * 权限请求次数
+     */
+    private int mPermissionsRequestNum = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -281,7 +285,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     /**
      * 检查权限是否全部获取
      */
-    @AfterPermissionGranted(PERMS_REQUEST_CODE)
     public void checkPermissions() {
 
         if (EasyPermissions.hasPermissions(this, mPerms)) {
@@ -290,8 +293,11 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         } else {
             // Do not have permissions, request them now
             if (mShowPermissionsDialog) {
-                EasyPermissions.requestPermissions(this, getString(R.string.quick_permissions_check_error),
-                        PERMS_REQUEST_CODE, mPerms);
+                mPermissionsRequestNum++;
+                new Handler().postDelayed(() -> {
+                    EasyPermissions.requestPermissions(this, getString(R.string.quick_permissions_check_error),
+                            PERMS_REQUEST_CODE, mPerms);
+                }, 100);
             } else {
                 mOnPermissionCallback.onError();
             }
@@ -316,7 +322,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         // Some permissions have been denied
-        if (mLoopPermissionsDialog) {
+        if (mLoopPermissionsDialog || (mPermissionsRequestNum == 1 && EasyPermissions.somePermissionPermanentlyDenied(this, perms))) {
             if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
                 AppSettingsDialog.Builder builder = new AppSettingsDialog.Builder(this);
                 AppSettingsDialog appSettingsDialog = builder.setTitle(R.string.quick_permissions_dialog_title_settings)
