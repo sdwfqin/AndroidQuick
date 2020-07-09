@@ -50,7 +50,7 @@ import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
 import com.sdwfqin.quickseed.base.Constants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
-import com.sdwfqin.quickseed.utils.qrbarscan.QrBarTool;
+import com.sdwfqin.quickseed.utils.qrbarscan.DecodeCodeTools;
 import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
 import java.io.File;
@@ -331,7 +331,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                 PlanarYUVLuminanceSource source = new PlanarYUVLuminanceSource(data, image.getWidth(), image.getHeight(), 0, 0, image.getWidth(), image.getHeight(), false);
                 BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
                 try {
-                    Result result = QrBarTool.getDefaultMultiFormatReader().decode(binaryBitmap);
+                    Result result = DecodeCodeTools.getDefaultMultiFormatReader().decode(binaryBitmap);
                     if (result != null && (StringUtils.isEmpty(mQrText) || !StringUtils.equals(mQrText, result.getText()))) {
                         mQrText = result.getText();
                         LogUtils.e(result.toString());

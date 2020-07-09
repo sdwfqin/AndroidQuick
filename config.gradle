@@ -8,7 +8,7 @@ ext {
     retrofit = "2.9.0"
     glide = "4.11.0"
     vlayout = "1.2.36"
-    camerax_version = "1.0.0-beta04"
+    camerax_version = "1.0.0-beta06"
     smartrefresh = "2.0.0"
 
     androidVersion = [
@@ -40,7 +40,7 @@ ext {
             "retrofit"           : "com.squareup.retrofit2:retrofit:$retrofit",
             "converter-gson"     : "com.squareup.retrofit2:converter-gson:$retrofit",
             "converter-scalars"  : "com.squareup.retrofit2:converter-scalars:$retrofit",
-            "adapter-rxjava2"    : "com.squareup.retrofit2:adapter-rxjava3:$retrofit",
+            "adapter-rxjava3"    : "com.squareup.retrofit2:adapter-rxjava3:$retrofit",
             "okhttp"             : "com.squareup.okhttp3:okhttp:$okhttp",
             "logging-interceptor": "com.squareup.okhttp3:logging-interceptor:$okhttp",
     ]
@@ -67,7 +67,7 @@ ext {
             "matisse"          : "com.zhihu.android:matisse:0.5.3-beta3",
             "androidsvg"       : "com.caverock:androidsvg-aar:1.4",
             "camera-camera2"   : "androidx.camera:camera-camera2:${camerax_version}",
-            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha11",
+            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha13",
             "camera-lifecycle" : "androidx.camera:camera-lifecycle:${camerax_version}",
     ]
 

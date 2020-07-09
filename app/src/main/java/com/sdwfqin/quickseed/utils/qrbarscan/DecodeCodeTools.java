@@ -20,7 +20,7 @@ import java.util.Vector;
  * @author 张钦
  * @date 2018/1/25
  */
-public class QrBarTool {
+public class DecodeCodeTools {
 
     /**
      * 解析图片中的 二维码 或者 条形码

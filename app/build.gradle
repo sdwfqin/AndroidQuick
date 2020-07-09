@@ -62,7 +62,7 @@ dependencies {
     implementation netWorkDependencies["retrofit"]
     implementation netWorkDependencies["converter-gson"]
     implementation netWorkDependencies["converter-scalars"]
-    implementation netWorkDependencies["adapter-rxjava2"]
+    implementation netWorkDependencies["adapter-rxjava3"]
 
     implementation viewDependencies["brvah"]
     implementation viewDependencies["smartrefresh"]
@@ -90,7 +90,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     annotationProcessor compilerDependencies["arouter-compiler"]
     annotationProcessor compilerDependencies["arch-compiler"]
