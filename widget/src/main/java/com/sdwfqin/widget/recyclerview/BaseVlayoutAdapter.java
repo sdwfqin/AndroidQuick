@@ -61,7 +61,9 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
+        if (mContext == null) {
+            mContext = parent.getContext();
+        }
         View view = LayoutInflater.from(mContext).inflate(mLayoutResId, parent, false);
         BaseViewHolder holder = new BaseViewHolder(view);
         return holder;

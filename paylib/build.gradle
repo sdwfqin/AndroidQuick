@@ -31,7 +31,7 @@ dependencies {
     api netWorkDependencies["okhttp"]
     api utilsDependencies["gson"]
     api thirdDependencies["wechat-sdk-mta"]
-    api (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
+    api (name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
 }
 
 File deployConfig = rootProject.file('gradle/deploy.properties')

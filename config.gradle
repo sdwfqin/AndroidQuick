@@ -1,7 +1,7 @@
 ext {
 
-    versionCode = 41000
-    versionName = "4.1.0"
+    versionCode = 202007171
+    versionName = "4.1.1"
 
     qmui = "2.0.0-alpha10"
     okhttp = "4.7.2"
@@ -86,7 +86,7 @@ ext {
 
     thirdDependencies = [
             // 微信
-            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.5.8",
+            "wechat-sdk-mta"     : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.6.4",
             // bugly
             "crashreport_upgrade": "com.tencent.bugly:crashreport_upgrade:1.4.2",
     ]
