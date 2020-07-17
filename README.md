@@ -94,9 +94,7 @@
     }
     ```
 
-2. 请将[支付宝的aar文件](/libs)放入您项目根目录的`libs`目录中（没有可以新建，文件名字不要变，文件夹名字跟上面的名字匹配起来就可以）
-
-3. 在启动模块（ex：app Module）添加支付宝aar依赖
+2. 请将[支付宝的aar文件](/libs)放入您项目根目录的`libs`目录中，然后在启动模块（ex：app Module）添加支付宝aar依赖
 
     ``` gradle
     dependencies {
