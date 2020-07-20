@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    app:cardCornerRadius="5dp"
-    app:qmui_skin_background="?attr/app_content_bg_primary_color">
+    card_view:cardCornerRadius="5dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -30,7 +28,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/left"
+                android:id="@+id/cancel"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -40,13 +38,13 @@
                 app:qmui_skin_text_color="?attr/app_text_white_color" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/right"
+                android:id="@+id/submit"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="1dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="去查看"
+                android:text="提交"
                 app:qmui_skin_background="?attr/app_primary_color"
                 app:qmui_skin_text_color="?attr/app_text_white_color" />
 

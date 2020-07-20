@@ -166,7 +166,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | RxSchedulersUtils | compose()统一线程处理 |
 | RxTimerUtil | RxJava定时任务 |
 | EventBusUtil | EventBus工具类，使用时需要配合Base基类 |
-| HintDialog | 可配置提示弹窗 |
+| QuickSimpleHintDialog | 可配置提示弹窗 |
 | AppManager | Activity栈管理 |
 | QuickExecutor | 线程池 |
 | ImageWatermarkUtils | 图片水印工具类 |

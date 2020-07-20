@@ -11,8 +11,9 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ToastUtils;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quicklib.dialog.HintDialog;
+import com.sdwfqin.quicklib.dialog.QuickSimpleHintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.base.ArouterConstants;
@@ -95,23 +96,27 @@ public class MainFragment extends BaseFragment<FragmentMainBinding> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_WINDOWFLOATANDSCREENSHOT).navigation();
                     break;
                 case 9:
-                    HintDialog hintDialog = new HintDialog(mContext);
-                    hintDialog.setFollowSkin(true);
-                    hintDialog.show();
-                    hintDialog.setTitle("热更新测试33333");
-                    hintDialog.hideRight();
-                    hintDialog.setLeftText("取消");
-                    hintDialog.setOnClickListener(new HintDialog.OnDialogClickListener() {
-                        @Override
-                        public void left() {
-                            showMsg("您点击了取消！");
-                        }
+                    QuickSimpleHintDialog hintDialog = new QuickSimpleHintDialog.Builder()
+                            .setFollowSkin(true)
+                            .setTitleText("热更新测试33333")
+                            .setSubmitText("哈哈")
+                            .setCancelText("取消")
+                            .setShowCancelButton(true)
+                            .setOnClickListener(new QuickSimpleHintDialog.OnDialogClickListener() {
+                                @Override
+                                public void submit(QuickSimpleHintDialog dialog) {
+                                    ToastUtils.showShort("哈哈");
+                                    dialog.dismiss();
+                                }
 
-                        @Override
-                        public void right() {
-
-                        }
-                    });
+                                @Override
+                                public void cancel(QuickSimpleHintDialog dialog) {
+                                    ToastUtils.showShort("取消");
+                                    dialog.dismiss();
+                                }
+                            })
+                            .builder();
+                    hintDialog.show(getChildFragmentManager(), "QuickSimpleHintDialog");
                     break;
                 case 10:
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVVM).navigation();

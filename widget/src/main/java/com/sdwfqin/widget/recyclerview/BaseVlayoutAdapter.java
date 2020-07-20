@@ -10,7 +10,6 @@ import androidx.annotation.IntRange;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -18,7 +17,6 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -27,7 +25,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/3/16
  */
-public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
+public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter<BaseViewHolder> {
 
     protected Context mContext;
     private List<T> mData;
@@ -38,7 +36,6 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     private OnItemClickListener mOnItemClickListener;
     private OnItemChildClickListener mOnItemChildClickListener;
-    private final LinkedHashSet<Integer> childClickViewIds;
 
     public BaseVlayoutAdapter(LayoutHelper layoutHelper, @LayoutRes int layoutResId, List<T> data) {
         this(layoutHelper, layoutResId, data, new VirtualLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -46,10 +43,9 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     public BaseVlayoutAdapter(LayoutHelper layoutHelper, @LayoutRes int layoutResId, List<T> data, @NonNull VirtualLayoutManager.LayoutParams layoutParams) {
         this.mLayoutHelper = layoutHelper;
-        this.mData = data == null ? new ArrayList<T>() : data;
+        this.mData = data == null ? new ArrayList<>() : data;
         this.mLayoutResId = layoutResId;
         this.mLayoutParams = layoutParams;
-        this.childClickViewIds = new LinkedHashSet<>();
         this.mCount = mData.size();
     }
 
@@ -60,17 +56,16 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (mContext == null) {
             mContext = parent.getContext();
         }
         View view = LayoutInflater.from(mContext).inflate(mLayoutResId, parent, false);
-        BaseViewHolder holder = new BaseViewHolder(view);
-        return holder;
+        return new BaseViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.itemView.setLayoutParams(new VirtualLayoutManager.LayoutParams(mLayoutParams));
     }
 
@@ -80,15 +75,18 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
      * @param offsetTotal 全局RecyclerView的位置
      */
     @Override
-    protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
+    protected void onBindViewHolderWithOffset(BaseViewHolder holder, int position, int offsetTotal) {
         T t;
         try {
             t = mData.get(position);
         } catch (Exception e) {
             t = null;
         }
-        convert((BaseViewHolder) holder, t, position, offsetTotal);
-        bindViewClickListener((BaseViewHolder) holder, position);
+        if (mContext == null || t == null) {
+            return;
+        }
+        convert(holder, t, position, offsetTotal);
+        bindViewClickListener(holder, position);
     }
 
     @Override
@@ -100,13 +98,8 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
         if (baseViewHolder == null) {
             return;
         }
-        final View view = baseViewHolder.itemView;
-        if (view == null) {
-            return;
-        }
-
         if (getOnItemClickListener() != null) {
-            view.setOnClickListener(view1 -> setOnItemClick(view1, position));
+            baseViewHolder.itemView.setOnClickListener(view -> setOnItemClick(view, position));
         }
     }
 
@@ -115,7 +108,7 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
     }
 
     public void setOnItemClick(View v, int position) {
-        getOnItemClickListener().onItemClick(BaseVlayoutAdapter.this, v, position);
+        getOnItemClickListener().onItemClick(this, v, position);
     }
 
     public final OnItemChildClickListener getOnItemChildClickListener() {
@@ -123,29 +116,16 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
     }
 
     public void addOnClickListener(final BaseViewHolder baseViewHolder, @IdRes final int viewId, final int position) {
-        childClickViewIds.add(viewId);
         View view = baseViewHolder.getView(viewId);
-        if (view != null) {
-            if (!view.isClickable()) {
-                view.setClickable(true);
-            }
-            view.setOnClickListener(view1 -> {
-                if (getOnItemChildClickListener() != null) {
-                    getOnItemChildClickListener()
-                            .onItemChildClick(BaseVlayoutAdapter.this, view1, position);
-                }
-            });
+        if (!view.isClickable()) {
+            view.setClickable(true);
         }
-    }
-
-    /**
-     * 设置Item数量
-     *
-     * @param count
-     */
-    public void setItemCount(int count) {
-        mCount = count;
-        notifyDataSetChanged();
+        view.setOnClickListener(view1 -> {
+            if (getOnItemChildClickListener() != null) {
+                getOnItemChildClickListener()
+                        .onItemChildClick(BaseVlayoutAdapter.this, view1, position);
+            }
+        });
     }
 
     /**
@@ -166,6 +146,17 @@ public abstract class BaseVlayoutAdapter<T> extends DelegateAdapter.Adapter {
      */
     public void addData(List<T> data) {
         this.mData.addAll(data == null ? new ArrayList<T>() : data);
+        this.mCount = mData.size();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 插入新数据
+     *
+     * @param data
+     */
+    public void insertItemData(int pos, T data) {
+        this.mData.add(pos, data);
         this.mCount = mData.size();
         notifyDataSetChanged();
     }
