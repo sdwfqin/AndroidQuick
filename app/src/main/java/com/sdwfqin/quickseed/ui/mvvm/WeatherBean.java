@@ -1,5 +1,7 @@
 package com.sdwfqin.quickseed.ui.mvvm;
 
+import java.io.Serializable;
+
 /**
  * 天气bean
  * <p>
@@ -7,7 +9,7 @@ package com.sdwfqin.quickseed.ui.mvvm;
  * @author 张钦
  * @date 2020/4/14
  */
-public class WeatherBean {
+public class WeatherBean implements Serializable {
 
     private Integer errcode;
     private String errmsg;

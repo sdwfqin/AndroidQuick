@@ -113,7 +113,7 @@
 # 导入指南
 
 ``` groovy
-def quicklib = "4.1.1"
+def quicklib = "4.2.0"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
@@ -137,7 +137,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 
 # 混淆
 
-可参考[Sample混淆文件](/app/proguard-rules.pro)
+4.2.0开始支持自动传递混淆配置，如有问题请提Issues或单独添加需要添加的策略～
 
 # 其他
 
