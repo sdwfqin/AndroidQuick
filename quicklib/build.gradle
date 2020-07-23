@@ -59,7 +59,7 @@ dependencies {
 
     api utilsDependencies["utilcodex"]
     api utilsDependencies["agentweb"]
-    api utilsDependencies["easypermissions"]
+    api utilsDependencies["permissionx"]
     api utilsDependencies["arouter"]
     api utilsDependencies["gson"]
 

@@ -3,7 +3,6 @@ package com.sdwfqin.quicklib.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,10 +11,12 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.permissionx.guolindev.PermissionX;
 import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
+import com.sdwfqin.quicklib.dialog.PermissionCustomDialog;
 import com.sdwfqin.quicklib.mvp.BaseView;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
@@ -24,21 +25,15 @@ import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
-
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import pub.devrel.easypermissions.AppSettingsDialog;
-import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements BaseView, EasyPermissions.PermissionCallbacks {
-
-    private static final int PERMS_REQUEST_CODE = 1122;
+public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements BaseView {
 
     protected Activity mContext;
     protected V mBinding;
@@ -55,17 +50,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      * TipDialog
      */
     protected QMUITipDialog mQmuiTipDialog;
-    /**
-     * 权限相关
-     */
-    private String[] mPerms;
-    private OnPermissionCallback mOnPermissionCallback;
-    private boolean mShowPermissionsDialog;
-    private boolean mLoopPermissionsDialog;
-    /**
-     * 权限请求次数
-     */
-    private int mPermissionsRequestNum = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -255,100 +239,30 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     }
 
     /**
-     * 检查权限是否全部获取
-     *
-     * @param perms
-     * @param onPermissionCallback
-     */
-    public void initCheckPermissions(String[] perms, OnPermissionCallback onPermissionCallback) {
-        initCheckPermissions(perms, false, false, onPermissionCallback);
-    }
-
-    /**
      * 初始化权限检查
      *
-     * @param perms                 权限列表
-     * @param showPermissionsDialog true：拒绝显示弹窗
-     * @param loopPermissionsDialog true：弹窗关闭继续弹出弹窗
-     * @param onPermissionCallback  权限回掉接口
+     * @param perms                权限列表
+     * @param onPermissionCallback 权限回掉接口
      */
-    public void initCheckPermissions(String[] perms, boolean showPermissionsDialog, boolean loopPermissionsDialog,
-                                     OnPermissionCallback onPermissionCallback) {
-        mPerms = perms;
-        mShowPermissionsDialog = showPermissionsDialog;
-        mLoopPermissionsDialog = loopPermissionsDialog;
-        mOnPermissionCallback = onPermissionCallback;
-
-        checkPermissions();
+    public void initCheckPermissions(String[] perms, OnPermissionCallback onPermissionCallback) {
+        PermissionX.init(this)
+                .permissions(perms)
+                .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
+                    PermissionCustomDialog dialog = new PermissionCustomDialog(mContext, getString(R.string.quick_permissions_title, getString(R.string.app_name)), deniedList);
+                    scope.showRequestReasonDialog(dialog);
+                })
+                .onForwardToSettings((scope, deniedList) -> {
+                    PermissionCustomDialog dialog = new PermissionCustomDialog(mContext, getString(R.string.quick_permissions_forward), deniedList);
+                    scope.showForwardToSettingsDialog(dialog);
+                })
+                .request((allGranted, grantedList, deniedList) -> {
+                    if (allGranted) {
+                        onPermissionCallback.onSuccess();
+                    } else {
+                        onPermissionCallback.onError();
+                    }
+                });
     }
-
-    /**
-     * 检查权限是否全部获取
-     */
-    public void checkPermissions() {
-
-        if (EasyPermissions.hasPermissions(this, mPerms)) {
-            // Already have permission, do the thing
-            mOnPermissionCallback.onSuccess();
-        } else {
-            // Do not have permissions, request them now
-            if (mShowPermissionsDialog) {
-                mPermissionsRequestNum++;
-                new Handler().postDelayed(() -> {
-                    EasyPermissions.requestPermissions(this, getString(R.string.quick_permissions_check_error),
-                            PERMS_REQUEST_CODE, mPerms);
-                }, 100);
-            } else {
-                mOnPermissionCallback.onError();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // Forward results to EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        // Some permissions have been granted
-        if (perms.size() >= mPerms.length) {
-            mOnPermissionCallback.onSuccess();
-        }
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        // Some permissions have been denied
-        if (mLoopPermissionsDialog || (mPermissionsRequestNum == 1 && EasyPermissions.somePermissionPermanentlyDenied(this, perms))) {
-            if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-                AppSettingsDialog.Builder builder = new AppSettingsDialog.Builder(this);
-                AppSettingsDialog appSettingsDialog = builder.setTitle(R.string.quick_permissions_dialog_title_settings)
-                        .setRationale(R.string.quick_permissions_dialog_rationale_ask_again)
-                        .setNegativeButton(R.string.quick_permissions_dialog_cancel)
-                        .setPositiveButton(R.string.quick_permissions_dialog_to_setting)
-                        .build();
-                appSettingsDialog.show();
-            } else {
-                checkPermissions();
-            }
-        } else {
-            mOnPermissionCallback.onError();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            // Do something after user returned from app settings screen, like showing a Toast.
-            checkPermissions();
-        }
-    }
-
     // ==================== 提供的接口 ====================
 
     protected void initViewModel() {

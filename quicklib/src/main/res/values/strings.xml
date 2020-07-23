@@ -1,5 +1,5 @@
 <resources>
-    <!--<string name="app_name">quickLib</string>-->
+<!--    <string name="app_name">quickLib</string>-->
 
     <string name="quick_cancel">取消</string>
     <string name="quick_img_save">保存图片到手机</string>
@@ -8,12 +8,8 @@
     <string name="quick_args_get_error">参数获取失败</string>
     <string name="quick_sd_not_found">内存卡不可用</string>
 
-    <string name="quick_permissions_check_error">获取权限失败！</string>
-    <string name="quick_permissions_dialog_cancel">取消</string>
-    <string name="quick_permissions_dialog_to_setting">去设置</string>
-    <string name="quick_permissions_dialog_title_settings">权限被拒绝</string>
-    <string name="quick_permissions_dialog_rationale_ask_again">
-        没有获取到权限，此应用可能无法正常运行。
-        \n打开应用程序设置页面以修改应用程序权限。
-    </string>
+    <string name="quick_permissions_dialog_cancel">拒绝</string>
+    <string name="quick_permissions_dialog_submit">开启</string>
+    <string name="quick_permissions_title">%s需要您同意以下权限才能正常使用</string>
+    <string name="quick_permissions_forward">您需要去设置中手动开启以下权限</string>
 </resources>

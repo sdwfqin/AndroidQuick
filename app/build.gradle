@@ -41,6 +41,8 @@ android {
             signingConfig signingConfigs.sdwfqinSigning
         }
         debug {
+            minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.sdwfqinSigning
         }
     }
