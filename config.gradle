@@ -8,7 +8,7 @@ ext {
     retrofit = "2.9.0"
     glide = "4.11.0"
     vlayout = "1.2.36"
-    camerax_version = "1.0.0-beta06"
+    camerax_version = "1.0.0-beta07"
     smartrefresh = "2.0.0"
 
     androidVersion = [
@@ -67,7 +67,7 @@ ext {
             "matisse"          : "com.zhihu.android:matisse:0.5.3-beta3",
             "androidsvg"       : "com.caverock:androidsvg-aar:1.4",
             "camera-camera2"   : "androidx.camera:camera-camera2:${camerax_version}",
-            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha13",
+            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha14",
             "camera-lifecycle" : "androidx.camera:camera-lifecycle:${camerax_version}",
     ]
 
