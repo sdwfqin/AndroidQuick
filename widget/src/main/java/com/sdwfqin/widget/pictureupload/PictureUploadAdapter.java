@@ -17,7 +17,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/5/31
  */
-public class PictureUploadAdapter<T extends PictureUpModel> extends BaseQuickAdapter<T, BaseViewHolder> {
+public class PictureUploadAdapter<T extends PictureUploadModel> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     public PictureUploadAdapter(int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);
@@ -30,7 +30,7 @@ public class PictureUploadAdapter<T extends PictureUpModel> extends BaseQuickAda
 
         if (item != null) {
             ImageLoader imageLoader = new ImageLoader.Builder()
-                    .setImagePath(item.getImage())
+                    .setImagePath(item.getPictureImage())
                     .setPlaceholder(R.mipmap.image_loading)
                     .setErrorImage(R.mipmap.image_load_err)
                     .build(iiImg);

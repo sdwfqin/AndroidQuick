@@ -113,7 +113,7 @@
 # 导入指南
 
 ``` groovy
-def quicklib = "4.2.0"
+def quicklib = "4.4.0"
 
 // quicklib(Base)
 implementation "com.sdwfqin.quicklib:quicklib:$quicklib"

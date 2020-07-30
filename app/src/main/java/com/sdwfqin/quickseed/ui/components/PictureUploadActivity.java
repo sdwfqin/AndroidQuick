@@ -26,8 +26,6 @@ public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUpl
 
     public static final int RESULT_PHOTO_SELECT = 101;
 
-//    PictureUploadView<PictureModel> mPic;
-
     @Override
     protected ActivityPictureUploadBinding getViewBinding() {
         return ActivityPictureUploadBinding.inflate(getLayoutInflater());
@@ -39,9 +37,8 @@ public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUpl
         mTopBar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
-//        mPic = mBinding.pic;
-
         mBinding.pic.setMaxColumn(3);
+        mBinding.pic.setMaxSize(12);
         mBinding.pic.setPicUploadCallback(new PictureUploadCallback<PictureModel>() {
             @Override
             public void click(int position, PictureModel pictureModel, List<PictureModel> list) {
@@ -76,7 +73,7 @@ public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUpl
                     for (int i = 0; i < selectList.size(); i++) {
                         models.add(new PictureModel(selectList.get(i)));
                     }
-                    mBinding.pic.setAddData(models);
+                    mBinding.pic.addData(models);
 
                     // 刷新相册图片
                     if (selectList.size() == 1) {

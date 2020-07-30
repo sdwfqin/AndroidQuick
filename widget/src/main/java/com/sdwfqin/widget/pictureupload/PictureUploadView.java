@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.sdwfqin.widget.R;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/5/31
  */
-public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout {
+public class PictureUploadView<T extends PictureUploadModel> extends FrameLayout {
 
     private Context mContext;
 
@@ -61,6 +60,7 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
         mContext = context;
         LayoutInflater.from(context).inflate(R.layout.quick_picture_upload_view, this);
         mRecyclerView = findViewById(R.id.rv);
+        mRecyclerView.setNestedScrollingEnabled(false);
 
         mDataList.add(null);
         initList();
@@ -110,12 +110,11 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
 
             } else if (i == R.id.ii_del) {
                 if (mDataList.size() == mMaxSize && mDataList.get(mDataList.size() - 1) != null) {
-                    mUploadAdapter.remove(position);
+                    mUploadAdapter.removeAt(position);
                     mDataList.add(null);
-                    mUploadAdapter.setNewData(mDataList);
+                    mUploadAdapter.setList(mDataList);
                 } else {
-                    mUploadAdapter.remove(position);
-                    mUploadAdapter.notifyDataSetChanged();
+                    mUploadAdapter.removeAt(position);
                 }
                 if (mCallback == null) {
                     return;
@@ -165,20 +164,28 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
      */
     public void setNewData(List<T> data) {
         mDataList.clear();
+        mDataList = data == null ? new ArrayList<>() : data;
         int size = mDataList.size();
         if (size < mMaxSize && mDataList.get(size - 1) != null) {
             // 如果数量小于最大值，添加一个null作为占位符
             mDataList.add(null);
         }
-        mDataList = data;
-        mUploadAdapter.notifyDataSetChanged();
-//        mUploadAdapter.setNewData(mDataList);
+        mUploadAdapter.setList(mDataList);
     }
 
     /**
      * 添加图片
      */
-    public void setAddData(List<T> data) {
+    public void addData(T data) {
+        List<T> list = new ArrayList<>();
+        list.add(data);
+        addData(list);
+    }
+
+    /**
+     * 添加图片
+     */
+    public void addData(List<T> data) {
         int size = mDataList.size();
         if (size <= mMaxSize && mDataList.get(size - 1) == null) {
             mDataList.remove(mDataList.size() - 1);
@@ -188,17 +195,14 @@ public class PictureUploadView<T extends PictureUpModel> extends RelativeLayout 
             // 如果数量小于最大值，添加一个null作为占位符
             mDataList.add(null);
         }
-        LogUtils.e(mDataList);
-        // fixme brvah3
-        mUploadAdapter.notifyDataSetChanged();
-//        mUploadAdapter.setNewData(mDataList);
+        mUploadAdapter.setList(mDataList);
     }
 
     /**
      * 移除全部图片
      */
     public void removeAll() {
-        mUploadAdapter.setNewData(null);
+        mUploadAdapter.setList(null);
         mDataList.clear();
     }
 

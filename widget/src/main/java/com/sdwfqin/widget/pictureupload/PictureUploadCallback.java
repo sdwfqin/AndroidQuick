@@ -8,7 +8,7 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/5/31
  */
-public interface PictureUploadCallback<T extends PictureUpModel> {
+public interface PictureUploadCallback<T extends PictureUploadModel> {
 
     /**
      * 移除某个图片
