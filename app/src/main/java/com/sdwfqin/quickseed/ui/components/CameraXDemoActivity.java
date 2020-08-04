@@ -213,7 +213,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
 
         mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider());
-        Camera camera = cameraProvider.bindToLifecycle(this, mCameraSelector, mImageCapture, mImageAnalysis, mPreview);
+        Camera camera = cameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
 
         mCameraInfo = camera.getCameraInfo();
         mCameraControl = camera.getCameraControl();
@@ -295,6 +295,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private void initUseCases() {
         initImageAnalysis();
         initImageCapture();
+        // 视频：VideoCapture
         initPreview();
         initCameraSelector();
     }
