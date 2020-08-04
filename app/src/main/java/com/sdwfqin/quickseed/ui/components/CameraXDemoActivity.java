@@ -17,6 +17,7 @@ import androidx.camera.core.Camera;
 import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.CameraX;
 import androidx.camera.core.CameraXConfig;
 import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.FocusMeteringResult;
@@ -69,6 +70,9 @@ import java.util.concurrent.TimeUnit;
 @Route(path = ArouterConstants.COMPONENTS_CAMERAX)
 public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding> implements CameraXConfig.Provider {
 
+    private static final int CHANGE_TYPE_RATIO = 0;
+    private static final int CHANGE_TYPE_SELECTOR = 1;
+
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture mImageCapture;
     private ImageAnalysis mImageAnalysis;
@@ -89,6 +93,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
      */
     private boolean mIsNextAnalysis = true;
     private String mQrText = "";
+    private ProcessCameraProvider mCameraProvider;
 
     @Override
     protected ActivityCameraxDemoBinding getViewBinding() {
@@ -99,6 +104,8 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     protected void initEventAndData() {
 
         mTopBar.setVisibility(View.GONE);
+
+        executor = ContextCompat.getMainExecutor(this);
 
         initCamera();
     }
@@ -155,7 +162,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                     break;
             }
 
-            initCamera();
+            changeCameraConfig(CHANGE_TYPE_RATIO);
         });
 
         /**
@@ -172,7 +179,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                     mBinding.btnCameraSelector.setText("前");
                     break;
             }
-            initCamera();
+            changeCameraConfig(CHANGE_TYPE_SELECTOR);
         });
 
         /**
@@ -191,34 +198,27 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
     private void initCamera() {
 
-        executor = ContextCompat.getMainExecutor(this);
-
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
         initUseCases();
 
         cameraProviderFuture.addListener(() -> {
             try {
-                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                cameraProvider.unbindAll();
-                bindPreview(cameraProvider);
+                mCameraProvider = cameraProviderFuture.get();
+                mCameraProvider.unbindAll();
+                mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider());
+                Camera camera = mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
+                mCameraInfo = camera.getCameraInfo();
+                mCameraControl = camera.getCameraControl();
+
+                initCameraListener();
             } catch (ExecutionException | InterruptedException e) {
+                LogUtils.e(e);
                 // No errors need to be handled for this Future.
                 // This should never be reached.
             }
         }, executor);
 
-    }
-
-    private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
-
-        mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider());
-        Camera camera = cameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
-
-        mCameraInfo = camera.getCameraInfo();
-        mCameraControl = camera.getCameraControl();
-
-        initCameraListener();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -402,6 +402,18 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         mCameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(mCameraSelectorInt)
                 .build();
+    }
+
+    private void changeCameraConfig(int changeType) {
+        if (changeType == CHANGE_TYPE_RATIO) {
+            if (mCameraProvider.isBound(mImageCapture)) {
+                mCameraProvider.unbind(mImageCapture);
+            }
+            initImageCapture();
+            mCameraProvider.bindToLifecycle(this, mCameraSelector, mImageCapture);
+        } else if (changeType == CHANGE_TYPE_SELECTOR) {
+            initCamera();
+        }
     }
 
     @NonNull
