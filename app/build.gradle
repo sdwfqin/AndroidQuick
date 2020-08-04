@@ -80,9 +80,6 @@ dependencies {
 
     implementation utilsDependencies["zxing"]
 
-    implementation("com.alibaba.android:vlayout:${vlayout}@aar") {
-        transitive = true
-    }
     implementation thirdDependencies["crashreport_upgrade"]
 //    implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
 

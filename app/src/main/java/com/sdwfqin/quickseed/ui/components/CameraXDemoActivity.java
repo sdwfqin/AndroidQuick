@@ -26,7 +26,6 @@ import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.MeteringPoint;
 import androidx.camera.core.MeteringPointFactory;
 import androidx.camera.core.Preview;
-import androidx.camera.core.SurfaceOrientedMeteringPointFactory;
 import androidx.camera.core.ZoomState;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -249,8 +248,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
             @Override
             public void click(float x, float y) {
-                // TODO 对焦
-                MeteringPointFactory factory = new SurfaceOrientedMeteringPointFactory(1.0f, 1.0f);
+                MeteringPointFactory factory = mBinding.viewFinder.createMeteringPointFactory(mCameraSelector);
                 MeteringPoint point = factory.createPoint(x, y);
                 FocusMeteringAction action = new FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
                         // auto calling cancelFocusAndMetering in 3 seconds
@@ -268,6 +266,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                             mBinding.focusView.onFocusFailed();
                         }
                     } catch (Exception e) {
+                        LogUtils.e(e);
                     }
                 }, executor);
             }

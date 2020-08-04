@@ -46,12 +46,12 @@ public class PictureUploadActivity extends SampleBaseActivity<ActivityPictureUpl
             }
 
             @Override
-            public void remove(int position, List list) {
+            public void remove(int position, List<PictureModel> list) {
 
             }
 
             @Override
-            public void onAddPic(int maxPic, List list) {
+            public void onAddPic(int maxPic, List<PictureModel> list) {
                 PictureSelectUtils.SelectSystemPhoto(mContext, RESULT_PHOTO_SELECT, maxPic);
             }
         });
