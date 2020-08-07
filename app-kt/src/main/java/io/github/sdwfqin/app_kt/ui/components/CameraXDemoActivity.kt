@@ -364,7 +364,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     private fun saveImage() {
         val file = File(PathUtils.getExternalPicturesPath(), System.currentTimeMillis().toString() + ".jpg")
         val outputFileOptions = OutputFileOptions.Builder(file).build()
-        mImageCapture.takePicture(outputFileOptions, executor!!,
+        mImageCapture.takePicture(outputFileOptions, executor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: OutputFileResults) {
                         val msg = "图片保存成功: " + file.absolutePath
