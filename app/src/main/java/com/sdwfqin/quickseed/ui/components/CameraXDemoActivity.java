@@ -17,7 +17,6 @@ import androidx.camera.core.Camera;
 import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
-import androidx.camera.core.CameraX;
 import androidx.camera.core.CameraXConfig;
 import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.FocusMeteringResult;
@@ -47,17 +46,18 @@ import com.google.zxing.common.HybridBinarizer;
 import com.sdwfqin.imageloader.ImageLoader;
 import com.sdwfqin.quicklib.base.BaseActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.Constants;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
-import com.sdwfqin.quickseed.utils.qrbarscan.DecodeCodeTools;
-import com.sdwfqin.quickseed.view.CameraXCustomPreviewView;
 
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+
+import io.github.sdwfqin.samplecommonlibrary.base.Constants;
+import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools;
+import io.github.sdwfqin.samplecommonlibrary.view.CameraXCustomPreviewView;
 
 /**
  * CameraX Demo
@@ -224,26 +224,13 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     @SuppressLint("ClickableViewAccessibility")
     private void initCameraListener() {
         LiveData<ZoomState> zoomState = mCameraInfo.getZoomState();
-        float maxZoomRatio = zoomState.getValue().getMaxZoomRatio();
-        float minZoomRatio = zoomState.getValue().getMinZoomRatio();
-        LogUtils.e(maxZoomRatio);
-        LogUtils.e(minZoomRatio);
 
         mBinding.viewFinder.setCustomTouchListener(new CameraXCustomPreviewView.CustomTouchListener() {
-            @Override
-            public void zoom() {
-                float zoomRatio = zoomState.getValue().getZoomRatio();
-                if (zoomRatio < maxZoomRatio) {
-                    mCameraControl.setZoomRatio((float) (zoomRatio + 0.1));
-                }
-            }
 
             @Override
-            public void ZoomOut() {
-                float zoomRatio = zoomState.getValue().getZoomRatio();
-                if (zoomRatio > minZoomRatio) {
-                    mCameraControl.setZoomRatio((float) (zoomRatio - 0.1));
-                }
+            public void zoom(float delta) {
+                float currentZoomRatio = zoomState.getValue().getZoomRatio();
+                mCameraControl.setZoomRatio(currentZoomRatio * delta);
             }
 
             @Override
@@ -274,8 +261,8 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
             @Override
             public void doubleClick(float x, float y) {
                 // 双击放大缩小
-                float zoomRatio = zoomState.getValue().getZoomRatio();
-                if (zoomRatio > minZoomRatio) {
+                float currentZoomRatio = zoomState.getValue().getZoomRatio();
+                if (currentZoomRatio > zoomState.getValue().getMinZoomRatio()) {
                     mCameraControl.setLinearZoom(0f);
                 } else {
                     mCameraControl.setLinearZoom(0.5f);

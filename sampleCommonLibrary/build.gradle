@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
+        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: "libs", include: ["*.jar"])
+    api googleDependencies["multidex"]
+
+    api netWorkDependencies["retrofit"]
+    api netWorkDependencies["converter-gson"]
+    api netWorkDependencies["converter-scalars"]
+    api netWorkDependencies["adapter-rxjava3"]
+
+    api viewDependencies["brvah"]
+    api viewDependencies["smartrefresh"]
+    api viewDependencies["smartrefresh-classics"]
+    api viewDependencies["pickerview"]
+
+    api imageDependencies["camera-camera2"]
+    api imageDependencies["camera-view"]
+    api imageDependencies["camera-lifecycle"]
+    api imageDependencies["matisse"]
+
+    api utilsDependencies["zxing"]
+
+    api thirdDependencies["crashreport_upgrade"]
+//    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
+
+    api project(':imageloader')
+    api project(':quicklib')
+    api project(':paylib')
+    api project(':widget')
+
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+}

@@ -9,7 +9,7 @@ import com.sdwfqin.quicklib.base.QuickConstants;
 import com.sdwfqin.quicklib.webview.QuickWebViewActivity;
 import com.sdwfqin.quicklib.webview.QuickWebViewLoadDataActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.ArouterConstants;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivitySampleListBinding;
 
 /**

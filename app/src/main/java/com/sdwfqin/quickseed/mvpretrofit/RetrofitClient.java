@@ -3,10 +3,10 @@ package com.sdwfqin.quickseed.mvpretrofit;
 import android.util.Log;
 
 import com.sdwfqin.quickseed.BuildConfig;
-import com.sdwfqin.quickseed.base.Constants;
 
 import java.util.concurrent.TimeUnit;
 
+import io.github.sdwfqin.samplecommonlibrary.base.Constants;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

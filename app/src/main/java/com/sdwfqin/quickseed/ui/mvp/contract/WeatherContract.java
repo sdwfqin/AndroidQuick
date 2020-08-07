@@ -13,10 +13,10 @@ import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
  */
 public interface WeatherContract {
 
-    public interface WeatherView extends BaseView {
+    interface WeatherView extends BaseView {
         void refreshView(WeatherBean weatherBean);
     }
-    public interface WeatherPresenter extends BasePresenter<WeatherView> {
+    interface WeatherPresenter extends BasePresenter<WeatherView> {
         void loadData();
     }
 }

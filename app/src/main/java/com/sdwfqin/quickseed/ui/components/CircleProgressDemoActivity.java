@@ -1,9 +1,10 @@
 package com.sdwfqin.quickseed.ui.components;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityCircleProgressDemoBinding;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 /**
  * 圆（方）形加载进度条

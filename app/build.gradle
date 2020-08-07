@@ -6,7 +6,7 @@ android {
         sdwfqinSigning {
             keyAlias 'sdwfqin'
             keyPassword 'sdwfqin.com'
-            storeFile file('sdwfqin.jks')
+            storeFile file('../sdwfqin.jks')
             storePassword 'sdwfqin.com'
         }
     }
@@ -61,40 +61,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation googleDependencies["multidex"]
-
-    implementation netWorkDependencies["retrofit"]
-    implementation netWorkDependencies["converter-gson"]
-    implementation netWorkDependencies["converter-scalars"]
-    implementation netWorkDependencies["adapter-rxjava3"]
-
-    implementation viewDependencies["brvah"]
-    implementation viewDependencies["smartrefresh"]
-    implementation viewDependencies["smartrefresh-classics"]
-    implementation viewDependencies["pickerview"]
-
-    implementation imageDependencies["camera-camera2"]
-    implementation imageDependencies["camera-view"]
-    implementation imageDependencies["camera-lifecycle"]
-    implementation imageDependencies["matisse"]
-
-    implementation utilsDependencies["zxing"]
-
-    implementation thirdDependencies["crashreport_upgrade"]
-//    implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
-
-    implementation project(':imageloader')
-    implementation project(':quicklib')
-    implementation project(':paylib')
-    implementation project(':widget')
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    implementation project(':sampleCommonLibrary')
 
     annotationProcessor compilerDependencies["arouter-compiler"]
     annotationProcessor compilerDependencies["arch-compiler"]
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }
 
 //apply from: "tinker_config.gradle"

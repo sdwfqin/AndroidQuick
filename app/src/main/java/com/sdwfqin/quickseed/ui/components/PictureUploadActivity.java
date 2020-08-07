@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityPictureUploadBinding;
 import com.sdwfqin.quickseed.model.PictureModel;
-import com.sdwfqin.quickseed.utils.picture.PictureSelectUtils;
 import com.sdwfqin.widget.pictureupload.PictureUploadCallback;
 import com.zhihu.matisse.Matisse;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
+import io.github.sdwfqin.samplecommonlibrary.utils.picture.PictureSelectUtils;
 
 /**
  * 描述：九宫格上传图片

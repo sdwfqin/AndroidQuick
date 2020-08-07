@@ -16,12 +16,13 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.qmuiteam.qmui.widget.tab.QMUITab;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 /**
  * 主Acticity

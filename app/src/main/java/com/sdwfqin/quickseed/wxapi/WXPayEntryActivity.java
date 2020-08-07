@@ -7,12 +7,13 @@ import android.os.Bundle;
 import com.blankj.utilcode.util.LogUtils;
 import com.sdwfqin.paylib.wechat.WechatPay;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.Constants;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import io.github.sdwfqin.samplecommonlibrary.base.Constants;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 

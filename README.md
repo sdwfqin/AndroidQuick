@@ -4,6 +4,7 @@
 
 * [注意事项](#注意事项)
 * [导入指南](#导入指南)
+* [目录介绍](#目录介绍)
 * [相关文档](#相关文档)
 * [混淆](#混淆)
 * [其他](#其他)
@@ -126,6 +127,21 @@ implementation "com.sdwfqin.quicklib:imageloader:$quicklib"
 // Android 自定义View组件
 implementation "com.sdwfqin.quicklib:widget:$quicklib"
 ```
+
+# 目录介绍
+
+| 目录文件 | 解释 |
+| :-------- | :--------|
+| app | Demo(Java版) |
+| app-kt | Demo(Kotlin版，正在完善) |
+| sampleCommonLibrary | Demo公共依赖 |
+| ~~docs~~ | ~~文档~~ |
+| imageloader | 图片加载库（基于Glide） |
+| libs | 公共jar/aar包 |
+| paylib | 支付组件库 |
+| quicklib | 基础组件库 |
+| widget | View组件库 |
+| config.gradle | 依赖配置 |
 
 # 相关文档
 

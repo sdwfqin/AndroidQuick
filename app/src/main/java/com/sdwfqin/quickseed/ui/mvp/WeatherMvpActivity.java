@@ -1,11 +1,12 @@
 package com.sdwfqin.quickseed.ui.mvp;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseMvpActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityWeatherMvpBinding;
 import com.sdwfqin.quickseed.ui.mvp.contract.WeatherContract;
 import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseMvpActivity;
 
 /**
  * mvp Demo

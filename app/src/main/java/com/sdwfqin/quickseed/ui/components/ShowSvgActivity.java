@@ -6,9 +6,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.RequestBuilder;
 import com.sdwfqin.imageloader.GlideApp;
 import com.sdwfqin.imageloader.svg.SvgSoftwareLayerSetter;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityShowSvgBinding;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 

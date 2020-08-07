@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseMvvmActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityWeatherMvvmBinding;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseMvvmActivity;
 
 /**
  * 获取天气信息 mvvm

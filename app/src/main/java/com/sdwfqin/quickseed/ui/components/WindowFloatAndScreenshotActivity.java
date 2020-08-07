@@ -9,10 +9,11 @@ import android.provider.Settings;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityWindowFloatAndScreenshotBinding;
-import com.sdwfqin.quickseed.view.QuickWindowFloatView;
+import io.github.sdwfqin.samplecommonlibrary.view.QuickWindowFloatView;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 /**
  * 悬浮窗与截图Demo

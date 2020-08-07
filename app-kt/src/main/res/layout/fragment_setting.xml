@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:qmui_skin_background="?attr/app_content_bg_color">
+
+    <com.sdwfqin.widget.StatusPlaceholderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:qmui_skin_background="?attr/app_primary_color" />
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ll_change_skin"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="12dp"
+                android:drawableRight="@drawable/ic_chevron_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="换肤"
+                android:textSize="16sp"
+                app:qmui_skin_background="?attr/app_content_bg_primary_color"
+                app:qmui_skin_text_color="?attr/app_text_black_color" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.databinding.FragmentSortListDetailBinding;
 import com.sdwfqin.quickseed.databinding.ItemSortFooterBinding;
 

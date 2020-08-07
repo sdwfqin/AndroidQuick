@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.adapter.AutoPollRecyclerAdapter;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityAutoPollRecyclerViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 /**
  * 标题：跑马灯Demo

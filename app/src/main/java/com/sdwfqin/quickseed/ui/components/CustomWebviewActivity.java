@@ -8,8 +8,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.webview.QuickBaseWebViewActivity;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
+
+import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
 
 /**
  * 描述：自定义Webview

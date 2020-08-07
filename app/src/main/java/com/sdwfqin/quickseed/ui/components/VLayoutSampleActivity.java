@@ -13,13 +13,14 @@ import com.sdwfqin.quickseed.adapter.StrokeCardAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeHistoryAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeOrderAdapter;
 import com.sdwfqin.quickseed.adapter.StrokeTitleAdapter;
-import com.sdwfqin.quickseed.base.ArouterConstants;
-import com.sdwfqin.quickseed.base.SampleBaseActivity;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityVlayoutSampleBinding;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 
 /**
  * VLayoutSample

@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.sdwfqin.quicklib.base.BaseFragment;
-import com.sdwfqin.quickseed.base.ArouterConstants;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentSettingBinding;
-import com.sdwfqin.quickseed.utils.skin.QMUISkinCustManager;
+
+import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
 
 /**
  * 配置页面

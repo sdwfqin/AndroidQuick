@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:qmui_skin_background="?attr/app_content_bg_color">
+
+    <com.sdwfqin.widget.StatusPlaceholderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:qmui_skin_background="?attr/app_primary_color" />
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</androidx.appcompat.widget.LinearLayoutCompat>

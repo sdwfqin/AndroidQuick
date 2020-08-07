@@ -16,7 +16,7 @@ import com.sdwfqin.quicklib.base.BaseFragment;
 import com.sdwfqin.quicklib.dialog.QuickSimpleHintDialog;
 import com.sdwfqin.quicklib.imagepreview.ImagePreviewActivity;
 import com.sdwfqin.quickseed.R;
-import com.sdwfqin.quickseed.base.ArouterConstants;
+import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.FragmentMainBinding;
 import com.sdwfqin.quickseed.ui.example.sortlist.SortListActivity;
 
