@@ -134,7 +134,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | :-------- | :--------|
 | app | Demo(Java版) |
 | app-kt | Demo(Kotlin版，正在完善) |
-| sampleCommonLibrary | Demo公共依赖 |
+| sampleCommonLibrary | Demo公共组件 |
 | ~~docs~~ | ~~文档~~ |
 | imageloader | 图片加载库（基于Glide） |
 | libs | 公共jar/aar包 |
