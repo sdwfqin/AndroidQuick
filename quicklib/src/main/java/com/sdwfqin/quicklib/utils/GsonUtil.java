@@ -9,9 +9,12 @@ import java.util.Map;
 
 /**
  * 描述：Gson工具类
+ * <p>
+ * 现在有了更完善的工具 {@link com.blankj.utilcode.util.GsonUtils}
  *
  * @author 张钦
  */
+@Deprecated
 public class GsonUtil {
 
     private static Gson gson = null;

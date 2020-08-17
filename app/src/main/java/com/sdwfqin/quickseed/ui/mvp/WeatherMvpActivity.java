@@ -34,7 +34,7 @@ public class WeatherMvpActivity extends SampleBaseMvpActivity<ActivityWeatherMvp
 
     @Override
     protected WeatherContract.WeatherPresenter createPresenter() {
-        return new WeatherPresenterImpl();
+        return new WeatherPresenterImpl(this);
     }
 
     @Override

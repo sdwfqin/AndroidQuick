@@ -6,10 +6,13 @@ import java.util.Stack;
 
 /**
  * 描述：Activity栈管理
+ * <p>
+ * 现在有了更完善的工具 {@link com.blankj.utilcode.util.ActivityUtils}
  *
- * @author  张钦
+ * @author 张钦
  * @date 2017/11/11
  */
+@Deprecated
 public class AppManager {
 
     private static Stack<Activity> activityStack = new Stack<>();

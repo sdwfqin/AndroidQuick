@@ -17,15 +17,15 @@ import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
 import com.sdwfqin.quicklib.dialog.PermissionCustomDialog;
-import com.sdwfqin.quicklib.mvp.BaseView;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
+import com.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
@@ -33,7 +33,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  *
  * @author 张钦
  */
-public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements BaseView {
+public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements IBaseView {
 
     protected Activity mContext;
     protected V mBinding;
@@ -41,7 +41,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     /**
      * Rxjava 订阅管理
      */
-    protected CompositeDisposable mCompositeDisposable;
+    protected RxJavaLifecycleManager mRxJavaLifecycleManager;
     /**
      * 顶部标题栏
      */
@@ -59,6 +59,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         mTopBar = findViewById(R.id.quick_base_topbar);
         mContext = this;
         AppManager.addActivity(this);
+        mRxJavaLifecycleManager = new RxJavaLifecycleManager(this);
         initPresenter();
         initViewModel();
         initEventAndData();
@@ -84,7 +85,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
 
     @Override
     protected void onDestroy() {
-        unSubscribe();
         removePresenter();
         AppManager.removeActivity(this);
         super.onDestroy();
@@ -212,21 +212,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      */
     @Override
     public void addSubscribe(Disposable subscription) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(subscription);
-    }
-
-    /**
-     * RxJava 解除所有订阅者
-     */
-    public void unSubscribe() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
-            mCompositeDisposable.clear();
-            mCompositeDisposable = new CompositeDisposable();
-        }
+        mRxJavaLifecycleManager.addDisposable(subscription);
     }
 
     // ==================== 权限管理 ====================
@@ -273,6 +259,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
 
     }
 
+    /**
+     * 改为Lifecycle管理
+     */
+    @Deprecated
     protected void removePresenter() {
 
     }

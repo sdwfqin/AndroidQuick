@@ -9,7 +9,8 @@ import androidx.viewbinding.ViewBinding;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.sdwfqin.quicklib.mvp.BaseMvpActivity;
-import com.sdwfqin.quicklib.mvp.BasePresenter;
+import com.sdwfqin.quicklib.mvp.IBasePresenter;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 
 import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
 
@@ -20,7 +21,7 @@ import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
  * @author 张钦
  * @date 2019-12-06
  */
-public abstract class SampleBaseMvpActivity<V extends ViewBinding, T extends BasePresenter> extends BaseMvpActivity<V, T> {
+public abstract class SampleBaseMvpActivity<V extends ViewBinding, T extends IBasePresenter> extends BaseMvpActivity<V, T> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -2,7 +2,7 @@ package com.sdwfqin.quickseed.mvpretrofit;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.sdwfqin.quicklib.mvp.BaseView;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 
 import java.lang.ref.WeakReference;
 
@@ -19,9 +19,9 @@ import io.reactivex.rxjava3.disposables.Disposable;
  */
 public abstract class RetrofitSubscriber<T> implements Observer<T> {
 
-    private final WeakReference<BaseView> mView;
+    private final WeakReference<IBaseView> mView;
 
-    public RetrofitSubscriber(BaseView view) {
+    public RetrofitSubscriber(IBaseView view) {
         super();
         mView = new WeakReference<>(view);
     }

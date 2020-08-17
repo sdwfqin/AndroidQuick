@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  *
  * @author zhangqin
  */
-public interface BaseView {
+public interface IBaseView {
 
     /**
      * 显示吐司

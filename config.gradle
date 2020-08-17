@@ -1,7 +1,7 @@
 ext {
 
-    versionCode = 202007301
-    versionName = "4.4.0"
+    versionCode = 202008171
+    versionName = "4.5.0"
 
     qmui = "2.0.0-alpha10"
     okhttp = "4.7.2"
@@ -9,7 +9,7 @@ ext {
     glide = "4.11.0"
     vlayout = "1.2.36"
     camerax_version = "1.0.0-beta07"
-    smartrefresh = "2.0.0"
+    smartrefresh = "2.0.1"
 
     androidVersion = [
             compileSdkVersion: 29,
@@ -47,15 +47,16 @@ ext {
 
     viewDependencies = [
             // qmui
-            "qmui"                 : "com.qmuiteam:qmui:$qmui",
-            "arch"                 : "com.qmuiteam:arch:$qmui",
+            "qmui"                        : "com.qmuiteam:qmui:$qmui",
+            "arch"                        : "com.qmuiteam:arch:$qmui",
             // brvah
-            "brvah"                : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4",
+            "brvah"                       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4",
             // smartrefresh
-            "smartrefresh"         : "com.scwang.smart:refresh-layout-kernel:$smartrefresh",
-            "smartrefresh-classics": "com.scwang.smart:refresh-header-classics:$smartrefresh",
+            "smartrefresh"                : "com.scwang.smart:refresh-layout-kernel:$smartrefresh",
+            "smartrefresh-classics"       : "com.scwang.smart:refresh-header-classics:$smartrefresh",
+            "smartrefresh-classics-footer": "com.scwang.smart:refresh-footer-classics:$smartrefresh",
             // pickerview
-            "pickerview"           : "com.contrarywind:Android-PickerView:4.1.9",
+            "pickerview"                  : "com.contrarywind:Android-PickerView:4.1.9",
     ]
 
     imageDependencies = [
@@ -74,13 +75,13 @@ ext {
     utilsDependencies = [
             "permissionx": "com.permissionx.guolindev:permissionx:1.3.0",
             // utils
-            "utilcodex"      : "com.blankj:utilcodex:1.29.0",
+            "utilcodex"  : "com.blankj:utilcodex:1.29.0",
             // agentweb
-            "agentweb"       : "com.just.agentweb:agentweb:4.1.3",
+            "agentweb"   : "com.just.agentweb:agentweb:4.1.3",
             // arouter
-            "arouter"        : "com.alibaba:arouter-api:1.5.0",
-            "gson"           : "com.google.code.gson:gson:2.8.6",
-            "zxing"          : "com.google.zxing:core:3.4.0",
+            "arouter"    : "com.alibaba:arouter-api:1.5.0",
+            "gson"       : "com.google.code.gson:gson:2.8.6",
+            "zxing"      : "com.google.zxing:core:3.4.0",
     ]
 
     thirdDependencies = [

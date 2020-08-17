@@ -10,7 +10,7 @@ import com.sdwfqin.quicklib.base.BaseFragment;
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseMvpFragment<V extends ViewBinding, T extends BasePresenter> extends BaseFragment<V> {
+public abstract class BaseMvpFragment<V extends ViewBinding, T extends IBasePresenter> extends BaseFragment<V> {
 
     protected T mPresenter;
 

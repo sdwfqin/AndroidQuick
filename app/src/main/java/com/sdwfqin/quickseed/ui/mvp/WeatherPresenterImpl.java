@@ -1,6 +1,8 @@
 package com.sdwfqin.quickseed.ui.mvp;
 
-import com.sdwfqin.quicklib.mvp.SamplePresenter;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.sdwfqin.quicklib.mvp.BasePresenter;
 import com.sdwfqin.quicklib.utils.rx.RxSchedulersUtils;
 import com.sdwfqin.quickseed.mvpretrofit.RetrofitClient;
 import com.sdwfqin.quickseed.mvpretrofit.RetrofitSubscriber;
@@ -17,7 +19,11 @@ import java.util.Map;
  * @author 张钦
  * @date 2020/4/16
  */
-public class WeatherPresenterImpl extends SamplePresenter<WeatherContract.WeatherView> implements WeatherContract.WeatherPresenter {
+public class WeatherPresenterImpl extends BasePresenter<WeatherContract.WeatherView> implements WeatherContract.WeatherPresenter {
+
+    public WeatherPresenterImpl(LifecycleOwner owner) {
+        super(owner);
+    }
 
     @Override
     public void loadData() {

@@ -9,7 +9,7 @@ import com.sdwfqin.quicklib.base.BaseActivity;
  *
  * @author 张钦
  */
-public abstract class BaseMvpActivity<V extends ViewBinding, T extends BasePresenter> extends BaseActivity<V> {
+public abstract class BaseMvpActivity<V extends ViewBinding, T extends IBasePresenter> extends BaseActivity<V> {
 
     protected T mPresenter;
 
@@ -21,12 +21,12 @@ public abstract class BaseMvpActivity<V extends ViewBinding, T extends BasePrese
         }
     }
 
-    @Override
-    protected void removePresenter() {
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
-    }
+//    @Override
+//    protected void removePresenter() {
+//        if (mPresenter != null) {
+//            mPresenter.detachView();
+//        }
+//    }
 
     /**
      * 创建Presenter

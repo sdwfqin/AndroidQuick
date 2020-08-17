@@ -14,14 +14,14 @@ import androidx.viewbinding.ViewBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-import com.sdwfqin.quicklib.mvp.BaseView;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
 import com.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
+import com.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
@@ -30,7 +30,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseFragment<V extends ViewBinding> extends Fragment implements BaseView {
+public abstract class BaseFragment<V extends ViewBinding> extends Fragment implements IBaseView {
 
     protected V mBinding;
     protected BaseActivity mActivity;
@@ -53,7 +53,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     @Deprecated
     protected boolean mIsLoad = false;
     private QMUITipDialog mQmuiTipDialog;
-    protected CompositeDisposable mCompositeDisposable;
+    protected RxJavaLifecycleManager mRxJavaLifecycleManager;
 
     /**
      * Fragment的UI是否是可见
@@ -76,6 +76,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     public void onAttach(Context context) {
         mActivity = (BaseActivity) context;
         mContext = context;
+        mRxJavaLifecycleManager = new RxJavaLifecycleManager(this);
         super.onAttach(context);
     }
 
@@ -136,7 +137,6 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     @Override
     public void onDestroyView() {
         mIsPrepared = false;
-        unSubscribe();
         removePresenter();
         mBinding = null;
         super.onDestroyView();
@@ -256,21 +256,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
      */
     @Override
     public void addSubscribe(Disposable subscription) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(subscription);
-    }
-
-    /**
-     * RxJava 解除所有订阅者
-     */
-    public void unSubscribe() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
-            mCompositeDisposable.clear();
-            mCompositeDisposable = new CompositeDisposable();
-        }
+        mRxJavaLifecycleManager.addDisposable(subscription);
     }
 
     protected void initViewModel() {
@@ -281,6 +267,10 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     }
 
+    /**
+     * 改为Lifecycle管理
+     */
+    @Deprecated
     protected void removePresenter() {
 
     }

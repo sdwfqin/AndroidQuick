@@ -1,7 +1,7 @@
 package com.sdwfqin.quickseed.ui.mvp.contract;
 
-import com.sdwfqin.quicklib.mvp.BasePresenter;
-import com.sdwfqin.quicklib.mvp.BaseView;
+import com.sdwfqin.quicklib.mvp.IBasePresenter;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
 
 /**
@@ -13,10 +13,10 @@ import com.sdwfqin.quickseed.ui.mvvm.WeatherBean;
  */
 public interface WeatherContract {
 
-    interface WeatherView extends BaseView {
+    interface WeatherView extends IBaseView {
         void refreshView(WeatherBean weatherBean);
     }
-    interface WeatherPresenter extends BasePresenter<WeatherView> {
+    interface WeatherPresenter extends IBasePresenter<WeatherView> {
         void loadData();
     }
 }

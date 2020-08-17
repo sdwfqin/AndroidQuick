@@ -1,6 +1,6 @@
 package com.sdwfqin.quickseed.mvpretrofit;
 
-import com.sdwfqin.quicklib.mvp.BaseView;
+import com.sdwfqin.quicklib.mvp.IBaseView;
 
 /**
  * 描述：
@@ -24,7 +24,7 @@ public class BaseResponse<T> {
                 '}';
     }
 
-    public boolean isOk(BaseView view) {
+    public boolean isOk(IBaseView view) {
         if (statusCode == 1) {
             return true;
         } else {

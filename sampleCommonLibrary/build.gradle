@@ -41,6 +41,7 @@ dependencies {
     api viewDependencies["brvah"]
     api viewDependencies["smartrefresh"]
     api viewDependencies["smartrefresh-classics"]
+    api viewDependencies["smartrefresh-classics-footer"]
     api viewDependencies["pickerview"]
 
     api imageDependencies["camera-camera2"]
