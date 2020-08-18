@@ -181,6 +181,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | GsonUtil | Gson工具类 |
 | RxSchedulersUtils | compose()统一线程处理 |
 | RxTimerUtil | RxJava定时任务 |
+| RxJavaLifecycleManager | RxJava生命周期管理 |
 | EventBusUtil | EventBus工具类，使用时需要配合Base基类 |
 | QuickSimpleHintDialog | 可配置提示弹窗 |
 | AppManager | Activity栈管理 |
