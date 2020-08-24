@@ -203,7 +203,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             }
 
             override fun click(x: Float, y: Float) {
-                val factory = mBinding.viewFinder.createMeteringPointFactory(mCameraSelector)
+                val factory = mBinding.viewFinder.meteringPointFactory
                 val point = factory.createPoint(x, y)
                 val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
                         // auto calling cancelFocusAndMetering in 3 seconds
@@ -211,7 +211,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                         .build()
                 mBinding.focusView.startFocus(Point(x.toInt(), y.toInt()))
                 val future: ListenableFuture<*> = mCameraControl.startFocusAndMetering(action)
-                future.addListener(Runnable {
+                future.addListener({
                     try {
                         val result = future.get() as FocusMeteringResult
                         if (result.isFocusSuccessful) {
@@ -260,7 +260,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                 .setTargetResolution(if (mAspectRatioInt == AspectRatio.RATIO_4_3) Size(720, 960) else Size(720, 1280)) // 非阻塞模式
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
-        mImageAnalysis.setAnalyzer(executor, ImageAnalysis.Analyzer { image: ImageProxy ->
+        mImageAnalysis.setAnalyzer(executor, { image: ImageProxy ->
             /**
              * 扫描二维码
              *

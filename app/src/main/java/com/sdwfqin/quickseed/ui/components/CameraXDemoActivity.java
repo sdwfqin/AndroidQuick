@@ -235,7 +235,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
             @Override
             public void click(float x, float y) {
-                MeteringPointFactory factory = mBinding.viewFinder.createMeteringPointFactory(mCameraSelector);
+                MeteringPointFactory factory = mBinding.viewFinder.getMeteringPointFactory();
                 MeteringPoint point = factory.createPoint(x, y);
                 FocusMeteringAction action = new FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
                         // auto calling cancelFocusAndMetering in 3 seconds
