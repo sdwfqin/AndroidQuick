@@ -7,7 +7,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.sdwfqin.quicklib.base.BaseFragment
 import com.sdwfqin.quicklib.dialog.QuickSimpleHintDialog
@@ -28,7 +27,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     private val mTitle = arrayOf(
             "图片预览",
             "支持换肤的弹窗",
-            "Camerax（支持二维码识别）"
+            "Camerax（支持二维码识别）",
+            "MVVM DEMO"
     )
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): FragmentMainBinding {
@@ -54,6 +54,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                 }
                 2 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CAMERAX).navigation()
+                }
+                3 -> {
+                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVVM).navigation()
                 }
             }
         }

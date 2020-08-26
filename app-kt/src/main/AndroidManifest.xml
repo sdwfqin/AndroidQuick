@@ -21,6 +21,9 @@
             android:name=".ui.components.CameraXDemoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="true" />
+        <activity
+            android:name=".ui.mvvm.WeatherMvvmActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>
