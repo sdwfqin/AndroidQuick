@@ -1,4 +1,4 @@
-package io.github.sdwfqin.app_kt.ui.mvvm
+package io.github.sdwfqin.app_kt.data.bean
 
 import java.io.Serializable
 

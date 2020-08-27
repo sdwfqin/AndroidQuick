@@ -1,4 +1,4 @@
-package io.github.sdwfqin.app_kt.retrofit
+package io.github.sdwfqin.app_kt.utils
 
 /**
  * 描述：服务器下发的错误

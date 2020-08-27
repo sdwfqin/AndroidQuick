@@ -1,10 +1,12 @@
 package io.github.sdwfqin.app_kt.ui.mvvm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.sdwfqin.quicklib.mvvm.BaseViewModel
-import io.github.sdwfqin.app_kt.retrofit.WeatherRepository
+import io.github.sdwfqin.app_kt.data.bean.WeatherBean
+import io.github.sdwfqin.app_kt.data.repository.WeatherRepository
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -14,9 +16,9 @@ import java.util.*
  * @author 张钦
  * @date 2020/4/15
  */
-class WeatherViewModel() : BaseViewModel() {
-
-    private val repository: WeatherRepository = WeatherRepository()
+class WeatherViewModel @ViewModelInject constructor(
+        private val repository: WeatherRepository
+) : BaseViewModel() {
 
     val weatherBean = MutableLiveData<WeatherBean>()
 

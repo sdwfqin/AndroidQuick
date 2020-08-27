@@ -2,6 +2,7 @@ package io.github.sdwfqin.app_kt.ui.mvvm
 
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.sdwfqin.app_kt.constants.ArouterConstants
 import io.github.sdwfqin.app_kt.databinding.ActivityWeatherMvvmBinding
 import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseMvvmActivity
@@ -13,6 +14,7 @@ import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseMvvmActivity
  * @date 2020/4/14
  */
 @Route(path = ArouterConstants.COMPONENTS_MVVM)
+@AndroidEntryPoint
 class WeatherMvvmActivity : SampleBaseMvvmActivity<ActivityWeatherMvvmBinding, WeatherViewModel>() {
     override fun getViewBinding(): ActivityWeatherMvvmBinding {
         return ActivityWeatherMvvmBinding.inflate(layoutInflater)

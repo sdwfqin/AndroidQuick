@@ -133,7 +133,7 @@ implementation "com.sdwfqin.quicklib:widget:$quicklib"
 | 目录文件 | 解释 |
 | :-------- | :--------|
 | app | Demo(Java版) |
-| app-kt | Demo(Kotlin版，正在完善) |
+| app-kt | MVVM+Hilt+Retrofit+协程 |
 | sampleCommonLibrary | Demo公共组件 |
 | ~~docs~~ | ~~文档~~ |
 | imageloader | 图片加载库（基于Glide） |

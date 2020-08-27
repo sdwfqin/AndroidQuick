@@ -3,6 +3,7 @@
     package="com.sdwfqin.quickseed">
 
     <application
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@mipmap/quicklib_launcher"
         android:label="@string/app_name"

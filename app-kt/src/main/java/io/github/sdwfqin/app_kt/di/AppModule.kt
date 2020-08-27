@@ -1,7 +1,12 @@
-package io.github.sdwfqin.app_kt.retrofit
+package io.github.sdwfqin.app_kt.di
 
 import android.util.Log
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import io.github.sdwfqin.app_kt.BuildConfig
+import io.github.sdwfqin.app_kt.data.remote.WeatherService
 import io.github.sdwfqin.samplecommonlibrary.base.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import javax.inject.Singleton
 
 /**
  * 描述：Retrofit封装
@@ -16,34 +22,27 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  * @author 张钦
  * @date 2017/9/25
  */
-object RetrofitClient {
+@Module
+@InstallIn(ApplicationComponent::class)
+object AppModule {
 
-    private val mRetrofit by lazy { createRetrofit() }
+    @Provides
+    fun provideWeatherService(retrofit: Retrofit): WeatherService = retrofit.create(WeatherService::class.java)
 
-    /**
-     * 生成接口实现类的实例
-     */
-    fun <T> createService(serviceClass: Class<T>): T {
-        return mRetrofit.create(serviceClass)
-    }
-
-    private fun createRetrofit(): Retrofit {
+    @Singleton
+    @Provides
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL) // 设置OkHttpclient
-                .client(initOkhttpClient()) // RxJava2
+                .client(okHttp) // RxJava2
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 字符串
                 .addConverterFactory(ScalarsConverterFactory.create()) // Gson
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
 
-    /**
-     * 每次请求都会走拦截器
-     *
-     *
-     * 只需要修改Constants.TOKEN就可以
-     */
-    private fun initOkhttpClient(): OkHttpClient {
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             // OkHttp日志拦截器
