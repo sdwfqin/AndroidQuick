@@ -46,7 +46,6 @@ object AppModule {
         val builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             // OkHttp日志拦截器
-            builder.addInterceptor(HttpLoggingInterceptor())
             builder.addInterceptor(HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
                     val strLength: Int = message.length
