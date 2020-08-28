@@ -2,6 +2,7 @@ package io.github.sdwfqin.app_kt.ui.mvvm
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.sdwfqin.quicklib.mvvm.BaseViewModel
@@ -21,6 +22,17 @@ class WeatherViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     val weatherBean = MutableLiveData<WeatherBean>()
+
+    // liveData KTX 测试
+    val weatherBean2 = liveData {
+        val map: Map<String, Any> = HashMap<String, Any>()
+        try {
+            val data = repository.getWeather(map) // loadUser is a suspend function.
+            emit(data)
+        } catch (e: Exception) {
+            LogUtils.e(e)
+        }
+    }
 
     fun loadWeather() {
 

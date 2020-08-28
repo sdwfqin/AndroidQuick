@@ -17,13 +17,24 @@
         tools:context=".ui.mvvm.WeatherMvvmActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/test01"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:text="@{viewModel.weatherBean.toString()}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:qmui_skin_text_color="?attr/app_text_black_color" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/test02"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            android:text="@{viewModel.weatherBean2.toString()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test01"
             app:qmui_skin_text_color="?attr/app_text_black_color" />
 
         <Button
@@ -34,8 +45,7 @@
             android:onClick="@{() -> viewModel.loadWeather()}"
             android:text="刷新内容"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/btn_test" />
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
