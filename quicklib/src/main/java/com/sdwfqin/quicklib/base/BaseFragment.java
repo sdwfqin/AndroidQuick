@@ -60,7 +60,7 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
      * <p>
      * 在onCreateView方法之前调用
      * <p>
-     * ViewPager2已经可以实现原生懒加载
+     * ViewPager2已经可以实现原生懒加载，但是感觉滑动冲突问题比较大
      * <p>
      * 如果还是用的ViewPager或其它方式可以参考以下方式实现懒加载
      * https://juejin.im/post/5cdb7c15f265da036c57ac66
@@ -295,8 +295,6 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
     /**
      * 页面懒加载
      * <p>
-     * ViewPager2已经可以实现原生懒加载
-     * <p>
      * 请查看当前类{@link #setUserVisibleHint}相关注释
      */
     @Deprecated
@@ -306,8 +304,6 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment imple
 
     /**
      * 页面懒加载
-     * <p>
-     * ViewPager2已经可以实现原生懒加载
      * <p>
      * 请查看当前类{@link #setUserVisibleHint}相关注释
      */
