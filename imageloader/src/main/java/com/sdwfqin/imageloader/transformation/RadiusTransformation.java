@@ -32,7 +32,9 @@ public class RadiusTransformation extends BitmapTransformation {
     }
 
     private Bitmap radiusCrop(BitmapPool pool, Bitmap source) {
-        if (source == null) return null;
+        if (source == null) {
+            return null;
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int size = Math.min(source.getWidth(), source.getHeight());

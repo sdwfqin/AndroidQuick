@@ -252,7 +252,9 @@ public class WechatShareUtil {
                 bytes = baos.toByteArray();
             }
         }
-        if (recycle && !src.isRecycled()) src.recycle();
+        if (recycle && !src.isRecycled()) {
+            src.recycle();
+        }
         return bytes;
     }
 }

@@ -31,11 +31,11 @@ public class RetrofitException {
     private static final int SERVICE_UNAVAILABLE = 503;
     private static final int GATEWAY_TIMEOUT = 504;
 
-    public static ResponeThrowable retrofitException(Throwable e) {
-        ResponeThrowable ex;
+    public static ResponseThrowable retrofitException(Throwable e) {
+        ResponseThrowable ex;
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            ex = new ResponeThrowable(e, ERROR.HTTP_ERROR);
+            ex = new ResponseThrowable(e, ERROR.HTTP_ERROR);
             switch (httpException.code()) {
                 case UNAUTHORIZED:
                 case FORBIDDEN:
@@ -53,27 +53,27 @@ public class RetrofitException {
         } else if (e instanceof ServerException) {
             // 服务器下发的错误
             ServerException resultException = (ServerException) e;
-            ex = new ResponeThrowable(resultException, resultException.code);
+            ex = new ResponseThrowable(resultException, resultException.code);
             ex.message = resultException.getMessage();
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {
-            ex = new ResponeThrowable(e, ERROR.PARSE_ERROR);
+            ex = new ResponseThrowable(e, ERROR.PARSE_ERROR);
             ex.message = "解析错误";
             return ex;
         } else if (e instanceof ConnectException
                 || e instanceof SocketTimeoutException
                 || e instanceof UnknownHostException) {
-            ex = new ResponeThrowable(e, ERROR.NETWORD_ERROR);
+            ex = new ResponseThrowable(e, ERROR.NETWORD_ERROR);
             ex.message = "连接失败";
             return ex;
         } else if (e instanceof SSLHandshakeException) {
-            ex = new ResponeThrowable(e, ERROR.SSL_ERROR);
+            ex = new ResponseThrowable(e, ERROR.SSL_ERROR);
             ex.message = "证书验证失败";
             return ex;
         } else {
-            ex = new ResponeThrowable(e, ERROR.UNKNOWN);
+            ex = new ResponseThrowable(e, ERROR.UNKNOWN);
             ex.message = "未知错误";
             return ex;
         }
@@ -106,11 +106,11 @@ public class RetrofitException {
         public static final int SSL_ERROR = 1005;
     }
 
-    public static class ResponeThrowable extends Exception {
+    public static class ResponseThrowable extends Exception {
         public int code;
         public String message;
 
-        public ResponeThrowable(Throwable throwable, int code) {
+        public ResponseThrowable(Throwable throwable, int code) {
             super(throwable);
             this.code = code;
         }

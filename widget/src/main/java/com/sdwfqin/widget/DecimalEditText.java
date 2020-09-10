@@ -57,14 +57,14 @@ public class DecimalEditText extends AppCompatEditText implements TextWatcher {
                 this.setSelection(s.length());
             }
         }
-        if (s.toString().trim().substring(0).equals(".")) {
+        if (".".equals(s.toString().trim().substring(0))) {
             s = "0" + s;
             this.setText(s);
             this.setSelection(2);
         }
         if (s.toString().startsWith("0")
                 && s.toString().trim().length() > 1) {
-            if (!s.toString().substring(1, 2).equals(".")) {
+            if (!".".equals(s.toString().substring(1, 2))) {
                 this.setText(s.subSequence(0, 1));
                 this.setSelection(1);
                 return;

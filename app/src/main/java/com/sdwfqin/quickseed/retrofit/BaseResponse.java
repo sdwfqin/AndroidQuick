@@ -29,9 +29,9 @@ public class BaseResponse<T> {
     }
 
     public boolean isOk(Context context) {
-        if (code.equals("000")) {
+        if ("000".equals(code)) {
             return true;
-        } else if (code.equals("002")) {
+        } else if ("002".equals(code)) {
             // 无数据
             return false;
         } else {

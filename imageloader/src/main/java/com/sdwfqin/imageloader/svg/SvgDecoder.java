@@ -23,6 +23,7 @@ public class SvgDecoder implements ResourceDecoder<InputStream, SVG> {
         return true;
     }
 
+    @Override
     public Resource<SVG> decode(
             @NonNull InputStream source, int width, int height, @NonNull Options options)
             throws IOException {

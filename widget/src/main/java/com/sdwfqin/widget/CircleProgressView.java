@@ -54,13 +54,13 @@ public class CircleProgressView extends ProgressBar {
     private int mRealWidth;
     private int mRealHeight;
 
-    @IntDef({ProgressStyle.NORMAL, ProgressStyle.FILL_IN, ProgressStyle.FILL_IN_ARC, ProgressStyle.Fill_IN_SQUARE})
+    @IntDef({ProgressStyle.NORMAL, ProgressStyle.FILL_IN, ProgressStyle.FILL_IN_ARC, ProgressStyle.FILL_IN_SQUARE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ProgressStyle {
         int NORMAL = 0;
         int FILL_IN = 1;
         int FILL_IN_ARC = 2;
-        int Fill_IN_SQUARE = 3;
+        int FILL_IN_SQUARE = 3;
     }
 
     public CircleProgressView(Context context) {
@@ -87,13 +87,13 @@ public class CircleProgressView extends ProgressBar {
 
         mNormalPaint = new Paint();
         mNormalPaint.setColor(mNormalBarColor);
-        mNormalPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.Fill_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
+        mNormalPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.FILL_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
         mNormalPaint.setAntiAlias(true);
         mNormalPaint.setStrokeWidth(mNormalBarSize);
 
         mReachPaint = new Paint();
         mReachPaint.setColor(mReachBarColor);
-        mReachPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.Fill_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
+        mReachPaint.setStyle(mProgressStyle == ProgressStyle.FILL_IN_ARC || mProgressStyle == ProgressStyle.FILL_IN_SQUARE ? Paint.Style.FILL : Paint.Style.STROKE);
         mReachPaint.setAntiAlias(true);
         mReachPaint.setStrokeCap(mReachCapRound ? Paint.Cap.ROUND : Paint.Cap.BUTT);
         mReachPaint.setStrokeWidth(mReachBarSize);
@@ -158,7 +158,7 @@ public class CircleProgressView extends ProgressBar {
                 rectInner = new RectF(-mInnerRadius, -mInnerRadius, mInnerRadius, mInnerRadius);
 
                 break;
-            case ProgressStyle.Fill_IN_SQUARE:
+            case ProgressStyle.FILL_IN_SQUARE:
                 mStartArc = ta.getInt(R.styleable.CircleProgressView_quick_progressStartArc, 0) + 270;
                 mInnerPadding = 0;
                 mOuterColor = 0;
@@ -193,7 +193,7 @@ public class CircleProgressView extends ProgressBar {
         int width = 0;
         switch (mProgressStyle) {
             case ProgressStyle.FILL_IN:
-            case ProgressStyle.Fill_IN_SQUARE:
+            case ProgressStyle.FILL_IN_SQUARE:
                 height = getPaddingTop() + getPaddingBottom()  // 边距
                         + Math.abs(mRadius * 2);  // 直径
                 width = getPaddingLeft() + getPaddingRight()  // 边距
@@ -236,7 +236,7 @@ public class CircleProgressView extends ProgressBar {
             case ProgressStyle.FILL_IN_ARC:
                 drawFillInArcCircle(canvas);
                 break;
-            case ProgressStyle.Fill_IN_SQUARE:
+            case ProgressStyle.FILL_IN_SQUARE:
                 drawFillInSquare(canvas);
                 break;
             default:
@@ -265,7 +265,7 @@ public class CircleProgressView extends ProgressBar {
     }
 
     /**
-     * 绘制PROGRESS_STYLE_Fill_IN_SQUARE方形
+     * 绘制PROGRESS_STYLE_FILL_IN_SQUARE方形
      */
     private void drawFillInSquare(Canvas canvas) {
         canvas.save();

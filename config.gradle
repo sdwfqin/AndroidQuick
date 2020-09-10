@@ -23,9 +23,9 @@ ext {
             "annotation"             : "androidx.annotation:annotation:1.1.0",
             "legacy-support-v4"      : "androidx.legacy:legacy-support-v4:1.0.0",
             "vectordrawable-animated": "androidx.vectordrawable:vectordrawable-animated:1.1.0",
-            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:2.0.0",
+            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:2.0.1",
             "multidex"               : "androidx.multidex:multidex:2.0.1",
-            "material"               : "com.google.android.material:material:1.2.0",
+            "material"               : "com.google.android.material:material:1.2.1",
     ]
 
     eventDependencies = [
