@@ -16,7 +16,6 @@ import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.sdwfqin.quicklib.R;
-import com.sdwfqin.quicklib.dialog.PermissionCustomDialog;
 import com.sdwfqin.quicklib.mvp.IBaseView;
 import com.sdwfqin.quicklib.utils.AppManager;
 import com.sdwfqin.quicklib.utils.eventbus.Event;
@@ -234,12 +233,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         PermissionX.init(this)
                 .permissions(perms)
                 .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
-                    PermissionCustomDialog dialog = new PermissionCustomDialog(mContext, getString(R.string.quick_permissions_title, getString(R.string.app_name)), deniedList);
-                    scope.showRequestReasonDialog(dialog);
+                    scope.showRequestReasonDialog(deniedList, getString(R.string.quick_permissions_title, getString(R.string.app_name)), getString(R.string.quick_permissions_dialog_submit), getString(R.string.quick_permissions_dialog_cancel));
                 })
                 .onForwardToSettings((scope, deniedList) -> {
-                    PermissionCustomDialog dialog = new PermissionCustomDialog(mContext, getString(R.string.quick_permissions_forward), deniedList);
-                    scope.showForwardToSettingsDialog(dialog);
+                    scope.showForwardToSettingsDialog(deniedList, getString(R.string.quick_permissions_forward), getString(R.string.quick_permissions_dialog_submit), getString(R.string.quick_permissions_dialog_cancel));
                 })
                 .request((allGranted, grantedList, deniedList) -> {
                     if (allGranted) {

@@ -11,7 +11,7 @@ import com.sdwfqin.quicklib.mvp.IBaseView;
 public class NetworkError {
 
     public static void error(IBaseView view, Throwable throwable) {
-        RetrofitException.ResponeThrowable responeThrowable = RetrofitException.retrofitException(throwable);
+        RetrofitException.ResponseThrowable responeThrowable = RetrofitException.retrofitException(throwable);
         // 此处可以通过判断错误代码来实现根据不同的错误代码做出相应的反应
         switch (responeThrowable.code) {
             case RetrofitException.ERROR.UNKNOWN:
