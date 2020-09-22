@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.ImageFormat
 import android.graphics.Point
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Size
 import android.view.OrientationEventListener
 import android.view.Surface
@@ -16,10 +17,8 @@ import androidx.camera.core.ImageCapture.OutputFileResults
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.PathUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.google.common.util.concurrent.ListenableFuture
@@ -31,10 +30,9 @@ import com.sdwfqin.quicklib.base.BaseActivity
 import io.github.sdwfqin.app_kt.R
 import io.github.sdwfqin.app_kt.constants.ArouterConstants
 import io.github.sdwfqin.app_kt.databinding.ActivityCameraxDemoBinding
-import io.github.sdwfqin.samplecommonlibrary.base.Constants
+import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils
 import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools
 import io.github.sdwfqin.samplecommonlibrary.view.CameraXCustomPreviewView.CustomTouchListener
-import java.io.File
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 
@@ -172,11 +170,11 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     private fun initCamera() {
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         initUseCases()
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             try {
                 mCameraProvider = cameraProviderFuture.get()
                 mCameraProvider.unbindAll()
-                mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider())
+                mPreview.setSurfaceProvider(mBinding.viewFinder.surfaceProvider)
                 val camera = mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis)
                 mCameraInfo = camera.cameraInfo
                 mCameraControl = camera.cameraControl
@@ -362,24 +360,17 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     }
 
     private fun saveImage() {
-        val file = File(PathUtils.getExternalPicturesPath(), System.currentTimeMillis().toString() + ".jpg")
-        val outputFileOptions = OutputFileOptions.Builder(file).build()
+        val outputFileOptions = OutputFileOptions.Builder(contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStoreUtils.getImageContentValues()).build()
         mImageCapture.takePicture(outputFileOptions, executor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: OutputFileResults) {
-                        val msg = "图片保存成功: " + file.absolutePath
-                        showMsg(msg)
-                        LogUtils.d(msg)
-                        mImagePathUri = FileProvider.getUriForFile(mContext, Constants.FILE_PROVIDER, file)
-                        val contentFileUri = Uri.fromFile(File(file.absolutePath))
+                        mImagePathUri = outputFileResults.savedUri
                         ImageLoader.Builder()
                                 .setImagePath(mImagePathUri)
                                 .setPlaceholder(R.mipmap.image_loading)
                                 .setErrorImage(R.mipmap.image_load_err)
                                 .build(mBinding.ivPictures)
                                 .loadImage()
-                        val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentFileUri)
-                        sendBroadcast(mediaScanIntent)
                     }
 
                     override fun onError(exception: ImageCaptureException) {

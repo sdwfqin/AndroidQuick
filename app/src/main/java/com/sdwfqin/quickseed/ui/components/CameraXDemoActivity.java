@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Size;
 import android.view.OrientationEventListener;
 import android.view.Surface;
@@ -30,12 +31,10 @@ import androidx.camera.core.ZoomState;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.lifecycle.LiveData;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.PathUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -49,13 +48,12 @@ import com.sdwfqin.quickseed.R;
 import com.sdwfqin.quickseed.constants.ArouterConstants;
 import com.sdwfqin.quickseed.databinding.ActivityCameraxDemoBinding;
 
-import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-import io.github.sdwfqin.samplecommonlibrary.base.Constants;
+import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils;
 import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools;
 import io.github.sdwfqin.samplecommonlibrary.view.CameraXCustomPreviewView;
 
@@ -206,7 +204,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
             try {
                 mCameraProvider = cameraProviderFuture.get();
                 mCameraProvider.unbindAll();
-                mPreview.setSurfaceProvider(mBinding.viewFinder.createSurfaceProvider());
+                mPreview.setSurfaceProvider(mBinding.viewFinder.getSurfaceProvider());
                 Camera camera = mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
                 mCameraInfo = camera.getCameraInfo();
                 mCameraControl = camera.getCameraControl();
@@ -410,34 +408,28 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     }
 
     public void saveImage() {
-        File file = new File(PathUtils.getExternalPicturesPath(), System.currentTimeMillis() + ".jpg");
+
         ImageCapture.OutputFileOptions outputFileOptions =
-                new ImageCapture.OutputFileOptions.Builder(file).build();
+                new ImageCapture.OutputFileOptions.Builder(getContentResolver(), MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStoreUtils.getImageContentValues()).build();
         mImageCapture.takePicture(outputFileOptions, executor,
                 new ImageCapture.OnImageSavedCallback() {
 
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        String msg = "图片保存成功: " + file.getAbsolutePath();
-                        showMsg(msg);
-                        LogUtils.d(msg);
-                        mImagePathUri = FileProvider.getUriForFile(mContext, Constants.FILE_PROVIDER, file);
-                        Uri contentFileUri = Uri.fromFile(new File(file.getAbsolutePath()));
+                        mImagePathUri = outputFileResults.getSavedUri();
                         new ImageLoader.Builder()
                                 .setImagePath(mImagePathUri)
                                 .setPlaceholder(R.mipmap.image_loading)
                                 .setErrorImage(R.mipmap.image_load_err)
                                 .build(mBinding.ivPictures)
                                 .loadImage();
-                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, contentFileUri);
-                        sendBroadcast(mediaScanIntent);
                     }
 
                     @Override
                     public void onError(@NonNull ImageCaptureException exception) {
                         String msg = "图片保存失败: " + exception.getMessage();
                         showMsg(msg);
-                        LogUtils.e(msg);
+                        LogUtils.e(exception);
                     }
                 }
         );
