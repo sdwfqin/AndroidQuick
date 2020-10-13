@@ -4,15 +4,17 @@ buildscript {
 
     ext {
         kotlin_version = '1.4.10'
-        hilt_version = '2.28.3-alpha'
+        hilt_version = '2.29.1-alpha'
     }
 
     repositories {
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/public" }
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.1.0'
         // bintray上传发布
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         // kotlin
@@ -28,6 +30,8 @@ allprojects {
         flatDir {
             dirs '../libs'
         }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/public" }
         google()
         jcenter()
         mavenCentral()

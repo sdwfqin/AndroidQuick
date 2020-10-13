@@ -23,8 +23,8 @@
     
 > 开发环境
 
-    AndroidStudio 4+
-    Gradle 6.1.1
+    AndroidStudio 4.1.+
+    Gradle 6.5
 
 ## 必读事项
 

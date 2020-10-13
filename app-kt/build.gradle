@@ -66,7 +66,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
     // Lifecycle KTX 为每个 Lifecycle 对象定义一个 LifecycleScope。在此范围内启动的协程会在 Lifecycle 被销毁时取消。
     // 您可以使用 lifecycle.coroutineScope 或 lifecycleOwner.lifecycleScope 属性访问 Lifecycle 的 CoroutineScope。
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"

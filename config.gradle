@@ -4,7 +4,7 @@ ext {
     versionName = "4.5.0"
 
     qmui = "2.0.0-alpha10"
-    okhttp = "4.8.1"
+    okhttp = "4.9.0"
     retrofit = "2.9.0"
     glide = "4.11.0"
     vlayout = "1.2.36"
@@ -23,7 +23,7 @@ ext {
             "annotation"             : "androidx.annotation:annotation:1.1.0",
             "legacy-support-v4"      : "androidx.legacy:legacy-support-v4:1.0.0",
             "vectordrawable-animated": "androidx.vectordrawable:vectordrawable-animated:1.1.0",
-            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:2.0.1",
+            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:2.0.2",
             "multidex"               : "androidx.multidex:multidex:2.0.1",
             "material"               : "com.google.android.material:material:1.2.1",
     ]
@@ -31,7 +31,7 @@ ext {
     eventDependencies = [
             // rxjava
             "rxandroid": "io.reactivex.rxjava3:rxandroid:3.0.0",
-            "rxjava"   : "io.reactivex.rxjava3:rxjava:3.0.6",
+            "rxjava"   : "io.reactivex.rxjava3:rxjava:3.0.7",
             // eventbus
             "eventbus" : "org.greenrobot:eventbus:3.2.0",
     ]
@@ -50,7 +50,7 @@ ext {
             "qmui"                        : "com.qmuiteam:qmui:$qmui",
             "arch"                        : "com.qmuiteam:arch:$qmui",
             // brvah
-            "brvah"                       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4",
+            "brvah"                       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6",
             // smartrefresh
             "smartrefresh"                : "com.scwang.smart:refresh-layout-kernel:$smartrefresh",
             "smartrefresh-classics"       : "com.scwang.smart:refresh-header-classics:$smartrefresh",
