@@ -55,7 +55,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils;
 import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools;
-import io.github.sdwfqin.samplecommonlibrary.view.CameraXCustomPreviewView;
+import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListener;
 
 /**
  * CameraX Demo
@@ -223,7 +223,8 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private void initCameraListener() {
         LiveData<ZoomState> zoomState = mCameraInfo.getZoomState();
 
-        mBinding.viewFinder.setCustomTouchListener(new CameraXCustomPreviewView.CustomTouchListener() {
+        CameraXPreviewViewTouchListener cameraXPreviewViewTouchListener = new CameraXPreviewViewTouchListener(mContext);
+        cameraXPreviewViewTouchListener.setCustomTouchListener(new CameraXPreviewViewTouchListener.CustomTouchListener() {
 
             @Override
             public void zoom(float delta) {
@@ -272,6 +273,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
             }
         });
+        mBinding.viewFinder.setOnTouchListener(cameraXPreviewViewTouchListener);
     }
 
     /**

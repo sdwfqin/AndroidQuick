@@ -8,13 +8,13 @@ buildscript {
     }
 
     repositories {
-        maven { url "https://maven.aliyun.com/repository/google" }
-        maven { url "https://maven.aliyun.com/repository/public" }
+//        maven { url "https://maven.aliyun.com/repository/google" }
+//        maven { url "https://maven.aliyun.com/repository/public" }
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:4.1.1'
         // bintray上传发布
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         // kotlin
@@ -30,8 +30,8 @@ allprojects {
         flatDir {
             dirs '../libs'
         }
-        maven { url "https://maven.aliyun.com/repository/google" }
-        maven { url "https://maven.aliyun.com/repository/public" }
+//        maven { url "https://maven.aliyun.com/repository/google" }
+//        maven { url "https://maven.aliyun.com/repository/public" }
         google()
         jcenter()
         mavenCentral()

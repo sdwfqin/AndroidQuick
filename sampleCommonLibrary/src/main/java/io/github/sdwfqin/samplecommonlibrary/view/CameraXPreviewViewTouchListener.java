@@ -1,32 +1,39 @@
 package io.github.sdwfqin.samplecommonlibrary.view;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.camera.view.PreviewView;
+import android.view.View;
 
 /**
- * 自定义CameraX预览页面
+ * 自定义CameraX点击事件
  * <p>
  *
  * @author 张钦
  * @date 2020/4/2
  */
-public class CameraXCustomPreviewView extends PreviewView {
+public class CameraXPreviewViewTouchListener implements View.OnTouchListener {
 
     private GestureDetector mGestureDetector;
-
     /**
      * 缩放相关
      */
-    private float currentDistance = 0;
-    private float lastDistance = 0;
     private ScaleGestureDetector mScaleGestureDetector;
+
+    public CameraXPreviewViewTouchListener(Context context) {
+        mGestureDetector = new GestureDetector(context, onGestureListener);
+        mScaleGestureDetector = new ScaleGestureDetector(context, onScaleGestureListener);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        mScaleGestureDetector.onTouchEvent(event);
+        if (!mScaleGestureDetector.isInProgress()) {
+            mGestureDetector.onTouchEvent(event);
+        }
+        return true;
+    }
 
     /**
      * 缩放监听
@@ -59,34 +66,6 @@ public class CameraXCustomPreviewView extends PreviewView {
         mCustomTouchListener = customTouchListener;
     }
 
-    public CameraXCustomPreviewView(@NonNull Context context) {
-        this(context, null);
-    }
-
-    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public CameraXCustomPreviewView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-
-        mGestureDetector = new GestureDetector(context, onGestureListener);
-        mScaleGestureDetector = new ScaleGestureDetector(context, onScaleGestureListener);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mScaleGestureDetector.onTouchEvent(event);
-        if (!mScaleGestureDetector.isInProgress()) {
-            mGestureDetector.onTouchEvent(event);
-        }
-        return true;
-    }
-
     /**
      * 缩放监听
      */
@@ -113,8 +92,6 @@ public class CameraXCustomPreviewView extends PreviewView {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            currentDistance = 0;
-            lastDistance = 0;
             return true;
         }
 

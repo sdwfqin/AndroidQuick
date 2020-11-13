@@ -32,7 +32,8 @@ import io.github.sdwfqin.app_kt.constants.ArouterConstants
 import io.github.sdwfqin.app_kt.databinding.ActivityCameraxDemoBinding
 import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils
 import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools
-import io.github.sdwfqin.samplecommonlibrary.view.CameraXCustomPreviewView.CustomTouchListener
+import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListener
+import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListener.CustomTouchListener
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 
@@ -192,7 +193,9 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     @SuppressLint("ClickableViewAccessibility")
     private fun initCameraListener() {
         val zoomState = mCameraInfo.zoomState
-        mBinding.viewFinder.setCustomTouchListener(object : CustomTouchListener {
+        val cameraXPreviewViewTouchListener = CameraXPreviewViewTouchListener(mContext)
+
+        cameraXPreviewViewTouchListener.setCustomTouchListener(object : CustomTouchListener {
             override fun zoom(delta: Float) {
                 zoomState.value?.let {
                     val currentZoomRatio = it.zoomRatio
@@ -237,6 +240,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
 
             override fun longClick(x: Float, y: Float) {}
         })
+        mBinding.viewFinder.setOnTouchListener(cameraXPreviewViewTouchListener)
     }
 
     /**
