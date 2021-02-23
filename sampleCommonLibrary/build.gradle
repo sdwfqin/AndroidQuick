@@ -47,6 +47,7 @@ dependencies {
     api imageDependencies["camera-camera2"]
     api imageDependencies["camera-view"]
     api imageDependencies["camera-lifecycle"]
+    api imageDependencies["camera-extensions"]
     api imageDependencies["matisse"]
 
     api utilsDependencies["zxing"]

@@ -1,5 +1,6 @@
 package com.sdwfqin.quickseed.ui.components;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.ImageFormat;
@@ -28,6 +29,8 @@ import androidx.camera.core.MeteringPoint;
 import androidx.camera.core.MeteringPointFactory;
 import androidx.camera.core.Preview;
 import androidx.camera.core.ZoomState;
+import androidx.camera.extensions.HdrImageCaptureExtender;
+import androidx.camera.extensions.HdrPreviewExtender;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -68,8 +71,16 @@ import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListene
 @Route(path = ArouterConstants.COMPONENTS_CAMERAX)
 public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding> implements CameraXConfig.Provider {
 
+    /**
+     * 修改配置参数
+     */
     private static final int CHANGE_TYPE_RATIO = 0;
     private static final int CHANGE_TYPE_SELECTOR = 1;
+    private static final int CHANGE_TYPE_HDR = 2;
+    /**
+     * TODO: 全屏
+     */
+    private static final int RATIO_FULL = -1;
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture mImageCapture;
@@ -79,6 +90,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private CameraControl mCameraControl;
     private Preview mPreview;
     private CameraSelector mCameraSelector;
+    //
     private int mAspectRatioInt = AspectRatio.RATIO_16_9;
     private int mCameraSelectorInt = CameraSelector.LENS_FACING_BACK;
     /**
@@ -93,6 +105,13 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
     private String mQrText = "";
     private ProcessCameraProvider mCameraProvider;
 
+    /**
+     * HDR
+     */
+    private HdrImageCaptureExtender mHdrImageCaptureExtender;
+    private HdrPreviewExtender mHdrPreviewExtender;
+    private boolean isStartHdr = true;
+
     @Override
     protected ActivityCameraxDemoBinding getViewBinding() {
         return ActivityCameraxDemoBinding.inflate(getLayoutInflater());
@@ -105,7 +124,18 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
         executor = ContextCompat.getMainExecutor(this);
 
-        initCamera();
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        initCheckPermissions(perms, new OnPermissionCallback() {
+            @Override
+            public void onSuccess() {
+                initCamera();
+            }
+
+            @Override
+            public void onError() {
+                finish();
+            }
+        });
     }
 
     @SuppressLint({"SetTextI18n"})
@@ -192,11 +222,20 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                 startActivity(intent);
             }
         });
+
+        mBinding.btnCameraHdr.setOnClickListener(v -> {
+            isStartHdr = !isStartHdr;
+            changeCameraConfig(CHANGE_TYPE_HDR);
+        });
     }
 
+    /**
+     * 初始化相机
+     */
     private void initCamera() {
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+
 
         initUseCases();
 
@@ -204,7 +243,6 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
             try {
                 mCameraProvider = cameraProviderFuture.get();
                 mCameraProvider.unbindAll();
-                mPreview.setSurfaceProvider(mBinding.viewFinder.getSurfaceProvider());
                 Camera camera = mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
                 mCameraInfo = camera.getCameraInfo();
                 mCameraControl = camera.getCameraControl();
@@ -219,6 +257,9 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
 
     }
 
+    /**
+     * 相机view触摸事件
+     */
     @SuppressLint("ClickableViewAccessibility")
     private void initCameraListener() {
         LiveData<ZoomState> zoomState = mCameraInfo.getZoomState();
@@ -242,7 +283,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                         .build();
 
                 mBinding.focusView.startFocus(new Point((int) x, (int) y));
-                ListenableFuture future = mCameraControl.startFocusAndMetering(action);
+                ListenableFuture<FocusMeteringResult> future = mCameraControl.startFocusAndMetering(action);
                 future.addListener(() -> {
                     try {
                         FocusMeteringResult result = (FocusMeteringResult) future.get();
@@ -285,6 +326,7 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
         // 视频：VideoCapture
         initPreview();
         initCameraSelector();
+        initHdr();
     }
 
     /**
@@ -310,6 +352,8 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                     || image.getFormat() == ImageFormat.YUV_422_888
                     || image.getFormat() == ImageFormat.YUV_444_888)
                     && image.getPlanes().length == 3) {
+
+//                Bitmap bitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
 
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] data = new byte[buffer.remaining()];
@@ -342,11 +386,15 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
      */
     private void initImageCapture() {
 
-        // 构建图像捕获用例
-        mImageCapture = new ImageCapture.Builder()
+        ImageCapture.Builder imageCaptureBuilder = new ImageCapture.Builder()
                 .setFlashMode(ImageCapture.FLASH_MODE_AUTO)
                 .setTargetAspectRatio(mAspectRatioInt)
-                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY);
+
+        mHdrImageCaptureExtender = HdrImageCaptureExtender.create(imageCaptureBuilder);
+
+        // 构建图像捕获用例
+        mImageCapture = imageCaptureBuilder
                 .build();
 
         // 旋转监听
@@ -377,9 +425,14 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
      * 构建图像预览
      */
     private void initPreview() {
-        mPreview = new Preview.Builder()
-                .setTargetAspectRatio(mAspectRatioInt)
+        Preview.Builder previewBuilder = new Preview.Builder()
+//                .setTargetResolution()
+                .setTargetAspectRatio(mAspectRatioInt);
+        mHdrPreviewExtender = HdrPreviewExtender.create(previewBuilder);
+        mPreview = previewBuilder
                 .build();
+
+        mPreview.setSurfaceProvider(mBinding.viewFinder.getSurfaceProvider());
     }
 
     /**
@@ -391,15 +444,57 @@ public class CameraXDemoActivity extends BaseActivity<ActivityCameraxDemoBinding
                 .build();
     }
 
+    /**
+     * 开启Hdr
+     */
+    private void initHdr() {
+        if (isStartHdr) {
+            mBinding.btnCameraHdr.setText("HDR: 已开启");
+            if (mHdrPreviewExtender.isExtensionAvailable(mCameraSelector)) {
+                mHdrPreviewExtender.enableExtension(mCameraSelector);
+            } else {
+                mBinding.btnCameraHdr.setText("HDR: 不支持的扩展");
+                mBinding.btnCameraHdr.setEnabled(false);
+            }
+            if (mHdrImageCaptureExtender.isExtensionAvailable(mCameraSelector)) {
+                mHdrImageCaptureExtender.enableExtension(mCameraSelector);
+            } else {
+                mBinding.btnCameraHdr.setText("HDR: 不支持的扩展");
+                mBinding.btnCameraHdr.setEnabled(false);
+            }
+        } else {
+            mBinding.btnCameraHdr.setText("HDR: 已关闭");
+        }
+    }
+
+    /**
+     * 更改相机参数
+     *
+     * @param changeType
+     */
     private void changeCameraConfig(int changeType) {
         if (changeType == CHANGE_TYPE_RATIO) {
             if (mCameraProvider.isBound(mImageCapture)) {
                 mCameraProvider.unbind(mImageCapture);
             }
             initImageCapture();
+            initHdr();
             mCameraProvider.bindToLifecycle(this, mCameraSelector, mImageCapture);
         } else if (changeType == CHANGE_TYPE_SELECTOR) {
-            initCamera();
+            mCameraProvider.unbindAll();
+            initUseCases();
+            mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture, mImageAnalysis);
+        } else if (changeType == CHANGE_TYPE_HDR) {
+            if (mCameraProvider.isBound(mPreview)) {
+                mCameraProvider.unbind(mPreview);
+            }
+            if (mCameraProvider.isBound(mImageCapture)) {
+                mCameraProvider.unbind(mImageCapture);
+            }
+            initPreview();
+            initImageCapture();
+            initHdr();
+            mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture);
         }
     }
 

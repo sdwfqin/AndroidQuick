@@ -43,6 +43,16 @@
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_camera_hdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="HDR"
+            app:layout_constraintBottom_toTopOf="@+id/btn_camera_selector"
+            app:layout_constraintLeft_toLeftOf="@+id/btn_light"
+            app:layout_constraintRight_toRightOf="@+id/btn_light" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_camera_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
