@@ -6,10 +6,11 @@ ext {
     qmui = "2.0.0-alpha11"
     okhttp = "4.9.0"
     retrofit = "2.9.0"
-    glide = "4.11.0"
+    glide = "4.12.0"
     vlayout = "1.2.36"
-    camerax_version = "1.0.0-rc02"
+    camerax_version = "1.0.0-rc04"
     smartrefresh = "2.0.1"
+    arouter = "1.5.1"
 
     androidVersion = [
             compileSdkVersion: 29,
@@ -31,7 +32,7 @@ ext {
     eventDependencies = [
             // rxjava
             "rxandroid": "io.reactivex.rxjava3:rxandroid:3.0.0",
-            "rxjava"   : "io.reactivex.rxjava3:rxjava:3.0.7",
+            "rxjava"   : "io.reactivex.rxjava3:rxjava:3.0.12",
             // eventbus
             "eventbus" : "org.greenrobot:eventbus:3.2.0",
     ]
@@ -68,19 +69,19 @@ ext {
             "matisse"          : "com.zhihu.android:matisse:0.5.3-beta3",
             "androidsvg"       : "com.caverock:androidsvg-aar:1.4",
             "camera-camera2"   : "androidx.camera:camera-camera2:${camerax_version}",
-            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha21",
-            "camera-extensions": "androidx.camera:camera-extensions:1.0.0-alpha21",
+            "camera-view"      : "androidx.camera:camera-view:1.0.0-alpha23",
+            "camera-extensions": "androidx.camera:camera-extensions:1.0.0-alpha23",
             "camera-lifecycle" : "androidx.camera:camera-lifecycle:${camerax_version}",
     ]
 
     utilsDependencies = [
             "permissionx": "com.permissionx.guolindev:permissionx:1.4.0",
             // utils
-            "utilcodex"  : "com.blankj:utilcodex:1.30.0",
+            "utilcodex"  : "com.blankj:utilcodex:1.30.6",
             // agentweb
             "agentweb"   : "com.just.agentweb:agentweb:4.1.4",
             // arouter
-            "arouter"    : "com.alibaba:arouter-api:1.5.0",
+            "arouter"    : "com.alibaba:arouter-api:$arouter",
             "gson"       : "com.google.code.gson:gson:2.8.6",
             "zxing"      : "com.google.zxing:core:3.4.0",
     ]
@@ -95,6 +96,6 @@ ext {
     compilerDependencies = [
             "glide-compiler"  : "com.github.bumptech.glide:compiler:$glide",
             "arch-compiler"   : "com.qmuiteam:arch-compiler:$qmui",
-            "arouter-compiler": "com.alibaba:arouter-compiler:1.2.2",
+            "arouter-compiler": "com.alibaba:arouter-compiler:$arouter",
     ]
 }

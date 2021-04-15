@@ -1,15 +1,16 @@
 package io.github.sdwfqin.app_kt.ui.mvvm
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.sdwfqin.quicklib.mvvm.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.sdwfqin.app_kt.data.bean.WeatherBean
 import io.github.sdwfqin.app_kt.data.repository.WeatherRepository
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 /**
  * 天气ViewModel
@@ -17,7 +18,8 @@ import java.util.*
  * @author 张钦
  * @date 2020/4/15
  */
-class WeatherViewModel @ViewModelInject constructor(
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
         private val repository: WeatherRepository
 ) : BaseViewModel() {
 

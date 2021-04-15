@@ -4,7 +4,7 @@ import android.util.Log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import io.github.sdwfqin.app_kt.BuildConfig
 import io.github.sdwfqin.app_kt.data.remote.WeatherService
 import io.github.sdwfqin.samplecommonlibrary.base.Constants
@@ -23,7 +23,7 @@ import javax.inject.Singleton
  * @date 2017/9/25
  */
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Provides

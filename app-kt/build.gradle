@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
@@ -84,9 +83,7 @@ dependencies {
 
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
-    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     implementation project(':sampleCommonLibrary')
     kapt compilerDependencies["arouter-compiler"]
