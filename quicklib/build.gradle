@@ -40,7 +40,6 @@ dependencies {
 
     api googleDependencies["appcompat"]
     api googleDependencies["annotation"]
-    api googleDependencies["legacy-support-v4"]
     api googleDependencies["vectordrawable-animated"]
     api googleDependencies["constraintlayout"]
     api googleDependencies["material"]
