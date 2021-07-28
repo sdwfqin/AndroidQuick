@@ -1,6 +1,6 @@
-package io.github.sdwfqin.quicklib.utils.eventbus;
+package io.github.sdwfqin.quicklib.utils.eventbus
 
-import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBus
 
 /**
  * 描述：EventBus工具类
@@ -8,15 +8,15 @@ import org.greenrobot.eventbus.EventBus;
  * @author 张钦
  * @date 2017/12/14
  */
-public class EventBusUtils {
+object EventBusUtils {
 
     /**
      * 注册
      *
      * @param subscriber
      */
-    public static void register(Object subscriber) {
-        EventBus.getDefault().register(subscriber);
+    fun register(subscriber: Any?) {
+        EventBus.getDefault().register(subscriber)
     }
 
     /**
@@ -24,8 +24,8 @@ public class EventBusUtils {
      *
      * @param subscriber
      */
-    public static void unregister(Object subscriber) {
-        EventBus.getDefault().unregister(subscriber);
+    fun unregister(subscriber: Any?) {
+        EventBus.getDefault().unregister(subscriber)
     }
 
     /**
@@ -33,8 +33,8 @@ public class EventBusUtils {
      *
      * @param event
      */
-    public static void sendEvent(Event event) {
-        EventBus.getDefault().post(event);
+    fun sendEvent(event: Event<*>?) {
+        EventBus.getDefault().post(event)
     }
 
     /**
@@ -42,8 +42,8 @@ public class EventBusUtils {
      *
      * @param event
      */
-    public static void sendStickyEvent(Event event) {
-        EventBus.getDefault().postSticky(event);
+    fun sendStickyEvent(event: Event<*>?) {
+        EventBus.getDefault().postSticky(event)
     }
 
     /**
@@ -51,7 +51,7 @@ public class EventBusUtils {
      *
      * @param event
      */
-    public static void removeStickyEvent(Event event) {
-        EventBus.getDefault().removeStickyEvent(event);
+    fun removeStickyEvent(event: Event<*>?) {
+        EventBus.getDefault().removeStickyEvent(event)
     }
 }

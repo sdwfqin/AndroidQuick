@@ -33,6 +33,6 @@ class WeatherMvvmActivity : SampleBaseMvvmActivity<ActivityWeatherMvvmBinding, W
     }
 
     override fun commonNetworkErrorListener(throwable: Throwable) {
-        showMsg(throwable.message)
+        throwable.message?.let { showMsg(it) }
     }
 }

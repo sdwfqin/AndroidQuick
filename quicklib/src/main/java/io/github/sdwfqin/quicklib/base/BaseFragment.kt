@@ -1,24 +1,18 @@
-package io.github.sdwfqin.quicklib.base;
+package io.github.sdwfqin.quicklib.base
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.viewbinding.ViewBinding;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.jetbrains.annotations.NotNull;
-
-import io.github.sdwfqin.quicklib.utils.eventbus.Event;
-import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils;
-import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
-import io.reactivex.rxjava3.disposables.Disposable;
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
+import io.github.sdwfqin.quicklib.utils.eventbus.Event
+import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils
+import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager
+import io.reactivex.rxjava3.disposables.Disposable
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * 描述：Fragment基类
@@ -26,68 +20,59 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * @author 张钦
  * @date 2017/8/3
  */
-public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
+abstract class BaseFragment<V : ViewBinding> : Fragment() {
 
-    protected V mBinding;
-    protected IBaseActivity mBaseActivity;
-    protected Context mContext;
-    protected LayoutInflater mInflater;
-    private RxJavaLifecycleManager mRxJavaLifecycleManager;
+    protected lateinit var mBinding: V
+    protected lateinit var mBaseActivity: IBaseActivity
+    protected lateinit var mContext: Context
+    protected lateinit var mInflater: LayoutInflater
+    private lateinit var mRxJavaLifecycleManager: RxJavaLifecycleManager
 
-    @Override
-    public void onAttach(@NotNull Context context) {
-        if (context instanceof IBaseActivity) {
-            mBaseActivity = (IBaseActivity) context;
+    override fun onAttach(context: Context) {
+        mBaseActivity = if (context is IBaseActivity) {
+            context
         } else {
-            throw new ClassCastException("BaseFragment下属Fragment应依附与BaseActivity");
+            throw ClassCastException("BaseFragment下属Fragment应依附与BaseActivity")
         }
-        mContext = context;
-        super.onAttach(context);
+        mContext = context
+        super.onAttach(context)
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = getViewBinding(inflater, container, savedInstanceState);
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        mBinding = getViewBinding(inflater, container, savedInstanceState)
         //指出fragment愿意添加item到选项菜单
-        setHasOptionsMenu(true);
-        mRxJavaLifecycleManager = new RxJavaLifecycleManager(this);
-        return mBinding.getRoot();
+        setHasOptionsMenu(true)
+        mRxJavaLifecycleManager = RxJavaLifecycleManager(this)
+        return mBinding.root
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mInflater = onGetLayoutInflater(savedInstanceState);
-        initViewModel();
-        initEventAndData();
-        initClickListener();
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mInflater = onGetLayoutInflater(savedInstanceState)
+        initViewModel()
+        initEventAndData()
+        initClickListener()
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (isRegisterEventBus()) {
-            EventBusUtils.register(this);
+    override fun onStart() {
+        super.onStart()
+        if (isRegisterEventBus) {
+            EventBusUtils.register(this)
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (isRegisterEventBus()) {
-            EventBusUtils.unregister(this);
+    override fun onStop() {
+        super.onStop()
+        if (isRegisterEventBus) {
+            EventBusUtils.unregister(this)
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        mRxJavaLifecycleManager.dispose();
-        mBinding = null;
-        super.onDestroyView();
-    }
-
-    protected void addSubscribe(Disposable disposable) {
-        mRxJavaLifecycleManager.addDisposable(disposable);
+    protected fun addSubscribe(disposable: Disposable) {
+        mRxJavaLifecycleManager.addDisposable(disposable)
     }
 
     /**
@@ -95,22 +80,17 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
      *
      * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
      */
-    protected boolean isRegisterEventBus() {
-        return false;
-    }
+    protected open val isRegisterEventBus: Boolean
+        get() = false
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusCome(Event<Object> event) {
-        if (event != null) {
-            receiveEvent(event);
-        }
+    fun onEventBusCome(event: Event<Any?>?) {
+        event?.let { receiveEvent(it) }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStickyEventBusCome(Event<Object> event) {
-        if (event != null) {
-            receiveStickyEvent(event);
-        }
+    fun onStickyEventBusCome(event: Event<Any?>?) {
+        event?.let { receiveStickyEvent(it) }
     }
 
     /**
@@ -118,38 +98,33 @@ public abstract class BaseFragment<V extends ViewBinding> extends Fragment {
      *
      * @param event 事件
      */
-    protected void receiveEvent(Event<Object> event) {
-
-    }
+    protected open fun receiveEvent(event: Event<Any?>) {}
 
     /**
      * 接收到分发的粘性事件
      *
      * @param event 粘性事件
      */
-    protected void receiveStickyEvent(Event<Object> event) {
+    protected open fun receiveStickyEvent(event: Event<Any?>) {}
 
-    }
-
-    protected void initViewModel() {
-
-    }
+    protected open fun initViewModel() {}
 
     /**
      * 加载布局
      */
-    protected abstract V getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    protected abstract fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): V
 
     /**
      * 加载数据
      */
-    protected abstract void initEventAndData();
+    protected abstract fun initEventAndData()
 
     /**
      * 点击事件
      */
-    protected void initClickListener() {
-
-    }
-
+    protected open fun initClickListener() {}
 }

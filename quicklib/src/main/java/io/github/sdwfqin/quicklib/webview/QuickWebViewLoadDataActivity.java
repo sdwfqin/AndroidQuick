@@ -73,7 +73,7 @@ public class QuickWebViewLoadDataActivity extends QuickBaseWebViewActivity {
         } else {
             mAgentWeb
                     .getUrlLoader()
-                    .loadDataWithBaseURL(QuickConstants.BASE_URL, mContent, "text/html", "UTF-8", null);
+                    .loadDataWithBaseURL(QuickConstants.INSTANCE.getBASE_URL(), mContent, "text/html", "UTF-8", null);
         }
     }
 

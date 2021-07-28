@@ -1,111 +1,66 @@
-package io.github.sdwfqin.quicklib.imagepreview;
+package io.github.sdwfqin.quicklib.imagepreview
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.github.sdwfqin.quicklib.R;
-import io.github.sdwfqin.quicklib.base.BaseActivity;
-import io.github.sdwfqin.quicklib.base.QuickArouterConstants;
-import io.github.sdwfqin.quicklib.databinding.QuickActivityImagePreviewBinding;
+import android.annotation.SuppressLint
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper
+import io.github.sdwfqin.quicklib.R
+import io.github.sdwfqin.quicklib.base.BaseActivity
+import io.github.sdwfqin.quicklib.base.QuickArouterConstants
+import io.github.sdwfqin.quicklib.databinding.QuickActivityImagePreviewBinding
+import java.util.*
 
 /**
  * 图片查看与保存Activity
- * <p>
+ *
  * 需传入string类型的集合
  *
  * @author zhangqin
  * @date 2017/8/7
  */
 @Route(path = QuickArouterConstants.QUICK_IMAGEPREVIEW)
-public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreviewBinding> {
+class ImagePreviewActivity : BaseActivity<QuickActivityImagePreviewBinding>() {
 
-    private List<String> mImageList;
-    private int position;
+    private lateinit var mImageList: List<String>
+    private var position = 0
 
-    /**
-     * 图片预览
-     *
-     * @param stringList 图片链接
-     * @return
-     */
-    public static void start(@Nullable List<String> stringList) {
-        start(stringList, 0);
+    override fun getViewBinding(): QuickActivityImagePreviewBinding {
+        return QuickActivityImagePreviewBinding.inflate(layoutInflater)
     }
 
-    /**
-     * @param stringList
-     * @param position   当前图片位置
-     * @return
-     */
-    public static void start(@Nullable List<String> stringList, int position) {
-        ARouter
-                .getInstance()
-                .build(QuickArouterConstants.QUICK_IMAGEPREVIEW)
-                .withStringArrayList("data", (ArrayList<String>) stringList)
-                .withInt("position", position)
-                .navigation();
-    }
-
-    @Override
-    protected QuickActivityImagePreviewBinding getViewBinding() {
-        return QuickActivityImagePreviewBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
-    protected void initEventAndData() {
-
-        QMUIStatusBarHelper.setStatusBarDarkMode(mContext);
-        mTopBar.setVisibility(View.GONE);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mImageList = this.getIntent().getStringArrayListExtra("data");
-            position = this.getIntent().getIntExtra("position", 0);
-        } else {
-            showMsg(getString(R.string.quick_args_get_error));
-            finish();
+    override fun initEventAndData() {
+        QMUIStatusBarHelper.setStatusBarDarkMode(mContext)
+        mTopBar.visibility = View.GONE
+        intent.extras?.let {
+            mImageList = intent.getStringArrayListExtra(ARG_DATA)!!
+            position = intent.getIntExtra(ARG_POS, 0)
+        } ?: let {
+            showMsg(getString(R.string.quick_args_get_error))
+            finish()
         }
-
-        ShowImagePagerAdapter showImagePagerAdapter = new ShowImagePagerAdapter(getSupportFragmentManager(), getLifecycle());
-        mBinding.viewpager.setAdapter(showImagePagerAdapter);
-        mBinding.viewpager.setCurrentItem(position);
-
-        if (mImageList.size() == 1) {
-            mBinding.position.setVisibility(View.GONE);
+        val showImagePagerAdapter = ShowImagePagerAdapter(supportFragmentManager, lifecycle)
+        mBinding.viewpager.adapter = showImagePagerAdapter
+        mBinding.viewpager.currentItem = position
+        if (mImageList.size == 1) {
+            mBinding.position.visibility = View.GONE
         } else {
-            mBinding.position.setVisibility(View.VISIBLE);
+            mBinding.position.visibility = View.VISIBLE
         }
-
-        setPosText(position + 1, mImageList.size());
-
-        mBinding.viewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                setPosText(position + 1, mImageList.size());
+        setPosText(position + 1, mImageList.size)
+        mBinding.viewpager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                setPosText(position + 1, mImageList.size)
             }
-        });
+        })
     }
 
-    @Override
-    protected void initClickListener() {
-
-    }
+    override fun initClickListener() {}
 
     /**
      * 指示器
@@ -113,26 +68,40 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
      * @param position
      * @param size
      */
-    @SuppressLint("SetTextI18n")
-    public void setPosText(int position, int size) {
-        mBinding.position.setText(position + "/" + size);
+    fun setPosText(position: Int, size: Int) {
+        mBinding.position.text = "$position/$size"
     }
 
-    private class ShowImagePagerAdapter extends FragmentStateAdapter {
-
-        public ShowImagePagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-            super(fragmentManager, lifecycle);
+    private inner class ShowImagePagerAdapter(
+        fragmentManager: FragmentManager,
+        lifecycle: Lifecycle
+    ) : FragmentStateAdapter(fragmentManager, lifecycle) {
+        override fun createFragment(position: Int): Fragment {
+            return ImagePreviewFragment.newInstance(mImageList[position])
         }
 
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            return ImagePreviewFragment.newInstance(mImageList.get(position));
+        override fun getItemCount(): Int {
+            return mImageList.size
         }
+    }
 
-        @Override
-        public int getItemCount() {
-            return mImageList.size();
+    companion object {
+
+        private const val ARG_DATA = "data"
+        private const val ARG_POS = "position"
+
+        /**
+         * @param stringList
+         * @param position   当前图片位置
+         * @return
+         */
+        fun start(stringList: List<String>, position: Int = 0) {
+            ARouter
+                .getInstance()
+                .build(QuickArouterConstants.QUICK_IMAGEPREVIEW)
+                .withStringArrayList(ARG_DATA, stringList as ArrayList<String>)
+                .withInt(ARG_POS, position)
+                .navigation()
         }
     }
 }

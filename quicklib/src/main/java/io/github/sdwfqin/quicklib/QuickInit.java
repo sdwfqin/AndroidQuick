@@ -16,7 +16,7 @@ public class QuickInit {
      * @param realPath
      */
     public static void setRealPath(String realPath) {
-        QuickConstants.SAVE_REAL_PATH = realPath;
+        QuickConstants.INSTANCE.setSAVE_REAL_PATH(realPath);
     }
 
     /**
@@ -25,6 +25,6 @@ public class QuickInit {
      * @param baseUrl
      */
     public static void setBaseUrl(String baseUrl) {
-        QuickConstants.BASE_URL = baseUrl;
+        QuickConstants.INSTANCE.setBASE_URL(baseUrl);
     }
 }

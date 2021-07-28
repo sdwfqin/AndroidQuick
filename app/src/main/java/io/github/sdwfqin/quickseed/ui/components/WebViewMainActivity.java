@@ -4,14 +4,14 @@ import android.widget.ArrayAdapter;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+
 import io.github.sdwfqin.quicklib.base.BaseActivity;
-import io.github.sdwfqin.quicklib.base.QuickConstants;
 import io.github.sdwfqin.quicklib.webview.QuickWebViewActivity;
 import io.github.sdwfqin.quicklib.webview.QuickWebViewLoadDataActivity;
-
 import io.github.sdwfqin.quickseed.R;
 import io.github.sdwfqin.quickseed.constants.ArouterConstants;
 import io.github.sdwfqin.quickseed.databinding.ActivitySampleListBinding;
+import io.github.sdwfqin.samplecommonlibrary.base.Constants;
 
 /**
  * WebView示例
@@ -53,7 +53,7 @@ public class WebViewMainActivity extends BaseActivity<ActivitySampleListBinding>
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CUSTOMWEBVIEW).navigation();
                     break;
                 case 2:
-                    QuickWebViewLoadDataActivity.launch(null, "测试标题", QuickConstants.HEAD + "哈哈哈哈" + QuickConstants.END, false);
+                    QuickWebViewLoadDataActivity.launch(null, "测试标题", Constants.HEAD + "哈哈哈哈" + Constants.END, false);
                     break;
                 default:
             }

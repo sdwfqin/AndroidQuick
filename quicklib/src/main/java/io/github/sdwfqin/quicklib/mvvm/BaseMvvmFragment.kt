@@ -1,41 +1,41 @@
-package io.github.sdwfqin.quicklib.mvvm;
+package io.github.sdwfqin.quicklib.mvvm
 
-import androidx.viewbinding.ViewBinding;
-
-import io.github.sdwfqin.quicklib.base.BaseFragment;
+import androidx.viewbinding.ViewBinding
+import io.github.sdwfqin.quicklib.base.BaseFragment
 
 /**
  * 描述：Mvvm Fragment基类
  *
  * @author 张钦
  */
-public abstract class BaseMvvmFragment<V extends ViewBinding, VM extends BaseViewModel> extends BaseFragment<V> {
+abstract class BaseMvvmFragment<V : ViewBinding, VM : BaseViewModel> : BaseFragment<V>() {
 
-    protected VM mVm;
+    protected lateinit var mVm: VM
 
-    @Override
-    protected void initViewModel() {
-        mVm = getViewModel();
-
-        mVm.isLoading.observe(getViewLifecycleOwner(), isLoading -> {
+    override fun initViewModel() {
+        mVm = getViewModel()
+        mVm.isLoading.observe(viewLifecycleOwner, { isLoading: Boolean ->
             if (isLoading) {
-                mBaseActivity.showProgress();
+                mBaseActivity.showProgress()
             } else {
-                mBaseActivity.hideProgress();
+                mBaseActivity.hideProgress()
             }
-        });
-        mVm.networkError.observe(this, this::commonNetworkErrorListener);
+        })
+        mVm.networkError.observe(
+            this,
+            { throwable: Throwable -> commonNetworkErrorListener(throwable) }
+        )
     }
 
     /**
      * 获取ViewModel
      */
-    protected abstract VM getViewModel();
+    protected abstract fun getViewModel(): VM
 
     /**
      * 通用网络异常回掉
      */
-    protected void commonNetworkErrorListener(Throwable throwable) {
+    protected fun commonNetworkErrorListener(throwable: Throwable) {
         // TODO 其实这里可以写一下默认处理方式，可以在业务模块写网络异常处理
     }
 }

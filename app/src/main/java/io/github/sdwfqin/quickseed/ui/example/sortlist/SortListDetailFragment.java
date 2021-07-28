@@ -53,7 +53,6 @@ public class SortListDetailFragment extends BaseFragment<FragmentSortListDetailB
 
     @Override
     protected void initEventAndData() {
-
         // TODO：上面的header应该是要重写的
         ClassicsHeader.REFRESH_HEADER_PULLING = "下拉切换";
         ClassicsHeader.REFRESH_HEADER_RELEASE = "释放立即切换";

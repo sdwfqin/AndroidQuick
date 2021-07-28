@@ -1,53 +1,39 @@
-package io.github.sdwfqin.quicklib.utils.rx;
+package io.github.sdwfqin.quicklib.utils.rx
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.OnLifecycleEvent;
-
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
-
-import static androidx.lifecycle.Lifecycle.State.DESTROYED;
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 
 /**
  * RxJava生命周期管理
- * <p>
  *
  * @author 张钦
  * @date 2020/8/11
  */
-public class RxJavaLifecycleManager implements LifecycleObserver {
+class RxJavaLifecycleManager(owner: LifecycleOwner) : LifecycleObserver {
 
-    private CompositeDisposable compositeDisposable;
-
-    public RxJavaLifecycleManager(LifecycleOwner owner) {
-        if (owner.getLifecycle().getCurrentState() == DESTROYED) {
-            // ignore
-            return;
+    init {
+        if (owner.lifecycle.currentState != Lifecycle.State.DESTROYED) {
+            owner.lifecycle.addObserver(this)
         }
-        owner.getLifecycle().addObserver(this);
     }
 
-    public void addDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
-            compositeDisposable = new CompositeDisposable();
-        }
-        if (disposable != null) {
-            compositeDisposable.add(disposable);
-        }
+    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
+    fun addDisposable(disposable: Disposable) {
+        compositeDisposable.add(disposable)
     }
 
-    public void dispose() {
-        if (compositeDisposable != null) {
-            compositeDisposable.dispose();
-        }
-        compositeDisposable = null;
+    private fun dispose() {
+        compositeDisposable.dispose()
+        compositeDisposable.clear()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    private void onDestroy() {
-        dispose();
+    private fun onDestroy() {
+        dispose()
     }
 }

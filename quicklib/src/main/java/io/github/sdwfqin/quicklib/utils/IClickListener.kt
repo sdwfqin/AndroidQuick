@@ -1,6 +1,6 @@
-package io.github.sdwfqin.quicklib.utils;
+package io.github.sdwfqin.quicklib.utils
 
-import android.view.View;
+import android.view.View
 
 /**
  * 描述：按钮防抖
@@ -8,18 +8,16 @@ import android.view.View;
  * @author 张钦
  * @date 2018/12/18
  */
-public abstract class IClickListener implements View.OnClickListener {
+abstract class IClickListener : View.OnClickListener {
 
-    private long mLastClickTime = 0;
-    public static final int TIME_INTERVAL = 1000;
+    private var mLastClickTime: Long = 0
 
-    @Override
-    public final void onClick(View view) {
+    override fun onClick(view: View) {
         if (System.currentTimeMillis() - mLastClickTime >= TIME_INTERVAL) {
-            onIClick(view);
-            mLastClickTime = System.currentTimeMillis();
+            onIClick(view)
+            mLastClickTime = System.currentTimeMillis()
         } else {
-            onAgain(view);
+            onAgain(view)
         }
     }
 
@@ -28,14 +26,16 @@ public abstract class IClickListener implements View.OnClickListener {
      *
      * @param view
      */
-    protected abstract void onIClick(View view);
+    protected abstract fun onIClick(view: View)
 
     /**
      * 重复点击
      *
      * @param view
      */
-    protected void onAgain(View view) {
+    protected open fun onAgain(view: View) {}
 
+    companion object {
+        const val TIME_INTERVAL = 1000
     }
 }

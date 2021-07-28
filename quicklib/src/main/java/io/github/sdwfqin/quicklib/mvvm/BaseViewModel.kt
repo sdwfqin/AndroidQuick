@@ -1,24 +1,22 @@
-package io.github.sdwfqin.quicklib.mvvm;
+package io.github.sdwfqin.quicklib.mvvm
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
 /**
  * BaseViewModel
- * <p>
  *
  * @author 张钦
  * @date 2020/4/15
  */
-public class BaseViewModel extends ViewModel {
-
+open class BaseViewModel : ViewModel() {
     /**
      * 加载窗状态
      */
-    public final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    val isLoading = MutableLiveData<Boolean>()
 
     /**
      * 通用网络请求异常
      */
-    public final MutableLiveData<Throwable> networkError = new MutableLiveData<>();
+    val networkError = MutableLiveData<Throwable>()
 }

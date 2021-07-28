@@ -1,102 +1,96 @@
-package io.github.sdwfqin.quicklib.base;
+package io.github.sdwfqin.quicklib.base
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.viewbinding.ViewBinding;
-
-import com.blankj.utilcode.util.ToastUtils;
-import com.permissionx.guolindev.PermissionX;
-import com.qmuiteam.qmui.arch.QMUIActivity;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import io.github.sdwfqin.quicklib.R;
-import io.github.sdwfqin.quicklib.utils.eventbus.Event;
-import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils;
-import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.viewbinding.ViewBinding
+import com.blankj.utilcode.util.ToastUtils
+import com.permissionx.guolindev.PermissionX
+import com.permissionx.guolindev.request.ExplainScope
+import com.permissionx.guolindev.request.ForwardScope
+import com.qmuiteam.qmui.arch.QMUIActivity
+import com.qmuiteam.qmui.widget.QMUITopBarLayout
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
+import io.github.sdwfqin.quicklib.R
+import io.github.sdwfqin.quicklib.utils.eventbus.Event
+import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils
+import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager
+import io.reactivex.rxjava3.disposables.Disposable
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * 描述：Activity基类
  *
  * @author 张钦
  */
-public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements IBaseActivity {
+abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
 
-    protected Activity mContext;
-    protected V mBinding;
-    protected LinearLayoutCompat mQuickBaseView;
+    protected lateinit var mContext: Activity
+    protected lateinit var mBinding: V
+    private lateinit var mQuickBaseView: LinearLayoutCompat
+
     /**
      * 顶部标题栏
      */
-    protected QMUITopBarLayout mTopBar;
+    protected lateinit var mTopBar: QMUITopBarLayout
+
     /**
      * TipDialog
      */
-    protected QMUITipDialog mQmuiTipDialog;
-    private RxJavaLifecycleManager mRxJavaLifecycleManager;
+    private var mQmuiTipDialog: QMUITipDialog? = null
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = getViewBinding();
-        initContentView();
-        mTopBar = findViewById(R.id.quick_base_topbar);
-        mContext = this;
-        mRxJavaLifecycleManager = new RxJavaLifecycleManager(this);
-        initViewModel();
-        initEventAndData();
-        initListener();
-        initClickListener();
+    /**
+     * Rxjava 生命周期管理
+     */
+    private lateinit var mRxJavaLifecycleManager: RxJavaLifecycleManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mBinding = getViewBinding()
+        initContentView()
+        mTopBar = findViewById(R.id.quick_base_topbar)
+        mContext = this
+        mRxJavaLifecycleManager = RxJavaLifecycleManager(this)
+        initViewModel()
+        initEventAndData()
+        initListener()
+        initClickListener()
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (isRegisterEventBus()) {
-            EventBusUtils.register(this);
+    override fun onStart() {
+        super.onStart()
+        if (isRegisterEventBus) {
+            EventBusUtils.register(this)
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (isRegisterEventBus()) {
-            EventBusUtils.unregister(this);
+    override fun onStop() {
+        super.onStop()
+        if (isRegisterEventBus) {
+            EventBusUtils.unregister(this)
         }
     }
 
-    private void initContentView() {
-        View quickBaseViewGroup = this.getLayoutInflater().inflate(R.layout.quick_activity_base, null);
-        mQuickBaseView = quickBaseViewGroup.findViewById(R.id.quick_base_view);
-        mBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mQuickBaseView.addView(mBinding.getRoot());
-        setContentView(quickBaseViewGroup);
+    private fun initContentView() {
+        val quickBaseViewGroup = this.layoutInflater.inflate(R.layout.quick_activity_base, null)
+        mQuickBaseView = quickBaseViewGroup.findViewById(R.id.quick_base_view)
+        mBinding.root.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        mQuickBaseView.addView(mBinding.root)
+        setContentView(quickBaseViewGroup)
     }
 
-    @Override
-    protected void onDestroy() {
-        mRxJavaLifecycleManager.dispose();
-        super.onDestroy();
+    protected fun addSubscribe(disposable: Disposable) {
+        mRxJavaLifecycleManager.addDisposable(disposable)
     }
 
-    protected void addSubscribe(Disposable disposable) {
-        mRxJavaLifecycleManager.addDisposable(disposable);
-    }
-
-    @Override
-    public Activity getActivity() {
-        return this;
+    override fun getActivity(): Activity {
+        return this
     }
 
     // ==================== EventBus事件 ====================
@@ -106,22 +100,17 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      *
      * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
      */
-    protected boolean isRegisterEventBus() {
-        return false;
-    }
+    protected open val isRegisterEventBus: Boolean
+        get() = false
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusCome(Event<Object> event) {
-        if (event != null) {
-            receiveEvent(event);
-        }
+    fun onEventBusCome(event: Event<Any?>?) {
+        event?.let { receiveEvent(it) }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStickyEventBusCome(Event<Object> event) {
-        if (event != null) {
-            receiveStickyEvent(event);
-        }
+    fun onStickyEventBusCome(event: Event<Any?>?) {
+        event?.let { receiveStickyEvent(it) }
     }
 
     /**
@@ -129,18 +118,14 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      *
      * @param event 事件
      */
-    protected void receiveEvent(Event<Object> event) {
-
-    }
+    protected open fun receiveEvent(event: Event<Any?>) {}
 
     /**
      * 接收到分发的粘性事件
      *
      * @param event 粘性事件
      */
-    protected void receiveStickyEvent(Event<Object> event) {
-
-    }
+    protected open fun receiveStickyEvent(event: Event<Any?>) {}
 
     // ==================== Toast ====================
 
@@ -149,70 +134,65 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      *
      * @param msg
      */
-    @Override
-    public void showMsg(String msg) {
-        ToastUtils.showShort(msg);
+    override fun showMsg(msg: String) {
+        ToastUtils.showShort(msg)
     }
 
     // ==================== QmuiTip(加载动画) ====================
-
     /**
      * 开启加载动画
      */
-    @Override
-    public void showProgress() {
-        showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载");
+    override fun showProgress() {
+        showTip(QMUITipDialog.Builder.ICON_TYPE_LOADING, "正在加载")
     }
 
     /**
      * 显示QmuiTip
      */
-    @Override
-    public void showTip(@QMUITipDialog.Builder.IconType int iconType, CharSequence tipWord) {
-        if (mQmuiTipDialog == null) {
-            mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
-                    .setIconType(iconType)
-                    .setTipWord(tipWord)
-                    .create();
+    override fun showTip(@QMUITipDialog.Builder.IconType iconType: Int, tipWord: CharSequence) {
+        mQmuiTipDialog ?: let {
+            mQmuiTipDialog = QMUITipDialog.Builder(mContext)
+                .setIconType(iconType)
+                .setTipWord(tipWord)
+                .create()
         }
-        if (!mQmuiTipDialog.isShowing()) {
-            mQmuiTipDialog.show();
+
+        mQmuiTipDialog?.let {
+            if (!it.isShowing) {
+                it.show()
+            }
         }
     }
 
     /**
      * 关闭加载动画
      */
-    @Override
-    public void hideProgress() {
-        hideTip();
+    override fun hideProgress() {
+        hideTip()
     }
 
     /**
      * 关闭QmuiTip
      */
-    @Override
-    public void hideTip() {
-        if (mQmuiTipDialog != null) {
-            if (mQmuiTipDialog.isShowing()) {
-                mQmuiTipDialog.dismiss();
+    override fun hideTip() {
+        mQmuiTipDialog?.let {
+            if (it.isShowing) {
+                it.dismiss()
             }
         }
+        mQmuiTipDialog = null
     }
 
-    @Override
-    public void startActivitySample(Class<?> cls) {
-        Intent intent = new Intent(mContext, cls);
-        startActivity(intent);
+    override fun startActivitySample(cls: Class<*>) {
+        val intent = Intent(mContext, cls)
+        startActivity(intent)
     }
 
     // ==================== 权限管理 ====================
 
-    public interface OnPermissionCallback {
-
-        void onSuccess();
-
-        void onError();
+    interface OnPermissionCallback {
+        fun onSuccess()
+        fun onError()
     }
 
     /**
@@ -221,50 +201,60 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      * @param perms                权限列表
      * @param onPermissionCallback 权限回掉接口
      */
-    public void initCheckPermissions(String[] perms, OnPermissionCallback onPermissionCallback) {
+    protected open fun initCheckPermissions(
+        perms: Array<String>,
+        onPermissionCallback: OnPermissionCallback
+    ) {
         PermissionX.init(this)
-                .permissions(perms)
-                .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
-                    scope.showRequestReasonDialog(deniedList, getString(R.string.quick_permissions_title, getString(R.string.app_name)), getString(R.string.quick_permissions_dialog_submit), getString(R.string.quick_permissions_dialog_cancel));
-                })
-                .onForwardToSettings((scope, deniedList) -> {
-                    scope.showForwardToSettingsDialog(deniedList, getString(R.string.quick_permissions_forward), getString(R.string.quick_permissions_dialog_submit), getString(R.string.quick_permissions_dialog_cancel));
-                })
-                .request((allGranted, grantedList, deniedList) -> {
-                    if (allGranted) {
-                        onPermissionCallback.onSuccess();
-                    } else {
-                        onPermissionCallback.onError();
-                    }
-                });
+            .permissions(*perms)
+            .onExplainRequestReason { scope: ExplainScope, deniedList: List<String?>?, beforeRequest: Boolean ->
+                scope.showRequestReasonDialog(
+                    deniedList, getString(
+                        R.string.quick_permissions_title, getString(R.string.app_name)
+                    ), getString(R.string.quick_permissions_dialog_submit), getString(
+                        R.string.quick_permissions_dialog_cancel
+                    )
+                )
+            }
+            .onForwardToSettings { scope: ForwardScope, deniedList: List<String?>? ->
+                scope.showForwardToSettingsDialog(
+                    deniedList, getString(
+                        R.string.quick_permissions_forward
+                    ), getString(R.string.quick_permissions_dialog_submit), getString(
+                        R.string.quick_permissions_dialog_cancel
+                    )
+                )
+            }
+            .request { allGranted: Boolean, grantedList: List<String?>?, deniedList: List<String?>? ->
+                if (allGranted) {
+                    onPermissionCallback.onSuccess()
+                } else {
+                    onPermissionCallback.onError()
+                }
+            }
     }
+
     // ==================== 提供的接口 ====================
 
-    protected void initViewModel() {
-
-    }
+    protected open fun initViewModel() {}
 
     /**
      * 加载布局
      */
-    protected abstract V getViewBinding();
+    protected abstract fun getViewBinding(): V
 
     /**
      * 加载数据
      */
-    protected abstract void initEventAndData();
+    protected abstract fun initEventAndData()
 
     /**
      * 监听器
      */
-    protected void initListener() {
-
-    }
+    protected open fun initListener() {}
 
     /**
      * 点击事件
      */
-    protected void initClickListener() {
-
-    }
+    protected open fun initClickListener() {}
 }
