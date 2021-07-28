@@ -1,4 +1,9 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
 
@@ -15,7 +20,7 @@ android {
     buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.sdwfqin.quickseed"
+        applicationId "io.github.sdwfqin.quickseed"
         minSdkVersion rootProject.ext.androidVersion.minSdkVersion
         targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -26,7 +31,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -59,14 +64,34 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation kotlinDependencies["ktx"]
+    implementation kotlinDependencies["kotlin"]
+    // Lifecycle KTX 为每个 Lifecycle 对象定义一个 LifecycleScope。在此范围内启动的协程会在 Lifecycle 被销毁时取消。
+    // 您可以使用 lifecycle.coroutineScope 或 lifecycleOwner.lifecycleScope 属性访问 Lifecycle 的 CoroutineScope。
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    // 使用 LiveData 时，您可能需要异步计算值。例如，您可能需要检索用户的偏好设置并将其传送给界面。
+    // 在这些情况下，LiveData KTX 可提供一个 liveData 构建器函数，该函数会调用 suspend 函数，并将结果作为 LiveData 对象传送。
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    // ViewModel KTX 库提供了一个 viewModelScope() 函数，可让您更轻松地从 ViewModel 启动协程。
+    // CoroutineScope 绑定至 Dispatchers.Main，并且会在清除 ViewModel 后自动取消。
+    // 您可以使用 viewModelScope()，而无需为每个 ViewModel 创建一个新范围。
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+
+    // 协程
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     implementation project(':sampleCommonLibrary')
 
-    annotationProcessor compilerDependencies["arouter-compiler"]
-    annotationProcessor compilerDependencies["arch-compiler"]
+    kapt compilerDependencies["arouter-compiler"]
+    kapt compilerDependencies["arch-compiler"]
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
 
 //apply from: "tinker_config.gradle"

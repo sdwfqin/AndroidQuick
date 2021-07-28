@@ -24,8 +24,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.sdwfqin.quicklib.utils.rx.RxSchedulersUtils;
-import com.sdwfqin.widget.WindowFloatView;
+import io.github.sdwfqin.quicklib.utils.rx.RxSchedulersUtils;
+import io.github.sdwfqin.widget.WindowFloatView;
 
 import java.io.File;
 import java.io.FileOutputStream;

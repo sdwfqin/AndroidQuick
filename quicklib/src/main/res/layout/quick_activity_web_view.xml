@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.sdwfqin.widget.StatusPlaceholderView
+    <io.github.sdwfqin.widget.StatusPlaceholderView
         android:id="@+id/status_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

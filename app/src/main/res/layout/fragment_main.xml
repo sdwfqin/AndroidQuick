@@ -6,7 +6,7 @@
     android:orientation="vertical"
     app:qmui_skin_background="?attr/app_content_bg_color">
 
-    <com.sdwfqin.widget.StatusPlaceholderView
+    <io.github.sdwfqin.widget.StatusPlaceholderView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:qmui_skin_background="?attr/app_primary_color" />

@@ -1,4 +1,4 @@
-package io.github.sdwfqin.samplecommonlibrary.base;//package com.sdwfqin.quickseed.base;
+//package io.github.sdwfqin.samplecommonlibrary.base;
 //
 //import android.annotation.TargetApi;
 //import android.app.Application;

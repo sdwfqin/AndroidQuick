@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Priority;
-import com.sdwfqin.imageloader.GlideApp;
+import io.github.sdwfqin.imageloader.GlideApp;
 import com.zhihu.matisse.engine.ImageEngine;
 
 /**

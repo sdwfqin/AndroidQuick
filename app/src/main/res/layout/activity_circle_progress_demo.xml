@@ -7,7 +7,7 @@
     android:background="@color/orange"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.components.CircleProgressDemoActivity">
+    tools:context="io.github.sdwfqin.quickseed.ui.components.CircleProgressDemoActivity">
 
     <Button
         android:id="@+id/test"
@@ -16,7 +16,7 @@
         android:gravity="center"
         android:text="+2" />
 
-    <com.sdwfqin.widget.CircleProgressView
+    <io.github.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar1"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -29,7 +29,7 @@
         app:quick_progressReachColor="@color/transparent90_white"
         app:quick_progressStyle="Normal" />
 
-    <com.sdwfqin.widget.CircleProgressView
+    <io.github.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar2"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -42,7 +42,7 @@
         app:quick_progressReachColor="@color/transparent90_white"
         app:quick_progressStyle="FillInner" />
 
-    <com.sdwfqin.widget.CircleProgressView
+    <io.github.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar3"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -55,7 +55,7 @@
         app:quick_progressReachColor="@color/transparent90_white"
         app:quick_progressStyle="FillInnerArc" />
 
-    <com.sdwfqin.widget.CircleProgressView
+    <io.github.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar4"
         android:layout_width="50dp"
         android:layout_height="50dp"

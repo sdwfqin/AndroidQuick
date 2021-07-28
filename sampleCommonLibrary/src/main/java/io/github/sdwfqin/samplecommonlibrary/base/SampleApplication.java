@@ -13,10 +13,9 @@ import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
-import com.sdwfqin.quicklib.BuildConfig;
-import com.sdwfqin.quicklib.QuickInit;
+import io.github.sdwfqin.quicklib.BuildConfig;
+import io.github.sdwfqin.quicklib.QuickInit;
 import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 
 import io.github.sdwfqin.samplecommonlibrary.R;
 import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;

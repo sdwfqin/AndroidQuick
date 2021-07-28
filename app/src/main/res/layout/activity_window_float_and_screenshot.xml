@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.components.WindowFloatAndScreenshotActivity">
+    tools:context="io.github.sdwfqin.quickseed.ui.components.WindowFloatAndScreenshotActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_screenshot"

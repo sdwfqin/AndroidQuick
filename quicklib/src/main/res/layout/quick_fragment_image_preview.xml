@@ -14,7 +14,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.sdwfqin.widget.CircleProgressView
+    <io.github.sdwfqin.widget.CircleProgressView
         android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"

@@ -4,7 +4,7 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.example.sortlist.SortListDetailFragment">
+    tools:context="io.github.sdwfqin.quickseed.ui.example.sortlist.SortListDetailFragment">
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/srl"

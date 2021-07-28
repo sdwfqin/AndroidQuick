@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.sdwfqin.quicklib.base.BaseActivity;
+import io.github.sdwfqin.quicklib.base.BaseActivity;
 
 import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
 

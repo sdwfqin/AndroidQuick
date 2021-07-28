@@ -1,6 +1,4 @@
 <resources>
-<!--    <string name="app_name">quickLib</string>-->
-
     <string name="quick_cancel">取消</string>
     <string name="quick_img_save">保存图片到手机</string>
     <string name="quick_img_save_success">图片保存成功</string>

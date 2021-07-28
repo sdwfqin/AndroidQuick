@@ -1,5 +1,7 @@
 include ':app'
-include ':app-kt'
 include ':sampleCommonLibrary'
 
-include ':quicklib', /*':baidumaplib',*/ ':paylib', ':widget', ':imageloader'
+include ':quicklib'
+include ':paylib'
+include ':widget'
+include ':imageloader'

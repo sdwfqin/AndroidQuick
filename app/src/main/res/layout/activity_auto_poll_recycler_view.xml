@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:qmui_skin_background="?attr/app_content_bg_color"
-    tools:context=".ui.components.AutoPollRecyclerViewActivity">
+    tools:context="io.github.sdwfqin.quickseed.ui.components.AutoPollRecyclerViewActivity">
 
-    <com.sdwfqin.widget.recyclerview.AutoPollRecyclerView
+    <io.github.sdwfqin.widget.recyclerview.AutoPollRecyclerView
         android:id="@+id/list_v"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:qmui_skin_background="?attr/app_content_bg_color" />
 
-    <com.sdwfqin.widget.recyclerview.AutoPollRecyclerView
+    <io.github.sdwfqin.widget.recyclerview.AutoPollRecyclerView
         android:id="@+id/list_h"
         android:layout_width="match_parent"
         android:layout_height="0dp"

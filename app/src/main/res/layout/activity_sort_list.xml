@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.example.sortlist.SortListActivity">
+    tools:context="io.github.sdwfqin.quickseed.ui.example.sortlist.SortListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sort"

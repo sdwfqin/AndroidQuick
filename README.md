@@ -1,5 +1,17 @@
 ### 如果你看到这个仓库，非常荣幸，如果想要用于您的项目中，建议先看源码，因为这是我用来做外包用来快速开发的库，里面很多内容适合我的项目但不一定适合您的项目，当然，如果需要，您可以clone源码中的部分代码用于您的项目中，如有雷同，不甚荣幸
 
+## v5版本开发计划
+
+- [ ] 代码转为Kotlin
+- [ ] 用Flow替换RxJava
+- [ ] 完善Mvvm
+- [ ] 更完善的WebView页面封装
+- [ ] 抽取基于CameraX的独立相机组件库
+- [ ] 移除Qmui组件
+- [ ] 原生换肤（夜间模式）
+- [ ] 适配Android12
+- [ ] 布局迁移到Compose
+
 ## 目录
 
 * [注意事项](#注意事项)
@@ -23,8 +35,8 @@
     
 > 开发环境
 
-    AndroidStudio 4.1.+
-    Gradle 6.5
+    AndroidStudio 4.2.+
+    Gradle 6.7.1
 
 ## 必读事项
 
@@ -113,20 +125,7 @@
 
 # 导入指南
 
-``` groovy
-def quicklib = "4.5.0"
-
-// quicklib(Base)
-implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
-annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha10"
-annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
-// 支付模块
-implementation "com.sdwfqin.quicklib:paylib:$quicklib"
-// Android 图片加载库（Glide封装）
-implementation "com.sdwfqin.quicklib:imageloader:$quicklib"
-// Android 自定义View组件
-implementation "com.sdwfqin.quicklib:widget:$quicklib"
-```
+暂时没有发版，可以下载源码使用~
 
 # 目录介绍
 

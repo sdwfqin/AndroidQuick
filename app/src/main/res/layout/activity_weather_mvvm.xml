@@ -5,15 +5,9 @@
 
     <data>
 
-        <import type="com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmConverter" />
-
         <variable
             name="viewModel"
-            type="com.sdwfqin.quickseed.ui.mvvm.WeatherViewModel" />
-
-        <variable
-            name="handlers"
-            type="com.sdwfqin.quickseed.ui.mvvm.WeatherMvvmHandlers" />
+            type="io.github.sdwfqin.quickseed.ui.mvvm.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,23 +17,25 @@
         tools:context=".ui.mvvm.WeatherMvvmActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/test01"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:text="@{viewModel.weatherBean.toString()}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:qmui_skin_text_color="?attr/app_text_black_color" />
 
-        <EditText
-            android:id="@+id/birth_date"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/test02"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@={WeatherMvvmConverter.dateToString(birthDate, viewModel.birthDate)}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_refresh"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            android:text="@{viewModel.weatherBean2.toString()}"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test01"
+            app:qmui_skin_text_color="?attr/app_text_black_color" />
 
         <Button
             android:id="@+id/btn_refresh"
@@ -49,20 +45,7 @@
             android:onClick="@{() -> viewModel.loadWeather()}"
             android:text="刷新内容"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/btn_test" />
-
-        <Button
-            android:id="@+id/btn_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:onClick="@{handlers::onClickTest}"
-            android:text="点击测试"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/btn_refresh"
-            app:layout_constraintRight_toRightOf="parent" />
-
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

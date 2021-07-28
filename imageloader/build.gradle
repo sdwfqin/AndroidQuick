@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 // ./gradlew clean build bintrayUpload
 
@@ -27,11 +31,13 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation kotlinDependencies["ktx"]
+    implementation kotlinDependencies["kotlin"]
     implementation googleDependencies["annotation"]
     api imageDependencies["glide"]
     api imageDependencies["glide-integration"]
     api imageDependencies["androidsvg"]
-    annotationProcessor compilerDependencies["glide-compiler"]
+    kapt compilerDependencies["glide-compiler"]
 }
 
 File deployConfig = rootProject.file('gradle/deploy.properties')

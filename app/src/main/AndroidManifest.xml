@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sdwfqin.quickseed">
+    package="io.github.sdwfqin.quickseed">
 
     <application
         android:name=".App"
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.components.PictureUploadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
@@ -35,10 +36,6 @@
             android:name=".ui.components.AutoPollRecyclerViewActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.components.CameraXDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:hardwareAccelerated="true" />
-        <activity
             android:name=".ui.components.VLayoutSampleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
@@ -49,12 +46,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.components.WindowFloatAndScreenshotActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name=".ui.mvvm.WeatherMvvmActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name=".ui.mvp.WeatherMvpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.components.CircleProgressDemoActivity"
