@@ -1,15 +1,20 @@
-package io.github.sdwfqin.quicklib.mvp;
+package io.github.sdwfqin.quicklib.base;
+
+import android.app.Activity;
 
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-
-import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * 描述：View的基类
  *
  * @author zhangqin
  */
-public interface IBaseView {
+public interface IBaseActivity {
+
+    /**
+     * 获取Activity
+     */
+    Activity getActivity();
 
     /**
      * 显示吐司
@@ -42,12 +47,5 @@ public interface IBaseView {
      * 跳转页面
      */
     void startActivitySample(Class<?> cls);
-
-    /**
-     * Rx事件管理
-     *
-     * @param subscription
-     */
-    void addSubscribe(Disposable subscription);
-
 }
+

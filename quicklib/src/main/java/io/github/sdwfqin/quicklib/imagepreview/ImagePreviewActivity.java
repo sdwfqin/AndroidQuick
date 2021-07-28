@@ -16,13 +16,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.sdwfqin.quicklib.R;
 import io.github.sdwfqin.quicklib.base.BaseActivity;
 import io.github.sdwfqin.quicklib.base.QuickArouterConstants;
 import io.github.sdwfqin.quicklib.databinding.QuickActivityImagePreviewBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 图片查看与保存Activity
@@ -38,16 +38,14 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
     private List<String> mImageList;
     private int position;
 
-    private ShowImagePagerAdapter mShowImagePagerAdapter;
-
     /**
      * 图片预览
      *
      * @param stringList 图片链接
      * @return
      */
-    public static void launch(@Nullable List<String> stringList) {
-        launch(stringList, 0);
+    public static void start(@Nullable List<String> stringList) {
+        start(stringList, 0);
     }
 
     /**
@@ -55,7 +53,7 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
      * @param position   当前图片位置
      * @return
      */
-    public static void launch(@Nullable List<String> stringList, int position) {
+    public static void start(@Nullable List<String> stringList, int position) {
         ARouter
                 .getInstance()
                 .build(QuickArouterConstants.QUICK_IMAGEPREVIEW)
@@ -84,8 +82,8 @@ public class ImagePreviewActivity extends BaseActivity<QuickActivityImagePreview
             finish();
         }
 
-        mShowImagePagerAdapter = new ShowImagePagerAdapter(getSupportFragmentManager(), getLifecycle());
-        mBinding.viewpager.setAdapter(mShowImagePagerAdapter);
+        ShowImagePagerAdapter showImagePagerAdapter = new ShowImagePagerAdapter(getSupportFragmentManager(), getLifecycle());
+        mBinding.viewpager.setAdapter(showImagePagerAdapter);
         mBinding.viewpager.setCurrentItem(position);
 
         if (mImageList.size() == 1) {

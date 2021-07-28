@@ -19,9 +19,9 @@ public abstract class BaseMvvmFragment<V extends ViewBinding, VM extends BaseVie
 
         mVm.isLoading.observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading) {
-                showProgress();
+                mBaseActivity.showProgress();
             } else {
-                hideProgress();
+                mBaseActivity.hideProgress();
             }
         });
         mVm.networkError.observe(this, this::commonNetworkErrorListener);

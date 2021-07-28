@@ -21,14 +21,14 @@ import com.blankj.utilcode.util.SDCardUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+
 import io.github.sdwfqin.imageloader.ImageLoaderManager;
 import io.github.sdwfqin.imageloader.progress.OnProgressListener;
 import io.github.sdwfqin.quicklib.R;
 import io.github.sdwfqin.quicklib.base.BaseFragment;
 import io.github.sdwfqin.quicklib.base.QuickConstants;
 import io.github.sdwfqin.quicklib.databinding.QuickFragmentImagePreviewBinding;
-
-import java.io.File;
 
 /**
  * 描述：显示图片
@@ -40,10 +40,10 @@ public class ImagePreviewFragment extends BaseFragment<QuickFragmentImagePreview
 
     private String url;
 
-    public static Fragment newInstance(String s) {
+    public static Fragment newInstance(String url) {
 
         Bundle bundle = new Bundle();
-        bundle.putString("url", s);
+        bundle.putString("url", url);
         ImagePreviewFragment fragment = new ImagePreviewFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -87,17 +87,13 @@ public class ImagePreviewFragment extends BaseFragment<QuickFragmentImagePreview
             return false;
         });
         mBinding.image.setOnClickListener(v -> {
-            mActivity.finish();
+            mBaseActivity.getActivity().finish();
         });
     }
 
     @Override
     protected void initClickListener() {
 
-    }
-
-    @Override
-    protected void lazyLoadShow() {
     }
 
     private void initSaveImageDialog() {
@@ -141,10 +137,10 @@ public class ImagePreviewFragment extends BaseFragment<QuickFragmentImagePreview
                 }
             } catch (Exception e) {
                 LogUtils.e(e);
-                showMsg(e.getMessage());
+                mBaseActivity.showMsg(e.getMessage());
             }
         } else {
-            showMsg(getString(R.string.quick_sd_not_found));
+            mBaseActivity.showMsg(getString(R.string.quick_sd_not_found));
         }
     }
 }

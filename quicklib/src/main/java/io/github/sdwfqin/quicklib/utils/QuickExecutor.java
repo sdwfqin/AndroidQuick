@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class QuickExecutor {
 
-    private ExecutorService mSingleThreadPool;
+    private final ExecutorService mSingleThreadPool;
 
     public static QuickExecutor getInstance() {
         return CbtExecutorHolder.CBT_EXECUTOR;

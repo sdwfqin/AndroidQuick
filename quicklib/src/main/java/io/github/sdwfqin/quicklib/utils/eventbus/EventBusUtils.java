@@ -8,7 +8,7 @@ import org.greenrobot.eventbus.EventBus;
  * @author 张钦
  * @date 2017/12/14
  */
-public class EventBusUtil {
+public class EventBusUtils {
 
     /**
      * 注册

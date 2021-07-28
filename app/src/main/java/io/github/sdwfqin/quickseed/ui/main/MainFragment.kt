@@ -62,7 +62,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     val strings: MutableList<String> = ArrayList()
                     strings.add("https://sdwfqin1-1252249614.cos.ap-beijing-1.myqcloud.com/blog/service_v1.0.png");
                     strings.add("https://sdwfqin1-1252249614.costj.myqcloud.com/blog/shopping.gif");
-                    ImagePreviewActivity.launch(strings);
+                    ImagePreviewActivity.start(strings);
                 }
                 1 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_PICTUREUPLOAD)

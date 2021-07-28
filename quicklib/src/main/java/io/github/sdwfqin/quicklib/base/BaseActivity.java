@@ -16,16 +16,14 @@ import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
-import io.github.sdwfqin.quicklib.R;
-import io.github.sdwfqin.quicklib.mvp.IBaseView;
-import io.github.sdwfqin.quicklib.utils.AppManager;
-import io.github.sdwfqin.quicklib.utils.eventbus.Event;
-import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtil;
-import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import io.github.sdwfqin.quicklib.R;
+import io.github.sdwfqin.quicklib.utils.eventbus.Event;
+import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils;
+import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
@@ -33,15 +31,11 @@ import io.reactivex.rxjava3.disposables.Disposable;
  *
  * @author 张钦
  */
-public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements IBaseView {
+public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity implements IBaseActivity {
 
     protected Activity mContext;
     protected V mBinding;
     protected LinearLayoutCompat mQuickBaseView;
-    /**
-     * Rxjava 订阅管理
-     */
-    protected RxJavaLifecycleManager mRxJavaLifecycleManager;
     /**
      * 顶部标题栏
      */
@@ -50,6 +44,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      * TipDialog
      */
     protected QMUITipDialog mQmuiTipDialog;
+    private RxJavaLifecycleManager mRxJavaLifecycleManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,9 +53,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         initContentView();
         mTopBar = findViewById(R.id.quick_base_topbar);
         mContext = this;
-        AppManager.addActivity(this);
         mRxJavaLifecycleManager = new RxJavaLifecycleManager(this);
-        initPresenter();
         initViewModel();
         initEventAndData();
         initListener();
@@ -71,7 +64,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     protected void onStart() {
         super.onStart();
         if (isRegisterEventBus()) {
-            EventBusUtil.register(this);
+            EventBusUtils.register(this);
         }
     }
 
@@ -79,15 +72,8 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     protected void onStop() {
         super.onStop();
         if (isRegisterEventBus()) {
-            EventBusUtil.unregister(this);
+            EventBusUtils.unregister(this);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        removePresenter();
-        AppManager.removeActivity(this);
-        super.onDestroy();
     }
 
     private void initContentView() {
@@ -96,6 +82,21 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         mBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mQuickBaseView.addView(mBinding.getRoot());
         setContentView(quickBaseViewGroup);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mRxJavaLifecycleManager.dispose();
+        super.onDestroy();
+    }
+
+    protected void addSubscribe(Disposable disposable) {
+        mRxJavaLifecycleManager.addDisposable(disposable);
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 
     // ==================== EventBus事件 ====================
@@ -110,14 +111,14 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventBusCome(Event event) {
+    public void onEventBusCome(Event<Object> event) {
         if (event != null) {
             receiveEvent(event);
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStickyEventBusCome(Event event) {
+    public void onStickyEventBusCome(Event<Object> event) {
         if (event != null) {
             receiveStickyEvent(event);
         }
@@ -128,7 +129,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      *
      * @param event 事件
      */
-    protected void receiveEvent(Event event) {
+    protected void receiveEvent(Event<Object> event) {
 
     }
 
@@ -137,7 +138,7 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
      *
      * @param event 粘性事件
      */
-    protected void receiveStickyEvent(Event event) {
+    protected void receiveStickyEvent(Event<Object> event) {
 
     }
 
@@ -205,16 +206,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
         startActivity(intent);
     }
 
-    // ==================== RxJava订阅管理 ====================
-
-    /**
-     * RxJava 添加订阅者
-     */
-    @Override
-    public void addSubscribe(Disposable subscription) {
-        mRxJavaLifecycleManager.addDisposable(subscription);
-    }
-
     // ==================== 权限管理 ====================
 
     public interface OnPermissionCallback {
@@ -250,18 +241,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends QMUIActivity i
     // ==================== 提供的接口 ====================
 
     protected void initViewModel() {
-
-    }
-
-    protected void initPresenter() {
-
-    }
-
-    /**
-     * 改为Lifecycle管理
-     */
-    @Deprecated
-    protected void removePresenter() {
 
     }
 
