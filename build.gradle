@@ -10,8 +10,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-        jcenter()
+        jcenter() // Warning: this repository is going to shut down soon
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.0'
@@ -26,22 +25,11 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        flatDir {
-            dirs '../libs'
-        }
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        jcenter()
-    }
-
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet') //忽略javadoc错误
         options {
             encoding "UTF-8"
             charSet 'UTF-8'
-            links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
 }

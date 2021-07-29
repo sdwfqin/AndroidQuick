@@ -16,13 +16,12 @@ android {
         }
     }
 
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+    compileSdk rootProject.ext.androidVersion.compileSdkVersion
 
     defaultConfig {
         applicationId "io.github.sdwfqin.quickseed"
-        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
-        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
+        minSdk rootProject.ext.androidVersion.minSdkVersion
+        targetSdk rootProject.ext.androidVersion.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
@@ -57,6 +56,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -65,8 +68,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation kotlinDependencies["ktx"]
-    implementation kotlinDependencies["kotlin"]
     // Lifecycle KTX 为每个 Lifecycle 对象定义一个 LifecycleScope。在此范围内启动的协程会在 Lifecycle 被销毁时取消。
     // 您可以使用 lifecycle.coroutineScope 或 lifecycleOwner.lifecycleScope 属性访问 Lifecycle 的 CoroutineScope。
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"

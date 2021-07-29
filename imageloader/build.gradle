@@ -7,31 +7,28 @@ plugins {
 // ./gradlew clean build bintrayUpload
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+    compileSdk rootProject.ext.androidVersion.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
-        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
-    }
+        minSdk rootProject.ext.androidVersion.minSdkVersion
+        targetSdk rootProject.ext.androidVersion.targetSdkVersion
 
-    buildTypes {
-        release {
-            consumerProguardFiles 'proguard-rules.pro'
-        }
+        consumerProguardFiles 'proguard-rules.pro'
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation kotlinDependencies["ktx"]
-    implementation kotlinDependencies["kotlin"]
-    implementation googleDependencies["annotation"]
+    implementation googleDependencies["ktx-core"]
     api imageDependencies["glide"]
     api imageDependencies["glide-integration"]
     api imageDependencies["androidsvg"]

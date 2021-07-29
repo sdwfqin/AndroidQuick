@@ -1,32 +1,33 @@
 plugins {
     id 'com.android.library'
+    id 'kotlin-android'
 }
 
 // ./gradlew clean build bintrayUpload
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+    compileSdk rootProject.ext.androidVersion.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
-        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
-    }
+        minSdk rootProject.ext.androidVersion.minSdkVersion
+        targetSdk rootProject.ext.androidVersion.targetSdkVersion
 
-    buildTypes {
-        release {
-            consumerProguardFiles 'proguard-rules.pro'
-        }
+        consumerProguardFiles 'proguard-rules.pro'
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation googleDependencies["ktx-core"]
     api netWorkDependencies["okhttp"]
     api utilsDependencies["gson"]
     api thirdDependencies["wechat-sdk-mta"]

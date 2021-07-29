@@ -1,9 +1,9 @@
 package io.github.sdwfqin.samplecommonlibrary.base;
 
+import android.app.Application;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
@@ -26,7 +26,7 @@ import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
  * @author 张钦
  * @date 2018/8/23
  */
-public class SampleApplication extends MultiDexApplication {
+public class SampleApplication extends Application {
 
 //    public SampleApplication() {
 //        super(ShareConstants.TINKER_ENABLE_ALL,

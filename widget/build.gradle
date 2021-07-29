@@ -1,26 +1,27 @@
 plugins {
     id 'com.android.library'
+    id 'kotlin-android'
 }
 
 // ./gradlew clean build bintrayUpload
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
-    defaultConfig {
-        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
-        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
-    }
+    compileSdk rootProject.ext.androidVersion.compileSdkVersion
 
-    buildTypes {
-        release {
-            consumerProguardFiles 'proguard-rules.pro'
-        }
+    defaultConfig {
+        minSdk rootProject.ext.androidVersion.minSdkVersion
+        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+
+        consumerProguardFiles 'proguard-rules.pro'
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     buildFeatures {
@@ -30,9 +31,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api googleDependencies["ktx-core"]
     api googleDependencies["appcompat"]
-    api googleDependencies["annotation"]
-    api googleDependencies["vectordrawable-animated"]
     api googleDependencies["constraintlayout"]
     api googleDependencies["material"]
     api("com.alibaba.android:vlayout:${vlayout}@aar") {

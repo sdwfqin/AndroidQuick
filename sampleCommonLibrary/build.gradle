@@ -1,28 +1,26 @@
 plugins {
     id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+    compileSdk rootProject.ext.androidVersion.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.androidVersion.minSdkVersion
-        targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
+        minSdk rootProject.ext.androidVersion.minSdkVersion
+        targetSdk rootProject.ext.androidVersion.targetSdkVersion
 
         consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     buildFeatures {
@@ -33,7 +31,6 @@ android {
 
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
-    api googleDependencies["multidex"]
 
     api netWorkDependencies["retrofit"]
     api netWorkDependencies["converter-gson"]
@@ -61,8 +58,4 @@ dependencies {
     api project(':quicklib')
     api project(':paylib')
     api project(':widget')
-
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
-    api 'androidx.legacy:legacy-support-v4:1.0.0'
 }
