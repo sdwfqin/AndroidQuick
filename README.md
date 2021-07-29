@@ -23,8 +23,8 @@
     
 > 开发环境
 
-    AndroidStudio 4.2.+
-    Gradle 6.7.1
+    AndroidStudio 2020.3.1
+    Gradle 7.0.2
 
 ## 必读事项
 
@@ -70,7 +70,7 @@
 
     ``` groovy
     buildFeatures {
-        viewBinding = true
+        viewBinding true
         dataBinding = true
     }
     ```

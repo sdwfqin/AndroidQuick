@@ -4,7 +4,7 @@ buildscript {
 
     ext {
         kotlin_version = '1.5.21'
-        hilt_version = '2.38'
+        hilt_version = '2.38.1'
     }
 
     repositories {
@@ -14,7 +14,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.0.0'
         // bintray上传发布
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         // kotlin

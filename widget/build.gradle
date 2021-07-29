@@ -10,8 +10,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.androidVersion.minSdkVersion
         targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
     }
 
     buildTypes {
@@ -26,7 +24,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding true
     }
 }
 
