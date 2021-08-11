@@ -28,7 +28,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation googleDependencies["ktx-core"]
+    implementation googleDependencies["core-ktx"]
     api imageDependencies["glide"]
     api imageDependencies["glide-integration"]
     api imageDependencies["androidsvg"]

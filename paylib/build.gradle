@@ -27,11 +27,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation googleDependencies["ktx-core"]
+    implementation googleDependencies["core-ktx"]
     api netWorkDependencies["okhttp"]
     api utilsDependencies["gson"]
     api thirdDependencies["wechat-sdk-mta"]
-    api (name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
+    api (name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 }
 
 File deployConfig = rootProject.file('gradle/deploy.properties')

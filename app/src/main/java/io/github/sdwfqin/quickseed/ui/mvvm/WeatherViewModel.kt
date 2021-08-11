@@ -2,13 +2,11 @@ package io.github.sdwfqin.quickseed.ui.mvvm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.sdwfqin.quicklib.mvvm.BaseViewModel
 import io.github.sdwfqin.quickseed.data.bean.WeatherBean
 import io.github.sdwfqin.quickseed.data.repository.WeatherRepository
-import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -20,7 +18,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-        private val repository: WeatherRepository
+    private val repository: WeatherRepository
 ) : BaseViewModel() {
 
     val weatherBean = MutableLiveData<WeatherBean>()
@@ -50,15 +48,5 @@ class WeatherViewModel @Inject constructor(
         }, {
             isLoading.postValue(false)
         })
-    }
-
-    private fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit, complete: suspend () -> Unit) = viewModelScope.launch {
-        try {
-            block()
-        } catch (e: Throwable) {
-            error(e)
-        } finally {
-            complete()
-        }
     }
 }

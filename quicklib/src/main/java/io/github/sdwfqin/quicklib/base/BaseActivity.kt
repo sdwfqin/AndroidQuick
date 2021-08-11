@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.viewbinding.ViewBinding
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.permissionx.guolindev.PermissionX
 import com.permissionx.guolindev.request.ExplainScope
@@ -210,7 +211,7 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
             .onExplainRequestReason { scope: ExplainScope, deniedList: List<String?>?, beforeRequest: Boolean ->
                 scope.showRequestReasonDialog(
                     deniedList, getString(
-                        R.string.quick_permissions_title, getString(R.string.app_name)
+                        R.string.quick_permissions_title, AppUtils.getAppName()
                     ), getString(R.string.quick_permissions_dialog_submit), getString(
                         R.string.quick_permissions_dialog_cancel
                     )

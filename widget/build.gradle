@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api googleDependencies["ktx-core"]
+    api googleDependencies["core-ktx"]
     api googleDependencies["appcompat"]
     api googleDependencies["constraintlayout"]
     api googleDependencies["material"]

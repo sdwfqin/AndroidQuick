@@ -2,6 +2,8 @@ package io.github.sdwfqin.quicklib.mvvm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 /**
  * BaseViewModel
@@ -19,4 +21,18 @@ open class BaseViewModel : ViewModel() {
      * 通用网络请求异常
      */
     val networkError = MutableLiveData<Throwable>()
+
+    fun launch(
+        block: suspend () -> Unit,
+        error: suspend (Throwable) -> Unit,
+        complete: suspend () -> Unit
+    ) = viewModelScope.launch {
+        try {
+            block()
+        } catch (e: Throwable) {
+            error(e)
+        } finally {
+            complete()
+        }
+    }
 }

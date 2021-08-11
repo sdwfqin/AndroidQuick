@@ -1,17 +1,5 @@
 ### 有缘相见，不胜荣幸。v5版本计划全面拥抱Kotlin与JetPack，会移除一些早期代码，计划可见Projects。因为很多原因，当前库目前只作为业余项目维护。
 
-## 目录
-
-* [注意事项](#注意事项)
-* [导入指南](#导入指南)
-* [目录介绍](#目录介绍)
-* [相关文档](#相关文档)
-* [混淆](#混淆)
-* [其他](#其他)
-* [基础功能](#基础功能)
-* [Demo下载](#Demo下载)
-* [License](#license)
-
 # 注意事项
 
 > **使用前请查看注意事项**，3.x及以后版本仅支持AndroidX，可切换分支查看早期代码
@@ -71,7 +59,7 @@
     ``` groovy
     buildFeatures {
         viewBinding true
-        dataBinding = true
+        dataBinding true
     }
     ```
 
@@ -104,13 +92,6 @@
     }
     ```
 
-## 如何使用Mvc、Mvp、Mvvm模式
-
-1. 如果使用Mvc模式，直接继承BaseActivity/BaseFragment即可
-2. 如果使用Mvp模式，请参考[Demo中的Mvp实现](/app/src/main/java/com/sdwfqin/quickseed/ui/mvp)
-3. 如果使用Mvvm模式，请参考[Demo中的Mvvm实现](/app/src/main/java/com/sdwfqin/quickseed/ui/mvvm)
-4. 网络部分可以参考DemoApp下面的[mvpretrofit](/app/src/main/java/com/sdwfqin/quickseed/mvpretrofit)
-
 # 导入指南
 
 暂时没有发版，可以下载源码使用~
@@ -119,10 +100,8 @@
 
 | 目录文件 | 解释 |
 | :-------- | :--------|
-| app | Demo(Java版) |
-| app-kt | MVVM+Hilt+Retrofit+协程 |
+| app | Demo |
 | sampleCommonLibrary | Demo公共组件 |
-| ~~docs~~ | ~~文档~~ |
 | imageloader | 图片加载库（基于Glide） |
 | libs | 公共jar/aar包 |
 | paylib | 支付组件库 |
@@ -141,77 +120,6 @@
 # 混淆
 
 4.2.0开始支持自动传递混淆配置，如有问题请提Issues或单独添加需要添加的策略～
-
-# 其他
-
-热更新（Tinker）、Retrofit封装可参考[Sample](/app)
-
-# 基础功能
-
-1. quicklib
-
-| 文件名称 | 功能 |
-| :-------- | :--------|
-| BaseActivity |  |
-| BaseFragment |  |
-| BaseMvpActivity | 支持MVP的基类Activity |
-| BaseMvpFragment | 支持MVP的基类Fragment |
-| RxPresenter | Presenter层封装 |
-| BaseMvvmActivity | 支持MVVM的基类Activity |
-| BaseMvvmFragment | 支持MVVM的基类Fragment |
-| BaseViewModel | ViewModel基类 |
-| WechatShareTools | 微信分享工具类 |
-| ImagePreviewActivity | 图片预览Activity（多图/单图） |
-| QuickBaseWebViewActivity | ViewActivity基类 |
-| QuickWebViewActivity | 传入url即可 |
-| QuickWebViewLoadDataActivity | 针对非url链接的网页 |
-| GsonUtil | Gson工具类 |
-| RxSchedulersUtils | compose()统一线程处理 |
-| RxTimerUtil | RxJava定时任务 |
-| RxJavaLifecycleManager | RxJava生命周期管理 |
-| EventBusUtil | EventBus工具类，使用时需要配合Base基类 |
-| QuickSimpleHintDialog | 可配置提示弹窗 |
-| AppManager | Activity栈管理 |
-| QuickExecutor | 线程池 |
-| ImageWatermarkUtils | 图片水印工具类 |
-| IClickListener | 按钮防抖 |
-
-2. paylib
-
-| 文件名称 | 功能 |
-| :-------- | :--------|
-| AliPayTools | 支付宝支付工具类 |
-| WechatPayTools | 微信支付工具类 |
-
-3. widget
-
-| 文件名称 | 功能 |
-| :-------- | :--------|
-| PictureUploadView | 九宫格图片上传view |
-| PayPwdInputView | 自定义验证码/密码View |
-| ClickViewPager | 可以点击的ViewPager |
-| DecimalEditText | Double类型的EditText，支持限定小数点后的位数 |
-| NoScrollViewPager | 可以禁止左右滑动的ViewPager，ViewPager2现已支持禁止滑动 |
-| TrembleButton | 可以漂浮颤抖的按钮 |
-| WrapContentHeightViewPager | 处理NestedScrollView嵌套Viewpager+RecyclerView |
-| AutoPollRecyclerView | 跑马灯样式的RecyclerView（自动滚动） |
-| AmountView | 购物车商品数量选择 |
-| ~~AutoLinesLayoutManager~~ | 自动换行的布局管理器（流式布局），建议使用[flexbox-layout](https://github.com/google/flexbox-layout)代替 |
-| ControlViewPager | 可动态禁止（允许）左滑/右滑的ViewPager |
-| StatusPlaceholderView | 沉浸式状态栏占位 |
-| WindowFloatView | 悬浮窗基类 |
-| CircleProgressView | 加载进度View |
-
-4. imageloader
-
-| 文件名称 | 功能 |
-| :-------- | :--------|
-| ImageLoader | 图片加载 |
-
-# Demo下载
-
-https://www.pgyer.com/AndroidQuick
-安装密码：111111
 
 # License
 
