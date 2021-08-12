@@ -1,7 +1,6 @@
 package io.github.sdwfqin.quickseed.ui.components
 
 import android.content.Intent
-import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.zhihu.matisse.Matisse
 import io.github.sdwfqin.quickseed.constants.ArouterConstants
@@ -29,8 +28,7 @@ class PictureUploadActivity : SampleBaseActivity<ActivityPictureUploadBinding>()
 
     override fun initEventAndData() {
         mTopBar.setTitle("九宫格上传图片")
-        mTopBar.addLeftBackImageButton()
-            .setOnClickListener { v: View? -> finish() }
+        mTopBar.addLeftBackImageButton().setOnClickListener { finish() }
         mBinding.pic.setMaxColumn(3)
         mBinding.pic.setMaxSize(12)
         mBinding.pic.setPicUploadCallback(object : PictureUploadCallback<PictureModel> {
