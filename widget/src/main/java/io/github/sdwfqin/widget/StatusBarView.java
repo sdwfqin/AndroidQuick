@@ -8,17 +8,17 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.BarUtils;
 
-public class StatusPlaceholderView extends View {
+public class StatusBarView extends View {
 
-    public StatusPlaceholderView(Context context) {
+    public StatusBarView(Context context) {
         this(context, null);
     }
 
-    public StatusPlaceholderView(Context context, @Nullable AttributeSet attrs) {
+    public StatusBarView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StatusPlaceholderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public StatusBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));

@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2 xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/quick_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/qmui_config_color_white">
+    android:orientation="vertical"
+    app:qmui_skin_background="@color/qmui_config_color_white">
+
+    <io.github.sdwfqin.widget.StatusBarView
+        android:id="@+id/quick_base_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:qmui_skin_background="?attr/app_primary_color" />
 
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        android:id="@+id/quick_base_topbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/quick_base_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/quick_base_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quick_base_topbar" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 
-</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2>
+</androidx.appcompat.widget.LinearLayoutCompat>

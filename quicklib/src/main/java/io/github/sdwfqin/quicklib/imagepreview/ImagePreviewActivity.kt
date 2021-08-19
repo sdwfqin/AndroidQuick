@@ -35,8 +35,8 @@ class ImagePreviewActivity : BaseActivity<QuickActivityImagePreviewBinding>() {
     }
 
     override fun initEventAndData() {
-        QMUIStatusBarHelper.setStatusBarDarkMode(mContext)
-        mTopBar.visibility = View.GONE
+//        QMUIStatusBarHelper.setStatusBarDarkMode(mContext)
+        mNavBar.visibility = View.GONE
         intent.extras?.let {
             mImageList = intent.getStringArrayListExtra(ARG_DATA)!!
             position = intent.getIntExtra(ARG_POS, 0)

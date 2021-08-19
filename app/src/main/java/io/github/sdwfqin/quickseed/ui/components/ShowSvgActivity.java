@@ -53,8 +53,8 @@ public class ShowSvgActivity extends SampleBaseActivity<ActivityShowSvgBinding> 
     @Override
     protected void initEventAndData() {
 
-        mTopBar.setTitle("展示原生SVG图片");
-        mTopBar.addLeftBackImageButton()
+        mNavBar.setTitle("展示原生SVG图片");
+        mNavBar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
         RequestBuilder<PictureDrawable> requestBuilder =

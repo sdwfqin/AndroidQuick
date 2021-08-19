@@ -27,9 +27,9 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle(getActivityTitle());
+        mNavBar.setTitle(getActivityTitle());
 
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> {
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> {
             // true表示AgentWeb处理了该事件
             if (!mAgentWeb.back()) {
                 finish();
@@ -49,7 +49,7 @@ public abstract class QuickBaseWebViewActivity extends BaseActivity<QuickActivit
                     public void onReceivedTitle(WebView view, String title) {
                         super.onReceivedTitle(view, title);
                         if (isAutoSetTitle()) {
-                            mTopBar.setTitle(title);
+                            mNavBar.setTitle(title);
                         }
                     }
                 });

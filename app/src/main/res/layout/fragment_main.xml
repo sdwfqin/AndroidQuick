@@ -6,11 +6,6 @@
     android:orientation="vertical"
     app:qmui_skin_background="?attr/app_content_bg_color">
 
-    <io.github.sdwfqin.widget.StatusPlaceholderView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:qmui_skin_background="?attr/app_primary_color" />
-
     <com.qmuiteam.qmui.widget.QMUITopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"

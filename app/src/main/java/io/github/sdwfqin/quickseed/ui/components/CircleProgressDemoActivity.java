@@ -22,8 +22,8 @@ public class CircleProgressDemoActivity extends SampleBaseActivity<ActivityCircl
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("圆（方）形加载进度条");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("圆（方）形加载进度条");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
 
         mBinding.test.setOnClickListener(v -> {
             mBinding.progressBar1.setProgress(mBinding.progressBar1.getProgress() + 2);

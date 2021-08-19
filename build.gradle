@@ -13,7 +13,7 @@ buildscript {
         jcenter() // Warning: this repository is going to shut down soon
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0'
+        classpath 'com.android.tools.build:gradle:7.0.1'
         // bintray上传发布
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         // kotlin

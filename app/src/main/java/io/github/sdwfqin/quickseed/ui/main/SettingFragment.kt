@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ToastUtils
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog.MenuDialogBuilder
+import io.github.sdwfqin.quicklib.base.BaseFragment
 import io.github.sdwfqin.quickseed.constants.ArouterConstants
 import io.github.sdwfqin.quickseed.databinding.FragmentSettingBinding
 import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager
@@ -20,7 +21,7 @@ import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager
  * @date 2020-01-15
  */
 @Route(path = ArouterConstants.MAIN_MINE)
-class SettingFragment : io.github.sdwfqin.quicklib.base.BaseFragment<FragmentSettingBinding>() {
+class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
     override fun getViewBinding(
         inflater: LayoutInflater,

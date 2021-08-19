@@ -22,8 +22,8 @@ public class PayPwdInputActivity extends SampleBaseActivity<ActivityPayPwdInputB
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("自定义输入密码或验证码View");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("自定义输入密码或验证码View");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
     }
 
     @Override

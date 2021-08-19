@@ -27,7 +27,7 @@
     }
     ```
    
-4. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mTopBar`调用相应方法即可，如果不需要使用请手动调用`mTopBar.setVisibility(View.GONE);`隐藏。
+4. `BaseActivity`集成了`QMUITopBarLayout`，默认集成沉浸式状态栏(状态栏背景与TopBar背景相同)，如需使用直接使用`mNavBar`调用相应方法即可，如果不需要使用请手动调用`mNavBar.setVisibility(View.GONE);`隐藏。
 5. 状态栏背景可能会与状态栏字体图标冲突，如有冲突请手动修改状态栏字体图标背景色，可参考`app`下面的`SampleBaseActivity`
 
     ``` java

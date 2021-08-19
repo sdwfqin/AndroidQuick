@@ -3,7 +3,7 @@ ext {
     versionCode = 202008171
     versionName = "4.5.0"
 
-    qmui = "2.0.0-alpha11"
+    qmui = "2.0.1"
     okhttp = "4.9.0"
     retrofit = "2.9.0"
     glide = "4.12.0"

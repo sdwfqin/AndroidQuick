@@ -45,8 +45,8 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("悬浮窗与截图");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("悬浮窗与截图");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
     }
 
     @Override

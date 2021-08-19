@@ -47,8 +47,8 @@ public class VLayoutSampleActivity extends SampleBaseActivity<ActivityVlayoutSam
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("VLayoutSample");
-        mTopBar.addLeftBackImageButton()
+        mNavBar.setTitle("VLayoutSample");
+        mNavBar.addLeftBackImageButton()
                 .setOnClickListener(v -> finish());
 
         mVirtualLayoutManager = new VirtualLayoutManager(mContext);

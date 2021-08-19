@@ -18,6 +18,7 @@ import io.github.sdwfqin.quicklib.R
 import io.github.sdwfqin.quicklib.utils.eventbus.Event
 import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils
 import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager
+import io.github.sdwfqin.widget.StatusBarView
 import io.reactivex.rxjava3.disposables.Disposable
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -34,9 +35,14 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
     private lateinit var mQuickBaseView: LinearLayoutCompat
 
     /**
+     * 顶部状态栏
+     */
+    protected lateinit var mStatusBar: StatusBarView
+
+    /**
      * 顶部标题栏
      */
-    protected lateinit var mTopBar: QMUITopBarLayout
+    protected lateinit var mNavBar: QMUITopBarLayout
 
     /**
      * TipDialog
@@ -52,7 +58,8 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
         super.onCreate(savedInstanceState)
         mBinding = getViewBinding()
         initContentView()
-        mTopBar = findViewById(R.id.quick_base_topbar)
+        mStatusBar = findViewById(R.id.quick_base_status_bar)
+        mNavBar = findViewById(R.id.quick_base_nav_bar)
         mContext = this
         mRxJavaLifecycleManager = RxJavaLifecycleManager(this)
         initViewModel()

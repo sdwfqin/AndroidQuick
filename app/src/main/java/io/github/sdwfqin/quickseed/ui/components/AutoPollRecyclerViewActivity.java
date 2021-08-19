@@ -37,8 +37,8 @@ public class AutoPollRecyclerViewActivity extends SampleBaseActivity<ActivityAut
     @Override
     protected void initEventAndData() {
 
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
-        mTopBar.setTitle("跑马灯Demo");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("跑马灯Demo");
 
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 10; ) {

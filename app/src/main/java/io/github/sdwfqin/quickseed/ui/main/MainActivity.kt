@@ -37,7 +37,7 @@ class MainActivity : SampleBaseActivity<ActivityMainBinding>() {
         /**
          * 隐藏默认Bar
          */
-        mTopBar.visibility = View.GONE
+        mNavBar.visibility = View.GONE
 
         initPagers()
         initTabs()

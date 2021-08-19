@@ -36,8 +36,8 @@ public class WebViewMainActivity extends BaseActivity<ActivitySampleListBinding>
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("WebView Demo");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("WebView Demo");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
 
         mBinding.list.setAdapter(new ArrayAdapter<>(mContext, R.layout.item_list, R.id.tv_items, mTitle));
     }

@@ -98,7 +98,8 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     }
 
     override fun initEventAndData() {
-        mTopBar.visibility = View.GONE
+        mStatusBar.visibility = View.GONE
+        mNavBar.visibility = View.GONE
         val perms = arrayOf(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,

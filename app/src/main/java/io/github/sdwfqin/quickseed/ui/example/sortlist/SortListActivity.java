@@ -39,8 +39,8 @@ public class SortListActivity extends BaseActivity<ActivitySortListBinding> {
 
     @Override
     protected void initEventAndData() {
-        mTopBar.setTitle("仿京东分类列表");
-        mTopBar.addLeftBackImageButton().setOnClickListener(v -> finish());
+        mNavBar.setTitle("仿京东分类列表");
+        mNavBar.addLeftBackImageButton().setOnClickListener(v -> finish());
 
         initSortList();
     }

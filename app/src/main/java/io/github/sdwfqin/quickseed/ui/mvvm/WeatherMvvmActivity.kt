@@ -25,8 +25,8 @@ class WeatherMvvmActivity : SampleBaseMvvmActivity<ActivityWeatherMvvmBinding, W
     }
 
     override fun initEventAndData() {
-        mTopBar.setTitle("MVVM DEMO")
-        mTopBar.addLeftBackImageButton().setOnClickListener { finish() }
+        mNavBar.setTitle("MVVM DEMO")
+        mNavBar.addLeftBackImageButton().setOnClickListener { finish() }
         mBinding.viewModel = mVm
         mBinding.lifecycleOwner = this
         mVm.loadWeather()

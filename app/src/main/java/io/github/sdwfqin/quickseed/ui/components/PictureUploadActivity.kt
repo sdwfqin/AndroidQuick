@@ -27,8 +27,8 @@ class PictureUploadActivity : SampleBaseActivity<ActivityPictureUploadBinding>()
     }
 
     override fun initEventAndData() {
-        mTopBar.setTitle("九宫格上传图片")
-        mTopBar.addLeftBackImageButton().setOnClickListener { finish() }
+        mNavBar.setTitle("九宫格上传图片")
+        mNavBar.addLeftBackImageButton().setOnClickListener { finish() }
         mBinding.pic.setMaxColumn(3)
         mBinding.pic.setMaxSize(12)
         mBinding.pic.setPicUploadCallback(object : PictureUploadCallback<PictureModel> {
