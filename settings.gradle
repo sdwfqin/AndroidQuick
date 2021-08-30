@@ -1,3 +1,17 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter() // Warning: this repository is going to shut down soon
+        flatDir {
+            dirs './libs'
+        }
+    }
+}
+rootProject.name = "AndroidQuick"
+
 include ':app'
 include ':app-kt'
 include ':sampleCommonLibrary'

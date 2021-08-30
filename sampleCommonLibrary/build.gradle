@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.androidVersion.minSdkVersion
@@ -24,15 +23,13 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding true
+        dataBinding true
     }
 }
 
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
-    api googleDependencies["multidex"]
-
     api netWorkDependencies["retrofit"]
     api netWorkDependencies["converter-gson"]
     api netWorkDependencies["converter-scalars"]

@@ -1,11 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-
-def siteUrl = 'https://github.com/sdwfqin/AndroidQuick'      // 项目的主页
-def gitUrl = 'https://github.com/sdwfqin/AndroidQuick.git'   // Git仓库的url
-
-group = "com.sdwfqin.quicklib"
-version = rootProject.ext.versionName
+apply plugin: 'signing'
 
 Properties properties = new Properties()
 File projectPropertiesFile = rootProject.file("gradle/deploy.properties")
@@ -14,6 +8,10 @@ if (projectPropertiesFile.exists()) {
 } else {
     throw new Error("Cannot find deploy.properties file in gradle folder")
 }
+
+ext["signing.keyId"] = properties.getProperty('signing.keyId')
+ext["signing.password"] = properties.getProperty('signing.password')
+ext["signing.secretKeyRingFile"] = properties.getProperty('signing.secretKeyRingFile')
 
 def isAndroidLib = project.getPlugins().hasPlugin('com.android.application') ||
         project.getPlugins().hasPlugin('com.android.library')
@@ -46,30 +44,37 @@ if (isAndroidLib) {
 }
 
 def pomConfig = {
+    name "${properties.getProperty('group_id')}:${project.name}"
+    url properties.getProperty('git_url')
     licenses {
         license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            name properties.getProperty("license.name")
+            url properties.getProperty("license.url")
         }
     }
     developers {
         developer {
-            id 'sdwfqin'
-            name 'qinzhang'
-            email 'sdwfqin@icloud.com'
+            id properties.getProperty("developer.id")
+            name properties.getProperty("developer.name")
+            email properties.getProperty("developer.email")
         }
     }
     scm {
-        connection gitUrl
-        developerConnection gitUrl
-        url siteUrl
+        connection properties.getProperty('git_url')
+        developerConnection properties.getProperty('git_url')
+        url properties.getProperty('site_url')
     }
+}
+
+signing {
+    sign publishing.publications
 }
 
 publishing {
     publications {
         mavenjava(MavenPublication) {
-            groupId project.group
+            groupId properties.getProperty('group_id')
+            artifactId project.name
             version project.version
             if (isAndroidLib) {
                 artifact file("$buildDir/outputs/aar/${project.name}-release.aar")
@@ -77,6 +82,9 @@ publishing {
                 artifact androidJavadocJar
                 pom.withXml {
                     def root = asNode()
+
+                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、RxJava、EventBus、JetPack、CameraX、base层封装等')
+
                     final dependenciesNode = root.appendNode('dependencies')
 
                     ext.addDependency = { dep, String scope ->
@@ -105,13 +113,6 @@ publishing {
                         }
                     }
 
-                    // List all "compile" dependencies (for old Gradle)
-                    configurations.compile.getDependencies().each { dep -> addDependency(dep, "compile") }
-                    // List all "implementation" dependencies (for new Gradle) as "runtime" dependencies
-                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
-                    // List all "api" dependencies (for new Gradle) as "compile" dependencies
-                    configurations.api.getDependencies().each { dep -> addDependency(dep, "compile") }
-
                     root.children().last() + pomConfig
                 }
             } else {
@@ -121,33 +122,20 @@ publishing {
 
                 pom.withXml {
                     def root = asNode()
+                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、RxJava、EventBus、JetPack、CameraX、base层封装等')
                     root.children().last() + pomConfig
                 }
             }
 
         }
     }
-//    repositories {
-//        maven {
-//            url properties.getProperty("maven.url")
-//            credentials {
-//                username properties.getProperty("maven.username")
-//                password properties.getProperty("maven.password")
-//            }
-//        }
-//    }
-}
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    publications = ['mavenjava']
-    pkg {
-        repo = 'quicklib'
-        name = project.name
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
+    repositories {
+        maven {
+            url properties.getProperty("maven.url")
+            credentials {
+                username properties.getProperty("maven.username")
+                password properties.getProperty("maven.password")
+            }
+        }
     }
 }

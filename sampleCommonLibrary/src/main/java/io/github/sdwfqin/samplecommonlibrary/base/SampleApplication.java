@@ -1,9 +1,9 @@
 package io.github.sdwfqin.samplecommonlibrary.base;
 
+import android.app.Application;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
@@ -16,7 +16,6 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
 import com.sdwfqin.quicklib.BuildConfig;
 import com.sdwfqin.quicklib.QuickInit;
 import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 
 import io.github.sdwfqin.samplecommonlibrary.R;
 import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
@@ -27,7 +26,7 @@ import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
  * @author 张钦
  * @date 2018/8/23
  */
-public class SampleApplication extends MultiDexApplication {
+public class SampleApplication extends Application {
 
 //    public SampleApplication() {
 //        super(ShareConstants.TINKER_ENABLE_ALL,
@@ -79,9 +78,9 @@ public class SampleApplication extends MultiDexApplication {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
+        if ((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
             QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_DARK);
-        }else if(QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_DARK){
+        } else if (QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_DARK) {
             QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_BLUE);
         }
     }

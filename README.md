@@ -23,8 +23,8 @@
     
 > 开发环境
 
-    AndroidStudio 4.1.+
-    Gradle 6.5
+    AndroidStudio 2020.3.1
+    Gradle 7.0.2
 
 ## 必读事项
 
@@ -70,8 +70,8 @@
 
     ``` groovy
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding true
+        dataBinding true
     }
     ```
 
@@ -90,7 +90,7 @@
                 dirs '../libs'
             }
     
-            // ... jcenter() 等其他仓库
+            // ... mavenCentral() 等其他仓库
         }
     }
     ```
@@ -114,18 +114,18 @@
 # 导入指南
 
 ``` groovy
-def quicklib = "4.5.0"
+def quicklib = "4.6.0"
 
 // quicklib(Base)
-implementation "com.sdwfqin.quicklib:quicklib:$quicklib"
-annotationProcessor "com.qmuiteam:arch-compiler:2.0.0-alpha10"
+implementation "io.github.sdwfqin.android:quicklib:$quicklib"
+annotationProcessor "com.qmuiteam:arch-compiler:2.0.1"
 annotationProcessor "com.alibaba:arouter-compiler:1.2.2"
 // 支付模块
-implementation "com.sdwfqin.quicklib:paylib:$quicklib"
+implementation "io.github.sdwfqin.android:paylib:$quicklib"
 // Android 图片加载库（Glide封装）
-implementation "com.sdwfqin.quicklib:imageloader:$quicklib"
+implementation "io.github.sdwfqin.android:imageloader:$quicklib"
 // Android 自定义View组件
-implementation "com.sdwfqin.quicklib:widget:$quicklib"
+implementation "io.github.sdwfqin.android:widget:$quicklib"
 ```
 
 # 目录介绍

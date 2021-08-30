@@ -12,7 +12,6 @@ android {
     }
 
     compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
 
     defaultConfig {
         applicationId "com.sdwfqin.quickseed"
@@ -53,8 +52,8 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding true
+        dataBinding true
     }
 }
 

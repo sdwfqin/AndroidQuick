@@ -1,16 +1,17 @@
 apply plugin: 'com.android.library'
 
-// ./gradlew clean build bintrayUpload
+version = rootProject.ext.versionName
 
 android {
     compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
-    buildToolsVersion rootProject.ext.androidVersion.buildToolsVersion
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
         minSdkVersion rootProject.ext.androidVersion.minSdkVersion
         targetSdkVersion rootProject.ext.androidVersion.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
     }
 
     buildTypes {
