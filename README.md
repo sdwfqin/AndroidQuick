@@ -114,7 +114,7 @@
 # 导入指南
 
 ``` groovy
-def quicklib = "4.6.0"
+def quicklib = "4.7.0"
 
 // quicklib(Base)
 implementation "io.github.sdwfqin.android:quicklib:$quicklib"
