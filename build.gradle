@@ -14,8 +14,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.1'
-        // bintray上传发布
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         // kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // hilt

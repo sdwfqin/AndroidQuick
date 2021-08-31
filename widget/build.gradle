@@ -3,10 +3,14 @@ plugins {
     id 'kotlin-android'
 }
 
-// ./gradlew clean build bintrayUpload
+version = rootProject.ext.versionName
 
 android {
-    compileSdk rootProject.ext.androidVersion.compileSdkVersion
+    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
         minSdk rootProject.ext.androidVersion.minSdkVersion
