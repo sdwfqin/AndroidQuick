@@ -43,9 +43,6 @@ dependencies {
     api libs.brvah
     api libs.utilcodex
 
-    api("com.alibaba.android:vlayout:${libs.versions.vlayout.get()}@aar") {
-        transitive = true
-    }
     implementation project(path: ':imageloader')
 }
 

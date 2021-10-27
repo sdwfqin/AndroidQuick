@@ -74,10 +74,6 @@
     public void *(android.webkit.webView, jav.lang.String);
 }
 
-#vlayout混淆
--keepattributes InnerClasses
--keep class com.alibaba.android.vlayout.ExposeLinearLayoutManagerEx { *; }
-
 #gson混淆配置
 ##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard

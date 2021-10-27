@@ -107,7 +107,6 @@
 | paylib | 支付组件库 |
 | quicklib | 基础组件库 |
 | widget | View组件库 |
-| config.gradle | 依赖配置 |
 
 # 相关文档
 

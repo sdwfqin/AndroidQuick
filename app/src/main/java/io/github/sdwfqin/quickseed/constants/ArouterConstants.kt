@@ -22,19 +22,9 @@ object ArouterConstants {
     const val COMPONENTS_PICTUREUPLOAD = "/components/pictureupload"
 
     /**
-     * 跑马灯Demo
-     */
-    const val COMPONENTS_AUTOPOLLRECYCLER = "/components/autopollrecycler"
-
-    /**
      * 自定义输入密码或验证码View
      */
     const val COMPONENTS_PAYPWD = "/components/paypwd"
-
-    /**
-     * VLayoutSample
-     */
-    const val COMPONENTS_VLAYOUTSAMPLE = "/components/vlayoutsample"
 
     /**
      * 展示SVG图片

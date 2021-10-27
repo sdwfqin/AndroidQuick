@@ -34,13 +34,7 @@
             android:name=".IntroActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".ui.components.AutoPollRecyclerViewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
             android:name=".ui.components.CameraXDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name=".ui.components.VLayoutSampleActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.components.ShowSvgActivity"
@@ -56,9 +50,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.mvvm.WeatherMvvmActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name=".ui.example.sortlist.SortListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"

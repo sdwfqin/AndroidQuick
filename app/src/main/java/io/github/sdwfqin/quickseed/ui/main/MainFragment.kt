@@ -1,6 +1,5 @@
 package io.github.sdwfqin.quickseed.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import io.github.sdwfqin.quicklib.imagepreview.ImagePreviewActivity
 import io.github.sdwfqin.quickseed.R
 import io.github.sdwfqin.quickseed.constants.ArouterConstants
 import io.github.sdwfqin.quickseed.databinding.FragmentMainBinding
-import io.github.sdwfqin.quickseed.ui.example.sortlist.SortListActivity
 import java.util.*
 
 /**
@@ -30,16 +28,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         "图片预览",
         "上传图片九宫格",
         "自定义验证码/密码View",
-        "跑马灯Demo",
         "Camerax（支持二维码识别）",
-        "VLayoutDemo",
         "展示原生SVG图片",
         "WebView",
         "悬浮窗与截图",
         "支持换肤的弹窗",
         "Mvvm Demo",
         "圆（方）形加载进度条",
-        "仿京东分类列表",
     )
 
     override fun getViewBinding(
@@ -72,38 +67,27 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_PAYPWD).navigation();
                 }
                 3 -> {
-                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_AUTOPOLLRECYCLER)
-                        .navigation();
-                }
-                4 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CAMERAX).navigation();
                 }
-                5 -> {
-                    ARouter.getInstance().build(ArouterConstants.COMPONENTS_VLAYOUTSAMPLE)
-                        .navigation();
-                }
-                6 -> {
+                4 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_SHOWSVG).navigation();
                 }
-                7 -> {
+                5 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_WEBVIEW).navigation();
                 }
-                8 -> {
+                6 -> {
                     ARouter.getInstance()
                         .build(ArouterConstants.COMPONENTS_WINDOWFLOATANDSCREENSHOT).navigation();
                 }
-                9 -> {
+                7 -> {
                     showCustomDialog()
                 }
-                10 -> {
+                8 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_MVVM).navigation();
                 }
-                11 -> {
+                9 -> {
                     ARouter.getInstance().build(ArouterConstants.COMPONENTS_CIRCLEPROGRESSDEMO)
                         .navigation();
-                }
-                12 -> {
-                    startActivity(Intent(mContext, SortListActivity::class.java))
                 }
             }
         }

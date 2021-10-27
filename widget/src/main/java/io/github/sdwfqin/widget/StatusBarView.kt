@@ -1,37 +1,26 @@
-package io.github.sdwfqin.widget;
+package io.github.sdwfqin.widget
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.View
+import androidx.core.content.ContextCompat
+import com.blankj.utilcode.util.BarUtils
 
-import androidx.annotation.Nullable;
+class StatusBarView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
-import com.blankj.utilcode.util.BarUtils;
-
-public class StatusBarView extends View {
-
-    public StatusBarView(Context context) {
-        this(context, null);
-    }
-
-    public StatusBarView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public StatusBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-
-        setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimary));
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        int widthSpec = MeasureSpec.getSize(widthMeasureSpec);
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val widthSpec = MeasureSpec.getSize(widthMeasureSpec)
 
         //高度我们要设置成statusbar的高度
-        int measureHeight = BarUtils.getStatusBarHeight();
-        setMeasuredDimension(widthSpec, measureHeight);
+        val measureHeight = BarUtils.getStatusBarHeight()
+        setMeasuredDimension(widthSpec, measureHeight)
+    }
 
+    init {
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark))
     }
 }

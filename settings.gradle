@@ -25,7 +25,6 @@ dependencyResolutionManagement {
             version('okhttp', '4.9.1')
             version('retrofit', '2.9.0')
             version('glide', '4.12.0')
-            version('vlayout', '1.2.36')
             version('smartrefresh', '2.0.1')
             version('arouter', '1.5.1')
 
