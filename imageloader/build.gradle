@@ -4,18 +4,18 @@ plugins {
     id 'kotlin-kapt'
 }
 
-version = rootProject.ext.versionName
+version = libs.versions.versionName.get()
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     lintOptions {
         abortOnError false
     }
 
     defaultConfig {
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -31,12 +31,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation googleDependencies["core-ktx"]
-    api imageDependencies["glide"]
-    api imageDependencies["glide-integration"]
-    api imageDependencies["androidsvg"]
-    kapt compilerDependencies["glide-compiler"]
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api libs.bundles.core
+
+    api libs.glide.core
+    api libs.glide.integration.okhttp3
+    api libs.androidsvg
+    kapt libs.glide.compiler
 }
 
 File deployConfig = rootProject.file('gradle/deploy.properties')

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AndroidQuick-Java</string>
+    <string name="app_name">AndroidQuick</string>
+    <string name="leak_canary_display_activity_label">AndroidQuick Leaks</string>
 </resources>

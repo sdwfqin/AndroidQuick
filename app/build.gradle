@@ -16,14 +16,18 @@ android {
         }
     }
 
-    compileSdk rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
         applicationId "io.github.sdwfqin.quickseed"
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
 
         multiDexEnabled true
         signingConfig signingConfigs.sdwfqinSigning
@@ -68,15 +72,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation googleDependencies["lifecycle-livedata-ktx"]
+
+    implementation libs.bundles.core
+
+    implementation libs.androidx.lifecycle.livedata
     // hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
-    implementation project(':sampleCommonLibrary')
+    implementation project(path: ':sampleCommonLibrary')
 
-    kapt compilerDependencies["arouter-compiler"]
-    kapt compilerDependencies["arch-compiler"]
+    kapt libs.arouter.compiler
+    kapt libs.qmui.arch.compiler
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }

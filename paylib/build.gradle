@@ -3,18 +3,18 @@ plugins {
     id 'kotlin-android'
 }
 
-version = rootProject.ext.versionName
+version = libs.versions.versionName.get()
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     lintOptions {
         abortOnError false
     }
 
     defaultConfig {
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -24,17 +24,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation googleDependencies["core-ktx"]
-    api netWorkDependencies["okhttp"]
-    api utilsDependencies["gson"]
-    api thirdDependencies["wechat-sdk-mta"]
+    api libs.bundles.core
+
+    api libs.okhttp.core
+    api libs.google.gson
+
+    api libs.wechat
     api (name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
 }
 

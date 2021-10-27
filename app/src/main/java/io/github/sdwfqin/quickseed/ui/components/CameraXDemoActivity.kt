@@ -15,11 +15,12 @@ import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.*
 import androidx.camera.core.ImageCapture.OutputFileOptions
 import androidx.camera.core.ImageCapture.OutputFileResults
-import androidx.camera.extensions.HdrImageCaptureExtender
-import androidx.camera.extensions.HdrPreviewExtender
+import androidx.camera.extensions.ExtensionMode
+import androidx.camera.extensions.ExtensionsManager
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
@@ -37,6 +38,7 @@ import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils
 import io.github.sdwfqin.samplecommonlibrary.utils.qrbarscan.DecodeCodeTools
 import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListener
 import io.github.sdwfqin.samplecommonlibrary.view.CameraXPreviewViewTouchListener.CustomTouchListener
+import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 
@@ -52,7 +54,6 @@ import java.util.concurrent.TimeUnit
 @Route(path = ArouterConstants.COMPONENTS_CAMERAX)
 class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXConfig.Provider {
     private val executor by lazy { ContextCompat.getMainExecutor(this) }
-    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var mCameraProvider: ProcessCameraProvider
     private lateinit var mImageCapture: ImageCapture
     private lateinit var mImageAnalysis: ImageAnalysis
@@ -87,11 +88,10 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     private var mQrText = ""
 
     /**
-     * HDR
+     * 扩展
      */
-    private lateinit var mHdrImageCaptureExtender: HdrImageCaptureExtender
-    private lateinit var mHdrPreviewExtender: HdrPreviewExtender
-    private var isStartHdr = true
+    private lateinit var mExtensionsManager: ExtensionsManager
+    private var isEnabledHdr = true
 
     override fun getViewBinding(): ActivityCameraxDemoBinding {
         return ActivityCameraxDemoBinding.inflate(layoutInflater)
@@ -160,7 +160,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                     mAspectRatioInt = AspectRatio.RATIO_16_9
                 }
             }
-            changeCameraConfig(io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_RATIO)
+            changeCameraConfig(CHANGE_TYPE_RATIO)
         }
         /**
          * 切换摄像头
@@ -176,7 +176,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                     mBinding.btnCameraSelector.text = "前"
                 }
             }
-            changeCameraConfig(io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_SELECTOR)
+            changeCameraConfig(CHANGE_TYPE_SELECTOR)
         }
         /**
          * 在相册打开图片
@@ -192,25 +192,36 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
         }
 
         mBinding.btnCameraHdr.setOnClickListener { v ->
-            isStartHdr = !isStartHdr
-            changeCameraConfig(io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_HDR)
+            isEnabledHdr = !isEnabledHdr
+            changeCameraConfig(CHANGE_TYPE_HDR)
         }
     }
 
     private fun initCamera() {
-        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-        initUseCases()
-        cameraProviderFuture.addListener({
+        lifecycleScope.launch {
+            mCameraProvider = ProcessCameraProvider.getInstance(this@CameraXDemoActivity).get()
+            mExtensionsManager = ExtensionsManager.getInstance(this@CameraXDemoActivity).get()
+            initUseCases()
             try {
-                mCameraProvider = cameraProviderFuture.get()
                 mCameraProvider.unbindAll()
+                var cameraSelector = mCameraSelector
+                if (isEnabledHdr) {
+                    cameraSelector = mExtensionsManager.getExtensionEnabledCameraSelector(
+                        mCameraProvider,
+                        mCameraSelector,
+                        ExtensionMode.HDR
+                    )
+                }
                 val camera = mCameraProvider.bindToLifecycle(
-                    this,
-                    mCameraSelector,
+                    this@CameraXDemoActivity,
+                    cameraSelector,
                     mPreview,
                     mImageCapture,
                     mImageAnalysis
                 )
+                if (isEnabledHdr) {
+                    changeCameraConfig(CHANGE_TYPE_HDR)
+                }
                 mCameraInfo = camera.cameraInfo
                 mCameraControl = camera.cameraControl
                 initCameraListener()
@@ -221,7 +232,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             } catch (e: InterruptedException) {
                 LogUtils.e(e)
             }
-        }, executor)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -361,8 +372,6 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             .setTargetAspectRatio(mAspectRatioInt)
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
 
-        mHdrImageCaptureExtender = HdrImageCaptureExtender.create(imageCaptureBuilder)
-
         // 构建图像捕获用例
         mImageCapture = imageCaptureBuilder
             .build();
@@ -398,7 +407,6 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     private fun initPreview() {
         val previewBuilder = Preview.Builder()
             .setTargetAspectRatio(mAspectRatioInt)
-        mHdrPreviewExtender = HdrPreviewExtender.create(previewBuilder)
         mPreview = previewBuilder
             .build()
 
@@ -418,22 +426,23 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
      * 开启Hdr
      */
     private fun initHdr() {
-        if (isStartHdr) {
+        if (isEnabledHdr) {
             mBinding.btnCameraHdr.text = "HDR: 已开启"
-            if (mHdrPreviewExtender.isExtensionAvailable(mCameraSelector)) {
-                mHdrPreviewExtender.enableExtension(mCameraSelector)
+            if (mExtensionsManager.isExtensionAvailable(
+                    mCameraProvider,
+                    mCameraSelector,
+                    ExtensionMode.HDR
+                )
+            ) {
+                mBinding.btnCameraHdr.isEnabled = true
             } else {
                 mBinding.btnCameraHdr.text = "HDR: 不支持的扩展"
                 mBinding.btnCameraHdr.isEnabled = false
-            }
-            if (mHdrImageCaptureExtender.isExtensionAvailable(mCameraSelector)) {
-                mHdrImageCaptureExtender.enableExtension(mCameraSelector)
-            } else {
-                mBinding.btnCameraHdr.text = "HDR: 不支持的扩展"
-                mBinding.btnCameraHdr.isEnabled = false
+                isEnabledHdr = false
             }
         } else {
             mBinding.btnCameraHdr.text = "HDR: 已关闭"
+            isEnabledHdr = false
         }
     }
 
@@ -444,7 +453,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
      */
     private fun changeCameraConfig(changeType: Int) {
         when (changeType) {
-            io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_RATIO -> {
+            CHANGE_TYPE_RATIO -> {
                 if (mCameraProvider.isBound(mImageCapture)) {
                     mCameraProvider.unbind(mImageCapture)
                 }
@@ -452,7 +461,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                 initHdr()
                 mCameraProvider.bindToLifecycle(this, mCameraSelector, mImageCapture)
             }
-            io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_SELECTOR -> {
+            CHANGE_TYPE_SELECTOR -> {
                 mCameraProvider.unbindAll()
                 initUseCases()
                 mCameraProvider.bindToLifecycle(
@@ -463,7 +472,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                     mImageAnalysis
                 )
             }
-            io.github.sdwfqin.quickseed.ui.components.CameraXDemoActivity.Companion.CHANGE_TYPE_HDR -> {
+            CHANGE_TYPE_HDR -> {
                 if (mCameraProvider.isBound(mPreview)) {
                     mCameraProvider.unbind(mPreview)
                 }
@@ -473,7 +482,21 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                 initPreview()
                 initImageCapture()
                 initHdr()
-                mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture)
+                if (isEnabledHdr) {
+                    val hdrCameraSelector = mExtensionsManager.getExtensionEnabledCameraSelector(
+                        mCameraProvider,
+                        mCameraSelector,
+                        ExtensionMode.HDR
+                    )
+                    mCameraProvider.bindToLifecycle(
+                        this,
+                        hdrCameraSelector,
+                        mPreview,
+                        mImageCapture
+                    )
+                } else {
+                    mCameraProvider.bindToLifecycle(this, mCameraSelector, mPreview, mImageCapture)
+                }
             }
         }
     }

@@ -215,7 +215,7 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
     ) {
         PermissionX.init(this)
             .permissions(*perms)
-            .onExplainRequestReason { scope: ExplainScope, deniedList: List<String?>?, beforeRequest: Boolean ->
+            .onExplainRequestReason { scope: ExplainScope, deniedList: List<String>, beforeRequest: Boolean ->
                 scope.showRequestReasonDialog(
                     deniedList, getString(
                         R.string.quick_permissions_title, AppUtils.getAppName()
@@ -224,7 +224,7 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
                     )
                 )
             }
-            .onForwardToSettings { scope: ForwardScope, deniedList: List<String?>? ->
+            .onForwardToSettings { scope: ForwardScope, deniedList: List<String> ->
                 scope.showForwardToSettingsDialog(
                     deniedList, getString(
                         R.string.quick_permissions_forward
@@ -233,7 +233,7 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
                     )
                 )
             }
-            .request { allGranted: Boolean, grantedList: List<String?>?, deniedList: List<String?>? ->
+            .request { allGranted: Boolean, grantedList: List<String>, deniedList: List<String?>? ->
                 if (allGranted) {
                     onPermissionCallback.onSuccess()
                 } else {

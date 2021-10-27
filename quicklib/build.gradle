@@ -4,18 +4,18 @@ plugins {
     id 'kotlin-kapt'
 }
 
-version = rootProject.ext.versionName
+version = libs.versions.versionName.get()
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     lintOptions {
         abortOnError false
     }
 
     defaultConfig {
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -43,37 +43,36 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
 
-    api googleDependencies["core-ktx"]
-    api googleDependencies["lifecycle-runtime-ktx"]
-    api googleDependencies["lifecycle-viewmodel-ktx"]
-    api googleDependencies["kotlinx-coroutines-core"]
-    api googleDependencies["kotlinx-coroutines-android"]
-    api googleDependencies["appcompat"]
-    api googleDependencies["constraintlayout"]
-    api googleDependencies["material"]
+    api libs.bundles.core
 
-    api eventDependencies["rxjava"]
-    api eventDependencies["rxandroid"]
-    api eventDependencies["eventbus"]
+    api libs.androidx.constraintlayout
+    api libs.androidx.lifecycle.runtime
+    api libs.androidx.lifecycle.viewmodel
 
-    api netWorkDependencies["okhttp"]
-    api netWorkDependencies["logging-interceptor"]
+    api libs.google.material
 
-    api viewDependencies["qmui"]
-    api viewDependencies["arch"]
+    api libs.kotlinx.coroutines.core
+    api libs.kotlinx.coroutines.android
 
-    api imageDependencies["photoview"]
+    api libs.reactivex.rxandroid
+    api libs.reactivex.rxjava
+    api libs.eventbus
 
-    api utilsDependencies["utilcodex"]
-    api utilsDependencies["agentweb"]
-    api utilsDependencies["permissionx"]
-    api utilsDependencies["arouter"]
-    api utilsDependencies["gson"]
+    api libs.qmui.core
+    api libs.qmui.arch.core
+    api libs.photoView
+    api libs.utilcodex
+    api libs.agentweb.core
+    api libs.permissionx
+    api libs.arouter.api
+    api libs.google.gson
 
-    implementation project(':imageloader')
-    implementation project(':widget')
+    api libs.bundles.okhttp
 
-    kapt compilerDependencies["arouter-compiler"]
+    api project(path: ':imageloader')
+    api project(path: ':widget')
+
+    kapt libs.arouter.compiler
 }
 
 // deploy

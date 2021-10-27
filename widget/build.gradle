@@ -3,18 +3,18 @@ plugins {
     id 'kotlin-android'
 }
 
-version = rootProject.ext.versionName
+version = libs.versions.versionName.get()
 
 android {
-    compileSdkVersion rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     lintOptions {
         abortOnError false
     }
 
     defaultConfig {
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -35,16 +35,18 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api googleDependencies["core-ktx"]
-    api googleDependencies["appcompat"]
-    api googleDependencies["constraintlayout"]
-    api googleDependencies["material"]
-    api("com.alibaba.android:vlayout:${vlayout}@aar") {
+    api libs.bundles.core
+
+    api libs.androidx.constraintlayout
+    api libs.google.material
+
+    api libs.brvah
+    api libs.utilcodex
+
+    api("com.alibaba.android:vlayout:${libs.versions.vlayout.get()}@aar") {
         transitive = true
     }
-    api viewDependencies["brvah"]
-    api utilsDependencies["utilcodex"]
-    implementation project(':imageloader')
+    implementation project(path: ':imageloader')
 }
 
 File deployConfig = rootProject.file('gradle/deploy.properties')

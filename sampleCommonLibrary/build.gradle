@@ -5,11 +5,15 @@ plugins {
 }
 
 android {
-    compileSdk rootProject.ext.androidVersion.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
-        minSdk rootProject.ext.androidVersion.minSdkVersion
-        targetSdk rootProject.ext.androidVersion.targetSdkVersion
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -31,31 +35,22 @@ android {
 
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
+    api libs.bundles.core
+    api libs.bundles.retrofit
+    api libs.bundles.cameraX
 
-    api netWorkDependencies["retrofit"]
-    api netWorkDependencies["converter-gson"]
-    api netWorkDependencies["converter-scalars"]
-    api netWorkDependencies["adapter-rxjava3"]
+    api libs.brvah
+    api libs.smartrefresh.core
+    api libs.smartrefresh.header
+    api libs.smartrefresh.footer
+    api libs.pickerView
 
-    api viewDependencies["brvah"]
-    api viewDependencies["smartrefresh"]
-    api viewDependencies["smartrefresh-classics"]
-    api viewDependencies["smartrefresh-classics-footer"]
-    api viewDependencies["pickerview"]
+    api libs.matisse
+    api libs.google.zxing
+    api libs.bugly
 
-    api imageDependencies["camera-camera2"]
-    api imageDependencies["camera-view"]
-    api imageDependencies["camera-lifecycle"]
-    api imageDependencies["camera-extensions"]
-    api imageDependencies["matisse"]
-
-    api utilsDependencies["zxing"]
-
-    api thirdDependencies["crashreport_upgrade"]
-//    api 'com.tencent.tinker:tinker-android-lib:1.9.9'
-
-    api project(':imageloader')
-    api project(':quicklib')
-    api project(':paylib')
-    api project(':widget')
+    api project(path: ':imageloader')
+    api project(path: ':quicklib')
+    api project(path: ':paylib')
+    api project(path: ':widget')
 }

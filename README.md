@@ -7,7 +7,7 @@
 > 最低支持api21
 
     minSdkVersion 21
-    targetSdkVersion 29
+    targetSdkVersion 31
     
 > 开发环境
 
@@ -88,7 +88,7 @@
     ``` gradle
     dependencies {
         // ...
-        api (name: 'alipaySdk-15.7.7-20200702160044', ext: 'aar')
+        api (name: 'alipaysdk-15.8.03.210428205839', ext: 'aar')
     }
     ```
 

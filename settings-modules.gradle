@@ -1,0 +1,7 @@
+include(":app")
+include(":sampleCommonLibrary")
+
+include(":quicklib")
+include(":paylib")
+include(":widget")
+include(":imageloader")
