@@ -1,9 +1,7 @@
-package io.github.sdwfqin.widget.utils;
+package io.github.sdwfqin.widget.utils
 
-import android.graphics.drawable.GradientDrawable;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.graphics.drawable.GradientDrawable
+import java.util.ArrayList
 
 /**
  * 描述：
@@ -11,28 +9,28 @@ import java.util.List;
  * @author zhangqin
  * @date 2018/6/20
  */
-public class WidgetUtils {
-
+object WidgetUtils {
     /**
      * 分割字符串
      *
      * @param str
      * @return
      */
-    public static List<String> subStringToList(String str) {
-        List<String> result = new ArrayList<>();
-        if (!str.isEmpty()) {
-            int len = str.length();
+    @JvmStatic
+    fun subStringToList(str: String): List<String> {
+        val result: MutableList<String> = ArrayList()
+        if (str.isNotEmpty()) {
+            val len = str.length
             if (len <= 1) {
-                result.add(str);
-                return result;
+                result.add(str)
+                return result
             } else {
-                for (int i = 0; i < len; i++) {
-                    result.add(str.substring(i, i + 1));
+                for (i in 0 until len) {
+                    result.add(str.substring(i, i + 1))
                 }
             }
         }
-        return result;
+        return result
     }
 
     /**
@@ -44,11 +42,16 @@ public class WidgetUtils {
      * @param radius      半径角度
      * @return
      */
-    public static GradientDrawable getDrawable(int solidColor, int strokeColor, int strokeWidth, float radius) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(solidColor);
-        drawable.setStroke(strokeWidth, strokeColor);
-        drawable.setCornerRadius(radius);
-        return drawable;
+    fun getDrawable(
+        solidColor: Int,
+        strokeColor: Int,
+        strokeWidth: Int,
+        radius: Float
+    ): GradientDrawable {
+        val drawable = GradientDrawable()
+        drawable.setColor(solidColor)
+        drawable.setStroke(strokeWidth, strokeColor)
+        drawable.cornerRadius = radius
+        return drawable
     }
 }

@@ -17,8 +17,6 @@ import androidx.appcompat.widget.AppCompatEditText;
  */
 public class DecimalEditText extends AppCompatEditText implements TextWatcher {
 
-    private Context mContext;
-
     /**
      * 小数的位数
      */
@@ -30,7 +28,6 @@ public class DecimalEditText extends AppCompatEditText implements TextWatcher {
 
     public DecimalEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
 
         this.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         this.setBackgroundResource(0);

@@ -31,12 +31,6 @@ android {
 
         multiDexEnabled true
         signingConfig signingConfigs.sdwfqinSigning
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -70,6 +64,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
@@ -77,8 +77,8 @@ dependencies {
 
     implementation libs.androidx.lifecycle.livedata
     // hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
     implementation project(path: ':sampleCommonLibrary')
 

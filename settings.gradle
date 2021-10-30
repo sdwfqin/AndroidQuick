@@ -20,6 +20,7 @@ dependencyResolutionManagement {
             version('versionCode', '202008171')
             version('versionName', '4.5.0')
             version('kotlin', '1.5.31')
+            version('hilt', '2.38.1')
             version('camerax', '1.1.0-alpha10')
             version('qmui', '2.0.1')
             version('okhttp', '4.9.1')
@@ -47,6 +48,8 @@ dependencyResolutionManagement {
             alias('google-material').to('com.google.android.material:material:1.4.0')
             alias('google-gson').to('com.google.code.gson:gson:2.8.6')
             alias('google-zxing').to('com.google.zxing:core:3.4.0')
+            alias('hilt-android').to('com.google.dagger', 'hilt-android').versionRef('hilt')
+            alias('hilt-compiler').to('com.google.dagger', 'hilt-compiler').versionRef('hilt')
 
             alias('reactivex-rxandroid').to('io.reactivex.rxjava3:rxandroid:3.0.0')
             alias('reactivex-rxjava').to('io.reactivex.rxjava3:rxjava:3.0.12')

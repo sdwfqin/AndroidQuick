@@ -1,9 +1,5 @@
 buildscript {
 
-    ext {
-        hilt_version = '2.38.1'
-    }
-
     repositories {
         google()
         mavenCentral()
@@ -14,7 +10,7 @@ buildscript {
         // kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}"
         // hilt
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${libs.versions.hilt.get()}"
         // classpath "com.tencent.bugly:tinker-support:1.1.5"
     }
 }
