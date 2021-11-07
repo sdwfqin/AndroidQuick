@@ -20,7 +20,7 @@
             android:id="@+id/test01"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:text="@{viewModel.weatherBean.toString()}"
+            android:text="@{viewModel.uiState.toString()}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -1,12 +1,13 @@
 package io.github.sdwfqin.quickseed.ui.mvvm
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.sdwfqin.quicklib.mvvm.BaseViewModel
 import io.github.sdwfqin.quickseed.data.bean.WeatherBean
 import io.github.sdwfqin.quickseed.data.repository.WeatherRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.*
 import javax.inject.Inject
 
@@ -21,7 +22,10 @@ class WeatherViewModel @Inject constructor(
     private val repository: WeatherRepository
 ) : BaseViewModel() {
 
-    val weatherBean = MutableLiveData<WeatherBean>()
+    // Backing property to avoid state updates from other classes
+    private val _uiState = MutableStateFlow<UiState>(UiState.Startup)
+    // The UI collects from this StateFlow to get its state updates
+    val uiState: StateFlow<UiState> = _uiState
 
     // liveData KTX 测试
     val weatherBean2 = liveData {
@@ -36,17 +40,16 @@ class WeatherViewModel @Inject constructor(
 
     fun loadWeather() {
 
-        isLoading.postValue(true)
-
         val map: Map<String, Any> = HashMap<String, Any>()
 
         launch({
-            weatherBean.postValue(repository.getWeather(map))
-        }, {
-            LogUtils.e(it)
-            networkError.postValue(it)
-        }, {
-            isLoading.postValue(false)
+            _uiState.value = UiState.Success(repository.getWeather(map))
         })
+    }
+
+    sealed class UiState {
+        object Startup : UiState()
+        data class Success(val data: WeatherBean) : UiState()
+        data class Error(val exception: Throwable) : UiState()
     }
 }

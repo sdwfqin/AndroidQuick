@@ -1,8 +1,8 @@
 package io.github.sdwfqin.quicklib.mvvm
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -15,24 +15,28 @@ open class BaseViewModel : ViewModel() {
     /**
      * 加载窗状态
      */
-    val isLoading = MutableLiveData<Boolean>()
+    val eventLoading = MutableSharedFlow<Boolean>()
 
     /**
      * 通用网络请求异常
      */
-    val networkError = MutableLiveData<Throwable>()
+    val eventError = MutableSharedFlow<Throwable>()
 
     fun launch(
         block: suspend () -> Unit,
-        error: suspend (Throwable) -> Unit,
-        complete: suspend () -> Unit
+        error: suspend (Throwable) -> Boolean = { true },
+        complete: suspend () -> Boolean = { true }
     ) = viewModelScope.launch {
         try {
             block()
         } catch (e: Throwable) {
-            error(e)
+            if (error(e)) {
+                eventError.emit(e)
+            }
         } finally {
-            complete()
+            if (complete()) {
+                eventLoading.emit(false)
+            }
         }
     }
 }

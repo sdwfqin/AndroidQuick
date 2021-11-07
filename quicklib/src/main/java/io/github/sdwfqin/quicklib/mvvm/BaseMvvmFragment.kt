@@ -1,7 +1,11 @@
 package io.github.sdwfqin.quicklib.mvvm
 
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.blankj.utilcode.util.LogUtils
 import io.github.sdwfqin.quicklib.base.BaseFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * 描述：Mvvm Fragment基类
@@ -14,17 +18,18 @@ abstract class BaseMvvmFragment<V : ViewBinding, VM : BaseViewModel> : BaseFragm
 
     override fun initViewModel() {
         mVm = getViewModel()
-        mVm.isLoading.observe(viewLifecycleOwner, { isLoading: Boolean ->
-            if (isLoading) {
-                mBaseActivity.showProgress()
-            } else {
-                mBaseActivity.hideProgress()
+        lifecycleScope.launch {
+            mVm.eventLoading.collect {
+                if (it) {
+                    mBaseActivity.showProgress()
+                } else {
+                    mBaseActivity.hideProgress()
+                }
             }
-        })
-        mVm.networkError.observe(
-            this,
-            { throwable: Throwable -> commonNetworkErrorListener(throwable) }
-        )
+            mVm.eventError.collect {
+                commonNetworkErrorListener(it)
+            }
+        }
     }
 
     /**
@@ -36,6 +41,7 @@ abstract class BaseMvvmFragment<V : ViewBinding, VM : BaseViewModel> : BaseFragm
      * 通用网络异常回掉
      */
     protected fun commonNetworkErrorListener(throwable: Throwable) {
+        LogUtils.e(throwable)
         // TODO 其实这里可以写一下默认处理方式，可以在业务模块写网络异常处理
     }
 }
