@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--文字-->
+    <dimen name="text_large_extra">18dp</dimen>
+    <dimen name="text_large">16dp</dimen>
+    <dimen name="text_medium">14dp</dimen>
+    <dimen name="text_small">12dp</dimen>
+
+    <!--边距-->
+    <dimen name="padding_large_extra">20dp</dimen>
+    <dimen name="padding_large">18dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_mini">8dp</dimen>
+    <dimen name="padding_mini_extra">4dp</dimen>
+
+    <!--分割线-->
+    <dimen name="divide">1px</dimen>
+</resources>

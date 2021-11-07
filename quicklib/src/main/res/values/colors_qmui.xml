@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="btn_filled_blue_bg_disabled">@color/color_button_disabled_background</color>
+    <color name="btn_filled_blue_bg_normal">@color/color_button_primary_background</color>
+    <color name="btn_filled_blue_bg_pressed">@color/color_button_primary_background</color>
+    <color name="btn_ghost_blue_border_disabled">@color/color_button_disabled_border</color>
+    <color name="btn_ghost_blue_border_normal">@color/color_button_primary_border</color>
+    <color name="btn_ghost_blue_border_pressed">@color/color_button_primary_border</color>
+    <color name="btn_ghost_blue_text_disabled">@color/color_button_disabled_text</color>
+    <color name="btn_ghost_blue_text_normal">@color/color_button_primary_text</color>
+    <color name="btn_ghost_blue_text_pressed">@color/color_button_primary_text</color>
+    <color name="qmui_config_color_background">@color/color_background_base</color>
+    <color name="qmui_config_color_background_pressed">@color/color_background_base</color>
+    <color name="qmui_config_color_black">@color/color_text_regular</color>
+    <color name="qmui_config_color_blue">@color/color_primary</color>
+    <color name="qmui_config_color_gray_1">@color/color_text_regular</color>
+    <color name="qmui_config_color_gray_2">@color/color_text_regular</color>
+    <color name="qmui_config_color_gray_3">@color/color_text_secondary</color>
+    <color name="qmui_config_color_gray_4">@color/color_text_secondary</color>
+    <color name="qmui_config_color_gray_5">@color/color_text_secondary</color>
+    <color name="qmui_config_color_gray_6">@color/color_text_placeholder</color>
+    <color name="qmui_config_color_gray_7">@color/color_text_placeholder</color>
+    <color name="qmui_config_color_gray_8">@color/color_text_placeholder</color>
+    <color name="qmui_config_color_gray_9">@color/color_text_placeholder</color>
+    <color name="qmui_config_color_link">@color/color_primary</color>
+    <color name="qmui_config_color_pressed">@color/color_background_base</color>
+    <color name="qmui_config_color_pure_black">#000000</color>
+    <color name="qmui_config_color_separator">@color/color_divide</color>
+    <color name="qmui_config_color_separator_darken">@color/color_divide</color>
+    <color name="qmui_config_color_transparent">#00000000</color>
+    <color name="qmui_config_color_white">@color/color_background</color>
+    <color name="qmui_drawable_color_list_pressed">@color/color_background_base</color>
+    <color name="qmui_drawable_color_list_separator">@color/color_divide</color>
+</resources>
