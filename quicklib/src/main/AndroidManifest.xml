@@ -18,12 +18,12 @@
     <application>
         <activity
             android:name=".webview.QuickWebViewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".webview.QuickWebViewLoadDataActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".imagepreview.ImagePreviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
     </application>
 </manifest>

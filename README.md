@@ -16,7 +16,7 @@
 
 ## 必读事项
 
-1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，参考`app`中的`theme.xml`，主题请继承`QuickTheme`
+1. `quicklib`依赖`QMUI`，需要在主项目中配置`QMUI`的`styles`，参考`app`中的`theme.xml`，主题请继承`QuickBaseTheme`
 2. 需要注意quicklib中的QuickInit类，需要的话请在Application中初始化(一般用不到)。
 3. 请在module的`build.gradle#android`中添加如下代码：
 

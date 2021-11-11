@@ -1,6 +1,5 @@
 package io.github.sdwfqin.samplecommonlibrary.base;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -21,11 +20,6 @@ public abstract class SampleBaseMvvmActivity<V extends ViewBinding, VM extends B
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     @Override
