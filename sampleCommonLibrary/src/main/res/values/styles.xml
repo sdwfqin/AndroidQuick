@@ -1,39 +1,20 @@
 <resources>
 
+    <style name="AppTheme" parent="QuickBaseTheme">
+        <item name="QMUITopBarStyle">@style/QDTopBar</item>
+    </style>
+
     <!--**********************************************
         *             qmui topbar style              *
         ***********************************************-->
     <style name="QDTopBar" parent="QMUI.TopBar">
-        <item name="qmui_bottomDividerHeight">0px</item>
+        <item name="qmui_bottomDividerHeight">@dimen/divide</item>
+        <item name="qmui_bottomDividerColor">@color/color_divide</item>
         <item name="qmui_topbar_left_back_drawable_id">@drawable/ic_back</item>
-        <item name="android:paddingLeft">0dp</item>
         <item name="qmui_topbar_image_btn_width">38dp</item>
-    </style>
-
-    <style name="transactionTheme" parent="AppTheme">
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowActionModeOverlay">true</item>
-    </style>
-
-    <style name="transactionDialog" parent="@android:style/Theme.Dialog">
-        <!--边框-->
-        <item name="android:windowFrame">@null</item>
-        <!--是否浮现在activity之上-->
-        <item name="android:windowIsFloating">true</item>
-        <!--半透明-->
-        <item name="android:windowIsTranslucent">false</item>
-        <!--无标题-->
-        <item name="android:windowNoTitle">true</item>
-        <!--背景透明-->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!--模糊-->
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="qmui_topbar_title_color">@color/color_navbar_title</item>
+        <item name="qmui_topbar_subtitle_color">@color/color_navbar_subtitle</item>
+        <item name="android:background">@color/color_navbar_background</item>
     </style>
 
 </resources>

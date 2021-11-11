@@ -52,6 +52,6 @@ class RadiusTransformation internal constructor(context: Context, var radius: In
     override fun updateDiskCacheKey(messageDigest: MessageDigest) {}
 
     init {
-        this.radius = DisplayUtil.dp2px(context, radius.toFloat())
+        this.radius = DisplayUtil.dp2px(radius.toFloat())
     }
 }

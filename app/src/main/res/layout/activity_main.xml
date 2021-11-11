@@ -19,9 +19,9 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:textSize="12sp"
-        app:qmui_skin_background="?attr/app_content_bg_primary_color"
+        android:background="@color/color_background_light"
         app:qmui_tab_icon_position="top"
-        app:qmui_topDividerColor="?attr/qmui_skin_support_color_separator"
+        app:qmui_topDividerColor="@color/color_divide"
         app:qmui_topDividerHeight="1px" />
 
 </LinearLayout>

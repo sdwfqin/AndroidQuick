@@ -3,8 +3,11 @@
 
     <style name="QuickBaseTheme" parent="QMUI.Compat.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primaryDark</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+
+        <item name="android:windowBackground">@color/color_background_base</item>
+        <item name="android:listDivider">@color/color_divide</item>
     </style>
 
 </resources>

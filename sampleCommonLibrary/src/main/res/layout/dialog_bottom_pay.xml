@@ -21,12 +21,12 @@
                 android:layout_height="45dp"
                 android:gravity="center"
                 android:text="选择支付方式"
-                android:textColor="@color/text_black_color" />
+                android:textColor="@color/color_text_primary" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divide_line_color" />
+                android:background="@color/color_divide" />
 
             <RadioGroup
                 android:id="@+id/rg"
@@ -46,12 +46,12 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:text="微信"
-                    android:textColor="@color/text_gray_dark_color" />
+                    android:textColor="@color/color_text_regular" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/divide_line_color" />
+                    android:background="@color/color_divide" />
 
                 <RadioButton
                     android:id="@+id/alipay"
@@ -65,7 +65,7 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:text="支付宝"
-                    android:textColor="@color/text_gray_dark_color" />
+                    android:textColor="@color/color_text_regular" />
 
             </RadioGroup>
 
@@ -90,7 +90,7 @@
                 android:layout_height="45dp"
                 android:gravity="center"
                 android:text="付款"
-                android:textColor="@color/red" />
+                android:textColor="@color/color_danger" />
 
         </LinearLayout>
 

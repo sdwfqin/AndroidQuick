@@ -14,7 +14,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.qmuiteam.qmui.skin.QMUISkinManager;
 
 import io.github.sdwfqin.quicklib.R;
 import io.github.sdwfqin.quicklib.databinding.QuickDialogSimpleHintBinding;
@@ -39,7 +38,7 @@ public class QuickSimpleHintDialog extends DialogFragment implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.transactionDialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.quick_dialog_default);
     }
 
     @Nullable
@@ -96,17 +95,11 @@ public class QuickSimpleHintDialog extends DialogFragment implements View.OnClic
         int width = (int) (ScreenUtils.getScreenWidth() * 0.7);
         getDialog().getWindow().setLayout(width, WindowManager.LayoutParams.WRAP_CONTENT);
         getDialog().getWindow().setGravity(Gravity.CENTER);
-        if (mBundle.getBoolean("followSkin", false)) {
-            QMUISkinManager.defaultInstance(getContext()).register(this);
-        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mBundle.getBoolean("followSkin", false)) {
-            QMUISkinManager.defaultInstance(getContext()).unRegister(this);
-        }
     }
 
     @Override
@@ -132,14 +125,6 @@ public class QuickSimpleHintDialog extends DialogFragment implements View.OnClic
 
         public Builder() {
             bundle = new Bundle();
-        }
-
-        /**
-         * 是否支持qmui换肤
-         */
-        public Builder setFollowSkin(boolean followSkin) {
-            bundle.putBoolean("followSkin", followSkin);
-            return this;
         }
 
         public Builder setTitleText(CharSequence titleText) {

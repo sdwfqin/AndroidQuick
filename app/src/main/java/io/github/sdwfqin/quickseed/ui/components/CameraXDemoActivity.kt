@@ -191,7 +191,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             }
         }
 
-        mBinding.btnCameraHdr.setOnClickListener { v ->
+        mBinding.btnCameraHdr.setOnClickListener {
             isEnabledHdr = !isEnabledHdr
             changeCameraConfig(CHANGE_TYPE_HDR)
         }

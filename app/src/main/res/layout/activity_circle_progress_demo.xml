@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="io.github.sdwfqin.quickseed.ui.components.CircleProgressDemoActivity">
@@ -23,10 +22,10 @@
         android:layout_marginTop="20dp"
         android:progress="0"
         app:quick_innerPadding="2dp"
-        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerColor="@color/color_primary"
         app:quick_outerSize="1dp"
         app:quick_progressNormalColor="@color/transparent"
-        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressReachColor="@color/color_primary"
         app:quick_progressStyle="Normal" />
 
     <io.github.sdwfqin.widget.CircleProgressView
@@ -36,10 +35,10 @@
         android:layout_marginTop="20dp"
         android:progress="0"
         app:quick_innerPadding="2dp"
-        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerColor="@color/color_primary"
         app:quick_outerSize="1dp"
         app:quick_progressNormalColor="@color/transparent"
-        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressReachColor="@color/color_primary"
         app:quick_progressStyle="FillInner" />
 
     <io.github.sdwfqin.widget.CircleProgressView
@@ -49,10 +48,10 @@
         android:layout_marginTop="20dp"
         android:progress="0"
         app:quick_innerPadding="2dp"
-        app:quick_outerColor="@color/transparent90_white"
+        app:quick_outerColor="@color/color_primary"
         app:quick_outerSize="1dp"
         app:quick_progressNormalColor="@color/transparent"
-        app:quick_progressReachColor="@color/transparent90_white"
+        app:quick_progressReachColor="@color/color_primary"
         app:quick_progressStyle="FillInnerArc" />
 
     <io.github.sdwfqin.widget.CircleProgressView
@@ -61,7 +60,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:progress="0"
-        app:quick_progressNormalColor="@color/transparent90_white"
+        app:quick_progressNormalColor="@color/color_primary"
         app:quick_progressReachColor="@color/transparent"
         app:quick_progressStyle="FillInnerSquare" />
 

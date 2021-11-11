@@ -83,7 +83,6 @@ dependencies {
     implementation project(path: ':sampleCommonLibrary')
 
     kapt libs.arouter.compiler
-    kapt libs.qmui.arch.compiler
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }

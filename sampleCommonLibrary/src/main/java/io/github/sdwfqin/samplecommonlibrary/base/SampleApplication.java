@@ -8,17 +8,15 @@ import androidx.annotation.NonNull;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
-import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
-import io.github.sdwfqin.quicklib.BuildConfig;
-import io.github.sdwfqin.quicklib.QuickInit;
 import com.tencent.bugly.Bugly;
 
+import io.github.sdwfqin.quicklib.BuildConfig;
+import io.github.sdwfqin.quicklib.QuickInit;
 import io.github.sdwfqin.samplecommonlibrary.R;
-import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager;
 
 /**
  * 描述：tinker热更新配置
@@ -39,8 +37,6 @@ public class SampleApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        QMUISwipeBackActivityManager.init(this);
-
         // 初始化工具类
         initUtils();
         // 只能在某个Activity显示更新弹窗
@@ -48,8 +44,6 @@ public class SampleApplication extends Application {
         Bugly.init(this, "534e5a3930", BuildConfig.DEBUG);
         QuickInit.setBaseUrl(Constants.BASE_URL);
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH);
-
-        QMUISkinCustManager.install(this);
 
         initArouter();
     }
@@ -78,11 +72,6 @@ public class SampleApplication extends Application {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if((newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES){
-            QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_DARK);
-        }else if(QMUISkinCustManager.getCurrentSkin() == QMUISkinCustManager.SKIN_DARK){
-            QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_BLUE);
-        }
     }
 
     /**
@@ -93,13 +82,13 @@ public class SampleApplication extends Application {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
             //全局设置主题颜色
-            layout.setPrimaryColorsId(R.color.frame_gray_background_color, R.color.text_gray_dark_color);
+            layout.setPrimaryColorsId(R.color.color_background_base, R.color.color_text_regular);
             //指定为经典Header，默认是 贝塞尔雷达Header
             return new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate);
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
-                    layout.setPrimaryColorsId(R.color.frame_gray_background_color, R.color.text_gray_dark_color);
+                    layout.setPrimaryColorsId(R.color.color_background_base, R.color.color_text_regular);
                     //指定为经典Footer，默认是 BallPulseFooter
                     return new ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate);
                 }

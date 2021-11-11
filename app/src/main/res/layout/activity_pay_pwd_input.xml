@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:qmui_skin_background="?attr/app_content_bg_color"
     tools:context="io.github.sdwfqin.quickseed.ui.components.PayPwdInputActivity">
 
     <io.github.sdwfqin.widget.PayPwdInputView
