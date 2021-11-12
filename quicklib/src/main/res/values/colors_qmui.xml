@@ -12,7 +12,7 @@
     <color name="qmui_config_color_background">@color/color_background_base</color>
     <color name="qmui_config_color_background_pressed">@color/color_background_base</color>
     <color name="qmui_config_color_black">@color/color_text_regular</color>
-    <color name="qmui_config_color_blue">@color/color_primary</color>
+    <color name="qmui_config_color_blue">@color/colorPrimary</color>
     <color name="qmui_config_color_gray_1">@color/color_text_regular</color>
     <color name="qmui_config_color_gray_2">@color/color_text_regular</color>
     <color name="qmui_config_color_gray_3">@color/color_text_secondary</color>
@@ -22,7 +22,7 @@
     <color name="qmui_config_color_gray_7">@color/color_text_placeholder</color>
     <color name="qmui_config_color_gray_8">@color/color_text_placeholder</color>
     <color name="qmui_config_color_gray_9">@color/color_text_placeholder</color>
-    <color name="qmui_config_color_link">@color/color_primary</color>
+    <color name="qmui_config_color_link">@color/colorPrimary</color>
     <color name="qmui_config_color_pressed">@color/color_background_base</color>
     <color name="qmui_config_color_pure_black">#000000</color>
     <color name="qmui_config_color_separator">@color/color_divide</color>

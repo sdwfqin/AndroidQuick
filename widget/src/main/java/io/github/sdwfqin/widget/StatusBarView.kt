@@ -20,6 +20,6 @@ class StatusBarView @JvmOverloads constructor(
     }
 
     init {
-        setBackgroundResource(R.color.color_primary_dark)
+        setBackgroundResource(R.color.colorPrimaryDark)
     }
 }

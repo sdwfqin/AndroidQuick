@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="取消"
-                android:background="@color/color_primary"
+                android:background="@color/colorPrimary"
                 android:textColor="@color/color_button_primary_text" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -44,7 +44,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="提交"
-                android:background="@color/color_primary"
+                android:background="@color/colorPrimary"
                 android:textColor="@color/color_button_primary_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

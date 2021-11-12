@@ -58,7 +58,7 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.color_primary_dark))
+        BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
         mBinding = getViewBinding()
         initContentView()
         mStatusBar = findViewById(R.id.quick_base_status_bar)

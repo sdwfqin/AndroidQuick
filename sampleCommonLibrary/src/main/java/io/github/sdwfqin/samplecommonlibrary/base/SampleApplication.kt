@@ -3,6 +3,7 @@ package io.github.sdwfqin.samplecommonlibrary.base
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.Utils
@@ -40,6 +41,8 @@ open class SampleApplication : Application() {
         QuickInit.setBaseUrl(Constants.BASE_URL)
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH)
         initArouter()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 
     private fun initArouter() {
@@ -66,8 +69,10 @@ open class SampleApplication : Application() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_NO -> {} // 夜间模式未启用，使用浅色主题
-            Configuration.UI_MODE_NIGHT_YES -> {} // 夜间模式启用，使用深色主题
+            Configuration.UI_MODE_NIGHT_NO -> {
+            } // 夜间模式未启用，使用浅色主题
+            Configuration.UI_MODE_NIGHT_YES -> {
+            } // 夜间模式启用，使用深色主题
         }
     }
 
