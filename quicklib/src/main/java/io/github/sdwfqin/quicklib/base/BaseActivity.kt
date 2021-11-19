@@ -90,11 +90,11 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
         when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_NO -> {
                 // 夜间模式未启用，使用浅色主题
-                reloadActivity()
+                recreate()
             }
             Configuration.UI_MODE_NIGHT_YES -> {
                 // 夜间模式启用，使用深色主题
-                reloadActivity()
+                recreate()
             }
         }
     }
@@ -116,18 +116,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
 
     override fun getActivity(): Activity {
         return this
-    }
-
-    /**
-     * 重启activity
-     */
-    open fun reloadActivity() {
-        val intent:Intent = intent;
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
     }
 
     // ==================== EventBus事件 ====================
