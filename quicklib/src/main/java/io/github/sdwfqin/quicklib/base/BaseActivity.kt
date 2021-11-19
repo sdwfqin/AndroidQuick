@@ -2,6 +2,7 @@ package io.github.sdwfqin.quicklib.base
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -85,6 +86,19 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                // 夜间模式未启用，使用浅色主题
+                reloadActivity()
+            }
+            Configuration.UI_MODE_NIGHT_YES -> {
+                // 夜间模式启用，使用深色主题
+                reloadActivity()
+            }
+        }
+    }
+
     private fun initContentView() {
         val quickBaseViewGroup = this.layoutInflater.inflate(R.layout.quick_activity_base, null)
         mQuickBaseView = quickBaseViewGroup.findViewById(R.id.quick_base_view)
@@ -102,6 +116,18 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
 
     override fun getActivity(): Activity {
         return this
+    }
+
+    /**
+     * 重启activity
+     */
+    open fun reloadActivity() {
+        val intent:Intent = intent;
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 
     // ==================== EventBus事件 ====================

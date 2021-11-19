@@ -16,6 +16,7 @@ import com.tencent.bugly.Bugly
 import io.github.sdwfqin.quicklib.QuickInit
 import io.github.sdwfqin.samplecommonlibrary.BuildConfig
 import io.github.sdwfqin.samplecommonlibrary.R
+import io.github.sdwfqin.samplecommonlibrary.utils.SkinManagerUtils
 
 /**
  * 描述：tinker热更新配置
@@ -42,7 +43,7 @@ open class SampleApplication : Application() {
         QuickInit.setRealPath(Constants.SAVE_REAL_PATH)
         initArouter()
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        SkinManagerUtils.initialize()
     }
 
     private fun initArouter() {

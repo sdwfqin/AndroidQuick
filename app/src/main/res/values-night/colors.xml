@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主题色-->
-    <color name="colorPrimary">#0d1116</color>
-    <color name="colorPrimaryDark">@color/colorPrimary</color>
-    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorPrimary">#409EFF</color>
+    <color name="colorPrimaryDark">#0d1116</color>
+    <color name="colorAccent">#409EFF</color>
 
     <!--基础背景色-->
     <color name="color_background_base">#010408</color>
