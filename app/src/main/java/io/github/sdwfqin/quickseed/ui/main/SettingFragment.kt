@@ -10,7 +10,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog.MenuDialogBuilder
 import io.github.sdwfqin.quicklib.base.BaseFragment
 import io.github.sdwfqin.quickseed.constants.ArouterConstants
 import io.github.sdwfqin.quickseed.databinding.FragmentSettingBinding
-import io.github.sdwfqin.samplecommonlibrary.utils.skin.QMUISkinCustManager
+import io.github.sdwfqin.samplecommonlibrary.utils.SkinManagerUtils
 
 /**
  * 配置页面
@@ -40,13 +40,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     private fun changeSkin() {
-        val items = arrayOf("蓝色（默认）", "黑色")
+        val items = arrayOf("跟随系统", "浅色", "深色")
         MenuDialogBuilder(activity)
             .addItems(items) { dialog: DialogInterface, which: Int ->
-                when (which) {
-                    0 -> QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_BLUE)
-                    1 -> QMUISkinCustManager.changeSkin(QMUISkinCustManager.SKIN_DARK)
-                }
+                SkinManagerUtils.changeSkin(which)
                 ToastUtils.showShort("你选择了 " + items[which])
                 dialog.dismiss()
             }

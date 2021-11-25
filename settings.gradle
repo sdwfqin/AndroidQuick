@@ -65,8 +65,6 @@ dependencyResolutionManagement {
             alias('okio').to('com.squareup.okio:okio:2.10.0')
 
             alias('qmui-core').to('com.qmuiteam', 'qmui').versionRef('qmui')
-            alias('qmui-arch-core').to('com.qmuiteam', 'arch').versionRef('qmui')
-            alias('qmui-arch-compiler').to('com.qmuiteam', 'arch-compiler').versionRef('qmui')
             alias('brvah').to('com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6')
             alias('smartrefresh-core').to('com.scwang.smart', 'refresh-layout-kernel').versionRef('smartrefresh')
             alias('smartrefresh-header').to('com.scwang.smart', 'refresh-header-classics').versionRef('smartrefresh')

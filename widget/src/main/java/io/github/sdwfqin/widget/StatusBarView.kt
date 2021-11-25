@@ -3,7 +3,6 @@ package io.github.sdwfqin.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.BarUtils
 
 class StatusBarView @JvmOverloads constructor(
@@ -21,6 +20,6 @@ class StatusBarView @JvmOverloads constructor(
     }
 
     init {
-        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark))
+        setBackgroundResource(R.color.colorPrimaryDark)
     }
 }

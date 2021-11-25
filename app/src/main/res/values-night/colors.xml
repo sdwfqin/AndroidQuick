@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题色-->
+    <color name="colorPrimary">#409EFF</color>
+    <color name="colorPrimaryDark">#0d1116</color>
+    <color name="colorAccent">#409EFF</color>
+
+    <!--基础背景色-->
+    <color name="color_background_base">#010408</color>
+    <!--背景浅色-->
+    <color name="color_background_light">#0d1116</color>
+    <!--背景深色-->
+    <color name="color_background_dark">#FFFFFF</color>
+
+    <!--分割线颜色-->
+    <color name="color_divide">#0FFFFFFF</color>
+
+    <!--文字颜色-->
+    <!--主要文字颜色-->
+    <color name="color_text_primary">#ffffff</color>
+    <!--常规文字颜色-->
+    <color name="color_text_regular">#c8d1d9</color>
+    <!--次要文字颜色-->
+    <color name="color_text_secondary">#8b949e</color>
+    <!--占位文字颜色-->
+    <color name="color_text_placeholder">#c3c3c5</color>
+
+    <!--边框颜色-->
+    <!--基础边框颜色-->
+    <color name="color_border_base">#30363c</color>
+    <!--二级边框颜色-->
+    <color name="color_border_light">#2b2b2b</color>
+
+    <!-- 导航栏颜色 -->
+    <color name="color_navbar_background">@color/colorPrimaryDark</color>
+    <!-- 导航栏标题颜色 -->
+    <color name="color_navbar_title">#f0f6fb</color>
+    <!-- 导航栏次标题颜色 -->
+    <color name="color_navbar_subtitle">#f0f6fb</color>
+
+
+    <!--功能颜色-->
+    <!--成功颜色-->
+    <color name="color_success">#67C23A</color>
+    <!--警告颜色-->
+    <color name="color_warning">#E6A23C</color>
+    <!--危险颜色-->
+    <color name="color_danger">#F56C6C</color>
+    <!--信息颜色-->
+    <color name="color_info">#909399</color>
+
+    <!--按钮颜色-->
+    <!--默认-->
+    <color name="color_button_default_text">@color/color_text_secondary</color>
+    <color name="color_button_default_background_default">@color/color_background_light</color>
+    <color name="color_button_border_default">@color/color_border_base</color>
+    <!--主要-->
+    <color name="color_button_primary_text">#c8d1d9</color>
+    <color name="color_button_primary_background">@color/colorPrimary</color>
+    <color name="color_button_primary_border">@color/colorPrimary</color>
+    <!--危险-->
+    <color name="color_button_danger_text">#c8d1d9</color>
+    <color name="color_button_danger_background">@color/color_danger</color>
+    <color name="color_button_danger_border">@color/color_danger</color>
+    <!--禁用-->
+    <color name="color_button_disabled_text">#C0C4CC</color>
+    <color name="color_button_disabled_background">@color/color_background_light</color>
+    <color name="color_button_disabled_border">@color/color_border_base</color>
+</resources>

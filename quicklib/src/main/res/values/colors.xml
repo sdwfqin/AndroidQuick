@@ -1,70 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主题色-->
-    <color name="colorPrimary">#009BE3</color>
-    <!--黑色主题色-->
-    <color name="colorDarkPrimary">#000000</color>
-    <!--界面白色背景-->
-    <color name="frame_white_background_color">#ffffff</color>
-    <!--界面浅灰色背景-->
-    <color name="frame_gray_background_color">#F5F5F5</color>
-    <color name="frame_dark_background_color">#49505A</color>
-    <color name="frame_dark_primary_background_color">#212832</color>
-    <!--item分割线颜色-->
-    <color name="divide_line_color">#cccccc</color>
-    <!--黑色字体颜色-->
-    <color name="text_black_color">#2a2a2a</color>
-    <color name="text_black_dark_color">#99A0AA</color>
-    <!--浅灰色字体颜色-->
-    <color name="text_gray_light_color">#999999</color>
-    <!--深灰色字体颜色-->
-    <color name="text_gray_dark_color">#666666</color>
-    <!--白色字体颜色-->
-    <color name="text_white_color">#ffffff</color>
-    <color name="text_white_dark_color">#99A0AA</color>
+    <color name="colorPrimary">#409EFF</color>
+    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorAccent">@color/colorPrimary</color>
 
-    <!--透明色 -->
+    <!--基础背景色-->
+    <color name="color_background_base">#F5F7FA</color>
+    <!--背景浅色-->
+    <color name="color_background_light">#FFFFFF</color>
+    <!--背景深色-->
+    <color name="color_background_dark">#000000</color>
+
+    <!--分割线颜色-->
+    <color name="color_divide">#0F000000</color>
+
+    <!--文字颜色-->
+    <!--主要文字颜色-->
+    <color name="color_text_primary">#303133</color>
+    <!--常规文字颜色-->
+    <color name="color_text_regular">#606266</color>
+    <!--次要文字颜色-->
+    <color name="color_text_secondary">#909399</color>
+    <!--占位文字颜色-->
+    <color name="color_text_placeholder">#C0C4CC</color>
+
+    <!--边框颜色-->
+    <!--基础边框颜色-->
+    <color name="color_border_base">#DCDFE6</color>
+    <!--二级边框颜色-->
+    <color name="color_border_light">#E4E7ED</color>
+
+    <!-- 导航栏颜色 -->
+    <color name="color_navbar_background">@color/colorPrimaryDark</color>
+    <!-- 导航栏标题颜色 -->
+    <color name="color_navbar_title">#FFFFFF</color>
+    <!-- 导航栏次标题颜色 -->
+    <color name="color_navbar_subtitle">#FFFFFF</color>
+
+
+    <!--功能颜色-->
+    <!--成功颜色-->
+    <color name="color_success">#67C23A</color>
+    <!--警告颜色-->
+    <color name="color_warning">#E6A23C</color>
+    <!--危险颜色-->
+    <color name="color_danger">#F56C6C</color>
+    <!--信息颜色-->
+    <color name="color_info">#909399</color>
+
+    <!--按钮颜色-->
+    <!--默认-->
+    <color name="color_button_default_text">@color/color_text_secondary</color>
+    <color name="color_button_default_background_default">@color/color_background_light</color>
+    <color name="color_button_border_default">@color/color_border_base</color>
+    <!--主要-->
+    <color name="color_button_primary_text">#FFFFFF</color>
+    <color name="color_button_primary_background">@color/colorPrimary</color>
+    <color name="color_button_primary_border">@color/colorPrimary</color>
+    <!--危险-->
+    <color name="color_button_danger_text">#FFFFFF</color>
+    <color name="color_button_danger_background">@color/color_danger</color>
+    <color name="color_button_danger_border">@color/color_danger</color>
+    <!--禁用-->
+    <color name="color_button_disabled_text">#C0C4CC</color>
+    <color name="color_button_disabled_background">@color/color_background_light</color>
+    <color name="color_button_disabled_border">@color/color_border_base</color>
+
     <color name="transparent">#00000000</color>
-    <!--白色 -->
-    <color name="white">#FFFFFF</color>
-    <!--象牙色 -->
-    <color name="ivory">#FFFFF0</color>
-    <!--黄色 -->
-    <color name="yellow">#FFFF00</color>
-    <!--桃色 -->
-    <color name="peachpuff">#FFDAB9</color>
-    <!--金色 -->
-    <color name="gold">#FFD700</color>
-    <!--粉红色 -->
-    <color name="pink">#FFC0CB</color>
-    <!--橙色 -->
-    <color name="orange">#FFA500</color>
-    <!--红橙色 -->
-    <color name="orangered">#FF4500</color>
-    <!--深粉红色 -->
-    <color name="deeppink">#FF1493</color>
-    <!--紫红色 -->
-    <color name="fuchsia">#FF00FF</color>
-    <!--红色 -->
-    <color name="red">#FF0000</color>
-    <!--褐色 -->
-    <color name="brown">#A52A2A</color>
-    <!--赭色 -->
-    <color name="sienna">#A0522D</color>
-    <!--灰色 -->
-    <color name="gray">#808080</color>
-    <!--橄榄色 -->
-    <color name="olive">#808000</color>
-    <!--紫色 --> 
-    <color name="purple">#800080</color>
-    <!--碧绿色 -->
-    <color name="aquamarine">#7FFFD4</color>
-    <!--青色 -->
-    <color name="cyan">#00FFFF</color>
-    <!--绿色 -->
-    <color name="green">#008000</color>
-    <!--蓝色 -->
-    <color name="blue">#0000FF</color>
-    <!--黑色 -->
-    <color name="black">#000000</color>
+    <color name="transparent05">#0B000000</color>
+    <color name="transparent10">#1A000000</color>
+    <color name="transparent20">#33000000</color>
+    <color name="transparent30">#4D000000</color>
+    <color name="transparent40">#66000000</color>
+    <color name="transparent50">#80000000</color>
+    <color name="transparent60">#9A000000</color>
+    <color name="transparent70">#B3000000</color>
+    <color name="transparent80">#CC000000</color>
+    <color name="transparent90">#E5000000</color>
+    <color name="transparent100">#FF000000</color>
+
+    <color name="transparent_white">#00ffffff</color>
+    <color name="transparent10_white">#1Affffff</color>
+    <color name="transparent20_white">#33ffffff</color>
+    <color name="transparent30_white">#4Dffffff</color>
+    <color name="transparent40_white">#66ffffff</color>
+    <color name="transparent50_white">#80ffffff</color>
+    <color name="transparent60_white">#9Affffff</color>
+    <color name="transparent70_white">#B3ffffff</color>
+    <color name="transparent80_white">#CCffffff</color>
+    <color name="transparent90_white">#E5ffffff</color>
+    <color name="transparent100_white">#FFffffff</color>
+
 </resources>

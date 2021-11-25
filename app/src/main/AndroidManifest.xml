@@ -12,7 +12,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,34 +23,34 @@
 
         <activity
             android:name=".ui.components.PictureUploadActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.PayPwdInputActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.CustomWebviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".IntroActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.CameraXDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.ShowSvgActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.WebViewMainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.WindowFloatAndScreenshotActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.components.CircleProgressDemoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".ui.mvvm.WeatherMvvmActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"

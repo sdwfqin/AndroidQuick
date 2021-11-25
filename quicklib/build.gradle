@@ -59,7 +59,6 @@ dependencies {
     api libs.eventbus
 
     api libs.qmui.core
-    api libs.qmui.arch.core
     api libs.photoView
     api libs.utilcodex
     api libs.agentweb.core

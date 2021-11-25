@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:qmui_skin_background="?attr/app_content_bg_color"
         tools:context=".ui.mvvm.WeatherMvvmActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -24,7 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_skin_text_color="?attr/app_text_black_color" />
+            android:textColor="@color/color_text_primary" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/test02"
@@ -35,7 +34,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/test01"
-            app:qmui_skin_text_color="?attr/app_text_black_color" />
+            android:textColor="@color/color_text_primary" />
 
         <Button
             android:id="@+id/btn_refresh"

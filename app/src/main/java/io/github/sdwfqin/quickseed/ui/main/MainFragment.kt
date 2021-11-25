@@ -95,7 +95,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun showCustomDialog() {
         val hintDialog = QuickSimpleHintDialog.Builder()
-            .setFollowSkin(true)
             .setTitleText("热更新测试33333")
             .setSubmitText("哈哈")
             .setCancelText("取消")

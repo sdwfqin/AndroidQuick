@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:qmui_skin_background="?attr/app_content_bg_primary_color">
+        android:background="@color/color_background_light">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -19,8 +19,7 @@
             android:layout_height="120dp"
             android:gravity="center"
             android:text="亲，产品已激活成功，\n欢迎使用该产品！"
-            android:textColor="@color/black"
-            app:qmui_skin_text_color="?attr/app_text_black_color" />
+            android:textColor="@color/color_text_primary" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -34,8 +33,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="取消"
-                app:qmui_skin_background="?attr/app_primary_color"
-                app:qmui_skin_text_color="?attr/app_text_white_color" />
+                android:background="@color/colorPrimary"
+                android:textColor="@color/color_button_primary_text" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/submit"
@@ -45,8 +44,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="提交"
-                app:qmui_skin_background="?attr/app_primary_color"
-                app:qmui_skin_text_color="?attr/app_text_white_color" />
+                android:background="@color/colorPrimary"
+                android:textColor="@color/color_button_primary_text" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

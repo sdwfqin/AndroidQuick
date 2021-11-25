@@ -2,16 +2,19 @@ package io.github.sdwfqin.quicklib.base
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.permissionx.guolindev.PermissionX
 import com.permissionx.guolindev.request.ExplainScope
 import com.permissionx.guolindev.request.ForwardScope
-import com.qmuiteam.qmui.arch.QMUIActivity
 import com.qmuiteam.qmui.widget.QMUITopBarLayout
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import io.github.sdwfqin.quicklib.R
@@ -28,7 +31,7 @@ import org.greenrobot.eventbus.ThreadMode
  *
  * @author 张钦
  */
-abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
+abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivity {
 
     protected lateinit var mContext: Activity
     protected lateinit var mBinding: V
@@ -56,6 +59,7 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
         mBinding = getViewBinding()
         initContentView()
         mStatusBar = findViewById(R.id.quick_base_status_bar)
@@ -79,6 +83,19 @@ abstract class BaseActivity<V : ViewBinding> : QMUIActivity(), IBaseActivity {
         super.onStop()
         if (isRegisterEventBus) {
             EventBusUtils.unregister(this)
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                // 夜间模式未启用，使用浅色主题
+                recreate()
+            }
+            Configuration.UI_MODE_NIGHT_YES -> {
+                // 夜间模式启用，使用深色主题
+                recreate()
+            }
         }
     }
 
