@@ -52,14 +52,11 @@ dependencyResolutionManagement {
             alias('hilt-android').to('com.google.dagger', 'hilt-android').versionRef('hilt')
             alias('hilt-compiler').to('com.google.dagger', 'hilt-compiler').versionRef('hilt')
 
-            alias('reactivex-rxandroid').to('io.reactivex.rxjava3:rxandroid:3.0.0')
-            alias('reactivex-rxjava').to('io.reactivex.rxjava3:rxjava:3.0.12')
             alias('eventbus').to('org.greenrobot:eventbus:3.2.0')
 
             alias('retrofit-core').to('com.squareup.retrofit2', 'retrofit').versionRef('retrofit')
             alias('retrofit-converter-gson').to('com.squareup.retrofit2', 'converter-gson').versionRef('retrofit')
             alias('retrofit-converter-scalars').to('com.squareup.retrofit2', 'converter-scalars').versionRef('retrofit')
-            alias('retrofit-adapter-rxjava3').to('com.squareup.retrofit2', 'adapter-rxjava3').versionRef('retrofit')
             alias('okhttp-core').to('com.squareup.okhttp3', 'okhttp').versionRef('okhttp')
             alias('okhttp-urlconnection').to('com.squareup.okhttp3', 'okhttp-urlconnection').versionRef('okhttp')
             alias('okhttp-logging').to('com.squareup.okhttp3', 'logging-interceptor').versionRef('okhttp')
@@ -89,7 +86,7 @@ dependencyResolutionManagement {
             bundle('core', ['androidx-appcompat', 'androidx-core', 'kotlin-stdlib'])
             bundle('cameraX', ['androidx-camera-camera2', 'androidx-camera-view', 'androidx-camera-extensions', 'androidx-camera-lifecycle'])
             bundle('okhttp', ['okhttp-core', 'okhttp-urlconnection', 'okhttp-logging'])
-            bundle('retrofit', ['retrofit-core', 'retrofit-converter-gson', 'retrofit-converter-scalars', 'retrofit-adapter-rxjava3'])
+            bundle('retrofit', ['retrofit-core', 'retrofit-converter-gson', 'retrofit-converter-scalars'])
         }
     }
 }

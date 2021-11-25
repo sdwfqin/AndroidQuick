@@ -54,8 +54,6 @@ dependencies {
     api libs.kotlinx.coroutines.core
     api libs.kotlinx.coroutines.android
 
-    api libs.reactivex.rxandroid
-    api libs.reactivex.rxjava
     api libs.eventbus
 
     api libs.qmui.core
