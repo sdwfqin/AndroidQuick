@@ -43,7 +43,6 @@ dependencies {
     api libs.smartrefresh.core
     api libs.smartrefresh.header
     api libs.smartrefresh.footer
-    api libs.pickerView
 
     api libs.matisse
     api libs.google.zxing
