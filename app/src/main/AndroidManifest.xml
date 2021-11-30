@@ -55,6 +55,11 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+
+        <service
+            android:name=".services.ScreenRecorderService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaProjection"/>
     </application>
 
 </manifest>

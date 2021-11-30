@@ -1,30 +1,28 @@
-package io.github.sdwfqin.samplecommonlibrary.view
+package io.github.sdwfqin.quickseed.view
 
-import android.app.Application
-import android.content.Intent
-import io.github.sdwfqin.widget.WindowFloatView
-import androidx.appcompat.widget.AppCompatButton
-import android.media.projection.MediaProjection
-import android.hardware.display.VirtualDisplay
-import android.view.WindowManager
-import android.util.DisplayMetrics
-import android.graphics.PixelFormat
-import com.blankj.utilcode.util.ConvertUtils
-import android.graphics.Bitmap
-import com.blankj.utilcode.util.ToastUtils
-import android.hardware.display.DisplayManager
-import android.media.projection.MediaProjectionManager
 import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.media.Image
-import android.media.ImageReader
+import android.media.projection.MediaProjectionManager
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
+import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.LogUtils
-import io.github.sdwfqin.samplecommonlibrary.R
+import com.blankj.utilcode.util.ServiceUtils
+import com.blankj.utilcode.util.ToastUtils
+import io.github.sdwfqin.quickseed.R
+import io.github.sdwfqin.quickseed.services.ScreenRecorderService
+import io.github.sdwfqin.samplecommonlibrary.utils.ScreenCaptureManager
+import io.github.sdwfqin.widget.WindowFloatView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -32,7 +30,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.Exception
 
 /**
  * 悬浮窗View Demo
@@ -45,18 +42,15 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
     private lateinit var mBtnScreenshot: AppCompatButton
     private lateinit var mBtnClose: AppCompatButton
     private lateinit var mIvImg: ImageView
-    private var mScreenWidth = 0
-    private var mScreenHeight = 0
-    private var mScreenDensity = 0
-    private lateinit var mImageReader: ImageReader
-    private var mMediaProjection: MediaProjection
-    private lateinit var mVirtualDisplay: VirtualDisplay
     private var job: Job? = null
 
     init {
         val mediaProjectionManager =
             context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        mMediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data!!)
+        data?.let {
+            val mediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, it)
+            ScreenCaptureManager.instance.init(mediaProjection)
+        }
     }
 
     override fun onCreate(rootView: View, layoutParams: WindowManager.LayoutParams) {
@@ -68,13 +62,6 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
         //获取当前屏幕的像素点
         val metrics = DisplayMetrics()
         getWindowManager().defaultDisplay.getMetrics(metrics)
-        mScreenDensity = metrics.densityDpi
-        mScreenWidth = metrics.widthPixels
-        mScreenHeight = metrics.heightPixels
-        mImageReader =
-            ImageReader.newInstance(mScreenWidth, mScreenHeight, PixelFormat.RGBA_8888, 1)
-        // 获取VirtureDisplay对象
-        getVirtualDisplay()
         initListener()
         /**
          * 允许拖动悬浮窗
@@ -103,10 +90,10 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
     }
 
     private fun startCapture() {
-        val image = mImageReader.acquireLatestImage()
+        val image = ScreenCaptureManager.instance.getScreenImage()
         if (image == null) {
             //开始截屏
-            getVirtualDisplay()
+            ToastUtils.showShort("捕获屏幕图片失败")
             LogUtils.e("getVirtualDisplay")
             show()
         } else {
@@ -123,6 +110,7 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
                             }
                         }
                 }
+
         }
     }
 
@@ -177,30 +165,10 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
             .flowOn(Dispatchers.IO)
     }
 
-    private fun getVirtualDisplay() {
-        mVirtualDisplay = mMediaProjection.createVirtualDisplay(
-            "screen-mirror",
-            mScreenWidth,
-            mScreenHeight,
-            mScreenDensity,
-            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-            mImageReader.surface,
-            null,
-            null
-        )
-    }
-
-    private fun tearDownMediaProjection() {
-        mMediaProjection.stop()
-    }
-
-    private fun stopVirtual() {
-        mVirtualDisplay.release()
-    }
-
     override fun onStop() {
         job?.cancel()
-        stopVirtual()
-        tearDownMediaProjection()
+        ScreenCaptureManager.instance.release()
+        //关闭服务
+        ServiceUtils.stopService(ScreenRecorderService::class.java)
     }
 }

@@ -1,18 +1,18 @@
 package io.github.sdwfqin.quickseed.ui.components;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.projection.MediaProjectionManager;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ToastUtils;
 
 import io.github.sdwfqin.quickseed.databinding.ActivityWindowFloatAndScreenshotBinding;
-import io.github.sdwfqin.samplecommonlibrary.view.QuickWindowFloatView;
+import io.github.sdwfqin.quickseed.services.ScreenRecorderService;
+import io.github.sdwfqin.quickseed.view.QuickWindowFloatView;
 
 import io.github.sdwfqin.samplecommonlibrary.base.SampleBaseActivity;
 import io.github.sdwfqin.quickseed.constants.ArouterConstants;
@@ -31,12 +31,6 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
      * 截图权限
      */
     public static final int REQUEST_MEDIA_PROJECTION = 18;
-    /**
-     * 悬浮窗
-     */
-    public static final int REQUEST_ALERT = 19;
-
-    private MediaProjectionManager mMediaProjectionManager;
 
     @Override
     protected ActivityWindowFloatAndScreenshotBinding getViewBinding() {
@@ -52,53 +46,47 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
     @Override
     protected void initClickListener() {
         mBinding.btnScreenshot.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!Settings.canDrawOverlays(getApplicationContext())) {
-                    //启动Activity让用户授权
-                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                    intent.setData(Uri.parse("package:" + getPackageName()));
-                    startActivityForResult(intent, REQUEST_ALERT);
-                } else {
+            initCheckPermissions(new String[]{Manifest.permission.SYSTEM_ALERT_WINDOW}, new OnPermissionCallback() {
+                @Override
+                public void onSuccess() {
                     requestCapturePermission();
                 }
-            } else {
-                requestCapturePermission();
-            }
+
+                @Override
+                public void onError() {
+                    ToastUtils.showShort("悬浮窗权限已被拒绝");
+                }
+            });
         });
     }
 
     private void requestCapturePermission() {
         //获取截屏的管理器
-        mMediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        startActivityForResult(mMediaProjectionManager.createScreenCaptureIntent(), REQUEST_MEDIA_PROJECTION);
+        MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(), REQUEST_MEDIA_PROJECTION);
     }
 
-    private void showFloat(Intent data) {
+    private void showFloat(int resultCode, Intent data) {
+        QuickWindowFloatView quickWindowFloatView;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            ToastUtils.showShort("当前功能尚未适配Android 10，后续空闲会修改！");
-            return;
+            Intent service = new Intent(this, ScreenRecorderService.class);
+            service.putExtra("code", resultCode);
+            service.putExtra("data", data);
+            startForegroundService(service);
+            quickWindowFloatView = new QuickWindowFloatView(mContext.getApplication(), null);
+        } else {
+            quickWindowFloatView = new QuickWindowFloatView(mContext.getApplication(), data);
         }
-        QuickWindowFloatView quickWindowFloatView = new QuickWindowFloatView(mContext.getApplication(), data);
         quickWindowFloatView.show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_MEDIA_PROJECTION:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    showFloat(data);
-                }
-                break;
-            case REQUEST_ALERT:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Settings.canDrawOverlays(this)) {
-                        requestCapturePermission();
-                    } else {
-                        ToastUtils.showShort("ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝");
-                    }
-                }
+        if (requestCode == REQUEST_MEDIA_PROJECTION) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                showFloat(resultCode, data);
+            }
         }
     }
 }

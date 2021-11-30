@@ -1,5 +1,6 @@
 package io.github.sdwfqin.widget
 
+import android.app.Application
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
@@ -13,7 +14,7 @@ import androidx.annotation.IdRes
  * @author 张钦
  * @date 2020/4/10
  */
-abstract class WindowFloatView(private val context: Context) {
+abstract class WindowFloatView(private val context: Application) {
     private val windowManager: WindowManager =
         context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private val params: WindowManager.LayoutParams = WindowManager.LayoutParams()
@@ -105,7 +106,7 @@ abstract class WindowFloatView(private val context: Context) {
         return isShowing
     }
 
-    fun getContext(): Context {
+    fun getContext(): Application {
         return context
     }
 
