@@ -1,221 +1,182 @@
-package io.github.sdwfqin.widget;
+package io.github.sdwfqin.widget
 
-import android.content.Context;
-import android.graphics.PixelFormat;
-import android.os.Build;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context
+import android.graphics.PixelFormat
+import android.os.Build
+import android.view.*
+import android.view.View.OnTouchListener
+import androidx.annotation.IdRes
 
 /**
  * 悬浮窗View
- * <p>
  *
  * @author 张钦
  * @date 2020/4/10
  */
-public abstract class WindowFloatView {
+abstract class WindowFloatView(private val context: Context) {
+    private val windowManager: WindowManager =
+        context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    private val params: WindowManager.LayoutParams = WindowManager.LayoutParams()
 
-    private Context mContext;
-    private WindowManager mWindowManager;
-    private WindowManager.LayoutParams mParams;
+    private lateinit var rootView: View
 
-    private boolean isShowing = false;
-    private boolean mCreate = false;
-    private View mDecor;
-    private boolean isCanMove = false;
+    //获取当前悬浮窗是否展示
+    private var isShowing = false
+    private var mCreate = false
+    private var isCanMove = false
 
-    public WindowFloatView(@NonNull Context context) {
-        mContext = context;
+    init {
         //窗口管理器
-        mWindowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
         //布局参数
-        mParams = new WindowManager.LayoutParams();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
-            mParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+            params.type = WindowManager.LayoutParams.TYPE_PHONE
         }
-        mParams.format = PixelFormat.RGBA_8888;
-
-        mParams.flags = getWindowFlags();
-
-        mParams.gravity = getWindowGravity();
-        mParams.width = getWidth();
-        mParams.height = getHeight();
+        params.format = PixelFormat.RGBA_8888
+        params.flags = getWindowFlags()
+        params.gravity = getWindowGravity()
+        params.width = getWidth()
+        params.height = getHeight()
         if (getCreateAnimator() != 0) {
-            mParams.windowAnimations = getCreateAnimator();
+            params.windowAnimations = getCreateAnimator()
         }
     }
 
-    public void show() {
+    fun show() {
         if (isShowing) {
-            if (mDecor != null) {
-                mDecor.setVisibility(View.VISIBLE);
-            }
-            return;
+            rootView.visibility = View.VISIBLE
+            return
         }
         if (!mCreate) {
-            dispathOnCreate();
+            dispathOnCreate()
         }
-        mWindowManager.addView(mDecor, mParams);
-        isShowing = true;
-        onStart();
+        windowManager.addView(rootView, params)
+        isShowing = true
+        onStart()
     }
 
-    private void dispathOnCreate() {
+    private fun dispathOnCreate() {
         if (!mCreate) {
-            create();
-            mCreate = true;
+            create()
+            mCreate = true
         }
     }
 
-    private void create() {
-        mDecor = LayoutInflater.from(getContext()).inflate(getLayoutView(), null);
-
-        onCreate(mDecor, mParams);
+    private fun create() {
+        rootView = LayoutInflater.from(context).inflate(getLayoutView(), null)
+        onCreate(rootView, params)
         if (isCanMove) {
-            mDecor.setOnTouchListener(new FloatOnTouchListener());
+            rootView.setOnTouchListener(FloatOnTouchListener())
         }
-
-        //如果集成的有ButterKnife，可以在这里声明ButterKnife.bind(this, mDecor);
-
     }
 
     //留给子类修改布局参数使用。
-    protected void onCreate(View decor, WindowManager.LayoutParams layoutParams) {
+    protected open fun onCreate(rootView: View, layoutParams: WindowManager.LayoutParams) {}
 
-    }
-
-    public void dismiss() {
-        if (mDecor == null || !isShowing) {
-            return;
+    fun dismiss() {
+        if (!isShowing) {
+            return
         }
         try {
-            onStop();
-            mWindowManager.removeViewImmediate(mDecor);
-            //这个地方可以注销ButterKnife
+            onStop()
+            windowManager.removeViewImmediate(rootView)
         } finally {
-            mDecor = null;
-            isShowing = false;
-            mCreate = false;
+            isShowing = false
+            mCreate = false
             //这里可以还原参数
         }
     }
 
-    public void hide() {
-        if (mDecor != null) {
-            mDecor.setVisibility(View.GONE);
-        }
+    fun hide() {
+        rootView.visibility = View.GONE
+    }
+
+    protected fun <T : View> findViewById(@IdRes id: Int): T {
+        return rootView.findViewById(id)
+    }
+
+    fun setCanMove(isCan: Boolean) {
+        isCanMove = isCan
     }
 
     //获取当前悬浮窗是否展示
-    public boolean isShowing() {
-        return isShowing;
+    fun isShowing(): Boolean {
+        return isShowing
     }
 
-    @Nullable
-    protected <T extends View> T findViewById(@IdRes int id) {
-        return mDecor.findViewById(id);
+    fun getContext(): Context {
+        return context
     }
 
-    public void setCanMove(boolean isCan) {
-        if (isCan) {
-            isCanMove = true;
-        } else {
-            isCanMove = false;
-        }
-    }
-
-    private class FloatOnTouchListener implements View.OnTouchListener {
-        private int x;
-        private int y;
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    x = (int) event.getRawX();
-                    y = (int) event.getRawY();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    int nowX = (int) event.getRawX();
-                    int nowY = (int) event.getRawY();
-                    int movedX = nowX - x;
-                    int movedY = nowY - y;
-                    x = nowX;
-                    y = nowY;
-                    mParams.x = mParams.x + movedX;
-                    mParams.y = mParams.y + movedY;
-
-                    // 更新悬浮窗控件布局
-                    mWindowManager.updateViewLayout(v, mParams);
-                    break;
-                default:
-                    break;
-            }
-            return false;
-        }
-    }
-
-    public WindowManager.LayoutParams getParams() {
-        return mParams;
-    }
-
-    public WindowManager getWindowManager() {
-        return mWindowManager;
-    }
-
-    @NonNull
-    protected Context getContext() {
-        return mContext;
+    fun getWindowManager(): WindowManager {
+        return windowManager
     }
 
     /**
      * 悬浮窗布局
      */
-    protected abstract int getLayoutView();
-
-    /**
-     * 高度
-     */
-    protected abstract int getHeight();
-
-    /**
-     * 宽度
-     */
-    protected abstract int getWidth();
-
-    protected int getWindowFlags() {
-        return WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-    }
-
-    protected int getWindowGravity() {
-        return Gravity.LEFT | Gravity.TOP;
-    }
-
-    protected int getCreateAnimator() {
-        return -1;
-    }
+    protected abstract fun getLayoutView(): Int
 
     /**
      * 界面加载完成
      */
-    protected void onStart() {
-
-    }
+    protected open fun onStart() {}
 
     /**
      * 界面销毁
      */
-    protected void onStop() {
+    protected open fun onStop() {}
 
+    /**
+     * 高度
+     */
+    protected abstract fun getHeight(): Int
+
+    /**
+     * 宽度
+     */
+    protected abstract fun getWidth(): Int
+
+    protected open fun getWindowFlags(): Int {
+        return WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
     }
 
+    protected open fun getWindowGravity(): Int {
+        return Gravity.LEFT or Gravity.TOP
+    }
+
+    protected open fun getCreateAnimator(): Int {
+        return -1
+    }
+
+    private inner class FloatOnTouchListener : OnTouchListener {
+
+        private var x = 0
+        private var y = 0
+
+        override fun onTouch(v: View, event: MotionEvent): Boolean {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    x = event.rawX.toInt()
+                    y = event.rawY.toInt()
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val nowX = event.rawX.toInt()
+                    val nowY = event.rawY.toInt()
+                    val movedX = nowX - x
+                    val movedY = nowY - y
+                    x = nowX
+                    y = nowY
+                    params.x = params.x + movedX
+                    params.y = params.y + movedY
+
+                    // 更新悬浮窗控件布局
+                    windowManager.updateViewLayout(v, params)
+                }
+                else -> {}
+            }
+            return false
+        }
+    }
 }

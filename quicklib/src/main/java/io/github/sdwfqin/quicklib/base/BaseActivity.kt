@@ -20,9 +20,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import io.github.sdwfqin.quicklib.R
 import io.github.sdwfqin.quicklib.utils.eventbus.Event
 import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils
-import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager
 import io.github.sdwfqin.widget.StatusBarView
-import io.reactivex.rxjava3.disposables.Disposable
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -52,11 +50,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
      */
     private var mQmuiTipDialog: QMUITipDialog? = null
 
-    /**
-     * Rxjava 生命周期管理
-     */
-    private lateinit var mRxJavaLifecycleManager: RxJavaLifecycleManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
@@ -65,7 +58,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
         mStatusBar = findViewById(R.id.quick_base_status_bar)
         mNavBar = findViewById(R.id.quick_base_nav_bar)
         mContext = this
-        mRxJavaLifecycleManager = RxJavaLifecycleManager(this)
         initViewModel()
         initEventAndData()
         initListener()
@@ -108,10 +100,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
         )
         mQuickBaseView.addView(mBinding.root)
         setContentView(quickBaseViewGroup)
-    }
-
-    protected fun addSubscribe(disposable: Disposable) {
-        mRxJavaLifecycleManager.addDisposable(disposable)
     }
 
     override fun getActivity(): Activity {

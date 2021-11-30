@@ -1,220 +1,206 @@
-package io.github.sdwfqin.samplecommonlibrary.view;
+package io.github.sdwfqin.samplecommonlibrary.view
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
-import android.hardware.display.DisplayManager;
-import android.hardware.display.VirtualDisplay;
-import android.media.Image;
-import android.media.ImageReader;
-import android.media.projection.MediaProjection;
-import android.media.projection.MediaProjectionManager;
-import android.net.Uri;
-import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-
-import com.blankj.utilcode.util.ConvertUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import io.github.sdwfqin.quicklib.utils.rx.RxSchedulersUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.ByteBuffer;
-
-import io.github.sdwfqin.samplecommonlibrary.R;
-import io.github.sdwfqin.widget.WindowFloatView;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.disposables.Disposable;
+import android.app.Application
+import android.content.Intent
+import io.github.sdwfqin.widget.WindowFloatView
+import androidx.appcompat.widget.AppCompatButton
+import android.media.projection.MediaProjection
+import android.hardware.display.VirtualDisplay
+import android.view.WindowManager
+import android.util.DisplayMetrics
+import android.graphics.PixelFormat
+import com.blankj.utilcode.util.ConvertUtils
+import android.graphics.Bitmap
+import com.blankj.utilcode.util.ToastUtils
+import android.hardware.display.DisplayManager
+import android.media.projection.MediaProjectionManager
+import android.app.Activity
+import android.content.Context
+import android.media.Image
+import android.media.ImageReader
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.widget.ImageView
+import com.blankj.utilcode.util.LogUtils
+import io.github.sdwfqin.samplecommonlibrary.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 
 /**
  * 悬浮窗View Demo
- * <p>
  *
  * @author 张钦
  * @date 2020/4/10
  */
-public class QuickWindowFloatView extends WindowFloatView {
+class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatView(context) {
 
-    private AppCompatButton mBtn_screenshot;
-    private AppCompatButton mBtn_close;
-    private ImageView mIv_img;
+    private lateinit var mBtnScreenshot: AppCompatButton
+    private lateinit var mBtnClose: AppCompatButton
+    private lateinit var mIvImg: ImageView
+    private var mScreenWidth = 0
+    private var mScreenHeight = 0
+    private var mScreenDensity = 0
+    private lateinit var mImageReader: ImageReader
+    private var mMediaProjection: MediaProjection
+    private lateinit var mVirtualDisplay: VirtualDisplay
+    private var job: Job? = null
 
-    private int mScreenWidth;
-    private int mScreenHeight;
-    private int mScreenDensity;
-
-    private ImageReader mImageReader;
-    private MediaProjection mMediaProjection;
-    private VirtualDisplay mVirtualDisplay;
-    private Disposable mSubscribe;
-
-    public QuickWindowFloatView(@NonNull Context context, Intent data) {
-        super(context);
-
-        MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) context.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        mMediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data);
+    init {
+        val mediaProjectionManager =
+            context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        mMediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, data!!)
     }
 
-    @Override
-    protected void onCreate(View decor, WindowManager.LayoutParams layoutParams) {
-        super.onCreate(decor, layoutParams);
-
-        mBtn_screenshot = findViewById(R.id.btn_screenshot);
-        mBtn_close = findViewById(R.id.btn_close);
-        mIv_img = findViewById(R.id.iv_img);
+    override fun onCreate(rootView: View, layoutParams: WindowManager.LayoutParams) {
+        super.onCreate(rootView, layoutParams)
+        mBtnScreenshot = findViewById(R.id.btn_screenshot)
+        mBtnClose = findViewById(R.id.btn_close)
+        mIvImg = findViewById(R.id.iv_img)
 
         //获取当前屏幕的像素点
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        mScreenDensity = metrics.densityDpi;
-        mScreenWidth = metrics.widthPixels;
-        mScreenHeight = metrics.heightPixels;
-        mImageReader = ImageReader.newInstance(mScreenWidth, mScreenHeight, PixelFormat.RGBA_8888, 1);
+        val metrics = DisplayMetrics()
+        getWindowManager().defaultDisplay.getMetrics(metrics)
+        mScreenDensity = metrics.densityDpi
+        mScreenWidth = metrics.widthPixels
+        mScreenHeight = metrics.heightPixels
+        mImageReader =
+            ImageReader.newInstance(mScreenWidth, mScreenHeight, PixelFormat.RGBA_8888, 1)
         // 获取VirtureDisplay对象
-        getVirtualDisplay();
-
-        initListener();
-
+        getVirtualDisplay()
+        initListener()
         /**
          * 允许拖动悬浮窗
          */
-        setCanMove(true);
+        setCanMove(true)
     }
 
-    @Override
-    protected int getLayoutView() {
-        return R.layout.layout_float_quick;
+    override fun getLayoutView(): Int {
+        return R.layout.layout_float_quick
     }
 
-    @Override
-    protected int getHeight() {
-        return ConvertUtils.dp2px(200);
+    override fun getHeight(): Int {
+        return ConvertUtils.dp2px(200f)
     }
 
-    @Override
-    protected int getWidth() {
-        return ConvertUtils.dp2px(80);
+    override fun getWidth(): Int {
+        return ConvertUtils.dp2px(80f)
     }
 
-    private void initListener() {
-        mBtn_close.setOnClickListener(v -> {
-            dismiss();
-        });
-        mBtn_screenshot.setOnClickListener(v -> {
-            hide();
-            new Handler().postDelayed(this::startCapture, 100);
-        });
+    private fun initListener() {
+        mBtnClose.setOnClickListener { dismiss() }
+        mBtnScreenshot.setOnClickListener {
+            hide()
+            Handler(Looper.getMainLooper()).postDelayed({ startCapture() }, 100)
+        }
     }
 
-    private void startCapture() {
-        Image image = mImageReader.acquireLatestImage();
+    private fun startCapture() {
+        val image = mImageReader.acquireLatestImage()
         if (image == null) {
             //开始截屏
-            getVirtualDisplay();
-            LogUtils.e("getVirtualDisplay");
-            show();
+            getVirtualDisplay()
+            LogUtils.e("getVirtualDisplay")
+            show()
         } else {
-            //保存截屏
-            mSubscribe = Observable.create((ObservableOnSubscribe<Bitmap>) emitter -> {
-                int width = image.getWidth();
-                int height = image.getHeight();
-                final Image.Plane[] planes = image.getPlanes();
-                final ByteBuffer buffer = planes[0].getBuffer();
+            job = GlobalScope
+                .launch(Dispatchers.Main) {
+                    saveImage(image)
+                        .onCompletion {
+                            show()
+                        }
+                        .collect {
+                            it?.let {
+                                ToastUtils.showShort("截图已经成功保存到相册")
+                                mIvImg.setImageBitmap(it)
+                            }
+                        }
+                }
+        }
+    }
+
+    private fun saveImage(image: Image): Flow<Bitmap?> {
+        return flowOf(image)
+            .map {
+                val width = it.width
+                val height = it.height
+                val planes = it.planes
+                val buffer = planes[0].buffer
                 //每个像素的间距
-                int pixelStride = planes[0].getPixelStride();
+                val pixelStride = planes[0].pixelStride
                 //总的间距
-                int rowStride = planes[0].getRowStride();
-                int rowPadding = rowStride - pixelStride * width;
-                Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
-                bitmap.copyPixelsFromBuffer(buffer);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
-                image.close();
+                val rowStride = planes[0].rowStride
+                val rowPadding = rowStride - pixelStride * width
+                var bitmap = Bitmap.createBitmap(
+                    width + rowPadding / pixelStride,
+                    height,
+                    Bitmap.Config.ARGB_8888
+                )
+                bitmap.copyPixelsFromBuffer(buffer)
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height)
+                it.close()
                 // 判断文件有没有
-                File fileImage = null;
+                var fileImage: File? = null
                 // 保存图片
                 if (bitmap != null) {
                     try {
-                        fileImage = new File(getContext().getExternalMediaDirs()[0], System.currentTimeMillis() + ".jpg");
-
+                        fileImage = File(
+                            getContext().externalMediaDirs[0],
+                            System.currentTimeMillis().toString() + ".jpg"
+                        )
                         if (!fileImage.exists()) {
-                            fileImage.createNewFile();
+                            fileImage.createNewFile()
                         }
-                        FileOutputStream out = new FileOutputStream(fileImage);
-                        if (out != null) {
-                            ToastUtils.showShort("正在保存中...");
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-
-                            out.flush();
-                            out.close();
-                            // 发送广播给相册--更新相册图片
-                            Intent media = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                            Uri contentUri = Uri.fromFile(fileImage);
-                            media.setData(contentUri);
-                            getContext().sendBroadcast(media);
-
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        fileImage = null;
+                        val out = FileOutputStream(fileImage)
+                        ToastUtils.showShort("正在保存中...")
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+                        out.flush()
+                        out.close()
+                        // 发送广播给相册--更新相册图片
+                        val media = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+                        val contentUri = Uri.fromFile(fileImage)
+                        media.data = contentUri
+                        getContext().sendBroadcast(media)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
-
-                if (fileImage != null) {
-                    emitter.onNext(bitmap);
-                }
-                emitter.onComplete();
-            }).compose(RxSchedulersUtils.rxObservableSchedulerHelper())
-                    .subscribe(bitmap -> {
-                        //预览图片
-                        if (bitmap != null) {
-                            ToastUtils.showShort("截图已经成功保存到相册");
-                            mIv_img.setImageBitmap(bitmap);
-                        }
-                    }, throwable -> {
-
-                    }, this::show);
-        }
+                return@map bitmap
+            }
+            .flowOn(Dispatchers.IO)
     }
 
-    private void getVirtualDisplay() {
-        if (mMediaProjection != null) {
-            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
-                    mScreenWidth, mScreenHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                    mImageReader.getSurface(), null, null);
-        }
+    private fun getVirtualDisplay() {
+        mVirtualDisplay = mMediaProjection.createVirtualDisplay(
+            "screen-mirror",
+            mScreenWidth,
+            mScreenHeight,
+            mScreenDensity,
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+            mImageReader.surface,
+            null,
+            null
+        )
     }
 
-    private void tearDownMediaProjection() {
-        if (mMediaProjection != null) {
-            mMediaProjection.stop();
-            mMediaProjection = null;
-        }
+    private fun tearDownMediaProjection() {
+        mMediaProjection.stop()
     }
 
-    private void stopVirtual() {
-        if (mVirtualDisplay == null) {
-            return;
-        }
-        mVirtualDisplay.release();
-        mVirtualDisplay = null;
+    private fun stopVirtual() {
+        mVirtualDisplay.release()
     }
 
-    @Override
-    protected void onStop() {
-        if (mSubscribe != null) {
-            mSubscribe.dispose();
-        }
-        stopVirtual();
-        tearDownMediaProjection();
+    override fun onStop() {
+        job?.cancel()
+        stopVirtual()
+        tearDownMediaProjection()
     }
 }

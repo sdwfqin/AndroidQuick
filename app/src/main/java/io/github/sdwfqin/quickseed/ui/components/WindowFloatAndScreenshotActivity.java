@@ -78,7 +78,7 @@ public class WindowFloatAndScreenshotActivity extends SampleBaseActivity<Activit
             ToastUtils.showShort("当前功能尚未适配Android 10，后续空闲会修改！");
             return;
         }
-        QuickWindowFloatView quickWindowFloatView = new QuickWindowFloatView(mContext, data);
+        QuickWindowFloatView quickWindowFloatView = new QuickWindowFloatView(mContext.getApplication(), data);
         quickWindowFloatView.show();
     }
 
