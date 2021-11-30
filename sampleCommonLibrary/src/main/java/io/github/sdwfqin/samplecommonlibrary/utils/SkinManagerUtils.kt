@@ -18,16 +18,20 @@ object SkinManagerUtils {
     }
 
     fun changeSkin(@NightMode skinMode: Int) {
-        SPUtils.getInstance().put("skin", skinMode)
-        AppCompatDelegate.setDefaultNightMode(skinMode)
+        var mode = skinMode
+        if (mode == 0) {
+            mode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        }
+        SPUtils.getInstance().put("skin", mode)
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     private fun getCurrentSkin(): Int {
-        var skinMode = SPUtils.getInstance().getInt("skin")
-        if (skinMode < 0 || skinMode > 2) {
-            skinMode = 0
+        var mode = SPUtils.getInstance().getInt("skin")
+        if (mode < -1 || mode == 0 || mode > 2) {
+            mode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
-        return skinMode
+        return mode
     }
 
 }

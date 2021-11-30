@@ -79,6 +79,7 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IBaseActivit
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
         when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
             Configuration.UI_MODE_NIGHT_NO -> {
                 // 夜间模式未启用，使用浅色主题
