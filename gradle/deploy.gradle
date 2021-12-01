@@ -83,7 +83,7 @@ publishing {
                 pom.withXml {
                     def root = asNode()
 
-                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、RxJava、EventBus、JetPack、CameraX、base层封装等')
+                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、EventBus、JetPack、CameraX、base层封装等')
 
                     final dependenciesNode = root.appendNode('dependencies')
 
@@ -127,7 +127,7 @@ publishing {
 
                 pom.withXml {
                     def root = asNode()
-                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、RxJava、EventBus、JetPack、CameraX、base层封装等')
+                    root.appendNode('description', '做外包用的快速开发库--微信、支付宝支付（含签名，下单）、自定义View（验证码/密码，九宫格图片上传等）、换肤、图片预览、EventBus、JetPack、CameraX、base层封装等')
                     root.children().last() + pomConfig
                 }
             }

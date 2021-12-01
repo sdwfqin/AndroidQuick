@@ -11,7 +11,6 @@ import io.github.sdwfqin.samplecommonlibrary.base.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
@@ -34,8 +33,7 @@ object AppModule {
     fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL) // 设置OkHttpclient
-                .client(okHttp) // RxJava2
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // 字符串
+                .client(okHttp)
                 .addConverterFactory(ScalarsConverterFactory.create()) // Gson
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

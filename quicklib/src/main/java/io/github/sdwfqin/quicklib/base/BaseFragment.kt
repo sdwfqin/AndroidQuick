@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import io.github.sdwfqin.quicklib.utils.eventbus.Event
 import io.github.sdwfqin.quicklib.utils.eventbus.EventBusUtils
-import io.github.sdwfqin.quicklib.utils.rx.RxJavaLifecycleManager
-import io.reactivex.rxjava3.disposables.Disposable
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -26,7 +24,6 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
     protected lateinit var mBaseActivity: IBaseActivity
     protected lateinit var mContext: Context
     protected lateinit var mInflater: LayoutInflater
-    private lateinit var mRxJavaLifecycleManager: RxJavaLifecycleManager
 
     override fun onAttach(context: Context) {
         mBaseActivity = if (context is IBaseActivity) {
@@ -46,7 +43,6 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         mBinding = getViewBinding(inflater, container, savedInstanceState)
         //指出fragment愿意添加item到选项菜单
         setHasOptionsMenu(true)
-        mRxJavaLifecycleManager = RxJavaLifecycleManager(this)
         return mBinding.root
     }
 
@@ -69,10 +65,6 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         if (isRegisterEventBus) {
             EventBusUtils.unregister(this)
         }
-    }
-
-    protected fun addSubscribe(disposable: Disposable) {
-        mRxJavaLifecycleManager.addDisposable(disposable)
     }
 
     /**
