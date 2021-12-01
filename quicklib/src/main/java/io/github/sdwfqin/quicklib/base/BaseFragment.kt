@@ -51,18 +51,15 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         initViewModel()
         initEventAndData()
         initClickListener()
-    }
 
-    override fun onStart() {
-        super.onStart()
-        if (isRegisterEventBus) {
+        if (isRegisterEventBus()) {
             EventBusUtils.register(this)
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        if (isRegisterEventBus) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (isRegisterEventBus()) {
             EventBusUtils.unregister(this)
         }
     }
@@ -72,17 +69,13 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
      *
      * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
      */
-    protected open val isRegisterEventBus: Boolean
-        get() = false
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onEventBusCome(event: Event<Any?>?) {
-        event?.let { receiveEvent(it) }
+    protected open fun isRegisterEventBus(): Boolean {
+        return false
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun onStickyEventBusCome(event: Event<Any?>?) {
-        event?.let { receiveStickyEvent(it) }
+    fun onEventBusCome(event: Event<Any?>?) {
+        event?.let { receiveEvent(it) }
     }
 
     /**
@@ -91,13 +84,6 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
      * @param event 事件
      */
     protected open fun receiveEvent(event: Event<Any?>) {}
-
-    /**
-     * 接收到分发的粘性事件
-     *
-     * @param event 粘性事件
-     */
-    protected open fun receiveStickyEvent(event: Event<Any?>) {}
 
     protected open fun initViewModel() {}
 
