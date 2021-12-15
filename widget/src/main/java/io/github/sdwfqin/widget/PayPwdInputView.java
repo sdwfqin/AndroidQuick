@@ -33,8 +33,6 @@ public class PayPwdInputView extends AppCompatEditText {
 
     private final static int DEFAULT_HEIGHT = ConvertUtils.dp2px(45);
 
-    private Context mContext;
-
     /**
      * 实心圆的半径
      */
@@ -174,7 +172,6 @@ public class PayPwdInputView extends AppCompatEditText {
      */
     public PayPwdInputView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
 
         // 获取attr
         getAtt(attrs);
@@ -199,7 +196,7 @@ public class PayPwdInputView extends AppCompatEditText {
      * @param attrs
      */
     private void getAtt(AttributeSet attrs) {
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.PayPwdInputView);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PayPwdInputView);
         maxCount = typedArray.getInt(R.styleable.PayPwdInputView_quick_maxCount, maxCount);
         circleColor = typedArray.getColor(R.styleable.PayPwdInputView_quick_circleColor, circleColor);
         textSize = typedArray.getDimension(R.styleable.PayPwdInputView_quick_textSize, textSize);

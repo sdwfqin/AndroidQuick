@@ -20,7 +20,7 @@ public class DecimalEditText extends AppCompatEditText implements TextWatcher {
     /**
      * 小数的位数
      */
-    private int DECIMAL_DIGITS = 1;
+    private int DECIMAL_DIGITS = 2;
 
     public DecimalEditText(Context context) {
         this(context, null);
