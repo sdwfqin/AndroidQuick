@@ -7,9 +7,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.media.Image
 import android.media.projection.MediaProjectionManager
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
@@ -21,6 +21,7 @@ import com.blankj.utilcode.util.ServiceUtils
 import com.blankj.utilcode.util.ToastUtils
 import io.github.sdwfqin.quickseed.R
 import io.github.sdwfqin.quickseed.services.ScreenRecorderService
+import io.github.sdwfqin.samplecommonlibrary.utils.MediaStoreUtils
 import io.github.sdwfqin.samplecommonlibrary.utils.ScreenCaptureManager
 import io.github.sdwfqin.widget.WindowFloatView
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +29,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
 
 /**
  * 悬浮窗View Demo
@@ -103,6 +102,10 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
                         .onCompletion {
                             show()
                         }
+                        .catch {
+                            ToastUtils.showShort("截图保存失败")
+                            LogUtils.e(this.toString())
+                        }
                         .collect {
                             it?.let {
                                 ToastUtils.showShort("截图已经成功保存到相册")
@@ -134,30 +137,19 @@ class QuickWindowFloatView(context: Application, data: Intent?) : WindowFloatVie
                 bitmap.copyPixelsFromBuffer(buffer)
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height)
                 it.close()
-                // 判断文件有没有
-                var fileImage: File? = null
                 // 保存图片
                 if (bitmap != null) {
-                    try {
-                        fileImage = File(
-                            getContext().externalMediaDirs[0],
-                            System.currentTimeMillis().toString() + ".jpg"
-                        )
-                        if (!fileImage.exists()) {
-                            fileImage.createNewFile()
+                    val contentValues = MediaStoreUtils.getImageContentValues()
+                    val external = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    val insertUri = getContext().contentResolver.insert(external, contentValues)
+                    insertUri?.apply {
+                        val fos = getContext().contentResolver.openOutputStream(this)
+                        fos?.apply {
+                            ToastUtils.showShort("正在保存中...")
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
+                            flush()
+                            close()
                         }
-                        val out = FileOutputStream(fileImage)
-                        ToastUtils.showShort("正在保存中...")
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-                        out.flush()
-                        out.close()
-                        // 发送广播给相册--更新相册图片
-                        val media = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-                        val contentUri = Uri.fromFile(fileImage)
-                        media.data = contentUri
-                        getContext().sendBroadcast(media)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
                 }
                 return@map bitmap

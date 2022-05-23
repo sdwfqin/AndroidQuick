@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.ImageFormat
 import android.graphics.Point
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Size
 import android.view.OrientationEventListener
@@ -100,11 +101,17 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     override fun initEventAndData() {
         mStatusBar.visibility = View.GONE
         mNavBar.visibility = View.GONE
-        val perms = arrayOf(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        )
+        val perms = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            arrayOf(
+                Manifest.permission.CAMERA
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
+        }
         initCheckPermissions(perms, object : OnPermissionCallback {
             override fun onSuccess() {
                 initCamera()
@@ -200,14 +207,13 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
     private fun initCamera() {
         lifecycleScope.launch {
             mCameraProvider = ProcessCameraProvider.getInstance(this@CameraXDemoActivity).get()
-            mExtensionsManager = ExtensionsManager.getInstance(this@CameraXDemoActivity).get()
+            mExtensionsManager = ExtensionsManager.getInstanceAsync(this@CameraXDemoActivity, mCameraProvider).get()
             initUseCases()
             try {
                 mCameraProvider.unbindAll()
                 var cameraSelector = mCameraSelector
                 if (isEnabledHdr) {
                     cameraSelector = mExtensionsManager.getExtensionEnabledCameraSelector(
-                        mCameraProvider,
                         mCameraSelector,
                         ExtensionMode.HDR
                     )
@@ -313,7 +319,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             ) // 非阻塞模式
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
-        mImageAnalysis.setAnalyzer(executor, { image: ImageProxy ->
+        mImageAnalysis.setAnalyzer(executor) { image: ImageProxy ->
 
             // Bitmap bitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);
 
@@ -359,7 +365,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
             if (mIsNextAnalysis) {
                 image.close()
             }
-        })
+        }
     }
 
     /**
@@ -429,7 +435,6 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
         if (isEnabledHdr) {
             mBinding.btnCameraHdr.text = "HDR: 已开启"
             if (mExtensionsManager.isExtensionAvailable(
-                    mCameraProvider,
                     mCameraSelector,
                     ExtensionMode.HDR
                 )
@@ -484,7 +489,6 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
                 initHdr()
                 if (isEnabledHdr) {
                     val hdrCameraSelector = mExtensionsManager.getExtensionEnabledCameraSelector(
-                        mCameraProvider,
                         mCameraSelector,
                         ExtensionMode.HDR
                     )
@@ -514,6 +518,7 @@ class CameraXDemoActivity : BaseActivity<ActivityCameraxDemoBinding>(), CameraXC
         mImageCapture.takePicture(outputFileOptions, executor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: OutputFileResults) {
+                    LogUtils.e(outputFileResults.toString())
                     mImagePathUri = outputFileResults.savedUri
                     ImageLoaderManager.Builder()
                         .setImagePath(mImagePathUri)

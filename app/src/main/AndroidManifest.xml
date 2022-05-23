@@ -59,7 +59,8 @@
         <service
             android:name=".services.ScreenRecorderService"
             android:enabled="true"
-            android:foregroundServiceType="mediaProjection"/>
+            android:foregroundServiceType="mediaProjection" />
+
     </application>
 
 </manifest>

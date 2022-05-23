@@ -1,6 +1,7 @@
 package io.github.sdwfqin.quickseed.ui.main
 
 import android.Manifest
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -46,8 +47,12 @@ class MainActivity : SampleBaseActivity<ActivityMainBinding>() {
     }
 
     private fun initPagers() {
-        mPages.add((ARouter.getInstance().build(ArouterConstants.MAIN_HOME).navigation() as Fragment))
-        mPages.add((ARouter.getInstance().build(ArouterConstants.MAIN_MINE).navigation() as Fragment))
+        mPages.add(
+            (ARouter.getInstance().build(ArouterConstants.MAIN_HOME).navigation() as Fragment)
+        )
+        mPages.add(
+            (ARouter.getInstance().build(ArouterConstants.MAIN_MINE).navigation() as Fragment)
+        )
 
         mBinding.pager.offscreenPageLimit = 2
         mBinding.pager.adapter = mTabPagerAdapter
@@ -59,20 +64,35 @@ class MainActivity : SampleBaseActivity<ActivityMainBinding>() {
     private fun initTabs() {
         val builder = mBinding.tabs.tabBuilder()
         builder.setSelectedIconScale(1.2f)
-                .setTextSize(ConvertUtils.sp2px(13f), ConvertUtils.sp2px(15f))
-                .setDynamicChangeIconColor(false)
+            .setTextSize(ConvertUtils.sp2px(13f), ConvertUtils.sp2px(15f))
+            .setDynamicChangeIconColor(false)
         val component = builder
-                .setNormalDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_home_apps_normal))
-                .setSelectedDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_home_apps_selected))
-                .setText("组件")
-                .build(mContext)
+            .setNormalDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_home_apps_normal))
+            .setSelectedDrawable(
+                ContextCompat.getDrawable(
+                    mContext,
+                    R.drawable.ic_home_apps_selected
+                )
+            )
+            .setText("组件")
+            .build(mContext)
         val util = builder
-                .setNormalDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_home_settings_normal))
-                .setSelectedDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_home_settings_selected))
-                .setText("配置")
-                .build(mContext)
+            .setNormalDrawable(
+                ContextCompat.getDrawable(
+                    mContext,
+                    R.drawable.ic_home_settings_normal
+                )
+            )
+            .setSelectedDrawable(
+                ContextCompat.getDrawable(
+                    mContext,
+                    R.drawable.ic_home_settings_selected
+                )
+            )
+            .setText("配置")
+            .build(mContext)
         mBinding.tabs.addTab(component)
-                .addTab(util)
+            .addTab(util)
         mBinding.tabs.setupWithViewPager(mBinding.pager)
     }
 
@@ -80,7 +100,17 @@ class MainActivity : SampleBaseActivity<ActivityMainBinding>() {
      * 获取权限
      */
     private fun getPermissions() {
-        val perms = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+        val perms = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            arrayOf(
+                Manifest.permission.CAMERA
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+            )
+        }
         initCheckPermissions(perms, object : OnPermissionCallback {
             override fun onSuccess() {
                 Toast.makeText(mContext, "取得权限", Toast.LENGTH_SHORT).show()
@@ -93,7 +123,11 @@ class MainActivity : SampleBaseActivity<ActivityMainBinding>() {
         })
     }
 
-    private class TabPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, private val pagers: List<Fragment>) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    private class TabPagerAdapter(
+        fragmentManager: FragmentManager,
+        lifecycle: Lifecycle,
+        private val pagers: List<Fragment>
+    ) : FragmentStateAdapter(fragmentManager, lifecycle) {
         override fun createFragment(position: Int): Fragment {
             return pagers[position]
         }
